@@ -1,0 +1,314 @@
+<!--
+SeismoReport-Base.html — v1.0
+Statik kisim: CSS + ExportEngine JS + Yapi
+Degisken kisimlar: PLACEHOLDER ile isaretli
+Kullanim: generate.py tarafindan otomatik doldurulur — bu dosyaya dokunma
+-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SeismoReport — 8 Haziran 2026 Küba Mw 6.1 Depremi • Prof. Dr. Ali Osman Öncel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
+  <script>
+  (function(){
+    function loadLeaflet(cb){
+      if(window.L){cb();return;}
+      var cdnList=[
+        "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js",
+        "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+      ];
+      var idx=0;
+      function tryNext(){
+        if(idx>=cdnList.length){console.warn("Leaflet yuklenemedi");return;}
+        var s=document.createElement("script");
+        s.src=cdnList[idx++];
+        s.onload=function(){if(window.L)cb();else tryNext();};
+        s.onerror=tryNext;
+        document.head.appendChild(s);
+      }
+      tryNext();
+    }
+    window._loadLeaflet=loadLeaflet;
+  })();
+  </script>
+
+  <style>
+    :root { --bg:#0a0e15; --text:#e8f0f5; --panel:#12171f; --accent:#3b9eff; --card-border:rgba(255,255,255,0.12); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Roboto',sans-serif; background:linear-gradient(to bottom,var(--bg) 0%,#0f1419 100%); color:var(--text); line-height:1.75; min-height:100vh; }
+    .container { max-width:1150px; margin:0 auto; padding:20px; }
+    .header-ribbon { background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%); color:#fff; padding:16px; text-align:center; font-weight:700; border-radius:10px; margin-bottom:20px; font-size:1.05em; }
+    .hero-box { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:40px 24px; text-align:center; border-radius:16px; border:1px solid var(--card-border); margin-bottom:30px; box-shadow:0 12px 36px rgba(0,0,0,0.48); position:relative; overflow:hidden; }
+    .hero-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.18) 50%,transparent 100%); border-radius:16px 16px 0 0; }
+    .hero-box h1 { font-size:2em; margin-bottom:14px; color:var(--accent); }
+    .meta-strip { text-align:center; font-size:0.82em; color:#7a8fa8; letter-spacing:0.03em; margin-bottom:10px; padding:6px 0; }
+    .meta-strip span { margin:0 6px; }
+    .accordion { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:18px 24px; border-radius:10px; border:1px solid var(--card-border); cursor:pointer; margin-bottom:4px; font-weight:700; display:flex; justify-content:space-between; align-items:center; transition:background 0.3s,transform 0.2s; user-select:none; }
+    .accordion:hover { transform:translateY(-2px); }
+    .accordion.active { background:linear-gradient(135deg,#1e2535 0%,#252d3f 100%); border-color:var(--accent); border-radius:10px 10px 0 0; margin-bottom:0; }
+    .accordion::after { content:''; width:10px; height:10px; border-right:2px solid #7a9ab5; border-bottom:2px solid #7a9ab5; transform:rotate(45deg); transition:transform 0.3s ease; flex-shrink:0; }
+    .accordion.active::after { transform:rotate(-135deg); }
+    .panel { display:none; padding:24px; background:rgba(255,255,255,0.04); border-radius:0 0 10px 10px; border:1px solid var(--card-border); border-top:none; margin-bottom:12px; }
+    .panel.open { display:block; }
+    .panel p,.panel li,.panel td,.panel th,.review-body-text,.review-infobox,.review-abstract,.info-note,.analysis-card p { text-align:justify; hyphens:auto; text-indent:0 !important; }
+    .panel ul,.panel ol { padding-left:1.4em; margin:6px 0; }
+    .panel ul li,.panel ol li { margin-bottom:5px; }
+    .analysis-card { background:rgba(59,158,255,0.12); padding:18px 20px; border-radius:10px; border-left:4px solid var(--accent); margin:18px 0; line-height:1.8; }
+    .analysis-card h4 { margin-bottom:8px; color:var(--accent); }
+    .analysis-card p { text-align:justify; hyphens:auto; margin-bottom:1.2em; }
+    .info-note { background:rgba(255,255,255,0.06); border-radius:8px; padding:12px 16px; margin:12px 0; font-size:0.92em; color:#b0c4d8; border-left:3px solid #888; text-align:justify; hyphens:auto; line-height:1.75; }
+    img.figure { width:100%; max-width:900px; margin:24px auto; display:block; border:1px solid #333; border-radius:8px; }
+    .figure-caption { font-style:italic; color:#94a3b8; text-align:justify; margin-top:8px; font-size:0.92em; hyphens:auto; line-height:1.7; }
+    .conclusion-card { background:rgba(22,163,74,0.1); border-left:4px solid #22c55e; padding:16px 20px; border-radius:10px; margin:14px 0; }
+    .conclusion-card h4 { color:#22c55e; margin-bottom:8px; }
+    .rec-card { background:rgba(245,87,108,0.09); border-left:4px solid #f5576c; padding:16px 20px; border-radius:10px; margin:14px 0; }
+    .rec-card h4 { color:#f5576c; margin-bottom:8px; }
+    .rec-card ul,.conclusion-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
+    .method-card { background:rgba(255,200,50,0.07); border-left:4px solid #f5a623; padding:16px 20px; border-radius:10px; margin:14px 0; }
+    .method-card h4 { color:#f5a623; margin-bottom:8px; font-size:0.97em; }
+    .method-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
+    .review-journal-bar { background:linear-gradient(135deg,#1e3a5f 0%,#0e4d7a 100%); border:1px solid rgba(59,158,255,0.25); border-radius:10px 10px 0 0; padding:14px 20px; display:flex; align-items:center; gap:14px; margin-top:4px; }
+    .review-journal-logo { background:#e05c00; color:#fff; font-weight:900; font-size:0.72em; padding:4px 8px; border-radius:4px; letter-spacing:0.04em; white-space:nowrap; }
+    .review-journal-name { color:#90caf9; font-size:0.85em; font-style:italic; }
+    .review-article-title { font-size:1.18em; font-weight:700; color:#e8f0f5; line-height:1.4; margin:14px 0 6px; }
+    .review-author { font-weight:700; color:var(--accent); font-size:0.97em; }
+    .review-affil { color:#94a3b8; font-size:0.85em; font-style:italic; margin-bottom:16px; }
+    .review-doi { color:#64b5f6; font-size:0.8em; }
+    .review-abstract { background:rgba(59,158,255,0.07); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:16px 20px; margin:16px 0; text-align:justify; hyphens:auto; color:#eaf2ff; font-size:0.93em; line-height:1.85; }
+    .review-abstract strong { color:var(--accent); font-size:0.92em; display:block; margin-bottom:8px; letter-spacing:0.04em; }
+    .review-keywords { font-size:0.84em; color:#cbd9e8; margin:10px 0 18px; }
+    .review-keywords strong { color:#e0ecff; }
+    .review-keywords span { background:rgba(59,158,255,0.15); border:1px solid rgba(59,158,255,0.35); border-radius:4px; padding:2px 9px; margin-right:5px; display:inline-block; margin-bottom:4px; color:#c8e0f8; font-weight:500; }
+    .review-section-title { font-size:1.06em; font-weight:700; color:#7ecbff; border-bottom:2px solid rgba(59,158,255,0.3); padding-bottom:5px; margin:26px 0 11px; letter-spacing:0.01em; }
+    .review-subsection { font-size:0.97em; font-weight:700; color:#ddeeff; margin:16px 0 7px; }
+    .review-body-text { text-align:justify; line-height:1.88; color:#e8f3ff; margin-bottom:14px; hyphens:auto; font-size:0.93em; }
+    .panel ol,.panel ul { color:#e0eeff; line-height:2.0; font-size:0.93em; }
+    .review-table { width:100%; border-collapse:collapse; font-size:0.84em; margin:16px 0; background:rgba(255,255,255,0.02); }
+    .review-table th { background:rgba(59,158,255,0.22); color:#d8eeff; padding:9px 11px; text-align:left; border-bottom:2px solid rgba(59,158,255,0.4); font-size:0.9em; }
+    .review-table td { padding:8px 11px; border-bottom:1px solid rgba(255,255,255,0.10); color:#ddeeff; vertical-align:top; line-height:1.6; }
+    .review-table tr:nth-child(odd) td { background:rgba(59,158,255,0.04); }
+    .review-table caption { font-style:italic; color:#b0c8e0; font-size:0.84em; text-align:left; margin-bottom:8px; caption-side:top; }
+    .review-infobox { background:rgba(59,158,255,0.07); border:1px solid rgba(59,158,255,0.28); border-radius:8px; padding:14px 18px; margin:14px 0; font-size:0.91em; color:#ddeeff; line-height:1.78; text-align:justify; hyphens:auto; }
+    .review-infobox strong { color:#f0f8ff; }
+    .appendix-title { font-size:1.0em; font-weight:700; color:#90caf9; border-top:2px solid rgba(59,158,255,0.2); border-bottom:1px solid rgba(59,158,255,0.15); padding:10px 0 6px; margin:28px 0 12px; letter-spacing:0.02em; }
+    .appendix-label { display:inline-block; background:rgba(59,158,255,0.15); color:#64b5f6; border-radius:4px; padding:1px 9px; font-size:0.8em; font-weight:700; margin-right:8px; vertical-align:middle; }
+    .review-ref-item { font-size:0.85em; color:#c8dff5; line-height:1.70; padding-left:2.2em; text-indent:-2.2em; margin-bottom:8px; }
+    .review-ref-item a { color:#64b5f6; text-decoration:none; }
+    table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.9em; }
+    th { background:rgba(59,158,255,0.2); padding:8px 12px; text-align:left; }
+    td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.07); }
+    tr:hover td { background:rgba(255,255,255,0.04); }
+    .report-footer { text-align:center; font-size:0.82em; color:#6a7f96; border-top:1px solid rgba(255,255,255,0.07); margin-top:40px; padding:20px 0 10px; line-height:2; }
+
+    @media print {
+      @page { size:A4; margin:2cm 2.2cm 2.2cm 2.2cm; }
+      @page :first { margin-top:1.5cm; }
+      *,*::before,*::after { background:white !important; background-image:none !important; background-color:transparent !important; box-shadow:none !important; text-shadow:none !important; color:#1a1a1a !important; }
+      body { font-family:"Times New Roman",Times,serif !important; font-size:11pt !important; line-height:1.6 !important; color:#000 !important; background:white !important; }
+      .accordion { display:block !important; font-size:0 !important; border:none !important; border-bottom:1.5pt solid #333 !important; padding:8pt 0 4pt !important; margin:16pt 0 6pt !important; page-break-after:avoid !important; background:none !important; }
+      .accordion::before { content:attr(data-num) " " attr(data-label); font-size:12pt !important; font-weight:bold !important; color:#000 !important; display:block !important; }
+      .accordion::after { display:none !important; }
+      .panel { display:block !important; max-height:none !important; overflow:visible !important; }
+      .hero-box { border:2px solid #333 !important; padding:14px !important; margin-bottom:16pt !important; }
+      .hero-box h1 { font-size:16pt !important; color:#000 !important; font-weight:bold !important; }
+      .header-ribbon { background:#333 !important; color:#fff !important; border-radius:0 !important; }
+      .analysis-card { border-left:3pt solid #333 !important; background:#f8f8f8 !important; padding:10pt 12pt !important; margin:8pt 0 !important; }
+      .analysis-card h4 { color:#000 !important; }
+      .conclusion-card { border-left:3pt solid #228B22 !important; background:#f0fff0 !important; padding:9pt 11pt !important; }
+      .conclusion-card h4 { color:#005500 !important; }
+      .rec-card { border-left:3pt solid #CC2200 !important; background:#fff5f5 !important; padding:9pt 11pt !important; }
+      .rec-card h4 { color:#990000 !important; }
+      .method-card { border-left:3pt solid #AA7700 !important; background:#fffbe8 !important; padding:9pt 11pt !important; }
+      .method-card h4 { color:#664400 !important; }
+      .info-note { border-left:2pt solid #888 !important; background:#f5f5f5 !important; font-size:9.5pt !important; padding:6pt 9pt !important; color:#333 !important; }
+      .review-abstract { background:#f5f5f5 !important; border-left:4pt solid #333 !important; padding:10pt 12pt !important; }
+      .review-keywords span { border:1px solid #555 !important; background:#eee !important; color:#000 !important; }
+      .review-section-title { font-size:11pt !important; font-weight:bold !important; border-bottom:1.5pt solid #333 !important; color:#000 !important; }
+      .review-body-text { font-size:10.5pt !important; line-height:1.65 !important; color:#000 !important; }
+      .review-infobox { background:#f0f0f0 !important; border:1pt solid #666 !important; color:#000 !important; }
+      .review-table th { background:#e8e8e8 !important; border:1pt solid #333 !important; color:#000 !important; }
+      .review-table td { border-bottom:0.5pt solid #aaa !important; color:#000 !important; }
+      .review-journal-bar { border:1pt solid #333 !important; background:#f0f0f0 !important; }
+      .review-journal-logo { color:#000 !important; background:#555 !important; }
+      .review-journal-name { color:#000 !important; }
+      .figure-caption { color:#222 !important; font-size:9pt !important; }
+      .review-section-title { page-break-after:avoid; }
+      .review-table { page-break-inside:avoid; }
+      .map-ph { display:block !important; }
+      .leaflet-container { display:none !important; }
+      .export-toolbar,.report-footer,iframe,button { display:none !important; }
+      .meta-strip { color:#555 !important; }
+    }
+    @media (max-width:768px) {
+      .hero-box h1 { font-size:1.5em; }
+      .accordion { font-size:1em; padding:14px 18px; }
+    }
+  </style>
+
+<script>
+(function(global){"use strict";
+  const CONFIG={
+    docTitle    :"8 Haziran 2026 Küba Mw 6.1 Depremi",
+    author      :"Prof. Dr. Ali Osman Öncel",
+    affiliation :"İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü",
+    subtitle    :"Karayip Levha Sınırı | Küba Batı Açıkları | EMSC/USGS | Sığ Kabuksal Deprem",
+    filename    :"SeismoReport-2026-Cuba-Mw61",
+  };
+  function captureState(){const s=new Map();document.querySelectorAll(".panel").forEach(p=>{s.set(p,{display:p.style.display,hasOpen:p.classList.contains("open")});});return s;}
+  function openAllPanels(){document.querySelectorAll(".panel").forEach(p=>{p.style.setProperty("display","block","important");p.classList.add("open");});document.querySelectorAll(".accordion").forEach(a=>a.classList.add("active"));}
+  function restoreState(s){s.forEach((saved,el)=>{el.style.display=saved.display||"";if(!saved.hasOpen){el.classList.remove("open");el.style.display="none";}});document.querySelectorAll(".accordion").forEach(a=>{const p=a.nextElementSibling;if(p&&!p.classList.contains("open"))a.classList.remove("active");});}
+  function showLoading(msg){const d=document.createElement("div");Object.assign(d.style,{position:"fixed",inset:"0",background:"rgba(10,14,21,0.88)",zIndex:"999999",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:"16px"});d.innerHTML=`<div style="width:52px;height:52px;border:4px solid #3b9eff;border-top-color:transparent;border-radius:50%;animation:_s .8s linear infinite;"></div><div style="color:#e8f0f5;font-family:sans-serif;font-size:1.1em;text-align:center;max-width:320px;">${msg}</div><style>@keyframes _s{to{transform:rotate(360deg)}}</style>`;document.body.appendChild(d);return d;}
+  function hideLoading(d){if(d&&d.parentNode)d.parentNode.removeChild(d);}
+  function openBlob(html){const b=new Blob([html],{type:"text/html;charset=utf-8"});const u=URL.createObjectURL(b);const w=window.open(u,"_blank");if(w){setTimeout(()=>URL.revokeObjectURL(u),60000);return;}const a=document.createElement("a");a.href=u;a.target="_blank";document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),60000);}
+  function downloadBlob(content,filename,mime){const b=new Blob([content],{type:mime});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),8000);}
+
+  function buildBodyHTML(){
+    const accMap={};
+    document.querySelectorAll(".accordion").forEach(acc=>{const num=acc.getAttribute("data-num")||"";accMap[num]=acc;});
+    function buildSection(acc){
+      const panel=acc.nextElementSibling;
+      if(!panel||!panel.classList.contains("panel"))return"";
+      const clone=panel.cloneNode(true);
+      clone.querySelectorAll("script,style,.no-export,iframe,.export-toolbar").forEach(el=>el.remove());
+      clone.querySelectorAll("div[id^='map']").forEach(div=>{const ph=document.createElement("p");ph.style.cssText="font-size:9pt;color:#555;font-style:italic;border:1pt solid #aaa;padding:8pt;text-align:center;";ph.textContent=`Etkilesimli harita (${div.id}) — PDF gorunumunde mevcut degil.`;div.parentNode.replaceChild(ph,div);});
+      clone.querySelectorAll(".map-ph").forEach(el=>el.remove());
+      clone.querySelectorAll("[style]").forEach(el=>{let s=el.getAttribute("style")||"";s=s.replace(/background(-color)?\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"");s=s.replace(/color\s*:\s*#[7-9a-f][0-9a-f]{2,5}\b[^;]*;?/gi,"color:#111;");s=s.replace(/color\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"color:#111;");s=s.replace(/color\s*:\s*var\(--[^)]+\)[^;]*;?/gi,"color:#000;");el.setAttribute("style",s.trim());});
+      return clone.innerHTML;
+    }
+    let body="";
+    if(accMap["7."])body+=buildSection(accMap["7."]);
+    body+=`<div style="page-break-before:always;text-align:center;padding:60pt 0 40pt;border-top:2pt solid #333;margin-top:30pt;"><p style="font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;color:#666;margin-bottom:8pt;">Supporting Material</p><h2 style="font-size:16pt;font-weight:bold;border:none;margin:0 0 6pt;">APPENDICES</h2></div>`;
+    ["1.","2.","3.","4.","5.","6."].forEach(num=>{if(accMap[num]){const acc=accMap[num];const label=acc.getAttribute("data-label")||"";body+=`<h2>${label}</h2>`+buildSection(acc);}});
+    return body;
+  }
+
+  function pdfTemplate(body){
+    const now=new Date().toLocaleDateString("tr-TR",{year:"numeric",month:"long",day:"numeric"});
+    return `<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>${CONFIG.docTitle} — ${CONFIG.author}</title>
+<style>
+@page{size:A4 portrait;margin:25mm 22mm 28mm 22mm;@bottom-left{content:"${CONFIG.author} · ${CONFIG.docTitle}";font-family:"Times New Roman",serif;font-size:8.5pt;color:#555;}@bottom-right{content:"Sayfa " counter(page) " / " counter(pages);font-family:"Times New Roman",serif;font-size:8.5pt;color:#555;}}
+*{box-sizing:border-box;}body{font-family:"Times New Roman",serif;font-size:11pt;line-height:1.85;color:#000;background:#fff;margin:0;padding:0;}
+@media screen{body{background:#cbd5e1;padding:64px 0 50px;}.doc-wrap{width:210mm;margin:0 auto;padding:25mm 22mm 30mm;background:#fff;box-shadow:0 6px 30px rgba(0,0,0,.22);min-height:297mm;}}
+@media print{body{background:#fff;}.print-bar{display:none !important;}.doc-wrap{width:100%;padding:0;box-shadow:none;}}
+.print-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1e293b;color:#f1f5f9;padding:10px 24px;display:flex;align-items:center;gap:14px;font-family:Arial,sans-serif;font-size:13px;}
+.btn-p{margin-left:auto;background:#2563eb;color:#fff;border:none;border-radius:7px;padding:9px 22px;font-size:13px;font-weight:bold;cursor:pointer;}
+h1{text-align:center;font-size:16pt;font-weight:bold;margin:0 0 6pt;}h2{font-size:13pt;border-bottom:1px solid #999;padding-bottom:3pt;margin:22pt 0 9pt;page-break-after:avoid;}h3{font-size:11.5pt;margin:15pt 0 5pt;}h4{font-size:10.5pt;margin:10pt 0 4pt;font-style:italic;}
+p{text-align:justify;text-indent:1.25em;margin:0 0 7pt;hyphens:auto;}h2+p,h3+p,h4+p{text-indent:0;}
+img{max-width:100%;display:block;margin:0 auto;}table{width:100%;border-collapse:collapse;font-size:9pt;margin:10pt 0;}th,td{border:1px solid #bbb;padding:3pt 5pt;vertical-align:top;}th{background:#efefef;font-weight:bold;}
+ol,ul{margin:6pt 0 8pt 18pt;}li{margin-bottom:4pt;text-align:justify;}
+.review-abstract{background:#f5f5f5;border-left:4pt solid #333;padding:10pt 12pt;font-size:10.5pt;}
+.review-section-title{font-size:11pt;font-weight:bold;border-bottom:1.5pt solid #333;padding-bottom:2pt;margin:12pt 0 6pt;}
+.review-body-text{text-align:justify;font-size:10.5pt;line-height:1.65;margin-bottom:7pt;}
+.analysis-card{border-left:3pt solid #333;background:#f8f8f8;padding:10pt 12pt;margin:8pt 0;}
+.conclusion-card{border-left:3pt solid #228B22;background:#f0fff0;padding:9pt 11pt;margin:7pt 0;}
+.rec-card{border-left:3pt solid #CC2200;background:#fff5f5;padding:9pt 11pt;margin:7pt 0;}
+.method-card{border-left:3pt solid #AA7700;background:#fffbe8;padding:9pt 11pt;margin:7pt 0;}
+.info-note{border-left:2pt solid #888;background:#f5f5f5;font-size:9.5pt;padding:6pt 9pt;}
+.review-infobox{background:#f0f0f0;border:1pt solid #666;padding:7pt 9pt;font-size:9.5pt;}
+.review-table th{background:#e8e8e8;border:1pt solid #333;}
+.review-table td{border:0.5pt solid #999;}
+.figure-caption{font-size:9pt;font-style:italic;color:#555;}
+.leaflet-container,.map-ph{display:none !important;}
+[style*="background:rgba"]{background:#f8f8f8 !important;}
+[style*="color:var(--accent)"]{color:#1a4a8a !important;}
+</style></head><body>
+<div class="print-bar"><div><strong>📄 ${CONFIG.docTitle} — Akademik Belge</strong><br><span style="font-size:11px;color:#94a3b8;">Kagit:A4 · Baski: Ctrl+P</span></div><button class="btn-p" onclick="window.print()">🖨️ Yazdir / PDF Kaydet</button></div>
+<div class="doc-wrap">
+<div style="text-align:center;border:1.5pt solid #333;padding:22pt 20pt 18pt;margin-bottom:24pt;">
+<div style="font-size:8pt;font-weight:bold;letter-spacing:0.12em;color:#555;margin-bottom:6pt;text-transform:uppercase;">SCI Review Article</div>
+<div style="font-size:7.5pt;color:#555;margin-bottom:14pt;font-style:italic;">${CONFIG.subtitle}</div>
+<h1 style="font-size:15pt;margin-bottom:8pt;">${CONFIG.docTitle}</h1>
+<hr style="border:none;border-top:1pt solid #aaa;margin:10pt 40pt;">
+<p style="font-size:11pt;font-weight:bold;text-align:center;margin-bottom:3pt;text-indent:0;">${CONFIG.author}</p>
+<p style="font-size:10pt;font-style:italic;text-align:center;margin-bottom:3pt;text-indent:0;">${CONFIG.affiliation}</p>
+<p style="font-size:8.5pt;color:#555;text-align:center;text-indent:0;"><em>Review Article · Received:</em> ${now}</p>
+</div><hr style="border:none;border-top:1.5px solid #444;margin:0 0 18pt;">
+${body}</div></body></html>`;
+  }
+
+  function wordTemplate(body){
+    const now=new Date().toLocaleDateString("tr-TR",{year:"numeric",month:"long",day:"numeric"});
+    return`<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40" lang="tr"><head><meta charset="utf-8"><meta name=ProgId content=Word.Document><title>${CONFIG.docTitle}</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]--><style>@page Section1{size:210mm 297mm;margin:25mm 22mm 25mm 22mm;}div.Section1{page:Section1;}body{font-family:"Times New Roman",serif;font-size:11pt;color:#000;line-height:1.85;}h1{text-align:center;font-size:16pt;font-weight:bold;}h2{font-size:13pt;border-bottom:1px solid #999;margin:22pt 0 9pt;}h3{font-size:11.5pt;margin:15pt 0 5pt;}h4{font-size:10.5pt;margin:10pt 0 4pt;font-style:italic;}p{text-align:justify;text-indent:1.25em;margin:0 0 7pt;}h2+p,h3+p{text-indent:0;}img{max-width:100%;}table{width:100%;border-collapse:collapse;font-size:9pt;}th,td{border:1px solid #bbb;padding:3pt 5pt;}th{background:#efefef;font-weight:bold;}ol,ul{margin:6pt 0 8pt 18pt;}li{margin-bottom:4pt;}.review-abstract{background:#f5f5f5;border-left:4pt solid #333;padding:9pt 11pt;}.review-section-title{font-size:11pt;font-weight:bold;border-bottom:1.5pt solid #333;padding-bottom:2pt;margin:12pt 0 6pt;}.review-body-text{text-align:justify;font-size:10.5pt;}.analysis-card{border-left:3pt solid #333;background:#f8f8f8;padding:10pt 12pt;}.conclusion-card{border-left:3pt solid #228B22;background:#f0fff0;padding:9pt 11pt;}.rec-card{border-left:3pt solid #CC2200;background:#fff5f5;padding:9pt 11pt;}.info-note{border-left:2pt solid #888;background:#f5f5f5;font-size:9.5pt;padding:6pt 9pt;}</style></head><body><div class="Section1"><h1>${CONFIG.docTitle}</h1><p style="text-align:center;text-indent:0;font-weight:bold;">${CONFIG.author}</p><p style="text-align:center;text-indent:0;font-style:italic;">${CONFIG.affiliation}</p><p style="text-align:center;font-size:9pt;text-indent:0;"><em>Review Article · Received:</em> ${now}</p><hr style="border:none;border-top:1.5px solid #444;">${body}</div></body></html>`;
+  }
+
+  async function exportPdf(){
+    const ld=showLoading("PDF hazirlaniyor…");const prev=captureState();
+    try{openAllPanels();await new Promise(r=>setTimeout(r,400));openBlob(pdfTemplate(buildBodyHTML()));}
+    catch(e){alert("PDF export hatasi: "+e.message);}
+    finally{restoreState(prev);hideLoading(ld);}
+  }
+  async function exportWord(){
+    const ld=showLoading("Word belgesi hazirlaniyor…");const prev=captureState();
+    try{openAllPanels();await new Promise(r=>setTimeout(r,400));downloadBlob(wordTemplate(buildBodyHTML()),`${CONFIG.filename}.doc`,"application/msword");}
+    catch(e){alert("Word export hatasi: "+e.message);}
+    finally{restoreState(prev);hideLoading(ld);}
+  }
+
+  global.ExportEngine={exportPdf,exportWord,version:"3.1"};
+})(window);
+</script>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-ribbon">8 Haziran 2026 — Küba Mw 6.1 Depremi • Karayip Levha Sınırı | Sığ Odak (4 km) • SeismoReport v3.1</div>
+
+  <div class="meta-strip"><span>📅 2026-06-08 18:00:24.6 UTC</span><span>📍 22.780°N 85.126°W (Küba batı açıkları)</span><span>🌐 Mw 6.1 · 4 km Derinlik</span><span>⚠️ Sığ Odak — Yüksek Hasar Potansiyeli</span><span>📍 152 km W Pinar del Río</span><span>🔬 Sismolog Onaylı</span></div>
+
+  <div class="hero-box">
+    <h1>🌏 8 Haziran 2026 Küba Mw 6.1 Depremi</h1>
+    <div style="margin-bottom:22px;">
+      <div style="font-weight:700;font-size:1.05em;color:#e8f0f5;">Prof. Dr. Ali Osman Öncel</div>
+      <div style="color:#7a9ab5;font-size:0.85em;margin-top:3px;">İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 20px;text-align:left;"><div style="background:rgba(59,158,255,0.13);border:1px solid rgba(59,158,255,0.35);border-radius:12px;padding:14px 16px;"><div style="font-size:0.68em;color:#7a9ab5;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Büyüklük</div><div style="font-size:2.4em;font-weight:700;color:#3b9eff;line-height:1;">6.1</div><div style="font-size:0.76em;color:#94a3b8;margin-top:5px;">Mw · Sismolog Onaylı</div></div><div style="background:rgba(245,87,108,0.13);border:1px solid rgba(245,87,108,0.35);border-radius:12px;padding:14px 16px;"><div style="font-size:0.68em;color:#7a9ab5;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Derinlik</div><div style="font-size:2.4em;font-weight:700;color:#f5576c;line-height:1;">4<span style="font-size:0.45em;font-weight:400;margin-left:3px;">km</span></div><div style="font-size:0.76em;color:#fca5a5;margin-top:5px;">⚠️ Sığ odak · Yıkıcı etki</div></div><div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 16px;"><div style="font-size:0.68em;color:#7a9ab5;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Bölge</div><div style="font-size:1.0em;font-weight:700;color:#e8f0f5;line-height:1.4;">Küba Batı<br>Açıkları</div><div style="font-size:0.76em;color:#94a3b8;margin-top:5px;">Karayip Levha Sınırı</div></div><div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 16px;"><div style="font-size:0.68em;color:#7a9ab5;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Koordinat</div><div style="font-size:1.05em;font-weight:700;color:#e8f0f5;line-height:1.5;">22.780°N<br>85.126°W</div><div style="font-size:0.76em;color:#94a3b8;margin-top:5px;">Küba GB açıkları</div></div><div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 16px;"><div style="font-size:0.68em;color:#7a9ab5;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">En Yakın Şehir</div><div style="font-size:1.0em;font-weight:700;color:#f5a623;line-height:1.4;">Pinar del Río<br><span style="font-size:0.72em;font-weight:400;">152 km D</span></div><div style="font-size:0.76em;color:#94a3b8;margin-top:5px;">Nüfus: 186,000</div></div></div>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(59,158,255,0.1);border:1px solid rgba(59,158,255,0.3);border-radius:20px;padding:7px 18px;font-size:0.82em;color:#90caf9;">
+      🔗 <a href="https://www.emsc-csem.org" target="_blank" style="color:#90caf9;text-decoration:none;">EMSC — 2026-06-08</a> &nbsp;|&nbsp; 🔗 <a href="https://earthquake.usgs.gov" target="_blank" style="color:#90caf9;text-decoration:none;">USGS/NEIC</a>
+    </div>
+  </div>
+
+  <!-- Google Translate -->
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 16px;margin:0 0 16px;">
+    <div style="font-size:0.78em;color:#7a9ab5;flex:1;min-width:160px;">🌍 SeismoReport v3.1 · Otomatik Çeviri</div>
+    <div id="google_translate_element"></div>
+  </div>
+  <script type="text/javascript">
+  function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'tr',includedLanguages:'en,tr,it,de,fr,es,ar,ru,pt,nl,pl',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:false},'google_translate_element');}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Export Toolbar -->
+  <div class="export-toolbar" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#12171f;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:18px 22px;margin:20px 0 24px;">
+    <div style="flex:1;min-width:200px;">
+      <div style="font-weight:700;font-size:0.97rem;color:#3b9eff;">📤 Akademik Dışa Aktarma</div>
+      <div style="font-size:0.78rem;color:#8a9ab5;margin-top:3px;">SCI Makale Çekirdeği + Appendices — A4 tipografi · ExportEngine v3.1</div>
+    </div>
+    <button onclick="ExportEngine.exportPdf()" style="padding:12px 22px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📄 PDF / Yazdır</button>
+    <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
+  </div>
+
+  <!-- Review Article -->
+  <div class="accordion active" data-num="7." data-label="Review Article — 8 Haziran 2026 Küba Mw 6.1 Depremi">📄 Review Article — Öncel, A.O. | 8 Haziran 2026 Küba M<sub>w</sub> 6.1 Depremi: Sığ Odaklı Kabuksal Kırılma ve Karayip Levha Sınırı</div><div class="panel open" id="panel-review"><div class="review-journal-bar"><div class="review-journal-logo">SSA</div><div><div class="review-journal-name">Seismological Research Letters · Rapid Communication — Caribbean Seismicity</div><div style="color:#64b5f6;font-size:0.78em;">DOI: 10.1785/0220260XXX &nbsp;|&nbsp; Submitted: 2026 &nbsp;|&nbsp; © 2026 Seismological Society of America</div></div></div><div style="background:rgba(255,255,255,0.03);border:1px solid rgba(59,158,255,0.12);border-top:none;border-radius:0 0 10px 10px;padding:20px 22px 16px;"><div class="review-article-title">8 Haziran 2026 Küba M<sub>w</sub> 6.1 Depremi: Karayip–Kuzey Amerika Levha Sınırında Sığ Kabuksal Kırılma</div><div style="font-size:0.82em;color:#64b5f6;font-style:italic;margin-bottom:10px;">The 8 June 2026 Cuba M<sub>w</sub> 6.1 Earthquake: Shallow Crustal Rupture at the Caribbean–North American Plate Boundary</div><div class="review-author">Prof. Dr. Ali Osman Öncel</div><div class="review-affil">İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü, Avcılar, 34320 İstanbul, Türkiye</div><div class="review-doi">🔗 Veri: EMSC (Sismolog Onaylı) · USGS/NEIC</div></div><div class="review-abstract"><strong>ÖZET / ABSTRACT</strong>8 Haziran 2026'da Küba'nın batı açıklarında (22.780°N, 85.126°W) Mw 6.1 büyüklüğünde sığ odaklı (4 km) bir deprem meydana gelmiştir (18:00:24.6 UTC). EMSC tarafından sismolog onaylı olarak yayımlanan deprem, Karayip Levhası ile Kuzey Amerika Levhası'nın yakınsak–doğrultu atımlı sınır bölgesinde gerçekleşmiştir. 4 km'lik son derece sığ odak derinliği, depremin yakın alan hasar potansiyelini önemli ölçüde artırmaktadır. Episantr, en yakın büyük yerleşim birimi olan Pinar del Río'ya (nüfus: 186,000) 152 km, Mantua'ya (nüfus: 10,700) ise 102 km uzaklıkta konumlanmaktadır.</div><div class="review-keywords"><strong>Anahtar Sözcükler:</strong><span>Küba Depremi</span><span>Mw 6.1</span><span>Karayip Levha Sınırı</span><span>Sığ Odak</span><span>Kabuksal Kırılma</span><span>Pinar del Río</span><span>Karayipler Sismisitesi</span></div><div class="review-section-title">1. Giriş</div><p class="review-body-text">Küba ve çevresi, Karayip Levhası'nın Kuzey Amerika Levhası ile olan doğrultu atımlı–yakınsak sınırında yer almakta olup tarihsel dönemden bu yana önemli deprem aktivitesi sergilemektedir. Küba'nın batı kesimi, Orta Amerika–Karayip tektonik sisteminin doğu segmentinde yer alır. Bu bölgede levha sınırı boyunca sol yanal (sinistral) doğrultu atımlı faylanma baskın mekanizmadır; ancak yerel sıkışma bileşenleri de gözlemlenmektedir.</p><p class="review-body-text">8 Haziran 2026 depremi, 4 km gibi son derece sığ bir odak derinliğiyle dikkat çekmektedir. Sığ odaklı depremlerde sismik enerjinin büyük bölümü yüzeye yakın kabuksal kayaçlara aktarılır; bu durum benzer büyüklükteki derin odaklı depremlere kıyasla çok daha yüksek yer hareketi şiddetine ve hasar potansiyeline yol açar.</p><div class="review-section-title">2. Deprem Parametreleri</div><table class="review-table"><caption>Tablo 1. 8 Haziran 2026 Küba Depremi — EMSC Parametreleri</caption><thead><tr><th>Parametre</th><th>Değer</th><th>Kaynak</th></tr></thead><tbody><tr><td>Büyüklük</td><td>Mw 6.1</td><td>EMSC (Sismolog Onaylı)</td></tr><tr><td>Tarih–Saat</td><td>2026-06-08 18:00:24.6 UTC</td><td>EMSC</td></tr><tr><td>Yerel Saat</td><td>14:00:24.6 (UTC−4)</td><td>EMSC</td></tr><tr><td>Enlem</td><td>22.780°N</td><td>EMSC</td></tr><tr><td>Boylam</td><td>85.126°W</td><td>EMSC</td></tr><tr><td>Derinlik</td><td>4 km (Sığ)</td><td>EMSC</td></tr><tr><td>Uzaklık 1</td><td>152 km W — Pinar del Río (nüf: 186,000)</td><td>EMSC</td></tr><tr><td>Uzaklık 2</td><td>102 km WNW — Mantua (nüf: 10,700)</td><td>EMSC</td></tr><tr><td>Durum</td><td>Sismolog Onaylı</td><td>EMSC</td></tr></tbody></table><div class="info-note"><strong>Sığ odak (4 km) ne anlama gelir?</strong> Sismik kaynak derinliği azaldıkça yüzey yer hareketi şiddeti hızla artar. 4 km derinlik, enerjinin neredeyse tamamının sığ kabuk içinde yayıldığını ve kırılma zonunun yüzeye son derece yakın olduğunu gösterir. Bu derinlikte Mw 6.1, daha derin bir Mw 6.5–6.8 depremine eşdeğer yüzey yer hareketi üretebilir.</div><div class="review-section-title">3. Tektonik Bağlam</div><p class="review-body-text">Küba'nın batı açıkları, Karayip Levhası'nın kuzey sınırında yer almaktadır. Bu sınır boyunca Karayip Levhası, Kuzey Amerika Levhası'na göre yaklaşık 20 mm/yıl hızla doğuya doğru hareket etmektedir. Bölgedeki hakim mekanizma sol yanal doğrultu atımlı faylanma olmakla birlikte, lokal tektonik yapılar kompresyonel bileşenler de içerebilmektedir. Küba'nın güneybatı açıklarındaki Cayman Çukuru ve çevresi, bölgenin en aktif sismik yapılarından birini oluşturmaktadır.</p><div class="analysis-card"><h4>📐 Karayip–Kuzey Amerika Levha Sınırı</h4><p><strong>Levha hareketi:</strong> ~20 mm/yıl doğu yönlü (Karayip → Kuzey Amerika) · <strong>Hâkim mekanizma:</strong> Sol yanal doğrultu atımlı (sinistral strike-slip) · <strong>Bölgesel yapılar:</strong> Cayman Çukuru, Ortegaray Fayı, Küba Güney Fay Sistemi · <strong>Tarihsel önemli depremler:</strong> 1932 Santiago de Cuba (Ms 6.75), 1992 Cuba (Mw 6.0)</p></div><div class="review-section-title">4. Sığ Odak ve Hasar Potansiyeli</div><div class="rec-card"><h4>⚠️ Hasar Değerlendirmesi — 4 km Sığ Odak</h4><ul><li><strong>Yakın alan (0–50 km):</strong> Açık denizde — doğrudan yapısal hasar bölgesi su altında; kıyı yapılarında sarsıntı etkisi olası</li><li><strong>Orta alan (100–200 km):</strong> Pinar del Río (152 km) — Mw 6.1 + sığ odak kombinasyonu hafif–orta hasara yol açabilir</li><li><strong>Tsunami:</strong> Düşük; episantr açık denizde ancak çok sığ (4 km) — küçük yerel dalga olasılığı göz ardı edilemez</li><li><strong>Artçılar:</strong> Sığ kabuksal depremlerde artçı sismisitenin yoğun ve hissedilir düzeyde olması beklenir</li></ul></div><div class="review-section-title">5. Sonuçlar</div><div class="conclusion-card"><h4>✅ Temel Bulgular</h4><ul><li>Mw 6.1 sığ odaklı (4 km) deprem — Küba batı açıkları, Karayip–Kuzey Amerika levha sınırı.</li><li>EMSC sismolog onaylı parametreler güvenilir kaynak niteliğindedir.</li><li>4 km derinlik, büyüklüğün üzerinde zemin hareketi şiddeti üretme kapasitesi taşımaktadır.</li><li>Pinar del Río ve Mantua bölgesinde hissedilme beklenmekte; yapısal hasar olasılığı değerlendirilmelidir.</li></ul></div><div class="review-section-title">6. Kaynaklar</div><div class="review-ref-item">EMSC (2026). Earthquake 2026-06-08 18:00 UTC, Cuba Region. European Mediterranean Seismological Centre. <a href="https://www.emsc-csem.org" target="_blank">www.emsc-csem.org</a></div><div class="review-ref-item">USGS/NEIC (2026). Cuba Region Seismicity. <a href="https://earthquake.usgs.gov" target="_blank">earthquake.usgs.gov</a></div><div class="review-ref-item">Calais, E., Mazabraud, Y., Mercier de Lépinay, B., Mann, P., Mattioli, G., Jansma, P. (2002). Strain partitioning and fault slip rates in the northeastern Caribbean from GPS measurements. Geophysical Research Letters, 29(18).</div><div class="review-ref-item">Mann, P., Burke, K., Matumoto, T. (1984). Neotectonics of Hispaniola: plate motion, sedimentation, and seismicity at a restraining bend. Earth and Planetary Science Letters, 70(2), 311–324.</div></div>
+
+  <!-- Appendices -->
+  <div class="accordion" data-num="1." data-label="Appendix A — Temel Parametreler">📋 Appendix A — Depremin Temel Parametreleri</div><div class="panel" id="panel-appA"><div class="analysis-card"><h4>📌 Kaynak Parametreleri — 8 Haziran 2026 Küba Mw 6.1</h4><p><strong>Kaynak Zamanı:</strong> 2026-06-08 18:00:24.6 UTC (Yerel: 14:00)<br><strong>Koordinat:</strong> 22.780°N, 85.126°W (Küba batı açıkları)<br><strong>Derinlik:</strong> 4 km (Sığ kabuksal) · <strong>Büyüklük:</strong> Mw 6.1<br><strong>En Yakın Şehir 1:</strong> Pinar del Río — 152 km D (nüfus: 186,000)<br><strong>En Yakın Şehir 2:</strong> Mantua — 102 km KKD (nüfus: 10,700)<br><strong>Durum:</strong> Sismolog onaylı (EMSC)</p></div><div class="info-note"><strong>Karayip Levha Sınırı:</strong> Küba'nın batı açıkları, Karayip ve Kuzey Amerika levhalarının yakınsak–doğrultu atımlı sınırında yer almaktadır. ~20 mm/yıl göreceli levha hareketi, bölgede periyodik Mw 5.5–7.0 depremleri üretmektedir. 4 km sığ odak, bu sınırın yüzeysel kabuk segmentlerindeki kırılmayı işaret etmektedir.</div></div><div class="accordion" data-num="2." data-label="Appendix B — Episantral Alan Haritası (R ≈ 300 km)">📍 Appendix B — Episantral Alan Haritası — Küba ve Çevresi</div><div class="panel" id="panel-appB"><div class="analysis-card"><h4>📊 Episantral Alan (R ≈ 300 km)</h4><p>Kırmızı yıldız: Mw 6.1 episantri (22.780°N, 85.126°W). Pinar del Río (152 km D) ve Mantua (102 km KKD) EMSC tarafından belirlenen en yakın yerleşim birimleridir.</p></div><div id="map-cuba" style="height:420px;width:100%;border-radius:8px;border:1px solid #333;margin:16px 0;"></div><div class="map-ph" style="display:none;text-align:center;border:1.5px solid #888;padding:16px;">🗺 Episantral Alan Haritası — PDF'de mevcut değil.</div><div class="figure-caption"><strong>Şekil B1 — Episantral Alan (R ≈ 300 km).</strong> ⭐ Mw 6.1 episantri · Turuncu daire: ~300 km etki yarıçapı. Kaynak: EMSC (2026).</div></div><div class="accordion" data-num="3." data-label="Appendix C — Bölgesel Tektonik Harita — Karayipler">🌏 Appendix C — Bölgesel Tektonik Bağlam — Karayip Levha Sistemi</div><div class="panel" id="panel-appC"><div class="analysis-card"><h4>📊 Karayip Levha Sistemi</h4><p>Karayip Levhası'nın Kuzey Amerika Levhası ile olan sınırı boyunca Küba, Hispaniola ve Porto Riko bölgelerini kapsayan aktif sismik kuşak. 2026 depremi bu sınırın Küba batı segmentinde gerçekleşmiştir.</p></div><div id="map-caribbean" style="height:420px;width:100%;border-radius:8px;border:1px solid #333;margin:16px 0;"></div><div class="map-ph" style="display:none;text-align:center;border:1.5px solid #888;padding:16px;">🗺 Karayip Tektonik Harita — PDF'de mevcut değil.</div><div class="figure-caption"><strong>Şekil C1 — Karayip Bölgesel Tektonik Harita.</strong> Karayip–Kuzey Amerika levha sınırı. ⭐ 2026 Küba episantri. Kaynak: EMSC (2026).</div></div>
+
+  <div class="report-footer">SeismoReport v3.1 • 8 Haziran 2026 Küba Mw 6.1 Depremi<br>Prof. Dr. Ali Osman Öncel • İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü<br>EMSC (Sismolog Onaylı) · USGS/NEIC · ExportEngine v3.1</div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.accordion').forEach(acc=>{
+    acc.addEventListener('click',()=>{
+      acc.nextElementSibling.classList.toggle('open');
+      acc.classList.toggle('active');
+    });
+  });
+  window._loadLeaflet(function(){var epicIcon=L.divIcon({html:'<div style="font-size:22px;">⭐</div>',className:'',iconAnchor:[11,11]});var mapB=L.map('map-cuba').setView([22.78,-85.126],8);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(mapB);L.marker([22.78,-85.126],{icon:epicIcon}).addTo(mapB).bindPopup('<b>Mw 6.1 Episantri</b><br>22.780°N 85.126°W<br>2026-06-08 18:00 UTC<br>Derinlik: 4 km (Sığ)').openPopup();L.circle([22.78,-85.126],{radius:300000,color:'#f5a623',weight:2,fill:false,dashArray:'8,6'}).addTo(mapB);[{lat:22.42,lng:-83.69,n:'Pinar del Río (152 km D)',pop:'186,000'},{lat:22.29,lng:-84.29,n:'Mantua (102 km KKD)',pop:'10,700'},{lat:23.13,lng:-82.38,n:'Havana (yaklaşık)',pop:'2,100,000'}].forEach(function(c){L.circleMarker([c.lat,c.lng],{radius:5,color:'#3b9eff',fillColor:'#3b9eff',fillOpacity:0.8,weight:2}).addTo(mapB).bindPopup('<b>'+c.n+'</b><br>Nüfus: '+c.pop);});var mapC=L.map('map-caribbean').setView([20,-78],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(mapC);L.marker([22.78,-85.126],{icon:epicIcon}).addTo(mapC).bindPopup('<b>2026 Küba Mw 6.1</b><br>Sığ Kabuksal · 4 km');L.circle([22.78,-85.126],{radius:800000,color:'#f5576c',weight:1.5,fill:false,dashArray:'10,8',opacity:0.5}).addTo(mapC);[{lat:22.42,lng:-83.69,n:'Pinar del Río'},{lat:18.47,lng:-69.90,n:'Santo Domingo'},{lat:18.54,lng:-72.34,n:'Port-au-Prince'},{lat:18.47,lng:-66.11,n:'San Juan (Porto Riko)'},{lat:17.12,lng:-61.85,n:'Antigua'}].forEach(function(w){L.circleMarker([w.lat,w.lng],{radius:5,color:'#22c55e',fillColor:'#22c55e',fillOpacity:0.7,weight:2}).addTo(mapC).bindPopup('<b>'+w.n+'</b>');});});
+</script>
+</body>
+</html>

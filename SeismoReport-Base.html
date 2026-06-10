@@ -1,0 +1,394 @@
+<!--
+SeismoReport-Base.html — v1.1
+Statik kisim: CSS + ExportEngine JS + Yapi
+Degisken kisimlar: PLACEHOLDER ile isaretli
+Kullanim: generate.py tarafindan otomatik doldurulur — bu dosyaya dokunma
+-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{{PAGE_TITLE}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
+  <script>
+  (function(){
+    function loadLeaflet(cb){
+      if(window.L){cb();return;}
+      var cdnList=[
+        "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js",
+        "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+      ];
+      var idx=0;
+      function tryNext(){
+        if(idx>=cdnList.length){console.warn("Leaflet yuklenemedi");return;}
+        var s=document.createElement("script");
+        s.src=cdnList[idx++];
+        s.onload=function(){if(window.L)cb();else tryNext();};
+        s.onerror=tryNext;
+        document.head.appendChild(s);
+      }
+      tryNext();
+    }
+    window._loadLeaflet=loadLeaflet;
+  })();
+  </script>
+
+  <style>
+    :root { --bg:#0a0e15; --text:#e8f0f5; --panel:#12171f; --accent:#3b9eff; --card-border:rgba(255,255,255,0.12); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Roboto',sans-serif; background:linear-gradient(to bottom,var(--bg) 0%,#0f1419 100%); color:var(--text); line-height:1.75; min-height:100vh; }
+    .container { max-width:1150px; margin:0 auto; padding:20px; }
+    .header-ribbon { background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%); color:#fff; padding:16px; text-align:center; font-weight:700; border-radius:10px; margin-bottom:20px; font-size:1.05em; }
+    .hero-box { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:40px 24px; text-align:center; border-radius:16px; border:1px solid var(--card-border); margin-bottom:30px; box-shadow:0 12px 36px rgba(0,0,0,0.48); position:relative; overflow:hidden; }
+    .hero-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.18) 50%,transparent 100%); border-radius:16px 16px 0 0; }
+    .hero-box h1 { font-size:2em; margin-bottom:14px; color:var(--accent); }
+    .hero-stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:0 0 20px; text-align:left; }
+    .hero-stat-card { border-radius:12px; padding:14px 16px; }
+    .hero-stat-label { font-size:0.68em; color:#7a9ab5; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; }
+    .hero-stat-value { font-size:2.4em; font-weight:700; line-height:1; }
+    .hero-stat-sub { font-size:0.76em; color:#94a3b8; margin-top:5px; }
+    .meta-strip { text-align:center; font-size:0.82em; color:#7a8fa8; letter-spacing:0.03em; margin-bottom:10px; padding:6px 0; }
+    .meta-strip span { margin:0 6px; }
+    h1.doc-title { text-align:center; font-size:16pt; font-weight:bold; margin:0 0 6pt; }
+    p.doc-sub  { text-align:center; font-size:10pt; margin:0 0 4pt; color:#333; }
+    p.doc-auth { text-align:center; font-size:11pt; font-weight:bold; margin:0 0 3pt; }
+    p.doc-aff  { text-align:center; font-size:10pt; font-style:italic; color:#444; margin:0 0 4pt; }
+    p.doc-date { text-align:center; font-size:10pt; color:#555; margin:0 0 16pt; }
+    hr.sep { border:none; border-top:1.5px solid #444; margin:0 0 18pt; }
+    .accordion { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:18px 24px; border-radius:10px; border:1px solid var(--card-border); cursor:pointer; margin-bottom:4px; font-weight:700; display:flex; justify-content:space-between; align-items:center; transition:background 0.3s,transform 0.2s; user-select:none; }
+    .accordion:hover { transform:translateY(-2px); }
+    .accordion.active { background:linear-gradient(135deg,#1e2535 0%,#252d3f 100%); border-color:var(--accent); border-radius:10px 10px 0 0; margin-bottom:0; }
+    .accordion::after { content:''; width:10px; height:10px; border-right:2px solid #7a9ab5; border-bottom:2px solid #7a9ab5; transform:rotate(45deg); transition:transform 0.3s ease; flex-shrink:0; }
+    .accordion.active::after { transform:rotate(-135deg); }
+    .panel { display:none; padding:24px; background:rgba(255,255,255,0.04); border-radius:0 0 10px 10px; border:1px solid var(--card-border); border-top:none; margin-bottom:12px; }
+    .panel.open { display:block; }
+    .panel p,.panel li,.panel td,.panel th,.review-body-text,.review-infobox,.review-abstract,.info-note,.analysis-card p { text-align:justify; hyphens:auto; text-indent:0 !important; }
+    .panel ul,.panel ol { padding-left:1.4em; margin:6px 0; }
+    .panel ul li,.panel ol li { margin-bottom:5px; }
+    .analysis-card { background:rgba(59,158,255,0.12); padding:18px 20px; border-radius:10px; border-left:4px solid var(--accent); margin:18px 0; line-height:1.8; }
+    .analysis-card h4 { margin-bottom:8px; color:var(--accent); }
+    .analysis-card p { text-align:justify; hyphens:auto; margin-bottom:1.2em; }
+    .info-note { background:rgba(255,255,255,0.06); border-radius:8px; padding:12px 16px; margin:12px 0; font-size:0.92em; color:#b0c4d8; border-left:3px solid #888; text-align:justify; hyphens:auto; line-height:1.75; }
+    img.figure { width:100%; max-width:900px; margin:24px auto; display:block; border:1px solid #333; border-radius:8px; }
+    .figure-caption { font-style:italic; color:#94a3b8; text-align:justify; margin-top:8px; font-size:0.92em; hyphens:auto; line-height:1.7; }
+    .conclusion-card { background:rgba(22,163,74,0.1); border-left:4px solid #22c55e; padding:16px 20px; border-radius:10px; margin:14px 0; }
+    .conclusion-card h4 { color:#22c55e; margin-bottom:8px; }
+    .rec-card { background:rgba(245,87,108,0.09); border-left:4px solid #f5576c; padding:16px 20px; border-radius:10px; margin:14px 0; }
+    .rec-card h4 { color:#f5576c; margin-bottom:8px; }
+    .rec-card ul,.conclusion-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
+    .method-card { background:rgba(255,200,50,0.07); border-left:4px solid #f5a623; padding:16px 20px; border-radius:10px; margin:14px 0; }
+    .method-card h4 { color:#f5a623; margin-bottom:8px; font-size:0.97em; }
+    .method-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
+    .review-journal-bar { background:linear-gradient(135deg,#1e3a5f 0%,#0e4d7a 100%); border:1px solid rgba(59,158,255,0.25); border-radius:10px 10px 0 0; padding:14px 20px; display:flex; align-items:center; gap:14px; margin-top:4px; }
+    .review-journal-logo { background:#e05c00; color:#fff; font-weight:900; font-size:0.72em; padding:4px 8px; border-radius:4px; letter-spacing:0.04em; white-space:nowrap; }
+    .review-journal-name { color:#90caf9; font-size:0.85em; font-style:italic; }
+    .review-article-title { font-size:1.18em; font-weight:700; color:#e8f0f5; line-height:1.4; margin:14px 0 6px; }
+    .review-author { font-weight:700; color:var(--accent); font-size:0.97em; }
+    .review-affil { color:#94a3b8; font-size:0.85em; font-style:italic; margin-bottom:16px; }
+    .review-doi { color:#64b5f6; font-size:0.8em; }
+    .review-abstract { background:rgba(59,158,255,0.07); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:16px 20px; margin:16px 0; text-align:justify; hyphens:auto; color:#eaf2ff; font-size:0.93em; line-height:1.85; }
+    .review-abstract strong { color:var(--accent); font-size:0.92em; display:block; margin-bottom:8px; letter-spacing:0.04em; }
+    .review-keywords { font-size:0.84em; color:#cbd9e8; margin:10px 0 18px; }
+    .review-keywords strong { color:#e0ecff; }
+    .review-keywords span { background:rgba(59,158,255,0.15); border:1px solid rgba(59,158,255,0.35); border-radius:4px; padding:2px 9px; margin-right:5px; display:inline-block; margin-bottom:4px; color:#c8e0f8; font-weight:500; }
+    .review-section-title { font-size:1.06em; font-weight:700; color:#7ecbff; border-bottom:2px solid rgba(59,158,255,0.3); padding-bottom:5px; margin:26px 0 11px; letter-spacing:0.01em; }
+    .review-subsection { font-size:0.97em; font-weight:700; color:#ddeeff; margin:16px 0 7px; }
+    .review-body-text { text-align:justify; line-height:1.88; color:#e8f3ff; margin-bottom:14px; hyphens:auto; font-size:0.93em; }
+    .panel ol,.panel ul { color:#e0eeff; line-height:2.0; font-size:0.93em; }
+    .review-table { width:100%; border-collapse:collapse; font-size:0.84em; margin:16px 0; background:rgba(255,255,255,0.02); }
+    .review-table th { background:rgba(59,158,255,0.22); color:#d8eeff; padding:9px 11px; text-align:left; border-bottom:2px solid rgba(59,158,255,0.4); font-size:0.9em; }
+    .review-table td { padding:8px 11px; border-bottom:1px solid rgba(255,255,255,0.10); color:#ddeeff; vertical-align:top; line-height:1.6; }
+    .review-table tr:nth-child(odd) td { background:rgba(59,158,255,0.04); }
+    .review-table caption { font-style:italic; color:#b0c8e0; font-size:0.84em; text-align:left; margin-bottom:8px; caption-side:top; }
+    .review-infobox { background:rgba(59,158,255,0.07); border:1px solid rgba(59,158,255,0.28); border-radius:8px; padding:14px 18px; margin:14px 0; font-size:0.91em; color:#ddeeff; line-height:1.78; text-align:justify; hyphens:auto; }
+    .review-infobox strong { color:#f0f8ff; }
+    .appendix-title { font-size:1.0em; font-weight:700; color:#90caf9; border-top:2px solid rgba(59,158,255,0.2); border-bottom:1px solid rgba(59,158,255,0.15); padding:10px 0 6px; margin:28px 0 12px; letter-spacing:0.02em; }
+    .appendix-label { display:inline-block; background:rgba(59,158,255,0.15); color:#64b5f6; border-radius:4px; padding:1px 9px; font-size:0.8em; font-weight:700; margin-right:8px; vertical-align:middle; }
+    .review-ref-item { font-size:0.85em; color:#c8dff5; line-height:1.70; padding-left:2.2em; text-indent:-2.2em; margin-bottom:8px; text-align:justify; }
+    .review-ref-item a { color:#64b5f6; text-decoration:none; }
+    table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.9em; }
+    th { background:rgba(59,158,255,0.2); padding:8px 12px; text-align:left; }
+    td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.07); }
+    tr:hover td { background:rgba(255,255,255,0.04); }
+    .report-footer { text-align:center; font-size:0.82em; color:#6a7f96; border-top:1px solid rgba(255,255,255,0.07); margin-top:40px; padding:20px 0 10px; line-height:2; }
+
+    @media print {
+      @page { size:A4; margin:2cm 2.2cm 2.2cm 2.2cm; }
+      @page :first { margin-top:1.5cm; }
+      *,*::before,*::after { background:white !important; background-image:none !important; background-color:transparent !important; box-shadow:none !important; text-shadow:none !important; color:#1a1a1a !important; }
+      body { font-family:"Times New Roman",Times,serif !important; font-size:11pt !important; line-height:1.6 !important; color:#000 !important; background:white !important; }
+      .accordion { display:block !important; font-size:0 !important; border:none !important; border-bottom:1.5pt solid #333 !important; padding:8pt 0 4pt !important; margin:16pt 0 6pt !important; page-break-after:avoid !important; background:none !important; }
+      .accordion::before { content:attr(data-num) " " attr(data-label); font-size:12pt !important; font-weight:bold !important; color:#000 !important; display:block !important; }
+      .accordion::after { display:none !important; }
+      .panel { display:block !important; max-height:none !important; overflow:visible !important; }
+      .hero-box { border:2px solid #333 !important; padding:14px !important; margin-bottom:16pt !important; }
+      .hero-box h1 { font-size:16pt !important; color:#000 !important; font-weight:bold !important; }
+      .header-ribbon { background:#333 !important; color:#fff !important; border-radius:0 !important; }
+      .analysis-card { border-left:3pt solid #333 !important; background:#f8f8f8 !important; padding:10pt 12pt !important; margin:8pt 0 !important; }
+      .analysis-card h4 { color:#000 !important; }
+      .conclusion-card { border-left:3pt solid #228B22 !important; background:#f0fff0 !important; padding:9pt 11pt !important; }
+      .conclusion-card h4 { color:#005500 !important; }
+      .rec-card { border-left:3pt solid #CC2200 !important; background:#fff5f5 !important; padding:9pt 11pt !important; }
+      .rec-card h4 { color:#990000 !important; }
+      .method-card { border-left:3pt solid #AA7700 !important; background:#fffbe8 !important; padding:9pt 11pt !important; }
+      .method-card h4 { color:#664400 !important; }
+      .info-note { border-left:2pt solid #888 !important; background:#f5f5f5 !important; font-size:9.5pt !important; padding:6pt 9pt !important; color:#333 !important; }
+      .review-abstract { background:#f5f5f5 !important; border-left:4pt solid #333 !important; padding:10pt 12pt !important; }
+      .review-keywords span { border:1px solid #555 !important; background:#eee !important; color:#000 !important; }
+      .review-section-title { font-size:11pt !important; font-weight:bold !important; border-bottom:1.5pt solid #333 !important; color:#000 !important; }
+      .review-body-text { font-size:10.5pt !important; line-height:1.65 !important; color:#000 !important; }
+      .review-infobox { background:#f0f0f0 !important; border:1pt solid #666 !important; color:#000 !important; }
+      .review-table th { background:#e8e8e8 !important; border:1pt solid #333 !important; color:#000 !important; }
+      .review-table td { border-bottom:0.5pt solid #aaa !important; color:#000 !important; }
+      .review-journal-bar { border:1pt solid #333 !important; background:#f0f0f0 !important; }
+      .review-journal-logo { color:#000 !important; background:#555 !important; }
+      .review-journal-name { color:#000 !important; }
+      .figure-caption { color:#222 !important; font-size:9pt !important; }
+      .review-section-title { page-break-after:avoid; }
+      .review-table { page-break-inside:avoid; }
+      .map-ph { display:block !important; }
+      .leaflet-container { display:none !important; }
+      .export-toolbar,.report-footer,iframe,button,.btn { display:none !important; }
+      .meta-strip { color:#555 !important; }
+    }
+    @media (max-width:768px) {
+      .hero-box h1 { font-size:1.5em; }
+      .accordion { font-size:1em; padding:14px 18px; }
+    }
+  </style>
+
+<script>
+(function(global){"use strict";
+  const CONFIG={
+    docTitle    :"{{DOC_TITLE}}",
+    author      :"{{AUTHOR}}",
+    affiliation :"{{AFFILIATION}}",
+    subtitle    :"{{SUBTITLE}}",
+    filename    :"{{FILENAME}}",
+  };
+  function captureState(){const s=new Map();document.querySelectorAll(".panel").forEach(p=>{s.set(p,{display:p.style.display,hasOpen:p.classList.contains("open")});});return s;}
+  function openAllPanels(){document.querySelectorAll(".panel").forEach(p=>{p.style.setProperty("display","block","important");p.classList.add("open");});document.querySelectorAll(".accordion").forEach(a=>a.classList.add("active"));}
+  function restoreState(s){s.forEach((saved,el)=>{el.style.display=saved.display||"";if(!saved.hasOpen){el.classList.remove("open");el.style.display="none";}});document.querySelectorAll(".accordion").forEach(a=>{const p=a.nextElementSibling;if(p&&!p.classList.contains("open"))a.classList.remove("active");});}
+  function showLoading(msg){const d=document.createElement("div");Object.assign(d.style,{position:"fixed",inset:"0",background:"rgba(10,14,21,0.88)",zIndex:"999999",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:"16px"});d.innerHTML=`<div style="width:52px;height:52px;border:4px solid #3b9eff;border-top-color:transparent;border-radius:50%;animation:_s .8s linear infinite;"></div><div style="color:#e8f0f5;font-family:sans-serif;font-size:1.1em;text-align:center;max-width:320px;">${msg}</div><style>@keyframes _s{to{transform:rotate(360deg)}}</style>`;document.body.appendChild(d);return d;}
+  function hideLoading(d){if(d&&d.parentNode)d.parentNode.removeChild(d);}
+  function openBlob(html){const b=new Blob([html],{type:"text/html;charset=utf-8"});const u=URL.createObjectURL(b);const w=window.open(u,"_blank");if(w){setTimeout(()=>URL.revokeObjectURL(u),60000);return;}const a=document.createElement("a");a.href=u;a.target="_blank";document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),60000);}
+  function downloadBlob(content,filename,mime){const b=new Blob([content],{type:mime});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),8000);}
+
+  function buildBodyHTML(){
+    const accMap={};
+    document.querySelectorAll(".accordion").forEach(acc=>{const num=acc.getAttribute("data-num")||"";accMap[num]=acc;});
+    function buildSection(acc){
+      const panel=acc.nextElementSibling;
+      if(!panel||!panel.classList.contains("panel"))return"";
+      const clone=panel.cloneNode(true);
+      clone.querySelectorAll("script,style,.no-export,iframe,.export-toolbar").forEach(el=>el.remove());
+      clone.querySelectorAll("div[id^='map']").forEach(div=>{const ph=document.createElement("p");ph.style.cssText="font-size:9pt;color:#555;font-style:italic;border:1pt solid #aaa;padding:8pt;text-align:center;";ph.textContent=`Etkilesimli harita (${div.id}) — PDF gorunumunde mevcut degil.`;div.parentNode.replaceChild(ph,div);});
+      clone.querySelectorAll(".map-ph").forEach(el=>el.remove());
+      clone.querySelectorAll("[style]").forEach(el=>{let s=el.getAttribute("style")||"";s=s.replace(/background(-color)?\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"");s=s.replace(/color\s*:\s*#[7-9a-f][0-9a-f]{2,5}\b[^;]*;?/gi,"color:#111;");s=s.replace(/color\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"color:#111;");s=s.replace(/color\s*:\s*var\(--[^)]+\)[^;]*;?/gi,"color:#000;");el.setAttribute("style",s.trim());});
+      return clone.innerHTML;
+    }
+    let body="";
+    if(accMap["7."])body+=buildSection(accMap["7."]);
+    body+=`<div style="page-break-before:always;text-align:center;padding:60pt 0 40pt;border-top:2pt solid #333;margin-top:30pt;"><p style="font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;color:#666;margin-bottom:8pt;">Supporting Material</p><h2 style="font-size:16pt;font-weight:bold;border:none;margin:0 0 6pt;">APPENDICES</h2></div>`;
+    ["1.","2.","3.","4.","5.","6."].forEach(num=>{if(accMap[num]){const acc=accMap[num];const label=acc.getAttribute("data-label")||"";body+=`<h2>${label}</h2>`+buildSection(acc);}});
+    return body;
+  }
+
+  function pdfTemplate(body){
+    const now=new Date().toLocaleDateString("tr-TR",{year:"numeric",month:"long",day:"numeric"});
+    return `<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>${CONFIG.docTitle} — ${CONFIG.author}</title>
+<style>
+@page{size:A4 portrait;margin:25mm 22mm 28mm 22mm;@bottom-left{content:"${CONFIG.author} · ${CONFIG.docTitle}";font-family:"Times New Roman",serif;font-size:8.5pt;color:#555;}@bottom-right{content:"Sayfa " counter(page) " / " counter(pages);font-family:"Times New Roman",serif;font-size:8.5pt;color:#555;}}
+*{box-sizing:border-box;}body{font-family:"Times New Roman",serif;font-size:11pt;line-height:1.85;color:#000;background:#fff;margin:0;padding:0;}
+@media screen{body{background:#cbd5e1;padding:64px 0 50px;}.doc-wrap{width:210mm;margin:0 auto;padding:25mm 22mm 30mm;background:#fff;box-shadow:0 6px 30px rgba(0,0,0,.22);min-height:297mm;}}
+@media print{body{background:#fff;}.print-bar{display:none !important;}.doc-wrap{width:100%;padding:0;box-shadow:none;}}
+.print-bar{position:fixed;top:0;left:0;right:0;z-index:9999;background:#1e293b;color:#f1f5f9;padding:10px 24px;display:flex;align-items:center;gap:14px;font-family:Arial,sans-serif;font-size:13px;}
+.btn-p{margin-left:auto;background:#2563eb;color:#fff;border:none;border-radius:7px;padding:9px 22px;font-size:13px;font-weight:bold;cursor:pointer;}
+h1{text-align:center;font-size:16pt;font-weight:bold;margin:0 0 6pt;}h2{font-size:13pt;border-bottom:1px solid #999;padding-bottom:3pt;margin:22pt 0 9pt;page-break-after:avoid;}h3{font-size:11.5pt;margin:15pt 0 5pt;}h4{font-size:10.5pt;margin:10pt 0 4pt;font-style:italic;}
+p{text-align:justify;text-indent:1.25em;margin:0 0 7pt;hyphens:auto;}h2+p,h3+p,h4+p{text-indent:0;}
+img{max-width:100%;display:block;margin:0 auto;}table{width:100%;border-collapse:collapse;font-size:9pt;margin:10pt 0;}th,td{border:1px solid #bbb;padding:3pt 5pt;vertical-align:top;}th{background:#efefef;font-weight:bold;}
+ol,ul{margin:6pt 0 8pt 18pt;}li{margin-bottom:4pt;text-align:justify;}
+.review-abstract{background:#f5f5f5;border-left:4pt solid #333;padding:10pt 12pt;font-size:10.5pt;}
+.review-section-title{font-size:11pt;font-weight:bold;border-bottom:1.5pt solid #333;padding-bottom:2pt;margin:12pt 0 6pt;}
+.review-body-text{text-align:justify;font-size:10.5pt;line-height:1.65;margin-bottom:7pt;}
+.analysis-card{border-left:3pt solid #333;background:#f8f8f8;padding:10pt 12pt;margin:8pt 0;}
+.conclusion-card{border-left:3pt solid #228B22;background:#f0fff0;padding:9pt 11pt;margin:7pt 0;}
+.rec-card{border-left:3pt solid #CC2200;background:#fff5f5;padding:9pt 11pt;margin:7pt 0;}
+.method-card{border-left:3pt solid #AA7700;background:#fffbe8;padding:9pt 11pt;margin:7pt 0;}
+.info-note{border-left:2pt solid #888;background:#f5f5f5;font-size:9.5pt;padding:6pt 9pt;}
+.review-infobox{background:#f0f0f0;border:1pt solid #666;padding:7pt 9pt;font-size:9.5pt;}
+.review-table th{background:#e8e8e8;border:1pt solid #333;}
+.review-table td{border:0.5pt solid #999;}
+.figure-caption{font-size:9pt;font-style:italic;color:#555;}
+.leaflet-container,.map-ph{display:none !important;}
+[style*="background:rgba"]{background:#f8f8f8 !important;}
+[style*="color:var(--accent)"]{color:#1a4a8a !important;}
+</style></head><body>
+<div class="print-bar"><div><strong>📄 ${CONFIG.docTitle} — Akademik Belge</strong><br><span style="font-size:11px;color:#94a3b8;">Kagit:A4 · Baski: Ctrl+P</span></div><button class="btn-p" onclick="window.print()">🖨️ Yazdir / PDF Kaydet</button></div>
+<div class="doc-wrap">
+<div style="text-align:center;border:1.5pt solid #333;padding:22pt 20pt 18pt;margin-bottom:24pt;">
+<div style="font-size:8pt;font-weight:bold;letter-spacing:0.12em;color:#555;margin-bottom:6pt;text-transform:uppercase;">SCI Review Article</div>
+<div style="font-size:7.5pt;color:#555;margin-bottom:14pt;font-style:italic;">${CONFIG.subtitle}</div>
+<h1 style="font-size:15pt;margin-bottom:8pt;">${CONFIG.docTitle}</h1>
+<hr style="border:none;border-top:1pt solid #aaa;margin:10pt 40pt;">
+<p style="font-size:11pt;font-weight:bold;text-align:center;margin-bottom:3pt;text-indent:0;">${CONFIG.author}</p>
+<p style="font-size:10pt;font-style:italic;text-align:center;margin-bottom:3pt;text-indent:0;">${CONFIG.affiliation}</p>
+<p style="font-size:8.5pt;color:#555;text-align:center;text-indent:0;"><em>Review Article · Received:</em> ${now}</p>
+</div><hr style="border:none;border-top:1.5px solid #444;margin:0 0 18pt;">
+${body}</div></body></html>`;
+  }
+
+  function wordTemplate(body){
+    const now=new Date().toLocaleDateString("tr-TR",{year:"numeric",month:"long",day:"numeric"});
+    return`<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40" lang="tr"><head><meta charset="utf-8"><meta name=ProgId content=Word.Document><title>${CONFIG.docTitle}</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]--><style>@page Section1{size:210mm 297mm;margin:25mm 22mm 25mm 22mm;}div.Section1{page:Section1;}body{font-family:"Times New Roman",serif;font-size:11pt;color:#000;line-height:1.85;}h1{text-align:center;font-size:16pt;font-weight:bold;}h2{font-size:13pt;border-bottom:1px solid #999;margin:22pt 0 9pt;}h3{font-size:11.5pt;margin:15pt 0 5pt;}h4{font-size:10.5pt;margin:10pt 0 4pt;font-style:italic;}p{text-align:justify;text-indent:1.25em;margin:0 0 7pt;}h2+p,h3+p{text-indent:0;}img{max-width:100%;}table{width:100%;border-collapse:collapse;font-size:9pt;}th,td{border:1px solid #bbb;padding:3pt 5pt;}th{background:#efefef;font-weight:bold;}ol,ul{margin:6pt 0 8pt 18pt;}li{margin-bottom:4pt;}.review-abstract{background:#f5f5f5;border-left:4pt solid #333;padding:9pt 11pt;}.review-section-title{font-size:11pt;font-weight:bold;border-bottom:1.5pt solid #333;padding-bottom:2pt;margin:12pt 0 6pt;}.review-body-text{text-align:justify;font-size:10.5pt;}.analysis-card{border-left:3pt solid #333;background:#f8f8f8;padding:10pt 12pt;}.conclusion-card{border-left:3pt solid #228B22;background:#f0fff0;padding:9pt 11pt;}.rec-card{border-left:3pt solid #CC2200;background:#fff5f5;padding:9pt 11pt;}.info-note{border-left:2pt solid #888;background:#f5f5f5;font-size:9.5pt;padding:6pt 9pt;}</style></head><body><div class="Section1"><h1>${CONFIG.docTitle}</h1><p style="text-align:center;text-indent:0;font-weight:bold;">${CONFIG.author}</p><p style="text-align:center;text-indent:0;font-style:italic;">${CONFIG.affiliation}</p><p style="text-align:center;font-size:9pt;text-indent:0;"><em>Review Article · Received:</em> ${now}</p><hr style="border:none;border-top:1.5px solid #444;">${body}</div></body></html>`;
+  }
+
+  async function exportPdf(){
+    const ld=showLoading("PDF hazirlaniyor…");const prev=captureState();
+    try{openAllPanels();await new Promise(r=>setTimeout(r,400));openBlob(pdfTemplate(buildBodyHTML()));}
+    catch(e){alert("PDF export hatasi: "+e.message);}
+    finally{restoreState(prev);hideLoading(ld);}
+  }
+  async function exportWord(){
+    const ld=showLoading("Word belgesi hazirlaniyor…");const prev=captureState();
+    try{openAllPanels();await new Promise(r=>setTimeout(r,400));downloadBlob(wordTemplate(buildBodyHTML()),`${CONFIG.filename}.doc`,"application/msword");}
+    catch(e){alert("Word export hatasi: "+e.message);}
+    finally{restoreState(prev);hideLoading(ld);}
+  }
+
+  global.ExportEngine={exportPdf,exportWord,version:"3.1"};
+})(window);
+</script>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-ribbon">{{HEADER_RIBBON}}</div>
+
+  <div class="meta-strip">{{META_STRIP_HTML}}</div>
+
+  <div class="hero-box">
+    <h1>{{HERO_TITLE}}</h1>
+    <div style="margin-bottom:22px;">
+      <div style="font-weight:700;font-size:1.05em;color:#e8f0f5;">{{AUTHOR}}</div>
+      <div style="color:#7a9ab5;font-size:0.85em;margin-top:3px;">{{AFFILIATION}}</div>
+    </div>
+    {{STAT_CARDS_HTML}}
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(59,158,255,0.1);border:1px solid rgba(59,158,255,0.3);border-radius:20px;padding:7px 18px;font-size:0.82em;color:#90caf9;">
+      {{HERO_LINKS_HTML}}
+    </div>
+  </div>
+
+  <!-- Google Translate -->
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 16px;margin:0 0 16px;">
+    <div style="font-size:0.78em;color:#7a9ab5;flex:1;min-width:160px;">🌍 SeismoReport v3.1 · Otomatik Çeviri</div>
+    <div id="google_translate_element"></div>
+  </div>
+  <script type="text/javascript">
+  function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'tr',includedLanguages:'en,tr,it,de,fr,es,ar,ru,pt,nl,pl',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:false},'google_translate_element');}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Export Toolbar -->
+  <div class="export-toolbar" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#12171f;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:18px 22px;margin:20px 0 24px;">
+    <div style="flex:1;min-width:200px;">
+      <div style="font-weight:700;font-size:0.97rem;color:#3b9eff;">📤 Akademik Dışa Aktarma</div>
+      <div style="font-size:0.78rem;color:#8a9ab5;margin-top:3px;">SCI Makale Çekirdeği + Appendices — A4 tipografi · ExportEngine v3.1</div>
+    </div>
+    <button onclick="ExportEngine.exportPdf()" style="padding:12px 22px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📄 PDF / Yazdır</button>
+    <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
+  </div>
+
+  <!-- Review Article -->
+  {{REVIEW_SECTION_HTML}}
+
+  <!-- Appendices -->
+  {{APPENDIX_SECTIONS_HTML}}
+
+  <!-- Aftershock Map + Omori -->
+  <div id="aftershock-section" style="margin:32px 0 24px;">
+    <div style="font-size:1.0em;font-weight:700;color:#90caf9;border-top:2px solid rgba(59,158,255,.2);border-bottom:1px solid rgba(59,158,255,.15);padding:10px 0 6px;margin:0 0 14px;letter-spacing:.02em;">
+      <span style="display:inline-block;background:rgba(59,158,255,.15);color:#64b5f6;border-radius:4px;padding:1px 9px;font-size:.8em;font-weight:700;margin-right:8px;">EK 5</span>
+      Artçı Sismik Aktivite Haritası — EMSC Veritabanı
+    </div>
+    <div id="aftershock-map-wrap" style="position:relative;">
+      <div id="aftershock-map" style="height:460px;border-radius:10px;border:1px solid rgba(255,255,255,.1);margin-bottom:10px;"></div>
+    </div>
+    <div class="map-ph" style="display:none;background:#1a1f2e;border:1px solid #333;border-radius:8px;padding:12px;text-align:center;color:#94a3b8;font-size:.85em;">
+      [Artçı Deprem Haritası — Tarayıcıda görüntüleyin]
+    </div>
+    <div style="font-size:.82em;color:#7a9ab5;margin-top:8px;line-height:1.7;">
+      Daire büyüklüğü magnitude ile orantılıdır. ⭐ ana depremi gösterir. ⛶ tam ekran için sağ üst butona tıklayın.
+      Kaynak: EMSC-CSEM Seismik Portal (seismicportal.eu).
+    </div>
+  </div>
+
+  <!-- Omori-Utsu Egrisi (2 tab: lineer + log-log) -->
+  <div style="background:linear-gradient(135deg,#12171f,#1a1f2e);border:1px solid rgba(255,136,0,.2);border-radius:14px;padding:20px 22px;margin:0 0 28px;">
+    <div style="font-size:1.0em;font-weight:700;color:#ffaa44;border-top:2px solid rgba(255,136,0,.2);border-bottom:1px solid rgba(255,136,0,.12);padding:10px 0 6px;margin:0 0 12px;letter-spacing:.02em;">
+      <span style="display:inline-block;background:rgba(255,136,0,.15);color:#ffaa44;border-radius:4px;padding:1px 9px;font-size:.8em;font-weight:700;margin-right:8px;">EK 6</span>
+      Omori-Utsu Yasası — Artçı Aktivite Sönümü
+    </div>
+    <!-- Tab butonlari -->
+    <div style="display:flex;gap:4px;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:0;">
+      <button class="omori-tab-btn" data-tab="omori-pane-log"
+        style="background:rgba(59,158,255,.12);color:#7ecbff;border:none;border-bottom:2px solid #3b9eff;
+               padding:6px 16px;border-radius:6px 6px 0 0;cursor:pointer;font-size:.88em;font-weight:700;">
+        Omori-Utsu (log–log)
+      </button>
+      <button class="omori-tab-btn" data-tab="omori-pane-gr"
+        style="background:transparent;color:#7a9ab5;border:none;border-bottom:2px solid transparent;
+               padding:6px 16px;border-radius:6px 6px 0 0;cursor:pointer;font-size:.88em;">
+        Gutenberg-Richter (log N – M)
+      </button>
+      <button class="omori-tab-btn" data-tab="omori-pane-dc"
+        style="background:transparent;color:#7a9ab5;border:none;border-bottom:2px solid transparent;
+               padding:6px 16px;border-radius:6px 6px 0 0;cursor:pointer;font-size:.88em;">
+        Fraktal Boyut (Dc)
+      </button>
+    </div>
+    <div id="omori-pane-log" class="omori-tab-pane" style="height:300px;position:relative;display:block;">
+      <canvas id="omori-chart-log"></canvas>
+    </div>
+    <div id="omori-pane-gr" class="omori-tab-pane" style="height:300px;position:relative;display:none;">
+      <canvas id="omori-chart-gr"></canvas>
+    </div>
+    <div id="omori-pane-dc" class="omori-tab-pane" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;height:300px;">
+        <div style="position:relative;">
+          <div style="font-size:.78em;color:#b464ff;font-weight:700;margin-bottom:4px">Uzaysal Fraktal — C(r) log–log</div>
+          <div style="position:relative;height:270px;"><canvas id="omori-chart-dc"></canvas></div>
+        </div>
+        <div style="position:relative;">
+          <div style="font-size:.78em;color:#ffaa22;font-weight:700;margin-bottom:4px">Zamansal Kümelenme — Inter-event Δt</div>
+          <div style="position:relative;height:270px;"><canvas id="omori-chart-dt"></canvas></div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.82em;color:#7a9ab5;margin-top:10px;line-height:1.7;">
+      λ(t) = K / (c + t)<sup>p</sup> — Nonlineer LS (Nelder-Mead).
+      Omori (1894) orijinal yasası p = 1 alır; Utsu (1957) serbest p ile genelleştirmiştir.
+      Tipik aralık: p = 0.8–1.2. Kaynak: EMSC artçı kataloğu.
+    </div>
+  </div>
+
+  <div class="report-footer">{{FOOTER_HTML}}</div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.accordion').forEach(acc=>{
+    acc.addEventListener('click',()=>{
+      acc.nextElementSibling.classList.toggle('open');
+      acc.classList.toggle('active');
+    });
+  });
+  {{MAP_INIT_JS}}
+  {{AFTERSHOCK_MAP_JS}}
+  {{OMORI_CHART_JS}}
+</script>
+</body>
+</html>

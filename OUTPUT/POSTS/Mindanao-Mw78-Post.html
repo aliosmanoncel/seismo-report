@@ -21,16 +21,12 @@
   --ep-glass:rgba(0,0,0,.02); --ep-border:rgba(0,0,0,.1);
 }
 #ep-wrap * { box-sizing:border-box; }
-
-/* HEADER */
 #ep-wrap .ep-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 0 20px;border-bottom:1px solid var(--ep-border);margin-bottom:28px;}
 #ep-wrap .ep-badge{background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));padding:5px 14px;border-radius:100px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;color:#fff;letter-spacing:.08em;text-transform:uppercase;}
 #ep-wrap .ep-brand-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--ep-text);margin-top:5px;}
 #ep-wrap .ep-brand-sub{font-size:.78rem;color:var(--ep-muted);}
 #ep-wrap .ep-theme-btn{border:1px solid var(--ep-border);padding:7px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;background:var(--ep-glass);color:var(--ep-text);transition:all .2s;}
 #ep-wrap .ep-theme-btn:hover{border-color:var(--ep-accent);color:var(--ep-accent);}
-
-/* HERO */
 #ep-wrap .ep-hero{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(225,29,72,.18),transparent 70%),linear-gradient(135deg,#070c18,#0d1525);border-radius:20px;padding:44px 32px;text-align:center;margin-bottom:28px;border:1px solid var(--ep-border);overflow:hidden;}
 #ep-wrap .ep-hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(225,29,72,.1);border:1px solid rgba(225,29,72,.25);padding:5px 14px;border-radius:100px;font-size:.78rem;color:var(--ep-accent);margin-bottom:18px;font-weight:600;}
 #ep-wrap .ep-hero h1{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;line-height:1.15;margin-bottom:12px;text-wrap:balance;}
@@ -38,44 +34,19 @@
 #ep-wrap .ep-hero .ep-lead{font-size:1rem;color:var(--ep-muted);max-width:520px;margin:0 auto 20px;}
 #ep-wrap .ep-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
 #ep-wrap .ep-pill{padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:600;border:1px solid var(--ep-border);color:var(--ep-muted);background:var(--ep-glass);}
-
-/* META */
 #ep-wrap .ep-meta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 20px;font-size:.8rem;color:var(--ep-muted);}
-
-/* VIDEO KAPAK */
-#ep-wrap .ep-video{margin:0 0 28px;border-radius:16px;overflow:hidden;border:1px solid rgba(225,29,72,.25);}
-#ep-wrap .ep-video a{display:block;position:relative;line-height:0;border-radius:12px;overflow:hidden;}
-#ep-wrap .ep-video img{width:100%;display:block;}
-#ep-wrap .ep-video .ep-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;background:rgba(225,29,72,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.5);}
-#ep-wrap .ep-video .ep-play-arrow{width:0;height:0;border-style:solid;border-width:13px 0 13px 26px;border-color:transparent transparent transparent #fff;margin-left:5px;}
-#ep-wrap .ep-video-cap{padding:12px 18px;background:linear-gradient(135deg,rgba(225,29,72,.07),rgba(245,158,11,.04));border-top:1px solid rgba(225,29,72,.2);font-size:.78rem;color:var(--ep-muted);font-style:italic;text-align:justify;hyphens:auto;}
-
-/* ÖZET KUTUSU */
 #ep-wrap .ep-summary{background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.25);border-radius:16px;padding:24px 24px 24px 70px;margin:24px 0;position:relative;}
-#ep-wrap .ep-summary::before{content:"\1F3AC";font-size:1.8rem;position:absolute;top:20px;left:20px;}
+#ep-wrap .ep-summary::before{content:"🌍";font-size:1.8rem;position:absolute;top:20px;left:20px;}
 #ep-wrap .ep-summary h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--ep-accent);margin-bottom:10px;}
 #ep-wrap .ep-summary p{font-size:.92rem;font-style:italic;color:var(--ep-text);opacity:.88;margin-bottom:8px;}
 #ep-wrap .ep-summary .ep-note{font-size:.78rem;color:var(--ep-muted);font-style:normal;}
-
-/* STAT KUTUSU */
-#ep-wrap .ep-stats{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0;}
-#ep-wrap .ep-stat{flex:1;min-width:110px;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:16px;text-align:center;}
-#ep-wrap .ep-stat-num{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;color:var(--ep-accent);}
-#ep-wrap .ep-stat-label{font-size:.75rem;color:var(--ep-muted);margin-top:4px;}
-#ep-wrap .ep-stat-sub{font-size:.7rem;color:var(--ep-muted);opacity:.7;margin-top:3px;}
-
-/* BÖLÜM BAŞLIĞI */
-#ep-wrap .ep-section{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--ep-accent);margin:32px 0 14px;display:flex;align-items:center;gap:10px;border-bottom:2px solid rgba(225,29,72,.2);padding-bottom:8px;text-wrap:balance;}
-
-/* KART GRUBU */
+#ep-wrap .ep-section{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--ep-accent);margin:32px 0 14px;display:flex;align-items:center;gap:10px;border-bottom:2px solid rgba(225,29,72,.2);padding-bottom:8px;}
 #ep-wrap .ep-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0;}
 #ep-wrap .ep-card{background:var(--ep-panel);border:1px solid var(--ep-border);border-radius:14px;padding:18px;transition:border-color .2s,transform .2s;}
 #ep-wrap .ep-card:hover{border-color:var(--ep-accent);transform:translateY(-2px);}
 #ep-wrap .ep-card .ep-icon{font-size:1.6rem;margin-bottom:10px;}
 #ep-wrap .ep-card h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:6px;color:var(--ep-accent);}
 #ep-wrap .ep-card p{font-size:.82rem;opacity:.72;line-height:1.6;}
-
-/* ADIM SIRASI */
 #ep-wrap .ep-steps{display:flex;flex-direction:column;margin:20px 0;}
 #ep-wrap .ep-step{display:flex;gap:16px;align-items:flex-start;padding:18px;background:var(--ep-panel);border:1px solid var(--ep-border);}
 #ep-wrap .ep-step:first-child{border-radius:14px 14px 0 0;}
@@ -84,66 +55,29 @@
 #ep-wrap .ep-step-body h4{margin:0 0 4px;color:var(--ep-accent);font-family:'Syne',sans-serif;font-size:.9rem;}
 #ep-wrap .ep-step-body p{margin:0;font-size:.88rem;opacity:.8;}
 #ep-wrap .ep-connector{width:2px;background:rgba(225,29,72,.3);height:20px;margin-left:19px;}
-
-/* ALINTI */
 #ep-wrap .ep-quote{border-left:3px solid var(--ep-accent2);padding:14px 20px;margin:20px 0;background:rgba(245,158,11,.05);border-radius:0 12px 12px 0;font-style:italic;font-size:1rem;}
 #ep-wrap .ep-quote cite{display:block;margin-top:8px;font-style:normal;font-size:.78rem;color:var(--ep-muted);}
-
-/* BİLGİ KUTULARI */
 #ep-wrap .ep-box{border-radius:14px;padding:18px 22px;margin:20px 0;font-size:.92rem;}
 #ep-wrap .ep-box-red{background:rgba(225,29,72,.07);border:1px solid rgba(225,29,72,.2);}
 #ep-wrap .ep-box-red strong{color:var(--ep-accent);}
-#ep-wrap .ep-box-warn{background:rgba(245,87,108,.07);border:1px solid rgba(245,87,108,.2);}
-#ep-wrap .ep-box-warn strong{color:#f5576c;}
 #ep-wrap .ep-box-gold{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);}
 #ep-wrap .ep-box-gold strong{color:#c9a84c;}
 #ep-wrap .ep-box-green{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);}
 #ep-wrap .ep-box-green strong{color:#22c55e;}
-
-/* DÜŞÜNCE KUTUSU */
 #ep-wrap .ep-think{background:rgba(167,139,250,.08);border-left:4px solid var(--ep-accent3);padding:16px 18px 16px 60px;border-radius:12px;margin:24px 0;font-style:italic;position:relative;font-size:.92rem;}
-#ep-wrap .ep-think::before{content:"\1F4A1";font-size:1.6rem;position:absolute;top:14px;left:14px;}
+#ep-wrap .ep-think::before{content:"💡";font-size:1.6rem;position:absolute;top:14px;left:14px;}
 #ep-wrap .ep-think strong{display:block;margin-bottom:6px;font-style:normal;color:var(--ep-accent3);}
-
-/* TABLO */
-/* NOT: Blogger <style> bloğundaki tablo kurallarını eziyor.
-   CSS sınıfları yedek olarak bırakıldı; asıl stil tablo HTML'inde
-   inline style ile verilmeli &#x2014; aşağıdaki örneğe bakın.
-   ⚠️ table-layout:auto zorunlu — fixed Blogger'da sütunları bozar.
-   ⚠️ İlk sütun th/td için white-space:nowrap inline eklenmeli. */
-#ep-wrap .ep-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.88rem;table-layout:auto;}
-#ep-wrap .ep-table th{background:rgba(225,29,72,.15);padding:10px 12px;text-align:left;border-bottom:2px solid var(--ep-accent);font-family:'Syne',sans-serif;}
-#ep-wrap .ep-table td{padding:9px 12px;border-bottom:1px solid var(--ep-border);vertical-align:top;word-wrap:break-word;}
-#ep-wrap .ep-table td:first-child{font-weight:700;color:var(--ep-accent);font-family:'Syne',sans-serif;white-space:nowrap;}
-#ep-wrap .ep-table tr:hover td{background:rgba(255,255,255,.02);}
-
-/* ETİKETLER */
 #ep-wrap .ep-tags{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0 0;}
 #ep-wrap .ep-tag{padding:6px 16px;border-radius:100px;font-size:.78rem;font-weight:600;border:1px solid var(--ep-border);color:var(--ep-muted);background:var(--ep-glass);}
-
-/* AYRAÇ */
 #ep-wrap .ep-divider{height:1px;background:linear-gradient(90deg,transparent,var(--ep-border),transparent);margin:28px 0;}
-
-/* METİN */
 #ep-wrap .ep-intro{font-size:.95rem;opacity:.85;margin:24px 0 16px;line-height:1.8;}
 #ep-wrap .ep-p{font-size:.96rem;line-height:1.9;margin:16px 0;opacity:.9;}
 #ep-wrap .ep-kw{color:var(--ep-accent2);font-weight:600;}
-/* ep-kw2: ikincil vurgu — Saha Romanı ve anlatı yazılarında mor (accent3) ton için */
 #ep-wrap .ep-kw2{color:var(--ep-accent3);font-weight:600;}
-
-/* DIŞA AKTARMA */
-#ep-wrap .ep-export{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:14px 20px;margin:28px 0;}
-#ep-wrap .ep-export-info{display:flex;align-items:center;gap:10px;flex:1;min-width:180px;}
-#ep-wrap .ep-export-icon{width:34px;height:34px;border-radius:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-#ep-wrap .ep-export-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:#e8c97a;}
-#ep-wrap .ep-export-sub{font-size:.68rem;color:var(--ep-muted);margin-top:2px;}
-#ep-wrap .ep-btn{padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .2s;white-space:nowrap;border:1px solid;}
-#ep-wrap .ep-btn-pdf{background:#1a3a6e;border-color:rgba(56,189,248,.4);color:#7ab8ff;}
-#ep-wrap .ep-btn-pdf:hover{background:#1e4a8a;}
-#ep-wrap .ep-btn-word{background:#0f3020;border-color:rgba(34,197,94,.4);color:#4ade80;}
-#ep-wrap .ep-btn-word:hover{background:#163d28;}
-
-/* YAZAR KARTI */
+#ep-wrap .ep-cta{text-align:center;margin:36px 0 16px;}
+#ep-wrap .ep-cta-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));color:#fff;border:none;padding:16px 36px;border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;box-shadow:0 8px 28px rgba(225,29,72,.35);transition:opacity .2s,transform .2s;}
+#ep-wrap .ep-cta-btn:hover{opacity:.88;transform:translateY(-2px);}
+#ep-wrap .ep-cta-sub{font-size:.8rem;color:var(--ep-muted);margin-top:10px;}
 #ep-wrap .ep-author{display:flex;align-items:center;gap:18px;background:var(--ep-panel);border:1px solid var(--ep-border);border-radius:16px;padding:20px 24px;margin:28px 0;flex-wrap:wrap;}
 #ep-wrap .ep-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
 #ep-wrap .ep-author-info{flex:1;min-width:180px;}
@@ -151,8 +85,6 @@
 #ep-wrap .ep-author-role{font-size:.78rem;color:var(--ep-accent);margin-bottom:5px;}
 #ep-wrap .ep-author-bio{font-size:.8rem;color:var(--ep-muted);line-height:1.6;}
 #ep-wrap .ep-author-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:.75rem;font-weight:600;color:var(--ep-accent);text-decoration:none;border:1px solid rgba(225,29,72,.3);border-radius:100px;padding:3px 10px;background:rgba(225,29,72,.06);}
-
-/* PAYLAŞIM */
 #ep-wrap .ep-share{margin:28px 0 0;}
 #ep-wrap .ep-share-label{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ep-muted);margin-bottom:10px;}
 #ep-wrap .ep-share-btns{display:flex;flex-wrap:wrap;gap:9px;}
@@ -162,27 +94,8 @@
 #ep-wrap .ep-wa{border-color:rgba(37,211,102,.35);color:#25d366;}
 #ep-wrap .ep-cp{border-color:rgba(167,139,250,.35);color:var(--ep-accent3);}
 #ep-wrap .ep-ml{border-color:rgba(225,29,72,.35);color:var(--ep-accent);}
-
-/* CTA */
-#ep-wrap .ep-cta{text-align:center;margin:36px 0 16px;}
-#ep-wrap .ep-cta-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));color:#fff;border:none;padding:16px 36px;border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;box-shadow:0 8px 28px rgba(225,29,72,.35);transition:opacity .2s,transform .2s;}
-#ep-wrap .ep-cta-btn:hover{opacity:.88;transform:translateY(-2px);}
-#ep-wrap .ep-cta-sub{font-size:.8rem;color:var(--ep-muted);margin-top:10px;}
-
-/* FOOTER */
-#ep-wrap .ep-footer{text-align:justify;hyphens:auto;padding:24px 0 0;color:var(--ep-muted);font-size:.82rem;border-top:1px solid var(--ep-border);}
+#ep-wrap .ep-footer{text-align:center;padding:24px 0 0;color:var(--ep-muted);font-size:.82rem;border-top:1px solid var(--ep-border);}
 #ep-wrap .ep-footer strong{color:var(--ep-accent);}
-
-/* TİPOGRAFİ — Blogger uyumluluk standardı */
-#ep-wrap figcaption{text-align:justify;hyphens:auto;}
-#ep-wrap .ep-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;}
-#ep-wrap .ep-table-wrap table{min-width:480px;}
-
-/* ROZET */
-#ep-wrap .ep-badge-ev{display:inline-block;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:100px;margin-right:4px;vertical-align:middle;font-weight:700;}
-#ep-wrap .ep-ev{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);color:#38bdf8;}
-#ep-wrap .ep-prop{background:rgba(232,255,71,.08);border:1px solid rgba(232,255,71,.25);color:#e8ff47;}
-
 @media(max-width:600px){
   #ep-wrap .ep-hero h1{font-size:1.6rem;}
   #ep-wrap .ep-hero{padding:32px 20px;}
@@ -193,102 +106,113 @@
 
 <div id="ep-wrap">
 
+<!-- GOOGLE TRANSLATE — varsayılan EN -->
+<div style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+  <div id="google_translate_element"></div>
+  <span style="font-size:0.72rem;color:#7a9ab5;">🌍 Auto-translated to English · Change language above</span>
+</div>
+<script type="text/javascript">
+/* Sayfa ilk açılışta İngilizce göster */
+(function(){
+  function setCookie(name,value,days){
+    var d=new Date(); d.setTime(d.getTime()+(days*24*60*60*1000));
+    document.cookie=name+'='+value+';expires='+d.toUTCString()+';path=/';
+  }
+  /* googtrans cookie yoksa EN olarak ayarla */
+  if(document.cookie.indexOf('googtrans')===-1){
+    setCookie('googtrans','/tr/en',1);
+    setCookie('googtrans','/tr/en',1);  /* subdomain için */
+  }
+})();
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'tr',
+    includedLanguages: 'en,tr,it,de,fr,es,ar,ru,pt,nl,pl',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: true
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <!-- HEADER -->
 <div class="ep-header">
   <div>
-    <div class="ep-badge">Deprem Analizi · EduPanel</div>
-    <div class="ep-brand-title">Mindanao’da Mw 7.8 Büyük Deprem</div>
-    <div class="ep-brand-sub">Sismik Tehlike · PSHA · FTLS · Philippine Sea Levhası · <span style="opacity:.6;">Haziran 2026</span></div>
+    <div class="ep-badge">Deprem Analizi · Haziran 2026</div>
+    <div class="ep-brand-title">🔴 Mindanao’da Mw 7.8 Büyük Deprem</div>
+    <div class="ep-brand-sub">Filipinler Yayı · Mw 7.8 · <span style="opacity:.6;">7 Haziran 2026</span></div>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <!-- Google Translate — görsel kutu -->
-    <div style="display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(59,158,255,0.12),rgba(30,80,140,0.18));border:1px solid rgba(59,158,255,0.35);border-radius:100px;padding:5px 12px 5px 10px;">
-      <span style="font-size:1em;line-height:1;">🌐</span>
-      <span style="font-size:0.68rem;font-weight:700;color:#90caf9;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;">Language</span>
-      <div id="google_translate_element" style="display:flex;align-items:center;"></div>
-    </div>
-    <!-- TTS -->
-    <button id="tts-btn" title="Sesli oku / Listen" style="padding:7px 13px;background:linear-gradient(135deg,#1e3a5f,#1e40af);border:1px solid rgba(59,158,255,0.45);border-radius:100px;color:#90caf9;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;transition:background .2s;">🔊 Dinle</button>
-    <button class="ep-theme-btn" id="ep-theme-btn"><span id="ep-theme-icon">🌙</span> Tema</button>
-  </div>
+  <button class="ep-theme-btn" id="ep-theme-btn"><span id="ep-theme-icon">🌙</span> Tema</button>
 </div>
 
 <!-- HERO -->
 <div class="ep-hero">
-  <div class="ep-hero-tag">📍 Deprem Analizi · Haziran 2026</div>
-  <!-- ⚠️ <br> KULLANMA — "Earthquake" gibi tek kelime alta düşer (orphan).
-       İki parçayı boşlukla yaz; text-wrap:balance otomatik dengeler. -->
-  <h1>Mindanao’da Mw 7.8 Büyük Deprem_SATIR1 <span>Mindanao’da Mw 7.8 Büyük Deprem_SATIR2</span></h1>
-  <p class="ep-lead">7 Haziran 2026 Mindanao Mw 7.8 — FTLS kırmızı, PSHA PGA=0.759g. Ters faylanma (megathrust) mekanizması, FTLS kırmızı uyarı ve %90 PSHA aşımı modern dönemin kritik olayları arasında.</p>
+  <div class="ep-hero-tag">🌍 Sismoloji Analizi · 7 Haziran 2026, 23:37 UTC</div>
+  <h1>Mindanao Mw 7.8 <span>Deep Focus Earthquake</span></h1>
+  <p class="ep-lead">FTLS b=0.635 kırmızı uyardı ve PSHA logic tree PGA=0.759g — tasarım standardının %90 üzerinde.</p>
   <div class="ep-pills">
     <span class="ep-pill">🌏 Mindanao</span>
-    <span class="ep-pill">📊 PSHA</span>
-    <span class="ep-pill">🔴 FTLS b=0.635</span>
     <span class="ep-pill">⚡ Mw 7.8</span>
+    <span class="ep-pill">🔴 FTLS b=0.635</span>
+    <span class="ep-pill">📊 PSHA %90</span>
     <span class="ep-pill">🌊 Tsunami</span>
+    <span class="ep-pill">✅ Megathrust</span>
   </div>
 </div>
 
-<!-- Google Translate widget header'da — aşağıya taşındı (script bloğuna bakın) -->
-
-<!-- OKUMA SÜRESİ -->
+<!-- META -->
 <div class="ep-meta-row">
-  <span>📅 Haziran 2026</span>
+  <span>📅 7 Haziran 2026</span>
   <span>⏱️ <span id="ep-read-time">~6 dk</span> okuma</span>
   <span>✍️ Deprem Analizi</span>
-  <span>📡 JeoTurizm EduPanel</span>
+  <span>📡 SeismoReport v3.1</span>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     3 yerde değiştir: href, img src, alt
-     ═══════════════════════════════════════════════════ -->
-<!-- ÖZET KUTUSU -->
+<!-- ÖZET -->
 <div class="ep-summary">
   <h3>Yazının Özü</h3>
-  <p>7 Haziran 2026 tarihinde 23:37 UTC’de Mindanao’da Mw 7.8 depremi. FTLS b=0.635 kırmızı uyarı. PSHA Logic Tree 27 dal: %10/50yr medyan PGA=0.759g, 84.fraktil=1.140g — tasarım standardının %90 üzerinde. </p>
+  <p>7 Haziran 2026 tarihinde 23:37 UTC'de Filipinler'in Mindanao adası açıklarında Mw 7.8 büyüklüğünde bir deprem meydana geldi. Dört bağımsız ajansın moment tensör çözümleri saf ters faylanma (megathrust) mekanizmasını doğruladı. FTLS b=0.635 kırmızı uyarı verirken PSHA Logic Tree 27 dal hesaplaması medyan PGA=0.759g ortaya koydu — Filipinler tasarım standardının %90 üzerinde.</p>
+  <p class="ep-note">📍 Tam analiz, ShakeMap, artçı dizi, PSHA tehlike eğrisi ve sismolog değerlendirmesi için aşağıdaki tam rapor bağlantısına bakın.</p>
 </div>
 
 <!-- STAT KUTULARI -->
-<!-- ⚠️ Blogger flexbox (.ep-stats) class kurallarını eziyor.
-     Inline style + table-layout kullan — 2x2 grid en güvenli.
-     Mw 7.8–4 → kısa tut, white-space:nowrap taşmayı önler. -->
 <table style="width:100%;border-collapse:separate;border-spacing:10px;margin:24px 0;table-layout:fixed;">
   <tr>
     <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">SAYI1</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Büyüklük</div>
-      <div style="font-size:.68rem;color:#7c9cbd;opacity:.7;margin-top:3px;">EMSC · Moment Tensör</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">7.8</div>
+      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Moment Büyüklüğü (Mw)</div>
+      <div style="font-size:.68rem;color:#7c9cbd;opacity:.7;margin-top:3px;">4 ajans onaylı · EMSC/USGS/GFZ/GCMT</div>
     </td>
     <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">57 km</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Odak Derinliği</div>
-      <div style="font-size:.68rem;color:#7c9cbd;opacity:.7;margin-top:3px;">Kaynak / not</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">55.2 km</div>
+      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Hipocenter Derinliği</div>
+      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">W-faz santroid: 35.5 km · Megathrust</div>
     </td>
   </tr>
   <tr>
     <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">b=0.635</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">FTLS b-değeri</div>
-      <div style="font-size:.68rem;color:#7c9cbd;opacity:.7;margin-top:3px;">Kaynak / not</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">0.759g</div>
+      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Medyan PGA (PSHA)</div>
+      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">%10/50yr · Tasarım standardının %90+ üzerinde</div>
     </td>
     <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">0.759 g</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">PSHA PGA (%10/50yr)</div>
-      <div style="font-size:.68rem;color:#7c9cbd;opacity:.7;margin-top:3px;">Kaynak / not</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">b = 0.635</div>
+      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">FTLS G-R b-Değeri</div>
+      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">🔴 Kırmızı uyarı eşiği · M6.0+ artçı riski</div>
     </td>
   </tr>
 </table>
 
 <div class="ep-divider"></div>
 
-<!-- ADIM SIRASI (hikâye perdesi veya yöntem adımları) -->
-<div class="ep-section">📖 Analiz Adımları</div>
+<!-- ADIM SIRASI -->
+<div class="ep-section">🔬 Analizin 3 Kritik Boyutu</div>
 <div class="ep-steps">
   <div class="ep-step">
     <div class="ep-step-num">01</div>
     <div class="ep-step-body">
       <h4>Çok-Ajans Parametre Sentezi</h4>
-      <p>EMSC, USGS/NEIC, GFZ ve GlobalCMT&#x02BC;den derlenen Mw 7.8 ± 0.1 büyüklük, 55.2 km hipocenter, 35.5 km W-faz santroid derinliği ve saf thrust mekanizması bağımsız olarak doğrulandı.</p>
+      <p>EMSC, USGS/NEIC, GFZ ve GlobalCMT'den derlenen Mw 7.8 ± 0.1 büyüklük, 55.2 km hipocenter ve 35.5 km W-faz santroid derinliği bağımsız olarak doğrulandı. Saf thrust mekanizması 4 ajans tarafından teyit edildi.</p>
     </div>
   </div>
   <div class="ep-connector"></div>
@@ -296,7 +220,7 @@
     <div class="ep-step-num">02</div>
     <div class="ep-step-body">
       <h4>Artçı Dizi ve FTLS b-Değeri Analizi</h4>
-      <p>Omori-Utsu parametreleri (K=14.10, p=0.619) ile sismik kalıcılık belirlendi. Gutenberg-Richter analizi (Mc=3.5) b=0.635 verdi — FTLS metodolojisine göre kırmızı uyarı eşiğinin altında, M6.0+ artçı riski yüksek.</p>
+      <p>Omori-Utsu parametreleri (K=14.10, p=0.619) ile sismik kalıcılık belirlendi. Gutenberg-Richter analizi (Mc=3.5) b=0.635 verdi — FTLS metodolojisinde kırmızı uyarı, M6.0+ artçı riski yüksek.</p>
     </div>
   </div>
   <div class="ep-connector"></div>
@@ -304,34 +228,34 @@
     <div class="ep-step-num">03</div>
     <div class="ep-step-body">
       <h4>PSHA Logic Tree — 27 Dal Hesaplaması</h4>
-      <p>Baker, Bradley &amp; Stafford (2021) §6 metodolojisi ve Youngs vd. (1988) GMPE kullanılarak General Santos City (R=108 km, Vs30=270 m/s) için %10/50 yıl aşım olasılığıyla medyan PGA=0.759g, 84. fraktil=1.140g hesaplandı — Filipinler tasarım standardı 0.40g&#x02BC;nin %90 üzerinde.</p>
+      <p>Baker, Bradley & Stafford (2021) §6 ve Youngs vd. (1988) GMPE kullanılarak General Santos City (R=108 km, Vs30=270 m/s) için medyan PGA=0.759g, 84. fraktil=1.140g hesaplandı — Filipinler tasarım standardı 0.40g'nin %90 üzerinde.</p>
     </div>
   </div>
 </div>
 
 <div class="ep-divider"></div>
 
-<!-- METİN BÖLÜMÜ -->
-<div class="ep-section">📝 Deprem Analizi</div>
+<!-- METİN -->
+<div class="ep-section">🔬 Sismolog Perspektifi: Tehlike Ne Boyutta?</div>
 
-<p class="ep-p">Filipinler Takımadası, <strong class="ep-kw">Pasifik Levhası</strong>, Avustralya Levhası ve Güneydoğu Asya Levhası&#x02BC;nın karmaşık etkileşimleri sonucu küresel en aktif sismik bölgelerden biridir. Mindanao adası ve çevresi; Batı Mindanao Fay Zonu, Cotabato Çukuru ve Mindanao Hendek Zonu gibi farklı yapısal unsurları barındıran sismotektonik açıdan son derece karmaşık bir ortam oluşturur.</p>
+<p class="ep-p">Filipinler Takımadası, <strong class="ep-kw">Pasifik Levhası</strong>, Avustralya Levhası ve Güneydoğu Asya Levhasıʼnın karmaşık etkileşimleri sonucu küresel en aktif sismik bölgelerden biridir. Mindanao adası; Batı Mindanao Fay Zonu, Cotabato Çukuru ve Mindanao Hendek Zonu gibi yapısal unsurlarıyla son derece karmaşık bir sismotektonik ortam oluşturmaktadır.</p>
 
 <div class="ep-quote">
-  "Earthquakes cause damage to many parts of the natural and built environment, with potentially widespread and devastating impacts. Since 1900, earthquakes have killed approximately 8.5 million people and caused $2 trillion of damage."
-  <cite>&#x2014; Baker, Bradley &amp; Stafford (2021, s. 1)</cite>
+  &ldquo;Earthquakes cause damage to many parts of the natural and built environment, with potentially widespread and devastating impacts. Since 1900, earthquakes have killed approximately 8.5 million people and caused $2 trillion of damage.&rdquo;
+  <cite>&mdash; Baker, Bradley &amp; Stafford (2021, s. 1)</cite>
 </div>
 
-<p class="ep-p">Dört bağımsız ajansın (EMSC, USGS/NEIC, GFZ, GlobalCMT) moment tensör çözümleri, depremin <strong class="ep-kw">saf ters faylanma (megathrust)</strong> mekanizmasıyla gerçekleştiğini tutarlı biçimde doğrulamaktadır. Hipocenter derinliği 55.2 km, W-faz santroid derinliği 35.5 km; enerji geniş alana yayılmış, 2000 km&#x02BC;yi aşan mesafelerde hissedilmiştir.</p>
+<p class="ep-p">Dört bağımsız ajansın (EMSC, USGS/NEIC, GFZ, GlobalCMT) moment tensör çözümleri, depremin <strong class="ep-kw">saf ters faylanma (megathrust)</strong> mekanizmasıyla gerçekleştiğini tutar lı biçimde doğrulamaktadır. Hipocenter derinliği 55.2 km, W-faz santroid derinliği 35.5 km; enerji geniş alana yayılmış, 2000 kmʼyi aşan mesafelerde hissedilmiştir.</p>
 
 <div class="ep-think">
-  <strong>FTLS Kırmızı Uyarı — Ne Anlama Gelir?</strong>
-  b-değeri 0.635, Öncel &amp; Wilson (2007) FTLS metodolojisinde kırmızı eşiğin altında. Bu değer, sismik çevrimde birikmekte olan gerilmenin M6.0+ tetikleyici artçı olasılığını artırdığına işaret eder.
+  <strong>FTLS Kırmızı Uyarı &mdash; Ne Anlama Gelir?</strong>
+  b-değeri 0.635, Öncel &amp; Wilson (2007) FTLS metodolojisinde kırmızı eşiğin altında. Sismik çevrimde birikmekte olan gerilme, M6.0+ tetikleyici artçı olasılığını artırıyor. Düşük p=0.619 ile birlikte: zaten hasar lı yapılara yönelik 90 gün boyunca yüksek tetikte kalınması zorunlu.
 </div>
 
 <div class="ep-divider"></div>
 
-<!-- KART GRUBU -->
-<div class="ep-section">🔬 Tematik Katmanlar</div>
+<!-- KARTLAR -->
+<div class="ep-section">🗺️ Bilimsel Altyapı &mdash; 4 Temel Analiz</div>
 <div class="ep-cards">
   <div class="ep-card">
     <div class="ep-icon">🌊</div>
@@ -340,58 +264,53 @@
   </div>
   <div class="ep-card">
     <div class="ep-icon">📊</div>
-    <h4>G-R b-Değeri: 0.635</h4>
-    <p>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık b=0.635 — FTLS kırmızı eşiğinin altında. İki-segment analiz M5.0&#x02BC;de eğim kırılması gösterdi (b₁=0.829, b₂=1.12).</p>
+    <h4>G-R b = 0.635</h4>
+    <p>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık b=0.635 &mdash; FTLS kırmızı eşiğinin altında. İki-segment analiz M5.0ʼde eğim kırılması gösterdi (b₁=0.829, b₂=1.12).</p>
   </div>
   <div class="ep-card">
     <div class="ep-icon">🏗️</div>
-    <h4>Yapısal Risk — %90 Aşım</h4>
-    <p>PSHA medyan PGA=0.759g, Filipinler tasarım standardı 0.40g&#x02BC;nin %90 üzerinde. 84. fraktil 1.140g — hasarlı yapılara yönelik M6.0+ artçı riski kritik.</p>
+    <h4>Yapısal Risk %90+</h4>
+    <p>PSHA medyan PGA=0.759g, Filipinler tasarım standardı 0.40gʼnin %90 üzerinde. 84. fraktil 1.140g &mdash; hasar lı yapılara yönelik M6.0+ artçı riski kritik.</p>
   </div>
   <div class="ep-card">
     <div class="ep-icon">🧠</div>
-    <h4>Omori-Utsu p=0.619</h4>
-    <p>Düşük p-değeri (p=0.619) yüksek sismik kalıcılığı gösteriyor. 90 günlük beklenti: 2× M6.5+, 1× M7.0+. Zaten hasarlı yapılar için ek artçı yükü önemli risk oluşturuyor.</p>
+    <h4>Omori-Utsu p = 0.619</h4>
+    <p>Düşük p-değeri yüksek sismik kalıcılığı gösteriyor. 90 günlük beklenti: 2× M6.5+, 1× M7.0+. Hasar lı yapılar için ek artçı yükü önemli risk oluşturuyor.</p>
   </div>
 </div>
 
 <div class="ep-divider"></div>
 
-<!-- BİLGİ KUTULARI ÖRNEKLERİ -->
+<!-- BİLGİ KUTULARI -->
 <div class="ep-box ep-box-red">
-  <strong>🔴 FTLS Kırmızı Uyarı — b=0.635:</strong> Gutenberg-Richter b-değeri FTLS eşiğinin altında. Öncel &amp; Wilson (2007) metodolojisine göre M6.0+ tetikleyici artçı olasılığı yüksek. Zaten hasarlı yapılar için ek yük kritik risk oluşturuyor.
+  <strong>🔴 FTLS Kırmızı Uyarı &mdash; b=0.635:</strong> Gutenberg-Richter b-değeri FTLS eşiğinin altında. Öncel &amp; Wilson (2007) metodolojisine göre M6.0+ tetikleyici artçı olasılığı yüksek. Zaten hasar lı yapılar için ek yük kritik risk oluşturuyor.
   <div class="ep-tags" style="margin-top:12px;">
     <span class="ep-tag">📉 b=0.635</span>
-    <span class="ep-tag">🔴 Kırmızı Eşik</span>
+    <span class="ep-tag">🔴 Kırmızı Eşlik</span>
     <span class="ep-tag">⚡ M6.0+ Risk</span>
   </div>
 </div>
 
 <div class="ep-box ep-box-gold" style="margin-top:16px;">
-  <strong>🔑 PSHA Temel Bulgu:</strong> Logic Tree 27 dal hesaplaması (Baker 2021, Youngs 1988 GMPE) — General Santos City için medyan PGA=0.759g, 84. fraktil=1.140g. Filipinler ulusal tasarım standardı 0.40g&#x02BC;nin %90 üzerinde.
+  <strong>🔑 PSHA Temel Bulgu:</strong> Logic Tree 27 dal hesaplaması (Baker 2021, Youngs 1988 GMPE) &mdash; General Santos City için medyan PGA=0.759g, 84. fraktil=1.140g. Filipinler ulusal tasarım standardı 0.40gʼnin %90 üzerinde.
 </div>
 
-<div class="ep-box ep-box-warn" style="margin-top:16px;">
-  <strong>⚠️ Sivil Savunma Tavsiyesi:</strong> Düşük p=0.619 + düşük b=0.635 kombinasyonu — hasarlı yapıların tahliyesi ve M6.0+ artçılar için 90 gün boyunca yüksek tetikte kalınması önerilmektedir.
+<div class="ep-box ep-box-red" style="margin-top:16px;">
+  <strong>⚠️ Sivil Savunma Tavsiyesi:</strong> Düşük p=0.619 + düşük b=0.635 kombinasyonu &mdash; hasar lı yapıların tahliyesi ve M6.0+ artçılar için 90 gün boyunca yüksek tetikte kalınması önerilmektedir.
 </div>
 
-dardı 0.40g&#x02BC;nin %90 üzerinde.
-</div>
-
-<div class="ep-box ep-box-warn" style="margin-top:16px;">
-  <strong>⚠️ Sivil Savunma Tavsiyesi:</strong> Düşük p=0.619 + düşük b=0.635 kombinasyonu — hasarlı yapıların tahliyesi ve M6.0+ artçılar için 90 gün boyunca yüksek tetikte kalınması önerilmektedir.
-</div>
+<div class="ep-divider"></div>
 
 <!-- DIŞA AKTARMA -->
-<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(196,21,53,.06);border:1px solid rgba(196,21,53,.3);border-radius:14px;padding:14px 20px;margin:28px 0;">
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:14px 20px;margin:28px 0;">
   <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:180px;">
-    <div style="width:34px;height:34px;border-radius:8px;background:rgba(196,21,53,.15);border:1px solid rgba(196,21,53,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📤</div>
+    <div style="width:34px;height:34px;border-radius:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📤</div>
     <div>
-      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:#e8627a;">PDF / Word olarak dışa aktar</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:#e8c97a;">PDF / Word olarak dışa aktar</div>
       <div style="font-size:.68rem;color:#7c9cbd;margin-top:2px;">Times New Roman · A4 · Akademik format · Abstract dahil</div>
     </div>
   </div>
-  <button id="tts-btn-export" onclick="document.getElementById('tts-btn').click()" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(59,158,255,.5);background:linear-gradient(135deg,#1e3a5f,#1e40af);color:#90caf9;white-space:nowrap;">🔊 Dinle</button>
+  <button id="tts-btn" title="Sayfayı sesli oku" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(59,158,255,.5);background:linear-gradient(135deg,#1e3a5f,#1e40af);color:#90caf9;white-space:nowrap;transition:background .2s;">🔊 Dinle</button>
   <button id="ep-pdf" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(56,189,248,.4);background:#1a3a6e;color:#7ab8ff;white-space:nowrap;">📄 PDF indir</button>
   <button id="ep-word" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(34,197,94,.4);background:#0f3020;color:#4ade80;white-space:nowrap;">📝 Word indir</button>
 </div>
@@ -429,23 +348,21 @@ dardı 0.40g&#x02BC;nin %90 üzerinde.
 </div>
 
 <!-- KAYNAKÇA -->
-<div class="ep-box ep-box-blue" style="margin-top:28px;">
-  <div class="ep-box-head" style="margin-bottom:14px;">📚 Kaynakça / References</div>
+<div class="ep-box ep-box-red" style="margin-top:28px;">
+  <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#e11d48;margin-bottom:14px;">📚 Temel Kaynaklar</div>
   <ol style="padding-left:1.4em;font-size:0.82rem;line-height:1.75;color:var(--ep-muted);margin:0;">
     <li style="margin-bottom:6px;">Baker, J. W., Bradley, B. A., &amp; Stafford, P. J. (2021). <em>Seismic Hazard and Risk Analysis</em>. Cambridge University Press.</li>
-    <li style="margin-bottom:6px;">Cardwell, R. K., Isacks, B. L., &amp; Karig, D. E. (1980). The spatial distribution of earthquakes, focal mechanism solutions, and subducted lithosphere in the Philippine and northeastern Indonesian islands. <em>The Tectonic and Geologic Evolution of Southeast Asian Seas and Islands, Geophys. Monogr.</em>, 23, 1–35.</li>
-    <li style="margin-bottom:6px;">Hamburger, M. W., Cardwell, R. K., &amp; Isacks, B. L. (2010). Seismotectonics of the northern Philippine island arc. <em>Geol. Soc. Am. Spec. Paper</em>, 175.</li>
-    <li style="margin-bottom:6px;">Nowicki-Jessee, M. A., vd. (2018). A globally applicable model for near real-time prediction of seismically induced landslides. <em>J. Geophys. Res. Earth Surf.</em>, 123, 1835–1859.</li>
-    <li style="margin-bottom:6px;">Öncel, A. O., &amp; Wilson, T. H. (2007). Anomalous seismicity preceding the 1999 Izmit earthquake, NW Turkey. <em>Geophys. J. Int.</em>, 169, 259–270.</li>
-    <li style="margin-bottom:6px;">Youngs, R. R., Chiou, S. J., Silva, W. J., &amp; Humphrey, J. R. (1988). Strong ground motion attenuation relationships for subduction zone earthquakes. <em>Seism. Res. Lett.</em>, 68, 58–73.</li>
-    <li style="margin-bottom:6px;">Yumul, G. P. Jr., vd. (2008). Geological features of the Philippines. <em>Island Arc</em>, 17, 3–17.</li>
-    <li style="margin-bottom:0;">Aurelio, M. A. (2000). Shear partitioning in the Philippines. <em>Island Arc</em>, 9, 584–597.</li>
+    <li style="margin-bottom:6px;">Cardwell, R. K., Isacks, B. L., &amp; Karig, D. E. (1980). The spatial distribution of earthquakes in the Philippine islands. <em>Geophys. Monogr.</em>, 23, 1&ndash;35.</li>
+    <li style="margin-bottom:6px;">Youngs, R. R., Chiou, S. J., Silva, W. J., &amp; Humphrey, J. R. (1988). Strong ground motion for subduction zone earthquakes. <em>Seism. Res. Lett.</em>, 68, 58&ndash;73.</li>
+    <li style="margin-bottom:6px;">Öncel, A. O., &amp; Wilson, T. H. (2007). Anomalous seismicity preceding the 1999 Izmit earthquake, NW Turkey. <em>Geophys. J. Int.</em>, 169, 259&ndash;270.</li>
+    <li style="margin-bottom:6px;">Aurelio, M. A. (2000). Shear partitioning in the Philippines. <em>Island Arc</em>, 9, 584&ndash;597.</li>
+    <li style="margin-bottom:0;">Yumul, G. P. Jr. vd. (2008). Geological features of the Philippines. <em>Island Arc</em>, 17, 3&ndash;17.</li>
   </ol>
 </div>
 
 <!-- FOOTER -->
 <div class="ep-footer" style="margin-top:32px;">
-  <p>© 2026 <strong>JeoTurizm EduPanel</strong> · Mindanao’da Mw 7.8 Büyük Deprem · Haziran 2026</p>
+  <p>© 2026 <strong>SeismoReport · JeoTurizm EduPanel</strong> · Mindanao Mw 7.8 Büykük Deprem · Haziran 2026</p>
   <p style="margin-top:6px;opacity:.55;">Prof. Dr. Ali Osman Öncel · aliosmanoncel.blogspot.com</p>
 </div>
 
@@ -453,135 +370,58 @@ dardı 0.40g&#x02BC;nin %90 üzerinde.
 
 <script>
 (function(){
-
-/* TEMA */
-var btn = document.getElementById('ep-theme-btn');
-var ico = document.getElementById('ep-theme-icon');
-var wrap = document.getElementById('ep-wrap');
-if(btn) btn.onclick = function(){
-  var light = wrap.getAttribute('data-theme') === 'light';
-  wrap.setAttribute('data-theme', light ? 'dark' : 'light');
-  ico.textContent = light ? '🌙' : '☀️';
+var btn=document.getElementById('ep-theme-btn');
+var ico=document.getElementById('ep-theme-icon');
+var wrap=document.getElementById('ep-wrap');
+if(btn) btn.onclick=function(){
+  var light=wrap.getAttribute('data-theme')==='light';
+  wrap.setAttribute('data-theme',light?'dark':'light');
+  ico.textContent=light?'🌙':'☀️';
 };
-
-/* OKUMA SÜRESİ */
-var rt = document.getElementById('ep-read-time');
-if(rt && wrap){
-  var w = wrap.innerText.split(/\s+/).length;
-  rt.textContent = '~' + Math.max(1, Math.round(w/200)) + ' dk';
-}
-
-/* KART FADE-IN */
+var rt=document.getElementById('ep-read-time');
+if(rt&&wrap){var w=wrap.innerText.split(/\s+/).length;rt.textContent='~'+Math.max(1,Math.round(w/200))+' dk';}
 if('IntersectionObserver' in window){
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}
-    });
-  },{threshold:0.1});
-  document.querySelectorAll('#ep-wrap .ep-card').forEach(function(c){
-    c.style.opacity='0';c.style.transform='translateY(16px)';
-    c.style.transition='opacity .45s ease,transform .45s ease';
-    obs.observe(c);
-  });
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});
+  document.querySelectorAll('#ep-wrap .ep-card').forEach(function(c){c.style.opacity='0';c.style.transform='translateY(16px)';c.style.transition='opacity .45s ease,transform .45s ease';obs.observe(c);});
 }
-
-/* SOSYAL PAYLAŞIM */
-var url   = encodeURIComponent(window.location.href);
-var title = encodeURIComponent('Mindanao-da Mw 7.8 Buyuk Deprem - JeoTurizm EduPanel');
-var tw = document.getElementById('ep-tw');
-var wa = document.getElementById('ep-wa');
-var ml = document.getElementById('ep-ml');
-var cp = document.getElementById('ep-cp');
-if(tw) tw.href = 'https://twitter.com/intent/tweet?text=' + title + '&url=' + url;
-if(wa) wa.href = 'https://api.whatsapp.com/send?text=' + title + '%20' + url;
-if(ml) ml.href = 'mailto:?subject=' + title + '&body=' + url;
-if(cp) cp.onclick = function(){
-  navigator.clipboard.writeText(window.location.href).then(function(){
-    cp.textContent = '✅ Kopyalandı!';
-    setTimeout(function(){ cp.innerHTML = '🔗 Linki Kopyala'; }, 2000);
-  });
-};
+var url=encodeURIComponent(window.location.href);
+var title=encodeURIComponent('Mindanao Mw 7.8 Büykük Deprem — SeismoReport');
+var tw=document.getElementById('ep-tw');var wa=document.getElementById('ep-wa');
+var ml=document.getElementById('ep-ml');var cp=document.getElementById('ep-cp');
+if(tw) tw.href='https://twitter.com/intent/tweet?text='+title+'&url='+url;
+if(wa) wa.href='https://api.whatsapp.com/send?text='+title+'%20'+url;
+if(ml) ml.href='mailto:?subject='+title+'&body='+url;
+if(cp) cp.onclick=function(){navigator.clipboard.writeText(window.location.href).then(function(){cp.textContent='✅ Kopyalandı!';setTimeout(function(){cp.innerHTML='🔗 Linki Kopyala';},2000);});};
 
 /* EXPORT YARDIMCI */
-function epLoading(msg){
-  var d = document.createElement('div');
-  d.style.cssText='position:fixed;inset:0;background:rgba(10,14,21,.92);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:sans-serif;gap:16px;';
-  d.innerHTML='<div style="font-size:36px;">⚙️</div><div style="font-size:16px;font-weight:700;">'+msg+'</div>';
-  document.body.appendChild(d);return d;
-}
+function epLoading(msg){var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;background:rgba(10,14,21,.92);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:sans-serif;gap:16px;';d.innerHTML='<div style="font-size:36px;">⚙️</div><div style="font-size:16px;font-weight:700;">'+msg+'</div>';document.body.appendChild(d);return d;}
 function epHide(d){if(d&&d.parentNode)d.parentNode.removeChild(d);}
-function epOpen(html){
-  var b=new Blob([html],{type:'text/html;charset=utf-8'});
-  var u=URL.createObjectURL(b);
-  var w=window.open(u,'_blank');
-  if(w)setTimeout(function(){URL.revokeObjectURL(u);},60000);
-}
-function epDown(content,filename,mime){
-  var b=new Blob([content],{type:mime});
-  var u=URL.createObjectURL(b);
-  var a=document.createElement('a');
-  a.href=u;a.download=filename;
-  document.body.appendChild(a);a.click();
-  document.body.removeChild(a);
-  setTimeout(function(){URL.revokeObjectURL(u);},8000);
-}
+function epOpen(html){var b=new Blob([html],{type:'text/html;charset=utf-8'});var u=URL.createObjectURL(b);var w=window.open(u,'_blank');if(w)setTimeout(function(){URL.revokeObjectURL(u);},60000);}
+function epDown(content,filename,mime){var b=new Blob([content],{type:mime});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u);},8000);}
 
-/* İÇERİK TOPLAYICI */
 function epBody(){
-  var html=''; var seen={};
+  var html='';var seen={};
   var summ=document.querySelector('#ep-wrap .ep-summary p');
   if(summ) html+='<h2>Özet</h2>\n<p>'+(summ.innerText||'').trim()+'</p>\n';
-  var stats=document.querySelectorAll('#ep-wrap .ep-stat');
-  if(stats.length){
-    html+='<h2>Temel Veriler</h2>\n<table><thead><tr><th>Değer</th><th>Konu</th><th>Not</th></tr></thead><tbody>\n';
-    stats.forEach(function(s){
-      var n=(s.querySelector('.ep-stat-num')||{}).innerText||'';
-      var l=(s.querySelector('.ep-stat-label')||{}).innerText||'';
-      var b=(s.querySelector('.ep-stat-sub')||{}).innerText||'';
-      html+='<tr><td><strong>'+n.trim()+'</strong></td><td>'+l.trim()+'</td><td>'+b.trim()+'</td></tr>\n';
-    });
-    html+='</tbody></table>\n';
-  }
-  document.querySelectorAll('#ep-wrap .ep-section').forEach(function(sec){
-    html+='<h2>'+(sec.innerText||'').trim()+'</h2>\n';
-  });
-  document.querySelectorAll('#ep-wrap .ep-step').forEach(function(step,i){
-    var h=(step.querySelector('h4')||{}).innerText||'';
-    var p=(step.querySelector('p')||{}).innerText||'';
-    if(h){html+='<h3>'+(i+1)+'. '+h.trim()+'</h3>\n';if(p)html+='<p>'+p.trim()+'</p>\n';}
-  });
-  document.querySelectorAll('#ep-wrap .ep-quote').forEach(function(q){
-    var t=(q.innerText||'').trim();
-    if(t.length>5&&!seen[t.slice(0,40)]){seen[t.slice(0,40)]=1;html+='<blockquote>'+t+'</blockquote>\n';}
-  });
-  document.querySelectorAll('#ep-wrap .ep-p').forEach(function(p){
-    var t=(p.innerText||'').trim();
-    if(t.length>10)html+='<p>'+t+'</p>\n';
-  });
-  document.querySelectorAll('#ep-wrap .ep-card').forEach(function(c){
-    var h=(c.querySelector('h4')||{}).innerText||'';
-    var p=(c.querySelector('p')||{}).innerText||'';
-    if(h.trim().length>2){html+='<h3>'+h.trim()+'</h3>\n';if(p.trim().length>5)html+='<p>'+p.trim()+'</p>\n';}
-  });
-  document.querySelectorAll('#ep-wrap .ep-box').forEach(function(box){
-    var t=(box.innerText||'').trim();
-    if(t.length>10&&!seen[t.slice(0,40)]){seen[t.slice(0,40)]=1;html+='<blockquote>'+t+'</blockquote>\n';}
-  });
-  var tables=document.querySelectorAll('#ep-wrap .ep-table');
-  tables.forEach(function(tbl,i){
-    html+='<h2>Tablo '+(i+1)+'</h2>\n<div style="column-span:all;">'+tbl.outerHTML+'</div>\n';
-  });
+  document.querySelectorAll('#ep-wrap .ep-section').forEach(function(sec){html+='<h2>'+(sec.innerText||'').trim()+'</h2>\n';});
+  document.querySelectorAll('#ep-wrap .ep-step').forEach(function(step,i){var h=(step.querySelector('h4')||{}).innerText||'';var p=(step.querySelector('p')||{}).innerText||'';if(h){html+='<h3>'+(i+1)+'. '+h.trim()+'</h3>\n';if(p)html+='<p>'+p.trim()+'</p>\n';}});
+  document.querySelectorAll('#ep-wrap .ep-quote').forEach(function(q){var t=(q.innerText||'').trim();if(t.length>5&&!seen[t.slice(0,40)]){seen[t.slice(0,40)]=1;html+='<blockquote>'+t+'</blockquote>\n';}});
+  document.querySelectorAll('#ep-wrap .ep-p').forEach(function(p){var t=(p.innerText||'').trim();if(t.length>10)html+='<p>'+t+'</p>\n';});
+  document.querySelectorAll('#ep-wrap .ep-card').forEach(function(c){var h=(c.querySelector('h4')||{}).innerText||'';var p=(c.querySelector('p')||{}).innerText||'';if(h.trim().length>2){html+='<h3>'+h.trim()+'</h3>\n';if(p.trim().length>5)html+='<p>'+p.trim()+'</p>\n';}});
+  document.querySelectorAll('#ep-wrap .ep-box').forEach(function(box){var t=(box.innerText||'').trim();if(t.length>10&&!seen[t.slice(0,40)]){seen[t.slice(0,40)]=1;html+='<blockquote>'+t+'</blockquote>\n';}});
   return html;
 }
 
-/* PDF */
+var TITLE='Mindanao’da Mw 7.8 Büyük Deprem';
+var ABSTRACT='7 Haziran 2026 tarihinde 23:37 UTC de Mindanao açıklarında gerçekleşen Mw 7.8 depremi, ters faylanma mekanizması ve PSHA Logic Tree 27 dal hesaplamasıyla General Santos City için medyan PGA=0.759g değeri ortaya koymuştur — Filipinler tasarım standardının yüzde 90 üzerinde.';
+
 var pdfBtn=document.getElementById('ep-pdf');
 if(pdfBtn) pdfBtn.addEventListener('click',function(){
   var ld=epLoading('PDF hazırlanıyor…');
   try{
     var body=epBody();
     var now=new Date().toLocaleDateString('tr-TR',{year:'numeric',month:'long',day:'numeric'});
-    var html='<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>Mindanao’da Mw 7.8 Büyük Deprem &#x2014; JeoTurizm EduPanel</title>'
+    var html='<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>'+TITLE+'</title>'
     +'<style>@page{size:A4;margin:20mm 18mm 24mm 18mm;}*{box-sizing:border-box;}'
     +'body{font-family:"Times New Roman",serif;font-size:10.5pt;line-height:1.75;color:#000;background:#fff;margin:0;}'
     +'@media screen{body{background:#b0b8c8;padding:48px 0 60px;}.doc{width:210mm;margin:0 auto;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.28);padding:20mm 18mm 24mm;}}'
@@ -596,116 +436,111 @@ if(pdfBtn) pdfBtn.addEventListener('click',function(){
     +'.albl{font-family:Arial,sans-serif;font-size:8.5pt;font-weight:700;color:#c41535;text-transform:uppercase;margin:0 0 4pt;}'
     +'.atext{font-size:9.5pt;line-height:1.7;text-align:justify;margin:0;}'
     +'.twocol{column-count:2;column-gap:14pt;column-rule:1px solid #dde;}'
-    +'h2{font-family:Arial,sans-serif;font-size:10.5pt;font-weight:700;color:#c41535;margin:14pt 0 5pt;border-bottom:1px solid #c41535;break-after:avoid;}'
-    +'h3{font-family:Arial,sans-serif;font-size:9.5pt;font-weight:700;font-style:italic;margin:10pt 0 4pt;break-after:avoid;}'
+    +'h2{font-family:Arial,sans-serif;font-size:10.5pt;font-weight:700;color:#c41535;margin:14pt 0 5pt;border-bottom:1px solid #c41535;}'
+    +'h3{font-family:Arial,sans-serif;font-size:9.5pt;font-weight:700;font-style:italic;margin:10pt 0 4pt;}'
     +'p{text-align:justify;font-size:9.5pt;margin:0 0 5pt;line-height:1.7;}'
     +'blockquote{border-left:2.5px solid #c41535;padding:4pt 8pt;margin:7pt 0 7pt 10pt;font-size:9pt;font-style:italic;color:#333;text-align:justify;}'
-    +'ol,ul{padding-left:16pt;font-size:9pt;text-align:justify;}'
-    +'li{margin-bottom:3pt;text-align:justify;}'
-    +'table{width:100%;border-collapse:collapse;font-size:7.5pt;margin:10pt 0;column-span:all;}'
-    +'th{border-top:1.5px solid #c41535;border-bottom:1px solid #c41535;padding:3pt 4pt;font-family:Arial,sans-serif;font-weight:700;background:#fff5f7;}'
-    +'td{padding:2.5pt 4pt;border-bottom:1px solid #dde;}'
     +'.col{column-span:all;margin-top:18pt;padding-top:8pt;border-top:1px solid #bbb;font-size:7.5pt;color:#777;font-family:Arial,sans-serif;text-align:center;}'
     +'</style></head><body>'
-    +'<div class="pbar"><strong>📄 Mindanao’da Mw 7.8 Büyük Deprem &#x2014; JeoTurizm EduPanel</strong>'
-    +'<button class="pbtn" onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button></div>'
-    +'<div class="doc"><div class="mast">'
-    +'<div><div class="jname">JeoTurizm EduPanel · Deprem Analizi</div>'
-    +'<div style="font-size:8pt;color:#444;font-family:Arial,sans-serif;margin-top:2pt;">aliosmanoncel.blogspot.com</div></div>'
-    +'<div class="jmeta">Deprem Analizi · Haziran 2026<br>Tarih: '+now+'</div></div>'
-    +'<div style="font-family:Arial,sans-serif;font-size:8.5pt;font-weight:700;color:#c41535;letter-spacing:1pt;text-transform:uppercase;margin:0 0 6pt;">Deprem Analizi · JeoTurizm EduPanel · Haziran 2026</div>'
-    +'<div class="atitle">Mindanao’da Mw 7.8 Büyük Deprem</div>'
-    +'<p style="font-size:9.5pt;font-family:Arial,sans-serif;margin:0 0 4pt;"><strong>Prof. Dr. Ali Osman Öncel</strong> &#x2014; Deprem Sismolojisti · Jeofizik Mühendisi</p>'
-    +'<p style="font-size:8.5pt;font-style:italic;font-family:Arial,sans-serif;color:#555;margin:0 0 8pt;">JeoTurizm EduPanel · Haziran 2026 · aliosmanoncel.blogspot.com</p>'
-    +'<div class="abox"><div class="albl">Özet / Abstract</div>'
-    +'<p class="atext">7 Haziran 2026 tarihinde 23:37 UTC’de Mindanao’da Mw 7.8 depremi. FTLS b=0.635 kırmızı uyarı. PSHA Logic Tree 27 dal: %10/50yr medyan PGA=0.759g, 84.fraktil=1.140g — tasarım standardının %90 üzerinde.</p></div>'
+    +'<div class="pbar"><strong>📄 '+TITLE+' — SeismoReport</strong><button class="pbtn" onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button></div>'
+    +'<div class="doc"><div class="mast"><div><div class="jname">JeoTurizm EduPanel · Deprem Analizi</div><div style="font-size:8pt;color:#444;font-family:Arial,sans-serif;margin-top:2pt;">aliosmanoncel.blogspot.com</div></div><div class="jmeta">Deprem Analizi · Haziran 2026<br>Tarih: '+now+'</div></div>'
+    +'<div class="atitle">'+TITLE+'</div>'
+    +'<p style="font-size:9.5pt;font-family:Arial,sans-serif;margin:0 0 4pt;"><strong>Prof. Dr. Ali Osman Öncel</strong> — Deprem Sismolojisti · Jeofizik Mühendisi</p>'
+    +'<p style="font-size:8.5pt;font-style:italic;font-family:Arial,sans-serif;color:#555;margin:0 0 8pt;">SeismoReport · Haziran 2026 · aliosmanoncel.blogspot.com</p>'
+    +'<div class="abox"><div class="albl">Özet / Abstract</div><p class="atext">'+ABSTRACT+'</p></div>'
     +'<div class="twocol">'+body+'</div>'
-    +'<div class="col">&copy; 2026 JeoTurizm EduPanel &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; '+now+'</div>'
+    +'<div class="col">&copy; 2026 SeismoReport &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; '+now+'</div>'
     +'</div></body></html>';
     epHide(ld);epOpen(html);
   }catch(e){epHide(ld);alert('PDF hatası: '+e.message);}
 });
 
-/* WORD */
 var wordBtn=document.getElementById('ep-word');
 if(wordBtn) wordBtn.addEventListener('click',function(){
   var ld=epLoading('Word hazırlanıyor…');
   try{
     var body=epBody();
     var now=new Date().toLocaleDateString('tr-TR',{year:'numeric',month:'long',day:'numeric'});
-    var html='<!DOCTYPE html>'
-    +'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40" lang="tr">'
-    +'<head><meta charset="utf-8"><meta name=ProgId content=Word.Document>'
-    +'<title>Mindanao’da Mw 7.8 Büyük Deprem &#x2014; JeoTurizm EduPanel</title>'
+    var html='<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40" lang="tr">'
+    +'<head><meta charset="utf-8"><meta name=ProgId content=Word.Document><title>'+TITLE+'</title>'
     +'<style>@page Section1{size:210mm 297mm;margin:25.4mm 19mm 25.4mm 19mm;}div.Section1{page:Section1;}'
     +'body{font-family:"Times New Roman",serif;font-size:10.5pt;color:#000;line-height:1.75;}'
     +'h1{font-family:Arial,sans-serif;font-size:15pt;font-weight:bold;margin:0 0 8pt;}'
-    +'h2{font-family:Arial,sans-serif;font-size:10.5pt;font-weight:bold;color:#c41535;margin:14pt 0 5pt;border-bottom:1pt solid #c41535;page-break-after:avoid;}'
-    +'h3{font-family:Arial,sans-serif;font-size:9.5pt;font-weight:bold;font-style:italic;margin:10pt 0 4pt;page-break-after:avoid;}'
+    +'h2{font-family:Arial,sans-serif;font-size:10.5pt;font-weight:bold;color:#c41535;margin:14pt 0 5pt;border-bottom:1pt solid #c41535;}'
+    +'h3{font-family:Arial,sans-serif;font-size:9.5pt;font-weight:bold;font-style:italic;margin:10pt 0 4pt;}'
     +'p{text-align:justify;font-size:9.5pt;margin:0 0 5pt;line-height:16pt;}'
-    +'blockquote{border-left:2.5pt solid #c41535;padding-left:8pt;margin:7pt 0 7pt 10pt;font-style:italic;font-size:9pt;text-align:justify;}'
-    +'ol,ul{padding-left:16pt;font-size:9pt;text-align:justify;}'
-    +'li{margin-bottom:3pt;text-align:justify;}'
-    +'table{width:100%;border-collapse:collapse;font-size:7.5pt;margin:10pt 0;}'
-    +'th{border-top:1.5pt solid #c41535;border-bottom:1pt solid #c41535;padding:3pt 4pt;font-family:Arial,sans-serif;font-weight:bold;background:#fff5f7;}'
-    +'td{padding:2.5pt 4pt;border-bottom:1pt solid #dde;}'
+    +'blockquote{border-left:2.5pt solid #c41535;padding-left:8pt;margin:7pt 0 7pt 10pt;font-style:italic;font-size:9pt;}'
     +'p.col{font-family:Arial,sans-serif;font-size:7.5pt;color:#777;border-top:1pt solid #ccc;margin-top:18pt;padding-top:6pt;text-align:center;}'
     +'</style></head><body><div class="Section1">'
-    +'<h1>Mindanao’da Mw 7.8 Büyük Deprem</h1>'
-    +'<p><strong>Prof. Dr. Ali Osman Öncel</strong> &#x2014; Deprem Sismolojisti · Jeofizik Mühendisi</p>'
-    +'<p><em>JeoTurizm EduPanel · Deprem Analizi · Haziran 2026</em></p>'
+    +'<h1>'+TITLE+'</h1>'
+    +'<p><strong>Prof. Dr. Ali Osman Öncel</strong> — Deprem Sismolojisti · Jeofizik Mühendisi</p>'
+    +'<p><em>SeismoReport · Deprem Analizi · Haziran 2026</em></p>'
     +'<p>Tarih: '+now+' · aliosmanoncel.blogspot.com</p>'
+    +'<h2>Özet</h2><p>'+ABSTRACT+'</p>'
     +body
-    +'<p class="col">&copy; 2026 JeoTurizm EduPanel &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; '+now+'</p>'
+    +'<p class="col">&copy; 2026 SeismoReport &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; '+now+'</p>'
     +'</div></body></html>';
     epHide(ld);
-    epDown(html,'JeoTurizm-EduPanel-Mindanao-Mw78-Deprem.doc','application/msword');
+    epDown(html,'SeismoReport-Mindanao-Mw78-2026.doc','application/msword');
   }catch(e){epHide(ld);alert('Word hatası: '+e.message);}
 });
 
 })();
-</script>
 
-<!-- Google Translate — Auto EN + görsel widget -->
-<script type="text/javascript">
+/* ── TTS — Web Speech API ── */
 (function(){
-  function setCookie(n,v,d){var e=new Date();e.setTime(e.getTime()+(d*864e5));document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/';}
-  if(document.cookie.indexOf('googtrans')===-1){setCookie('googtrans','/tr/en',1);setCookie('googtrans','/tr/en',1);}
-})();
-function googleTranslateElementInit(){
-  new google.translate.TranslateElement({
-    pageLanguage:'tr',
-    includedLanguages:'en,tr,it,de,fr,es,ar,ru,pt,nl,pl',
-    layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
-    autoDisplay:true
-  },'google_translate_element');
-}
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  var synth = window.speechSynthesis;
+  var btn   = document.getElementById('tts-btn');
+  if(!synth || !btn) return;
 
-<!-- TTS — Web Speech API -->
-<script>
-(function(){
-  var synth=window.speechSynthesis,btn=document.getElementById('tts-btn');
-  if(!synth||!btn) return;
-  var speaking=false,paused=false;
-  function getLang(){var m=document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/);return m?m[1]:(document.documentElement.lang||'en');}
+  var speaking=false, paused=false;
+
+  function getLang(){
+    var m = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/);
+    return m ? m[1] : (document.documentElement.lang || 'en');
+  }
+
   function getContent(){
-    var root=document.getElementById('ep-wrap')||document.body;
-    var clone=root.cloneNode(true);
-    clone.querySelectorAll('script,style,noscript,button,input,select,option,iframe,svg,#google_translate_element,.ep-share,.ep-footer,.ep-author-link,[class*="goog-"],[id*="goog"],[class*="VIpgJd"],[class*="skiptranslate"]').forEach(function(el){el.remove();});
-    return (clone.innerText||'').replace(/#[0-9a-fA-F]{3,8}\b/g,' ').replace(/\s{2,}/g,' ').trim().slice(0,50000);
+    var root = document.getElementById('ep-wrap') || document.body;
+    var clone = root.cloneNode(true);
+    clone.querySelectorAll(
+      'script,style,noscript,button,input,select,option,iframe,svg,' +
+      '#google_translate_element,.ep-share,.ep-footer,.ep-author-link,' +
+      '[class*="goog-"],[id*="goog"],[class*="VIpgJd"],[class*="skiptranslate"]'
+    ).forEach(function(el){ el.remove(); });
+    return (clone.innerText || clone.textContent || '')
+      .replace(/#[0-9a-fA-F]{3,8}\b/g,' ')
+      .replace(/\s{2,}/g,' ').trim().slice(0, 40000);
   }
+
   function setState(s){
-    if(s==='playing'){btn.textContent='⏸ Duraklat';btn.style.background='linear-gradient(135deg,#92400e,#b45309)';}
-    else if(s==='paused'){btn.textContent='▶ Devam';btn.style.background='linear-gradient(135deg,#14532d,#166534)';}
-    else{btn.textContent='🔊 Dinle';btn.style.background='linear-gradient(135deg,#1e3a5f,#1e40af)';}
+    if(s==='playing'){
+      btn.innerHTML='⏸ Duraklat';
+      btn.style.background='linear-gradient(135deg,#92400e,#b45309)';
+    } else if(s==='paused'){
+      btn.innerHTML='▶ Devam';
+      btn.style.background='linear-gradient(135deg,#14532d,#166534)';
+    } else {
+      btn.innerHTML='🔊 Dinle';
+      btn.style.background='linear-gradient(135deg,#1e3a5f,#1e40af)';
+    }
   }
-  btn.addEventListener('click',function(){
-    if(!speaking&&!paused){synth.cancel();var utt=new SpeechSynthesisUtterance(getContent());utt.lang=getLang();utt.rate=0.92;utt.pitch=1;utt.onend=utt.onerror=function(){speaking=false;paused=false;setState('idle');};synth.speak(utt);speaking=true;setState('playing');}
-    else if(speaking){synth.pause();speaking=false;paused=true;setState('paused');}
-    else if(paused){synth.resume();paused=false;speaking=true;setState('playing');}
+
+  btn.addEventListener('click', function(){
+    if(!speaking && !paused){
+      synth.cancel();
+      var utt = new SpeechSynthesisUtterance(getContent());
+      utt.lang=getLang(); utt.rate=0.92; utt.pitch=1;
+      utt.onend=utt.onerror=function(){ speaking=false; paused=false; setState('idle'); };
+      synth.speak(utt);
+      speaking=true; setState('playing');
+    } else if(speaking){
+      synth.pause(); speaking=false; paused=true; setState('paused');
+    } else if(paused){
+      synth.resume(); paused=false; speaking=true; setState('playing');
+    }
   });
-  window.addEventListener('beforeunload',function(){synth.cancel();});
+
+  window.addEventListener('beforeunload', function(){ synth.cancel(); });
 })();
 </script>

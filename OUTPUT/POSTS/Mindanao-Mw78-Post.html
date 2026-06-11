@@ -117,25 +117,15 @@
 }
 
 @media print {
-  .ep-toolbar, .ep-nav, .ep-toc, #ep-tts-bar,
-  .ep-badge-row, .ep-share, .ep-btn-row,
-  .ep-author, .leaflet-container,
-  canvas, .chartjs-render-monitor { display:none !important; }
-  #ep-wrap { background:#fff !important; color:#000 !important;
-             max-width:100% !important; padding:0 !important; }
-  .ep-section { border:none !important; box-shadow:none !important;
-                background:#fff !important; margin-bottom:16px !important; }
-  .ep-section-title { color:#000 !important; font-size:13pt !important; }
-  .ep-body-text, p { color:#000 !important; font-size:10.5pt !important;
-                     text-align:justify !important; }
-  a { color:#000 !important; text-decoration:none !important; }
-  table { border-collapse:collapse !important; width:100% !important; }
-  td, th { border:1px solid #999 !important; padding:4px 8px !important;
-           color:#000 !important; font-size:9pt !important; }
-  .info-note, blockquote { border-left:3px solid #333 !important;
-                           background:#f5f5f5 !important; color:#000 !important; }
-  img { max-width:100% !important; }
-  @page { margin:1.5cm 2cm; }
+  #ep-wrap, #ep-tts-bar { display:none !important; }
+  #print-doc { display:block !important; }
+  @page { margin:2cm 2cm; size:A4; }
+}
+#print-doc {
+  display:none;
+}
+#print-doc-inner {
+body{font-family:"Times New Roman",serif;font-size:10.5pt;color:#000;line-height:1.75;}h1{font-family:Arial,sans-serif;font-size:15pt;font-weight:bold;margin:0 0 8pt;}h2{font-family:Arial,sans-serif;font-size:10.5pt;font-weight:bold;color:#c41535;margin:14pt 0 5pt;border-bottom:1pt solid #c41535;page-break-after:avoid;}p{text-align:justify;font-size:9.5pt;margin:0 0 5pt;line-height:16pt;}table{width:100%;border-collapse:collapse;font-size:8pt;margin:10pt 0;}th{border-top:1.5pt solid #c41535;border-bottom:1pt solid #c41535;padding:3pt 4pt;font-family:Arial,sans-serif;font-weight:bold;background:#fff5f7;}td{padding:2.5pt 4pt;border-bottom:1pt solid #eee;}
 }
 </style>
 
@@ -2111,7 +2101,13 @@ document.getElementById('ep-pdf').addEventListener('click',function(){
     +'<h2>Tektonik Bağlam</h2><p>Philippine Sea Levhası yılda ~6–7 cm hızla Eurasia altına dalmaktadır. Cotabato yayı ve Mindanao Tranşesi bölgenin başlıca yapısal unsurlarıdır.</p>'
     +'<h2>Değerlendirme</h2><p>57 km derinlik yüzey hasarını sınırlamış, geniş alanda güçlü sarsıntı üretilmiştir. PTWC tsunami izleme protokolleri aktive edilmiş, artçı sismisitenin haftalarca sürmesi beklenmektedir.</p>'
     +'<p class="col" style="font-family:Arial,sans-serif;font-size:7.5pt;color:#777;border-top:1pt solid #ccc;margin-top:18pt;padding-top:6pt;text-align:center;">&copy; 2026 JeoTurizm EduPanel &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; '+now+'</p>'
-    +'</div></body></html>';
+    +'</div>
+<div id="print-doc">
+  <div id="print-doc-inner">
+    <div class="Section1"><h1>Mindanao\'da Mw 7.8 Büyük Deprem</h1><p><strong>Prof. Dr. Ali Osman Öncel</strong> &#x2014; Deprem Sismolojisti · Jeofizik Mühendisi</p><p><em>Deprem Analizi · Haziran 2026</em></p><p>Tarih: 11.06.2026 · aliosmanoncel.blogspot.com</p><h2>Özet</h2><p>7 Haziran 2026 tarihinde 23:37 UTC\'de Mindanao\'nun güneyinde Mw 7.8 büyüklüğünde deprem meydana geldi. Philippine Sea Levhası subdüksiyonuyla ilişkili olan olay, 57 km derinlikte, General Santos\'un 49 km güneyinde odaklanmıştır.</p><h2>Parametreler</h2><table><tr><th>Parametre</th><th>Değer</th><th>Not</th></tr><tr><td>Magnitüd</td><td>Mw 7.8</td><td>EMSC</td></tr><tr><td>Konum</td><td>5.683°K · 125.058°D</td><td>Mindanao GB</td></tr><tr><td>Derinlik</td><td>57 km</td><td>Orta-derin kuşak</td></tr><tr><td>Zaman (UTC)</td><td>2026-06-07 23:37:42</td><td>Yerel: +8</td></tr><tr><td>En Yakın Kent</td><td>General Santos · 49 km G</td><td>~600K nüfus</td></tr></table><h2>Tektonik Bağlam</h2><p>Philippine Sea Levhası yılda ~6–7 cm hızla Eurasia altına dalmaktadır. Cotabato yayı ve Mindanao Tranşesi bölgenin başlıca yapısal unsurlarıdır.</p><h2>Değerlendirme</h2><p>57 km derinlik yüzey hasarını sınırlamış, geniş alanda güçlü sarsıntı üretilmiştir. PTWC tsunami izleme protokolleri aktive edilmiş, artçı sismisitenin haftalarca sürmesi beklenmektedir.</p><p class="col" style="font-family:Arial,sans-serif;font-size:7.5pt;color:#777;border-top:1pt solid #ccc;margin-top:18pt;padding-top:6pt;text-align:center;">&copy; 2026 JeoTurizm EduPanel &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; 11.06.2026</p></div></body></html>';document.body.removeChild(ld);ifr.contentDocument.open();ifr.contentDocument.write(html);ifr.contentDocument.close();setTimeout(function(){document.body.removeChild(ld);ifr.contentWindow.focus();ifr.contentWindow.print();setTimeout(function(){document.body.removeChild(ifr);},3000);},800);}catch(e){document.body.removeChild(ld);alert('PDF hatası: '+e.message);}});/* WORD */document.getElementById('ep-word').addEventListener('click',function(){var ld=document.createElement('div');ld.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center;color:#fff;font-family:sans-serif;font-size:1.1rem;';ld.textContent='Word hazırlanıyor…';document.body.appendChild(ld);try{var now=new Date().toLocaleDateString('tr-TR',{year:'numeric',month:'long',day:'numeric'});var html='<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40" lang="tr"><head><meta charset="utf-8"><title>Mindanao Mw 7.8</title><style>@page Section1{size:210mm 297mm;margin:25.4mm 19mm 25.4mm 19mm;}div.Section1{page:Section1;}body{font-family:"Times New Roman",serif;font-size:10.5pt;color:#000;line-height:1.75;}h1{font-family:Arial,sans-serif;font-size:15pt;font-weight:bold;margin:0 0 8pt;}h2{font-family:Arial,sans-serif;font-size:10.5pt;font-weight:bold;color:#c41535;margin:14pt 0 5pt;border-bottom:1pt solid #c41535;page-break-after:avoid;}p{text-align:justify;font-size:9.5pt;margin:0 0 5pt;line-height:16pt;}table{width:100%;border-collapse:collapse;font-size:8pt;margin:10pt 0;}th{border-top:1.5pt solid #c41535;border-bottom:1pt solid #c41535;padding:3pt 4pt;font-family:Arial,sans-serif;font-weight:bold;background:#fff5f7;}td{padding:2.5pt 4pt;border-bottom:1pt solid #eee;}</style></head><body><div class="Section1"><h1>Mindanao\'da Mw 7.8 Büyük Deprem</h1><p><strong>Prof. Dr. Ali Osman Öncel</strong> &#x2014; Deprem Sismolojisti · Jeofizik Mühendisi</p><p><em>Deprem Analizi · Haziran 2026</em></p><p>Tarih: 11.06.2026 · aliosmanoncel.blogspot.com</p><h2>Özet</h2><p>7 Haziran 2026 tarihinde 23:37 UTC\'de Mindanao\'nun güneyinde Mw 7.8 büyüklüğünde deprem meydana geldi. Philippine Sea Levhası subdüksiyonuyla ilişkili olan olay, 57 km derinlikte, General Santos\'un 49 km güneyinde odaklanmıştır.</p><h2>Parametreler</h2><table><tr><th>Parametre</th><th>Değer</th><th>Not</th></tr><tr><td>Magnitüd</td><td>Mw 7.8</td><td>EMSC</td></tr><tr><td>Konum</td><td>5.683°K · 125.058°D</td><td>Mindanao GB</td></tr><tr><td>Derinlik</td><td>57 km</td><td>Orta-derin kuşak</td></tr><tr><td>Zaman (UTC)</td><td>2026-06-07 23:37:42</td><td>Yerel: +8</td></tr><tr><td>En Yakın Kent</td><td>General Santos · 49 km G</td><td>~600K nüfus</td></tr></table><h2>Tektonik Bağlam</h2><p>Philippine Sea Levhası yılda ~6–7 cm hızla Eurasia altına dalmaktadır. Cotabato yayı ve Mindanao Tranşesi bölgenin başlıca yapısal unsurlarıdır.</p><h2>Değerlendirme</h2><p>57 km derinlik yüzey hasarını sınırlamış, geniş alanda güçlü sarsıntı üretilmiştir. PTWC tsunami izleme protokolleri aktive edilmiş, artçı sismisitenin haftalarca sürmesi beklenmektedir.</p><p class="col" style="font-family:Arial,sans-serif;font-size:7.5pt;color:#777;border-top:1pt solid #ccc;margin-top:18pt;padding-top:6pt;text-align:center;">&copy; 2026 JeoTurizm EduPanel &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; 11.06.2026</p></div>
+  </div>
+</div>
+</body></html>';
     document.body.removeChild(ld);
     ifr.contentDocument.open();
     ifr.contentDocument.write(html);

@@ -210,28 +210,37 @@ def update_params_in_review():
     log(f'REVIEW parametreleri guncellendi: p={p} b={b} K={K} N={n} FTLS={ftls}')
     return True
 
-# ── GitHub'a push ────────────────────────────────────────────────
-def _push_to_github(new_count):
+# ── GitHub'a push ─────────────────────────────────────────────────
+# msg_prefix: 'data' (otomatik artci), 'sablon' (manuel sablon), vs.
+def _push_to_github(new_count=0, msg_prefix='data', custom_msg=None):
     import subprocess as _sp
-    event_dir = os.path.dirname(CFG['json'])
-    files = [
-        CFG['json'],
-        os.path.join(event_dir, 'aftershocks.json'),
-        os.path.join(event_dir, 'aftershocks_raw.txt'),
-    ]
-    existing = [f for f in files if os.path.exists(f)]
     try:
-        _sp.run(['git', 'add'] + existing, check=True, capture_output=True)
-        msg = f'data: Mindanao artci guncelleme +{new_count} olay ({datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")})'
-        result = _sp.run(['git', 'commit', '-m', msg], capture_output=True, text=True, encoding='utf-8')
+        # Tüm takip edilen (tracked) değişiklikleri stage et — şablonlar dahil
+        _sp.run(['git', 'add', '-u'], check=True, capture_output=True)
+        if custom_msg:
+            msg = custom_msg
+        elif msg_prefix == 'data':
+            msg = (f'data: Mindanao artci guncelleme +{new_count} olay '
+                   f'({datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")})')
+        else:
+            msg = (f'{msg_prefix}: sablon/JSON guncelleme '
+                   f'({datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")})')
+
+        result = _sp.run(['git', 'commit', '-m', msg],
+                         capture_output=True, text=True, encoding='utf-8')
         if result.returncode == 0:
-            push = _sp.run(['git', 'push', 'origin', 'main'], capture_output=True, text=True, encoding='utf-8')
+            push = _sp.run(['git', 'push', 'origin', 'main'],
+                           capture_output=True, text=True, encoding='utf-8')
             if push.returncode == 0:
                 log(f'GitHub push basarili: {msg}')
             else:
                 log(f'GitHub push HATASI: {push.stderr[:200]}')
         else:
-            log('Git commit: degisiklik yok veya hata — push atlandı')
+            # returncode=1 + "nothing to commit" → normal durum
+            if 'nothing to commit' in result.stdout + result.stderr:
+                log('Git: degisiklik yok, push atlandı')
+            else:
+                log(f'Git commit HATA: {result.stderr[:200]}')
     except Exception as ex:
         log(f'Git islem hatasi: {ex}')
 
@@ -365,7 +374,6 @@ def cmd_page_update():
 
 def cmd_post_update():
     log('=== post-update basladi ===')
-    # Once snippet guncel mi?
     if not os.path.exists(CFG['snippet']):
         log('Snippet yok, once aftershock-update calistirin.')
         return
@@ -373,11 +381,20 @@ def cmd_post_update():
     if ok:
         log(f'POST hazir → {CFG["post_html"]}')
 
+def cmd_push():
+    """Tüm yerel degisiklikleri (sablon, JSON, HTML) GitHub'a push et."""
+    log('=== github-push basladi ===')
+    # Önce generate et (en guncel HTML uret)
+    run_generate()
+    _push_to_github(msg_prefix='sablon')
+    log('=== push tamamlandi ===')
+
 # ── CLI ──────────────────────────────────────────────────────────
 COMMANDS = {
     'aftershock-update': cmd_aftershock_update,
     'page-update'      : cmd_page_update,
     'post-update'      : cmd_post_update,
+    'push'             : cmd_push,
     'status'           : show_status,
 }
 

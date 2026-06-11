@@ -119,6 +119,21 @@ python generate.py events/YeniDeprem-2026/YeniDeprem.json
 | `POST_BODY_SECTION` | Ana metin + kartlar + kutular HTML |
 | `POST_REFS` | `<li>` kaynakça satırları |
 
+### Video Özeti (Türkçe + İngilizce)
+
+Her iki şablonda (PAGE + POST) hero bölümünün hemen altında yan yana iki video kutusu gösterilir.
+
+| Anahtar | Açıklama | Örnek |
+|---------|----------|-------|
+| `YOUTUBE_VIDEO_ID` | Türkçe özet video ID | `"-GY0w_Tmub0"` |
+| `YOUTUBE_VIDEO_ID_EN` | İngilizce özet video ID | `"XTUmUOGXfFM"` |
+
+**Nasıl bulunur:** `https://youtu.be/ABC123` → ID = `ABC123`
+
+> **Neden iki video?**  
+> Türkçe + İngilizce video çifti, aynı anda yerel ve uluslararası kitleye ulaşmanın en hızlı yolu.  
+> Yeni bir deprem raporunda her zaman her iki alanı doldurun.
+
 ---
 
 ## Cuba Mw 6.1 — Hızlı Başlangıç

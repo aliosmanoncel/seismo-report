@@ -2120,7 +2120,7 @@ document.getElementById('ep-pdf').addEventListener('click',function(){
     +'</div></body></html>';
     document.body.removeChild(ld);
     var blob=new Blob([html],{type:'text/html;charset=utf-8'});
-    window.open(URL.createObjectURL(blob),'_blank');
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Mindanao-Mw78-Post.html';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href);},1000);
   }catch(e){document.body.removeChild(ld);alert('PDF hatası: '+e.message);}
 });
 

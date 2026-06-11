@@ -35,7 +35,9 @@ def generate(json_path):
         html = f.read()
 
     for key, value in data.items():
-        html = html.replace("{{" + key + "}}", str(value))
+        # Türkçe kesme işareti (U+2019) JS string'ini kırmaz; ASCII apostrofu (U+0027) kırar
+        safe_value = str(value).replace("'", "’")
+        html = html.replace("{{" + key + "}}", safe_value)
 
     leftovers = re.findall(r"\{\{[A-Z_]+\}\}", html)
     if leftovers:

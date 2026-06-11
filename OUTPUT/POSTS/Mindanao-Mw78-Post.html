@@ -2081,8 +2081,10 @@ function epHide(d){if(d&&d.parentNode)d.parentNode.removeChild(d);}
 function epOpen(html){
   var b=new Blob([html],{type:'text/html;charset=utf-8'});
   var u=URL.createObjectURL(b);
-  var w=window.open(u,'_blank');
-  if(w)setTimeout(function(){URL.revokeObjectURL(u);},60000);
+  var a=document.createElement('a');
+  a.href=u; a.download='Mindanao-Mw78-PDF.html';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(u);},1000);
 }
 function epDown(content,filename,mime){
   var b=new Blob([content],{type:mime});

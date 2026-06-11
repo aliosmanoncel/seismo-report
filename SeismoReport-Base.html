@@ -395,7 +395,92 @@ ${body}</div></body></html>`;
     });
   });
   {{MAP_INIT_JS}}
-  {{AFTERSHOCK_MAP_JS}}
+  // ── Artci Haritasi — GitHub'dan canli veri ──────────────────────
+  (function(){
+    var mapEl=document.getElementById('aftershock-map');
+    if(!mapEl)return;
+    var DATA_URL='{{GITHUB_AFTERSHOCK_URL}}';
+    var MS_LAT={{MS_LAT}},MS_LON={{MS_LON}},MS_MAG='{{MS_MAG}}',MS_TIME='{{MS_TIME}}',MS_DEPTH='{{MS_DEPTH}}';
+
+    if(!document.querySelector('link[href*="leaflet"]')){
+      var lnk=document.createElement('link');
+      lnk.rel='stylesheet';
+      lnk.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css';
+      document.head.appendChild(lnk);
+    }
+    var wrap=document.getElementById('aftershock-map-wrap');
+    if(wrap){
+      var btn=document.createElement('button');
+      btn.id='as-fs-btn';btn.title='Tam Ekran';btn.innerHTML='⛶';
+      btn.style.cssText='position:absolute;top:10px;right:10px;z-index:1000;background:rgba(10,14,21,0.85);color:#7ecbff;border:1px solid rgba(59,158,255,.4);border-radius:6px;padding:4px 9px;font-size:16px;cursor:pointer;';
+      btn.onmouseenter=function(){this.style.background='rgba(59,158,255,.25)';};
+      btn.onmouseleave=function(){this.style.background='rgba(10,14,21,0.85)';};
+      wrap.style.position='relative';wrap.appendChild(btn);
+      var _full=false,_origH=mapEl.style.height;
+      btn.onclick=function(){
+        _full=!_full;
+        if(_full){wrap.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;z-index:9998;border-radius:0;padding:0;margin:0;background:#0a0e15;width:100%';mapEl.style.height='100vh';mapEl.style.borderRadius='0';btn.innerHTML='✕';btn.style.top='14px';btn.style.right='14px';}
+        else{wrap.style.cssText='';wrap.style.position='relative';mapEl.style.height=_origH||'460px';mapEl.style.borderRadius='10px';btn.innerHTML='⛶';btn.style.top='10px';btn.style.right='10px';}
+        setTimeout(function(){if(window._asMap)window._asMap.invalidateSize();},250);
+      };
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&_full)btn.onclick();});
+    }
+
+    function _loadLeaflet(cb){
+      if(window.L){cb();return;}
+      var urls=['https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'];
+      var i=0;
+      function tryNext(){if(i>=urls.length)return;var s=document.createElement('script');s.src=urls[i++];s.onload=function(){if(window.L)cb();else tryNext();};s.onerror=tryNext;document.head.appendChild(s);}
+      tryNext();
+    }
+
+    function _renderMap(data){
+      var evs=data.events||[];
+      var p=data.params||{};
+      var map=L.map('aftershock-map').setView([MS_LAT,MS_LON],7);
+      window._asMap=map;
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:13}).addTo(map);
+      var si=L.divIcon({html:'<div style="font-size:30px;line-height:1;transform:translate(-50%,-50%);filter:drop-shadow(0 0 4px #ff8800)">⭐</div>',className:'',iconSize:[30,30],iconAnchor:[15,15]});
+      L.marker([MS_LAT,MS_LON],{icon:si}).bindPopup('<b>Ana Deprem</b><br>M'+MS_MAG+' · '+MS_TIME+' UTC<br>Derinlik: '+MS_DEPTH+' km').addTo(map);
+      var cnt={m6:0,m5:0,m4:0,m3:0};
+      evs.forEach(function(d){
+        var lat=d[0],lon=d[1],mag=d[2],dep=d[3],t=d[4],reg=d[5];
+        var color=mag>=6?'#ff2222':mag>=5?'#ff8800':mag>=4?'#ffd600':'#44aaff';
+        if(mag>=6)cnt.m6++;else if(mag>=5)cnt.m5++;else if(mag>=4)cnt.m4++;else cnt.m3++;
+        L.circleMarker([lat,lon],{radius:Math.pow(2,mag-2)*3,color:color,fillColor:color,fillOpacity:0.65,weight:1})
+         .bindPopup('<b>M'+mag+'</b> · '+t+' UTC<br>Derinlik: '+dep+' km<br>'+reg).addTo(map);
+      });
+      var lg=L.control({position:'bottomright'});
+      lg.onAdd=function(){
+        var d=L.DomUtil.create('div','');
+        d.style.cssText='background:rgba(10,14,21,0.88);color:#e8f0f5;padding:8px 12px;border-radius:8px;font-size:11px;line-height:1.9;border:1px solid rgba(255,255,255,.12)';
+        d.innerHTML='<b style="color:#7ecbff">Artçı Lejantı</b><br>'
+          +'<span style="color:#ff2222">●</span> M6+ ('+cnt.m6+')<br>'
+          +'<span style="color:#ff8800">●</span> M5–5.9 ('+cnt.m5+')<br>'
+          +'<span style="color:#ffd600">●</span> M4–4.9 ('+cnt.m4+')<br>'
+          +'<span style="color:#44aaff">●</span> M3–3.9 ('+cnt.m3+')<br>'
+          +'⭐ Ana Deprem M'+MS_MAG+'<br>'
+          +'<span style="color:#666;font-size:10px">Gün: '+data.updated+'</span>';
+        return d;
+      };
+      lg.addTo(map);
+      // Parametre panellerini güncelle
+      var els={'_param-p':p.p,'_param-b':p.b,'_param-n':p.n,'_param-ftls':p.ftls};
+      Object.keys(els).forEach(function(id){var el=document.getElementById(id);if(el&&els[id]!=null)el.textContent=els[id];});
+    }
+
+    _loadLeaflet(function(){
+      fetch(DATA_URL+'?_='+Date.now())
+        .then(function(r){return r.json();})
+        .then(function(data){_renderMap(data);})
+        .catch(function(err){
+          console.warn('GitHub veri cekilemedi, harita bos:',err);
+          var map=L.map('aftershock-map').setView([MS_LAT,MS_LON],7);
+          window._asMap=map;
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:13}).addTo(map);
+        });
+    });
+  })();
   {{OMORI_CHART_JS}}
 </script>
 </body>

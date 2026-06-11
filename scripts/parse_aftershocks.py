@@ -1166,3 +1166,39 @@ if os.path.exists(_json_path):
     print(f'Parametreler JSON\'a yazildi: p={p_fit}, b={b_val}, N={n_total}, FTLS={ftls_color}')
 else:
     print(f'JSON bulunamadi, parametreler yazilmadi: {_json_path}')
+
+# ── GitHub veri tabanı: aftershocks.json üret ────────────────────
+_event_dir = os.path.dirname(RAW)
+_as_json_path = os.path.join(_event_dir, 'aftershocks.json')
+
+n_total_all = len(aftershocks)
+ftls_color  = 'KIRMIZI' if b_val < 0.75 else 'SARI' if b_val < 0.90 else 'YEŞİL'
+now_iso     = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+
+_as_out = {
+    'updated': now_iso,
+    'params': {
+        'p':    p_fit,
+        'p_err': round(p_err, 3) if p_err else None,
+        'K':    K_fit,
+        'c':    c_fit,
+        'r2':   r2,
+        'b':    b_val,
+        'Mc':   M_C,
+        'Dc':   Dc,
+        'Dt':   Dt,
+        'n':    n_total_all,
+        'n_m5': bins['M5-5.9'] + bins['M6+'],
+        'n_m6': bins['M6+'],
+        'ftls': ftls_color
+    },
+    'events': [
+        [e['lat'], e['lon'], e['mag'], e['depth'],
+         e['time'][:16].replace('T', ' '), e['region']]
+        for e in aftershocks
+    ]
+}
+
+with open(_as_json_path, 'w', encoding='utf-8') as _f:
+    json.dump(_as_out, _f, ensure_ascii=False, separators=(',', ':'))
+print(f'aftershocks.json yazildi: {_as_json_path} ({len(_as_out["events"])} olay)')

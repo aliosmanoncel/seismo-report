@@ -210,6 +210,31 @@ def update_params_in_review():
     log(f'REVIEW parametreleri guncellendi: p={p} b={b} K={K} N={n} FTLS={ftls}')
     return True
 
+# ── GitHub'a push ────────────────────────────────────────────────
+def _push_to_github(new_count):
+    import subprocess as _sp
+    event_dir = os.path.dirname(CFG['json'])
+    files = [
+        CFG['json'],
+        os.path.join(event_dir, 'aftershocks.json'),
+        os.path.join(event_dir, 'aftershocks_raw.txt'),
+    ]
+    existing = [f for f in files if os.path.exists(f)]
+    try:
+        _sp.run(['git', 'add'] + existing, check=True, capture_output=True)
+        msg = f'data: Mindanao artci guncelleme +{new_count} olay ({datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")})'
+        result = _sp.run(['git', 'commit', '-m', msg], capture_output=True, text=True, encoding='utf-8')
+        if result.returncode == 0:
+            push = _sp.run(['git', 'push', 'origin', 'main'], capture_output=True, text=True, encoding='utf-8')
+            if push.returncode == 0:
+                log(f'GitHub push basarili: {msg}')
+            else:
+                log(f'GitHub push HATASI: {push.stderr[:200]}')
+        else:
+            log('Git commit: degisiklik yok veya hata — push atlandı')
+    except Exception as ex:
+        log(f'Git islem hatasi: {ex}')
+
 # ── generate.py calistir → PAGE HTML ─────────────────────────────
 def run_generate():
     log('generate.py calistiriliyor...')
@@ -326,6 +351,7 @@ def cmd_aftershock_update():
 
     ok = run_generate()
     if ok:
+        _push_to_github(added)
         log(f'=== Tamamlandi. Yeni: {added}, Toplam: {total} artci ===')
     else:
         log('generate.py basarisiz')

@@ -14,6 +14,23 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 RAW = sys.argv[1] if len(sys.argv) > 1 else 'INPUT/aftershocks_raw.txt'
 
+# ── Büyüklük dönüşümü → Mw (Scordilis 2006; Grünthal 2009) ───────
+def to_mw(mag, mtype):
+    t = mtype.lower().strip()
+    if t in ('mw', 'mww', 'mwb', 'mwc', 'mwr', 'mwp'):
+        return round(mag, 2)
+    if t == 'mb':
+        # Scordilis 2006: Mw = 0.85·mb + 1.03  (mb 3.5–6.2)
+        return round(0.85 * mag + 1.03, 2)
+    if t == 'ms' or t == 'ms_20':
+        if mag < 6.2:
+            return round(0.67 * mag + 2.07, 2)
+        return round(0.99 * mag + 0.08, 2)
+    if t in ('ml', 'm', 'md', 'mlv', 'mld'):
+        # Grünthal 2009: Mw = 0.0376·ML² + 0.646·ML + 0.53
+        return round(0.0376 * mag**2 + 0.646 * mag + 0.53, 2)
+    return round(mag, 2)  # bilinmeyen tip → dokunma
+
 # ── Veri yukle ─────────────────────────────────────────────────────
 with open(RAW, encoding='utf-8') as f:
     lines = [l.strip() for l in f if l.strip() and '|' in l]
@@ -21,8 +38,11 @@ with open(RAW, encoding='utf-8') as f:
 events = []
 for l in lines:
     p = l.split('|')
+    mtype = p[9].strip()
+    mag   = float(p[10])
+    mw_eq = to_mw(mag, mtype)
     events.append({'id':p[0],'time':p[1],'lat':float(p[2]),'lon':float(p[3]),
-                   'depth':float(p[4]),'magtype':p[9],'mag':float(p[10]),'region':p[12]})
+                   'depth':float(p[4]),'magtype':mtype,'mag':mag,'mw':mw_eq,'region':p[12]})
 
 mainshock  = max(events, key=lambda x: x['mag'])
 aftershocks = [e for e in events if e['id'] != mainshock['id']]
@@ -174,7 +194,7 @@ obs_log_js = json.dumps(obs_log)
 fit_log_js = json.dumps(fit_log)
 
 # ── Gutenberg-Richter: kumulatif N(>=M) ───────────────────────────
-mags_all = sorted([e['mag'] for e in aftershocks])
+mags_all = sorted([e['mw'] for e in aftershocks])  # Mw'ye dönüştürülmüş büyüklükler
 # Scordilis (2006) mb/m → Mw donusumu
 # Mw = 0.85*mb + 1.03  (±0.29)  [3.5 ≤ mb ≤ 6.2]
 def mb_to_mw(mb):
@@ -1193,8 +1213,10 @@ _as_out = {
         'ftls': ftls_color
     },
     'events': [
+        # [lat, lon, mag_orijinal, dep, time, region, magtype, mw_eq]
         [e['lat'], e['lon'], e['mag'], e['depth'],
-         e['time'][:16].replace('T', ' '), e['region']]
+         e['time'][:16].replace('T', ' '), e['region'],
+         e['magtype'], e['mw']]
         for e in aftershocks
     ]
 }

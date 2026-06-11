@@ -2099,10 +2099,12 @@ ${body}</div></body></html>`;
       var cnt={m6:0,m5:0,m4:0,m3:0};
       evs.forEach(function(d){
         var lat=d[0],lon=d[1],mag=d[2],dep=d[3],t=d[4],reg=d[5];
-        var color=mag>=6?'#ff2222':mag>=5?'#ff8800':mag>=4?'#ffd600':'#44aaff';
-        if(mag>=6)cnt.m6++;else if(mag>=5)cnt.m5++;else if(mag>=4)cnt.m4++;else cnt.m3++;
-        L.circleMarker([lat,lon],{radius:Math.pow(2,mag-2)*3,color:color,fillColor:color,fillOpacity:0.65,weight:1})
-         .bindPopup('<b>M'+mag+'</b> · '+t+' UTC<br>Derinlik: '+dep+' km<br>'+reg).addTo(map);
+        var mtype=d[6]||'m', mw=d[7]!=null?d[7]:mag;
+        var color=mw>=6?'#ff2222':mw>=5?'#ff8800':mw>=4?'#ffd600':'#44aaff';
+        if(mw>=6)cnt.m6++;else if(mw>=5)cnt.m5++;else if(mw>=4)cnt.m4++;else cnt.m3++;
+        var origLabel = mtype.toLowerCase()==='mw' ? '' : ' <span style="color:#aaa;font-size:10px">('+mtype.toUpperCase()+mag+'→Mw)</span>';
+        L.circleMarker([lat,lon],{radius:Math.pow(2,mw-2)*3,color:color,fillColor:color,fillOpacity:0.65,weight:1})
+         .bindPopup('<b>Mw '+mw+'</b>'+origLabel+'<br>'+t+' UTC<br>Derinlik: '+dep+' km<br>'+reg).addTo(map);
       });
       var lg=L.control({position:'bottomright'});
       lg.onAdd=function(){

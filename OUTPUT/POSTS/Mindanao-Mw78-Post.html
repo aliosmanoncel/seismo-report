@@ -430,56 +430,36 @@ dardı 0.40g&#x02BC;nin %90 üzerinde.
 </div>
 
 <!-- DIŞA AKTARMA -->
-<div class="ep-export">
-  <div class="ep-export-info">
-    <div class="ep-export-icon">📤</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(196,21,53,.06);border:1px solid rgba(196,21,53,.3);border-radius:14px;padding:14px 20px;margin:28px 0;">
+  <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:180px;">
+    <div style="width:34px;height:34px;border-radius:8px;background:rgba(196,21,53,.15);border:1px solid rgba(196,21,53,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📤</div>
     <div>
-      <div class="ep-export-title">PDF / Word olarak dışa aktar</div>
-      <div class="ep-export-sub">Times New Roman · Akademik format · Abstract</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:#e8627a;">PDF / Word olarak dışa aktar</div>
+      <div style="font-size:.68rem;color:#7c9cbd;margin-top:2px;">Times New Roman · A4 · Akademik format · Abstract dahil</div>
     </div>
   </div>
-  <button id="tts-btn-export" onclick="document.getElementById('tts-btn').click()" style="padding:9px 16px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.76rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(59,158,255,.4);background:#1a3a6e;color:#7ab8ff;white-space:nowrap;">🔊 Dinle</button>
-  <button class="ep-btn ep-btn-pdf" id="ep-pdf">📄 PDF indir</button>
-  <button class="ep-btn ep-btn-word" id="ep-word">📝 Word indir</button>
+  <button id="tts-btn-export" onclick="document.getElementById('tts-btn').click()" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(59,158,255,.5);background:linear-gradient(135deg,#1e3a5f,#1e40af);color:#90caf9;white-space:nowrap;">🔊 Dinle</button>
+  <button id="ep-pdf" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(56,189,248,.4);background:#1a3a6e;color:#7ab8ff;white-space:nowrap;">📄 PDF indir</button>
+  <button id="ep-word" style="padding:9px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(34,197,94,.4);background:#0f3020;color:#4ade80;white-space:nowrap;">📝 Word indir</button>
 </div>
 
-<!-- AHEAD / Veri Linkleri -->
-<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-16px 0 28px;padding:8px 16px;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.18);border-radius:10px;font-size:.75rem;color:#6a8faa;">
-  🗄️ <strong style="color:#86efac;">Veri:</strong>
-  <a href="https://www.emsc-csem.org/Earthquake/earthquake.php?id=1680457" target="_blank" style="color:#64b5f6;text-decoration:none;font-weight:600;">EMSC</a> ·
-  <a href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000pq1t/executive" target="_blank" style="color:#64b5f6;text-decoration:none;font-weight:600;">USGS</a> ·
-  <a href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000pq1t/shakemap/intensity" target="_blank" style="color:#64b5f6;text-decoration:none;font-weight:600;">ShakeMap</a> ·
-  <a href="https://www.globalcmt.org" target="_blank" style="color:#64b5f6;text-decoration:none;font-weight:600;">GlobalCMT</a>
-  <span style="margin-left:auto;opacity:.6;font-size:.68rem;">Mw 7.8 · 7 Haziran 2026</span>
-</div>
-
-<!-- TAM RAPOR LİNKİ -->
-<div style="text-align:center;margin:0 0 28px;">
-  <a href="https://aliosmanoncel.blogspot.com/p/mindanao-earthquake-2026.html"
-     target="_blank"
-     style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:linear-gradient(135deg,#c41535,#9b1c33);color:#fff;text-decoration:none;border-radius:10px;font-weight:700;font-size:.92rem;letter-spacing:.3px;box-shadow:0 4px 16px rgba(196,21,53,.35);">
-    📄 Tam Raporu Oku &rarr;
+<!-- TAM RAPOR CTA -->
+<div class="ep-cta" style="margin-top:36px;">
+  <a class="ep-cta-btn" href="https://aliosmanoncel.blogspot.com/p/mindanao-earthquake-2026.html" target="_blank">
+    📄 Tam Analiz Raporunu Oku →
   </a>
-  <div style="margin-top:8px;font-size:.75rem;color:var(--ep-muted);">SeismoReport · Mindanao Mw 7.8 · Haziran 2026</div>
-</div>
-
-<!-- CTA -->
-<div class="ep-cta">
-  <a class="ep-cta-btn" href="https://aliosmanoncel.blogspot.com" target="_blank">
-    🔬 Tüm Yazıları İncele →
-  </a>
-  <div class="ep-cta-sub">Deprem Analizi · Mindanao’da Mw 7.8 Büyük Deprem · Haziran 2026</div>
+  <div class="ep-cta-sub">Artçı Dizi · FTLS b-Değeri · PSHA Logic Tree · ShakeMap · Moment Tensör · PDF/Word Export</div>
 </div>
 
 <div class="ep-divider"></div>
 
-<!-- YAZAR KARTI -->
+<!-- YAZAR -->
 <div class="ep-author">
   <div class="ep-avatar">🌍</div>
   <div class="ep-author-info">
     <div class="ep-author-name">Prof. Dr. Ali Osman Öncel</div>
-    <div class="ep-author-role">Deprem Sismolojisti · Jeofizik Mühendisi · JeoTurizm EduPanel</div>
-    <div class="ep-author-bio">Edinburgh'dan İstanbul'a; yeraltı verilerinden saha romanlarına &#x2014; bilimi insanla buluşturan bir araştırmacının yolculuğu. JeoTurizm EduPanel, jeofizik bilimini saha anlatılarıyla harmanlayan özgün bir eğitim platformudur.</div>
+    <div class="ep-author-role">Deprem Sismolojisti · Jeofizik Mühendisi · SeismoReport</div>
+    <div class="ep-author-bio">İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü. Deprem sismolojisi, sismik tehlike değerlendirmesi ve subdüksiyon tektoniği üzerine araştırmalar.</div>
     <a class="ep-author-link" href="https://aliosmanoncel.blogspot.com" target="_blank">🔗 aliosmanoncel.blogspot.com</a>
   </div>
 </div>
@@ -495,7 +475,7 @@ dardı 0.40g&#x02BC;nin %90 üzerinde.
   </div>
 </div>
 
-<!-- KAYNAKÇA — APA 7 formatında doldurun -->
+<!-- KAYNAKÇA -->
 <div class="ep-box ep-box-blue" style="margin-top:28px;">
   <div class="ep-box-head" style="margin-bottom:14px;">📚 Kaynakça / References</div>
   <ol style="padding-left:1.4em;font-size:0.82rem;line-height:1.75;color:var(--ep-muted);margin:0;">

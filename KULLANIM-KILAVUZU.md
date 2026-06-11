@@ -1,5 +1,5 @@
 # SeismoReport Kullanım Kılavuzu
-**Sürüm 3.0 | Öncel, A.O. (2026)**
+**Sürüm 4.0 | Öncel, A.O. (2026)**
 
 ---
 
@@ -93,11 +93,31 @@ python scripts/update_psha_results.py events/YeniDeprem-2026/YeniDeprem.json
 python scripts/update_baker_quotes.py events/YeniDeprem-2026/YeniDeprem.json
 ```
 
-### 4. HTML üret
+### 4. HTML üret (PAGE + POST tek komut)
 ```
 python generate.py events/YeniDeprem-2026/YeniDeprem.json
 ```
-Çıktı: `OUTPUT/SEISMO/<FILENAME>.html`
+Çıktı:
+- `OUTPUT/SEISMO/<FILENAME>.html` — PAGE (tam analiz raporu)
+- `OUTPUT/POSTS/<POST_FILENAME>.html` — POST (Blogger özet yazısı)
+
+> **Not:** POST üretimi için JSON'da `POST_FILENAME` ve `POST_*` anahtarlarının dolu olması gerekir.  
+> `SeismoReport-Post-Base.html` şablonu otomatik kullanılır.  
+> Türkçe kesme işareti (`'`) `generate.py` tarafından otomatik `'` (U+2019) yapılır — JS hatası olmaz.
+
+### POST için ek JSON anahtarları
+
+| Anahtar | Örnek |
+|---------|-------|
+| `POST_FILENAME` | `"Mindanao-Mw78-Post"` |
+| `POST_BADGE` | `"Deprem Analizi · Haziran 2026"` |
+| `POST_BRAND_TITLE` | `"🔴 Mindanao'da Mw 7.8 Büyük Deprem"` |
+| `POST_JS_TITLE` | `"Mindanao-da Mw 7.8 Buyuk Deprem"` (apostrof yok) |
+| `POST_PAGE_URL` | Blogger PAGE tam URL |
+| `POST_STAT_TABLE` | 4 stat kutusu HTML |
+| `POST_STEPS_SECTION` | Analiz adımları HTML |
+| `POST_BODY_SECTION` | Ana metin + kartlar + kutular HTML |
+| `POST_REFS` | `<li>` kaynakça satırları |
 
 ---
 

@@ -39,9 +39,9 @@ print(f'Ana deprem : M{mainshock["mag"]} @ {mainshock["lat"]},{mainshock["lon"]}
 print(f'Artci       : {len(aftershocks)} (M6+:{bins["M6+"]} M5+:{bins["M5-5.9"]} M4+:{bins["M4-4.9"]} M3+:{bins["M3-3.9"]})')
 
 # ── CSV ────────────────────────────────────────────────────────────
-os.makedirs('INPUT', exist_ok=True)
+_csv_dir = os.path.dirname(RAW) if os.path.dirname(RAW) else 'events/Mindanao-2026'
 base_name = os.path.basename(RAW).replace('_raw.txt','').replace('aftershocks_raw','Mindanao-2026-aftershocks')
-csv_path  = os.path.join('INPUT', base_name + '.csv')
+csv_path  = os.path.join(_csv_dir, base_name + '.csv')
 with open(csv_path,'w',encoding='utf-8') as f:
     f.write('EventID,Time_UTC,Lat,Lon,Depth_km,MagType,Mag,Region\n')
     for e in aftershocks:
@@ -432,10 +432,11 @@ def _pga_color(v):
 
 _sm_mmi_lines, _sm_pga_lines, _sm_rup_segs, _sm_sta_pts = [], [], [], []
 
-_SM_MMI = 'INPUT/shakemap_cont_mmi.json'
-_SM_PGA = 'INPUT/shakemap_cont_pga.json'
-_SM_RUP = 'INPUT/shakemap_rupture.json'
-_SM_STA = 'INPUT/shakemap_stationlist.json'
+_RAW_DIR = os.path.dirname(RAW) if os.path.dirname(RAW) else 'events/Mindanao-2026'
+_SM_MMI = os.path.join(_RAW_DIR, 'shakemap_cont_mmi.json')
+_SM_PGA = os.path.join(_RAW_DIR, 'shakemap_cont_pga.json')
+_SM_RUP = os.path.join(_RAW_DIR, 'shakemap_rupture.json')
+_SM_STA = os.path.join(_RAW_DIR, 'shakemap_stationlist.json')
 
 def _extract_lines(filepath, color_fn, label_fn):
     lines_out = []
@@ -1132,3 +1133,36 @@ with open('OUTPUT/aftershock_map_snippet.html','w',encoding='utf-8') as f:
 print(f'\nSnippet: OUTPUT/aftershock_map_snippet.html')
 print(f'AFTERSHOCK_MAP_JS: {len(AFTERSHOCK_MAP_JS)} karakter')
 print(f'OMORI_CHART_JS   : {len(OMORI_CHART_JS)} karakter')
+
+# ── Hesaplanan parametreleri JSON'a yaz ───────────────────────────
+_json_path = os.path.join(os.path.dirname(RAW), os.path.basename(os.path.dirname(RAW)) + '.json')
+if os.path.exists(_json_path):
+    with open(_json_path, encoding='utf-8') as _f:
+        _d = json.load(_f)
+
+    n_total   = len(aftershocks)
+    n_m5      = bins['M5-5.9'] + bins['M6+']
+    n_m6      = bins['M6+']
+    ftls_color = 'KIRMIZI' if b_val < 0.75 else 'SARI' if b_val < 0.90 else 'YEŞİL'
+    now_str   = datetime.now(timezone.utc).strftime('%d %B %Y, %H:%M UTC')
+
+    _d['PARAM_P']             = str(p_fit)
+    _d['PARAM_P_ERR']         = str(round(p_err, 3)) if p_err else '—'
+    _d['PARAM_K']             = str(K_fit)
+    _d['PARAM_C']             = str(c_fit)
+    _d['PARAM_R2']            = str(r2)
+    _d['PARAM_B']             = str(b_val)
+    _d['PARAM_MC']            = str(M_C)
+    _d['PARAM_DC']            = str(Dc)
+    _d['PARAM_DT']            = str(Dt)
+    _d['PARAM_N_TOTAL']       = str(n_total)
+    _d['PARAM_N_M5']          = str(n_m5)
+    _d['PARAM_N_M6']          = str(n_m6)
+    _d['PARAM_FTLS']          = ftls_color
+    _d['PARAM_UPDATED']       = now_str
+
+    with open(_json_path, 'w', encoding='utf-8') as _f:
+        json.dump(_d, _f, ensure_ascii=False, indent=2)
+    print(f'Parametreler JSON\'a yazildi: p={p_fit}, b={b_val}, N={n_total}, FTLS={ftls_color}')
+else:
+    print(f'JSON bulunamadi, parametreler yazilmadi: {_json_path}')

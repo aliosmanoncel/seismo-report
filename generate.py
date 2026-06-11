@@ -1,11 +1,15 @@
 """
-SeismoReport Generator v3.0
+SeismoReport Generator v4.0
 Kullanim: python generate.py events/Mindanao-2026/Mindanao-2026.json
           python generate.py events/Cuba-2026/Cuba-2026.json
-Cikti:    OUTPUT/SEISMO/<FILENAME>.html
+Cikti:    OUTPUT/SEISMO/<FILENAME>.html   (BASE_TEMPLATE: SeismoReport-Base.html)
+          OUTPUT/POSTS/<POST_FILENAME>.html (BASE_TEMPLATE: SeismoReport-Post-Base.html)
 
-JSON icinde BASE_TEMPLATE alani ile sablon secilir:
-  "BASE_TEMPLATE": "SeismoReport-Base.html"   (varsayilan)
+JSON alanlari:
+  BASE_TEMPLATE    : sablon dosyasi adi (varsayilan: SeismoReport-Base.html)
+  POST_BASE_TEMPLATE: post sablon dosyasi (varsayilan: SeismoReport-Post-Base.html)
+  FILENAME         : PAGE cikti dosyasi adi (uzantisiz)
+  POST_FILENAME    : POST cikti dosyasi adi (uzantisiz); yoksa POST uretilmez
 """
 
 import json
@@ -16,42 +20,67 @@ import os
 ROOT = os.path.dirname(__file__)
 
 BASE_DIRS = {
-    "SeismoReport-Base.html": os.path.join(ROOT, "OUTPUT", "SEISMO"),
-    "JeoTurizm-Base.html":    os.path.join(ROOT, "OUTPUT", "JEOTOUR"),
+    "SeismoReport-Base.html":      os.path.join(ROOT, "OUTPUT", "SEISMO"),
+    "SeismoReport-Post-Base.html": os.path.join(ROOT, "OUTPUT", "POSTS"),
+    "JeoTurizm-Base.html":         os.path.join(ROOT, "OUTPUT", "JEOTOUR"),
 }
+
+# JS kodu içeren alanlar — apostrop değiştirilmez (JS string sınırlayıcısı bozulur)
+JS_CODE_KEYS = {"MAP_INIT_JS", "AFTERSHOCK_MAP_JS", "OMORI_CHART_JS",
+                "REVIEW_SECTION_HTML", "APPENDIX_SECTIONS_HTML",
+                "STAT_CARDS_HTML", "HERO_LINKS_HTML", "FOOTER_HTML",
+                "POST_STAT_TABLE", "POST_STEPS_SECTION", "POST_BODY_SECTION", "POST_REFS"}
+
+def fill_template(base_file, data):
+    with open(base_file, encoding="utf-8") as f:
+        html = f.read()
+    for key, value in data.items():
+        raw = str(value)
+        # Sadece kısa metin alanlarında Türkçe kesme işareti güvenli yapılır;
+        # JS kodu veya büyük HTML bloklarında dokunulmaz
+        if key not in JS_CODE_KEYS and len(raw) < 500:
+            raw = raw.replace("’", "’")
+        html = html.replace("{{" + key + "}}", raw)
+    leftovers = re.findall(r"\{\{[A-Z_]+\}\}", html)
+    if leftovers:
+        print(f"  UYARI: Doldurulamayan placeholder’lar: {set(leftovers)}")
+    return html
 
 def generate(json_path):
     with open(json_path, encoding="utf-8") as f:
         data = json.load(f)
 
+    # ── PAGE ────────────────────────────────────────────────────────────────
     base_name = data.get("BASE_TEMPLATE", "SeismoReport-Base.html")
     base_file = os.path.join(ROOT, base_name)
-
     if not os.path.exists(base_file):
         print(f"HATA: Sablon bulunamadi: {base_file}")
         sys.exit(1)
 
-    with open(base_file, encoding="utf-8") as f:
-        html = f.read()
-
-    for key, value in data.items():
-        # Türkçe kesme işareti (U+2019) JS string'ini kırmaz; ASCII apostrofu (U+0027) kırar
-        safe_value = str(value).replace("'", "’")
-        html = html.replace("{{" + key + "}}", safe_value)
-
-    leftovers = re.findall(r"\{\{[A-Z_]+\}\}", html)
-    if leftovers:
-        print(f"UYARI: Doldurulamayan placeholder'lar: {set(leftovers)}")
-
+    html = fill_template(base_file, data)
     filename = data.get("FILENAME", "output")
-    out_dir  = BASE_DIRS.get(base_name, os.path.join(ROOT, "OUTPUT"))
+    out_dir = BASE_DIRS.get(base_name, os.path.join(ROOT, "OUTPUT"))
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, filename + ".html")
-
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)
+    print(f"PAGE olusturuldu : {out_path}")
 
-    print(f"Olusturuldu: {out_path}")
+    # ── POST ────────────────────────────────────────────────────────────────
+    post_filename = data.get("POST_FILENAME")
+    if post_filename:
+        post_base_name = data.get("POST_BASE_TEMPLATE", "SeismoReport-Post-Base.html")
+        post_base_file = os.path.join(ROOT, post_base_name)
+        if not os.path.exists(post_base_file):
+            print(f"UYARI: POST sablon bulunamadi: {post_base_file}")
+        else:
+            post_html = fill_template(post_base_file, data)
+            post_dir = BASE_DIRS.get(post_base_name, os.path.join(ROOT, "OUTPUT", "POSTS"))
+            os.makedirs(post_dir, exist_ok=True)
+            post_path = os.path.join(post_dir, post_filename + ".html")
+            with open(post_path, "w", encoding="utf-8") as f:
+                f.write(post_html)
+            print(f"POST olusturuldu: {post_path}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

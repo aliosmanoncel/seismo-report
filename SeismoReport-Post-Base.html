@@ -138,9 +138,9 @@ function googleTranslateElementInit() {
 <!-- HEADER -->
 <div class="ep-header">
   <div>
-    <div class="ep-badge">Deprem Analizi · Haziran 2026</div>
-    <div class="ep-brand-title">🔴 Mindanao’da Mw 7.8 Büyk Deprem</div>
-    <div class="ep-brand-sub">Filipinler Yayı · Cotabato Megathrust · <span style="opacity:.6;">7 Haziran 2026</span></div>
+    <div class="ep-badge">{{POST_BADGE}}</div>
+    <div class="ep-brand-title">{{POST_BRAND_TITLE}}</div>
+    <div class="ep-brand-sub">{{POST_BRAND_SUB}} · <span style="opacity:.6;">{{EQ_DATE}}</span></div>
   </div>
   <button class="ep-theme-btn" id="ep-theme-btn"><span id="ep-theme-icon">🌙</span> Tema</button>
 </div>
@@ -149,13 +149,8 @@ function googleTranslateElementInit() {
 <div class="ep-hero">
   <div class="ep-hero-tag">🌍 Sismoloji Analizi · 7 Haziran 2026, 23:37 UTC</div>
   <h1>Mindanao Mw 7.8 <span>Deep Focus Earthquake</span></h1>
-  <p class="ep-lead">FTLS b=0.635 kırmızı uyardı ve PSHA logic tree PGA=0.759g — Filipinler tasarım standardının %90 üzerinde.</p>
-  <div class="ep-pills"><span class="ep-pill">🌏 Mindanao</span>
-    <span class="ep-pill">⚡ Mw 7.8</span>
-    <span class="ep-pill">🔴 FTLS b=0.635</span>
-    <span class="ep-pill">📊 PSHA %90</span>
-    <span class="ep-pill">🌊 Tsunami</span>
-    <span class="ep-pill">✅ Megathrust</span></div>
+  <p class="ep-lead">FTLS b=0.635 kırmızı uyard{{POST_LEAD_SUFFIX}}</p>
+  <div class="ep-pills">{{POST_PILLS}}</div>
   </div>
 
 <!-- META -->
@@ -174,128 +169,15 @@ function googleTranslateElementInit() {
 </div>
 
 <!-- STAT KUTULARI -->
-<table style="width:100%;border-collapse:separate;border-spacing:10px;margin:24px 0;table-layout:fixed;">
-  <tr>
-    <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">7.8</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Moment Büyüklüğü (Mw)</div>
-      <div style="font-size:.68rem;color:#7c9cbd;opacity:.7;margin-top:3px;">4 ajans onaylı · EMSC/USGS/GFZ/GCMT</div>
-    </td>
-    <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">55.2 km</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Hipocenter Derinliği</div>
-      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">W-faz santroid: 35.5 km · Megathrust</div>
-    </td>
-  </tr>
-  <tr>
-    <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">0.759g</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">Medyan PGA (PSHA)</div>
-      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">%10/50yr · Tasarım standardının %90+ üzerinde</div>
-    </td>
-    <td style="width:50%;background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.2);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
-      <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#e11d48;line-height:1.2;">b = 0.635</div>
-      <div style="font-size:.78rem;color:#7c9cbd;margin-top:6px;">FTLS G-R b-Değeri</div>
-      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">🔴 Kırmızı uyarı eşiği · M6.0+ artçı riski</div>
-    </td>
-  </tr>
-</table>
+{{POST_STAT_TABLE}}
 <div class="ep-divider"></div>
 
 <!-- ADIM SIRASI -->
-<div class="ep-section">🔬 Analizin 3 Kritik Boyutu</div>
-<div class="ep-steps">
-  <div class="ep-step">
-    <div class="ep-step-num">01</div>
-    <div class="ep-step-body">
-      <h4>Çok-Ajans Parametre Sentezi</h4>
-      <p>EMSC, USGS/NEIC, GFZ ve GlobalCMT'den derlenen Mw 7.8 ± 0.1 büyüklük, 55.2 km hipocenter ve 35.5 km W-faz santroid derinliği bağımsız olarak doğrulandı. Saf thrust mekanizması 4 ajans tarafından teyit edildi.</p>
-    </div>
-  </div>
-  <div class="ep-connector"></div>
-  <div class="ep-step">
-    <div class="ep-step-num">02</div>
-    <div class="ep-step-body">
-      <h4>Artçı Dizi ve FTLS b-Değeri Analizi</h4>
-      <p>Omori-Utsu parametreleri (K=14.10, p=0.619) ile sismik kalıcılık belirlendi. Gutenberg-Richter analizi (Mc=3.5) b=0.635 verdi — FTLS metodolojisinde kırmızı uyarı, M6.0+ artçı riski yüksek.</p>
-    </div>
-  </div>
-  <div class="ep-connector"></div>
-  <div class="ep-step">
-    <div class="ep-step-num">03</div>
-    <div class="ep-step-body">
-      <h4>PSHA Logic Tree — 27 Dal Hesaplaması</h4>
-      <p>Baker, Bradley & Stafford (2021) §6 ve Youngs vd. (1988) GMPE kullanılarak General Santos City (R=108 km, Vs30=270 m/s) için medyan PGA=0.759g, 84. fraktil=1.140g hesaplandı — Filipinler tasarım standardı 0.40g'nin %90 üzerinde.</p>
-    </div>
-  </div>
-</div>
+{{POST_STEPS_SECTION}}
 <div class="ep-divider"></div>
 
 <!-- METİN -->
-<div class="ep-section">🔬 Sismolog Perspektifi: Tehlike Ne Boyutta?</div>
-
-<p class="ep-p">Filipinler Takımadası, <strong class="ep-kw">Pasifik Levhası</strong>, Avustralya Levhası ve Güneydoğu Asya Levhasıʼnın karmaşık etkileşimleri sonucu küresel en aktif sismik bölgelerden biridir. Mindanao adası; Batı Mindanao Fay Zonu, Cotabato Çukuru ve Mindanao Hendek Zonu gibi yapısal unsurlarıyla son derece karmaşık bir sismotektonik ortam oluşturmaktadır.</p>
-
-<div class="ep-quote">
-  &ldquo;Earthquakes cause damage to many parts of the natural and built environment, with potentially widespread and devastating impacts. Since 1900, earthquakes have killed approximately 8.5 million people and caused $2 trillion of damage.&rdquo;
-  <cite>&mdash; Baker, Bradley &amp; Stafford (2021, s. 1)</cite>
-</div>
-
-<p class="ep-p">Dört bağımsız ajansın (EMSC, USGS/NEIC, GFZ, GlobalCMT) moment tensör çözümleri, depremin <strong class="ep-kw">saf ters faylanma (megathrust)</strong> mekanizmasıyla gerçekleştiğini tutar lı biçimde doğrulamaktadır. Hipocenter derinliği 55.2 km, W-faz santroid derinliği 35.5 km; enerji geniş alana yayılmış, 2000 kmʼyi aşan mesafelerde hissedilmiştir.</p>
-
-<div class="ep-think">
-  <strong>FTLS Kırmızı Uyarı &mdash; Ne Anlama Gelir?</strong>
-  b-değeri 0.635, Öncel &amp; Wilson (2007) FTLS metodolojisinde kırmızı eşiğin altında. Sismik çevrimde birikmekte olan gerilme, M6.0+ tetikleyici artçı olasılığını artırıyor. Düşük p=0.619 ile birlikte: zaten hasar lı yapılara yönelik 90 gün boyunca yüksek tetikte kalınması zorunlu.
-</div>
-
-<div class="ep-divider"></div>
-
-<!-- KARTLAR -->
-<div class="ep-section">🗺️ Bilimsel Altyapı &mdash; 4 Temel Analiz</div>
-<div class="ep-cards">
-  <div class="ep-card">
-    <div class="ep-icon">🌊</div>
-    <h4>Tsunami Değerlendirmesi</h4>
-    <p>Ters faylanma mekanizması tsunami potansiyeli taşısa da okyanus geneli yıkıcı risk düşük değerlendirildi. Cotabato ve Sarangani körfezi kıyıları için yerel risk uyarısı verildi.</p>
-  </div>
-  <div class="ep-card">
-    <div class="ep-icon">📊</div>
-    <h4>G-R b = 0.635</h4>
-    <p>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık b=0.635 &mdash; FTLS kırmızı eşiğinin altında. İki-segment analiz M5.0ʼde eğim kırılması gösterdi (b₁=0.829, b₂=1.12).</p>
-  </div>
-  <div class="ep-card">
-    <div class="ep-icon">🏗️</div>
-    <h4>Yapısal Risk %90+</h4>
-    <p>PSHA medyan PGA=0.759g, Filipinler tasarım standardı 0.40gʼnin %90 üzerinde. 84. fraktil 1.140g &mdash; hasar lı yapılara yönelik M6.0+ artçı riski kritik.</p>
-  </div>
-  <div class="ep-card">
-    <div class="ep-icon">🧠</div>
-    <h4>Omori-Utsu p = 0.619</h4>
-    <p>Düşük p-değeri yüksek sismik kalıcılığı gösteriyor. 90 günlük beklenti: 2× M6.5+, 1× M7.0+. Hasar lı yapılar için ek artçı yükü önemli risk oluşturuyor.</p>
-  </div>
-</div>
-
-<div class="ep-divider"></div>
-
-<!-- BİLGİ KUTULARI -->
-<div class="ep-box ep-box-red">
-  <strong>🔴 FTLS Kırmızı Uyarı &mdash; b=0.635:</strong> Gutenberg-Richter b-değeri FTLS eşiğinin altında. Öncel &amp; Wilson (2007) metodolojisine göre M6.0+ tetikleyici artçı olasılığı yüksek. Zaten hasar lı yapılar için ek yük kritik risk oluşturuyor.
-  <div class="ep-tags" style="margin-top:12px;">
-    <span class="ep-tag">📉 b=0.635</span>
-    <span class="ep-tag">🔴 Kırmızı Eşlik</span>
-    <span class="ep-tag">⚡ M6.0+ Risk</span>
-  </div>
-</div>
-
-<div class="ep-box ep-box-gold" style="margin-top:16px;">
-  <strong>🔑 PSHA Temel Bulgu:</strong> Logic Tree 27 dal hesaplaması (Baker 2021, Youngs 1988 GMPE) &mdash; General Santos City için medyan PGA=0.759g, 84. fraktil=1.140g. Filipinler ulusal tasarım standardı 0.40gʼnin %90 üzerinde.
-</div>
-
-<div class="ep-box ep-box-red" style="margin-top:16px;">
-  <strong>⚠️ Sivil Savunma Tavsiyesi:</strong> Düşük p=0.619 + düşük b=0.635 kombinasyonu &mdash; hasar lı yapıların tahliyesi ve M6.0+ artçılar için 90 gün boyunca yüksek tetikte kalınması önerilmektedir.
-</div>
-
-<div class="ep-divider"></div>
+{{POST_BODY_SECTION}}
 <!-- DIŞA AKTARMA -->
 <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:14px 20px;margin:28px 0;">
   <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:180px;">
@@ -312,10 +194,10 @@ function googleTranslateElementInit() {
 
 <!-- TAM RAPOR CTA -->
 <div class="ep-cta" style="margin-top:36px;">
-  <a class="ep-cta-btn" href="https://aliosmanoncel.blogspot.com/p/mindanao-earthquake-2026.html" target="_blank">
+  <a class="ep-cta-btn" href="{{POST_PAGE_URL}}" target="_blank">
     📄 Tam Analiz Raporunu Oku →
   </a>
-  <div class="ep-cta-sub">Artçı Dizi · FTLS b-Değeri · PSHA Logic Tree · ShakeMap · Moment Tensör · PDF/Word Export</div>
+  <div class="ep-cta-sub">{{POST_CTA_SUB}}</div>
 </div>
 
 <div class="ep-divider"></div>
@@ -326,7 +208,7 @@ function googleTranslateElementInit() {
   <div class="ep-author-info">
     <div class="ep-author-name">Prof. Dr. Ali Osman Öncel</div>
     <div class="ep-author-role">Deprem Sismolojisti · Jeofizik Mühendisi · SeismoReport</div>
-    <div class="ep-author-bio">İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü. Deprem sismolojisi, sismik tehlike değerlendirmesi ve subdüksiyon tektoniği üzerine araştırmalar.</div>
+    <div class="ep-author-bio">İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü. Deprem sismolojisi, sismik tehlike değerlendirmesi ve {{POST_AUTHOR_BIO}}</div>
     <a class="ep-author-link" href="https://aliosmanoncel.blogspot.com" target="_blank">🔗 aliosmanoncel.blogspot.com</a>
   </div>
 </div>
@@ -346,12 +228,7 @@ function googleTranslateElementInit() {
 <div class="ep-box ep-box-red" style="margin-top:28px;">
   <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:#e11d48;margin-bottom:14px;">📚 Temel Kaynaklar</div>
   <ol style="padding-left:1.4em;font-size:0.82rem;line-height:1.75;color:var(--ep-muted);margin:0;">
-<li style="margin-bottom:6px;">Baker, J. W., Bradley, B. A., &amp; Stafford, P. J. (2021). <em>Seismic Hazard and Risk Analysis</em>. Cambridge University Press.</li>
-    <li style="margin-bottom:6px;">Cardwell, R. K., Isacks, B. L., &amp; Karig, D. E. (1980). The spatial distribution of earthquakes in the Philippine islands. <em>Geophys. Monogr.</em>, 23, 1&ndash;35.</li>
-    <li style="margin-bottom:6px;">Youngs, R. R., Chiou, S. J., Silva, W. J., &amp; Humphrey, J. R. (1988). Strong ground motion for subduction zone earthquakes. <em>Seism. Res. Lett.</em>, 68, 58&ndash;73.</li>
-    <li style="margin-bottom:6px;">Öncel, A. O., &amp; Wilson, T. H. (2007). Anomalous seismicity preceding the 1999 Izmit earthquake, NW Turkey. <em>Geophys. J. Int.</em>, 169, 259&ndash;270.</li>
-    <li style="margin-bottom:6px;">Aurelio, M. A. (2000). Shear partitioning in the Philippines. <em>Island Arc</em>, 9, 584&ndash;597.</li>
-    <li style="margin-bottom:0;">Yumul, G. P. Jr. vd. (2008). Geological features of the Philippines. <em>Island Arc</em>, 17, 3&ndash;17.</li>
+{{POST_REFS}}
   </ol>
 </div>
 
@@ -407,8 +284,8 @@ function epBody(){
   return html;
 }
 
-var TITLE='Mindanao-da Mw 7.8 Buyuk Deprem';
-var ABSTRACT='7 Haziran 2026 tarihinde 23:37 UTC de Mindanao acıklarında gerçekleşen Mw 7.8 depremi, ters faylanma mekanizması ve PSHA Logic Tree 27 dal hesaplamasıyla General Santos City için medyan PGA=0.759g değeri ortaya koymuştur.';
+var TITLE='{{POST_JS_TITLE}}';
+var ABSTRACT='{{POST_ABSTRACT}}';
 
 var pdfBtn=document.getElementById('ep-pdf');
 if(pdfBtn) pdfBtn.addEventListener('click',function(){
@@ -476,7 +353,7 @@ if(wordBtn) wordBtn.addEventListener('click',function(){
     +'<p class="col">&copy; 2026 SeismoReport &middot; Prof. Dr. Ali Osman &Ouml;ncel &middot; aliosmanoncel.blogspot.com &middot; '+now+'</p>'
     +'</div></body></html>';
     epHide(ld);
-    epDown(html,'SeismoReport-Mindanao-Mw78-2026.doc','application/msword');
+    epDown(html,'{{POST_WORD_FILENAME}}','application/msword');
   }catch(e){epHide(ld);alert('Word hatası: '+e.message);}
 });
 

@@ -23,8 +23,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 # ── Konfigürasyon ─────────────────────────────────────────────────
 CFG = {
-    'raw'      : 'INPUT/aftershocks_raw.txt',
-    'json'     : 'INPUT/Mindanao-2026.json',
+    'raw'      : 'events/Mindanao-2026/aftershocks_raw.txt',
+    'json'     : 'events/Mindanao-2026/Mindanao-2026.json',
     'snippet'  : 'OUTPUT/aftershock_map_snippet.html',
     'page_html': 'OUTPUT/SEISMO/SeismoReport-2026-Mindanao-Mw78.html',
     'post_html': 'OUTPUT/POSTS/Mindanao-Mw78-Post.html',
@@ -100,7 +100,7 @@ def merge_raw(new_lines):
 def run_parse():
     log('parse_aftershocks.py calistiriliyor...')
     result = subprocess.run(
-        ['python', 'parse_aftershocks.py', CFG['raw']],
+        ['python', 'scripts/parse_aftershocks.py', CFG['raw']],
         capture_output=True, text=True, encoding='utf-8'
     )
     if result.returncode != 0:
@@ -160,6 +160,54 @@ def update_json_from_snippet():
         json.dump(d, f, ensure_ascii=False, indent=2)
 
     log(f'JSON guncellendi: MAP_JS={len(map_js)} chr, OMORI_JS={len(omori_js)} chr')
+    return True
+
+# ── REVIEW_SECTION_HTML içindeki parametreleri guncelle ───────────
+def update_params_in_review():
+    with open(CFG['json'], encoding='utf-8') as f:
+        d = json.load(f)
+
+    p   = d.get('PARAM_P')
+    b   = d.get('PARAM_B')
+    K   = d.get('PARAM_K')
+    c   = d.get('PARAM_C')
+    mc  = d.get('PARAM_MC', '3.5')
+    n   = d.get('PARAM_N_TOTAL')
+    n5  = d.get('PARAM_N_M5')
+    n6  = d.get('PARAM_N_M6')
+    ftls = d.get('PARAM_FTLS', 'KIRMIZI')
+    upd  = d.get('PARAM_UPDATED', '')
+
+    if not all([p, b, K, n]):
+        log('UYARI: PARAM_* alanlari eksik, REVIEW guncellenmedi')
+        return False
+
+    html = d.get('REVIEW_SECTION_HTML', '')
+    original_len = len(html)
+
+    # p değeri — "p = 0.xxx" veya "p=0.xxx"
+    html = re.sub(r'\bp\s*=\s*0\.\d{3,4}\b', f'p = {p}', html)
+    # b değeri — tam aralık (b₁ b₂ dokunma)
+    html = re.sub(r'(?<![₁₂_\d])b\s*=\s*0\.\d{3,4}(?![₁₂_\d])', f'b={b}', html)
+    # K değeri
+    html = re.sub(r'\bK\s*=\s*\d{1,3}\.\d{1,4}\b', f'K = {K}', html)
+    # Artçı sayısı — "NNN artçı" veya "N=NNN artçı" veya "N = NNN)"
+    html = re.sub(r'\b(\d{3,4})\s*artç[ıi]', lambda m: f'{n} artçı', html)
+    html = re.sub(r'N\s*=\s*\d{3,4}\b', f'N={n}', html)
+    # FTLS durumu metni
+    html = re.sub(r'FTLS\s+(KIRMIZI|SARI|YEŞİL)', f'FTLS {ftls}', html)
+    # Güncelleme tarihi — "Son güncelleme:" satırı
+    html = re.sub(
+        r'Son güncelleme:[^<\n]*',
+        f'Son güncelleme: {upd}',
+        html
+    )
+
+    d['REVIEW_SECTION_HTML'] = html
+    with open(CFG['json'], 'w', encoding='utf-8') as f:
+        json.dump(d, f, ensure_ascii=False, indent=2)
+
+    log(f'REVIEW parametreleri guncellendi: p={p} b={b} K={K} N={n} FTLS={ftls}')
     return True
 
 # ── generate.py calistir → PAGE HTML ─────────────────────────────
@@ -271,6 +319,10 @@ def cmd_aftershock_update():
     ok = update_json_from_snippet()
     if not ok:
         log('JSON guncellemesi basarisiz'); return
+
+    ok = update_params_in_review()
+    if not ok:
+        log('UYARI: REVIEW parametreleri guncellenemedi (devam ediliyor)')
 
     ok = run_generate()
     if ok:

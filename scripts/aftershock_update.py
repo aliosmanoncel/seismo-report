@@ -213,6 +213,10 @@ def update_params_in_review():
 # ── GitHub'a push ─────────────────────────────────────────────────
 # msg_prefix: 'data' (otomatik artci), 'sablon' (manuel sablon), vs.
 def _push_to_github(new_count=0, msg_prefix='data', custom_msg=None):
+    # GitHub Actions ortamında iç push atlanır — workflow kendi push adımını yapar
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        log('GitHub Actions ortamı — iç push atlandı, workflow devralıyor')
+        return
     import subprocess as _sp
     try:
         # Tüm takip edilen (tracked) değişiklikleri stage et — şablonlar dahil

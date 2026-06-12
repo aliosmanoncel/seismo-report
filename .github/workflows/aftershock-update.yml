@@ -24,6 +24,13 @@ jobs:
       - name: Artçı güncelleme çalıştır
         run: python scripts/aftershock_update.py aftershock-update
 
+      - name: Blogger PAGE ve POST güncelle
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python scripts/blogger_update.py
+
       - name: Değişiklikleri commit et ve push et
         run: |
           git config user.name  "github-actions[bot]"

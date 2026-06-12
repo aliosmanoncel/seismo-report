@@ -9,6 +9,9 @@ Metodoloji:
   - Büyüklük homojenleştirme : Scordilis (2006) mb/ML → Mw
   - b-değeri tahmini : b-positive (Gulia vd. 2024) + Aki (1965) MLE
   - Mc tespiti : Maximum Curvature + GFT doğrulama
+  - Ds (uzamsal fraktal boyut) : Grassberger-Procaccia korelasyon integrali
+  - Dt (zamansal fraktal boyut): korelasyon integrali zaman domeninde
+  - Üçlü alarm matrisi : R_b, R_Ds, R_Dt (Geliştirilmiş FTLS+)
   - Faz tespiti : Phase I/II/III (Öncel & Wilson 2007 b-Dt korelasyonu)
 
 Kullanım:
@@ -212,6 +215,183 @@ def temporal_fractal(events_sorted_by_time, window_days=10):
     dt_proxy = round(1.0 / (1.0 + cv), 3)  # 0→1 arası: 1=homojen, 0=kümelenmiş
     return dt_proxy
 
+# ── Haversine mesafesi (km) ───────────────────────────────────────
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371.0
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+    a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * \
+        math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+    return R * 2 * math.asin(math.sqrt(a))
+
+# ── Uzamsal fraktal boyut Ds (Grassberger-Procaccia) ─────────────
+def spatial_fractal_dim(events, n_sample=300):
+    """
+    Korelasyon integrali: C(r) = # çiftler(dist < r) / toplam çift
+    Ds = dlog(C)/dlog(r) doğrusal bölgede.
+    n_sample: büyük kataloglar için örnekleme sayısı.
+    """
+    if len(events) < 20:
+        return None
+    pts = [(e['lat'], e['lon']) for e in events]
+    # Büyük katalog için rastgele örnekleme
+    import random
+    random.seed(42)
+    if len(pts) > n_sample:
+        pts = random.sample(pts, n_sample)
+    n = len(pts)
+    # Tüm çift mesafeleri
+    dists = []
+    for i in range(n):
+        for j in range(i+1, n):
+            d = haversine(pts[i][0], pts[i][1], pts[j][0], pts[j][1])
+            if d > 0:
+                dists.append(d)
+    if len(dists) < 10:
+        return None
+    dists.sort()
+    total_pairs = len(dists)
+    # log-log regresyon için r değerleri (5. – 85. persentil)
+    p5  = dists[int(0.05 * total_pairs)]
+    p85 = dists[int(0.85 * total_pairs)]
+    if p5 <= 0 or p85 <= p5:
+        return None
+    # 10 nokta log-log
+    import random as _r
+    r_vals = [p5 * (p85/p5)**(k/9) for k in range(10)]
+    log_r, log_c = [], []
+    for r in r_vals:
+        cnt = sum(1 for d in dists if d <= r)
+        c = cnt / total_pairs
+        if c > 0:
+            log_r.append(math.log10(r))
+            log_c.append(math.log10(c))
+    if len(log_r) < 4:
+        return None
+    # Lineer regresyon eğimi = Ds
+    n_pts = len(log_r)
+    mx = sum(log_r)/n_pts
+    my = sum(log_c)/n_pts
+    num = sum((log_r[i]-mx)*(log_c[i]-my) for i in range(n_pts))
+    den = sum((log_r[i]-mx)**2 for i in range(n_pts))
+    if den == 0:
+        return None
+    ds = num / den
+    return round(max(0.1, min(3.0, ds)), 3)
+
+# ── Zamansal fraktal boyut Dt (korelasyon integrali) ─────────────
+def temporal_fractal_dim(events):
+    """
+    Korelasyon integrali zaman domeninde.
+    C(τ) = # çiftler(|t_i - t_j| < τ) / toplam çift
+    Dt = dlog(C)/dlog(τ) doğrusal bölgede.
+    """
+    if len(events) < 20:
+        return None
+    times = sorted([(e['t'] - events[0]['t']).total_seconds() / 3600
+                    for e in events])  # saat cinsinden
+    n = len(times)
+    diffs = []
+    for i in range(n):
+        for j in range(i+1, n):
+            dt = times[j] - times[i]
+            if dt > 0:
+                diffs.append(dt)
+    if len(diffs) < 10:
+        return None
+    diffs.sort()
+    total_pairs = len(diffs)
+    p5  = diffs[int(0.05 * total_pairs)]
+    p85 = diffs[int(0.85 * total_pairs)]
+    if p5 <= 0 or p85 <= p5:
+        return None
+    r_vals = [p5 * (p85/p5)**(k/9) for k in range(10)]
+    log_r, log_c = [], []
+    for r in r_vals:
+        cnt = sum(1 for d in diffs if d <= r)
+        c = cnt / total_pairs
+        if c > 0:
+            log_r.append(math.log10(r))
+            log_c.append(math.log10(c))
+    if len(log_r) < 4:
+        return None
+    n_pts = len(log_r)
+    mx = sum(log_r)/n_pts
+    my = sum(log_c)/n_pts
+    num = sum((log_r[i]-mx)*(log_c[i]-my) for i in range(n_pts))
+    den = sum((log_r[i]-mx)**2 for i in range(n_pts))
+    if den == 0:
+        return None
+    dt = num / den
+    return round(max(0.1, min(3.0, dt)), 3)
+
+# ── b-Dt korelasyonu (sliding window) ────────────────────────────
+def b_dt_correlation(events_by_time, window=100, step=10):
+    """
+    Kayan pencere (N=100, adım=10) ile b ve Dt zaman serileri üretir.
+    Korelasyon katsayısı r(b, Dt) > +0.6 → Phase III kanıtı.
+    """
+    if len(events_by_time) < window + step:
+        return None, [], []
+    b_series, dt_series = [], []
+    for i in range(0, len(events_by_time) - window, step):
+        win = events_by_time[i:i+window]
+        mags = [e['mw'] for e in win]
+        mc = estimate_mc(mags)
+        b, _ = b_mle(mags, mc)
+        dt = temporal_fractal_dim(win)
+        if b is not None and dt is not None:
+            b_series.append(b)
+            dt_series.append(dt)
+    if len(b_series) < 4:
+        return None, b_series, dt_series
+    # Pearson r
+    n = len(b_series)
+    mb = sum(b_series)/n
+    md = sum(dt_series)/n
+    num = sum((b_series[i]-mb)*(dt_series[i]-md) for i in range(n))
+    den = math.sqrt(sum((b_series[i]-mb)**2 for i in range(n)) *
+                    sum((dt_series[i]-md)**2 for i in range(n)))
+    r = round(num/den, 3) if den > 0 else None
+    return r, b_series, dt_series
+
+# ── Geliştirilmiş FTLS+ alarm matrisi ────────────────────────────
+def ftls_plus_alarm(b_ref, b_after, ds_ref, ds_after, dt_ref, dt_after, r_b_dt=None):
+    """
+    Üçlü oran matrisi:
+      R_b  = b_after / b_ref
+      R_Ds = Ds_after / Ds_ref
+      R_Dt = Dt_after / Dt_ref
+
+    KIRMIZI: R_b < 0.90 VE (R_Ds < 0.90 VEYA R_Dt < 0.90)
+    YEŞİL  : R_b ≥ 1.10 VE r(b,Dt) > +0.6
+    SARI   : diğer durumlar
+    """
+    def safe_ratio(a, b):
+        return round(a/b, 3) if (b and b > 0) else None
+
+    R_b  = safe_ratio(b_after,  b_ref)
+    R_Ds = safe_ratio(ds_after, ds_ref)
+    R_Dt = safe_ratio(dt_after, dt_ref)
+
+    if R_b is None:
+        return 'HESAPLANAMADI', R_b, R_Ds, R_Dt
+
+    # Alarm kararı
+    ds_low = (R_Ds is not None and R_Ds < 0.90)
+    dt_low = (R_Dt is not None and R_Dt < 0.90)
+
+    if R_b < 0.90 and (ds_low or dt_low):
+        alarm = 'KIRMIZI'
+    elif R_b < 0.90:
+        alarm = 'KIRMIZI'   # b tek başına kırmızı için yeterli
+    elif R_b >= 1.10 and (r_b_dt is not None and r_b_dt > 0.6):
+        alarm = 'YEŞİL'
+    else:
+        alarm = 'SARI'
+
+    return alarm, R_b, R_Ds, R_Dt
+
 # ── Faz tespiti (b-Dt korelasyonu) ───────────────────────────────
 def detect_phase(b_after, b_ref, dt_after, dt_pre):
     """
@@ -294,41 +474,71 @@ def run_analysis(json_path):
 
     log(f'FTLS Alarm       : {alarm}  (b_after/b_ref = {ratio})')
 
-    # Temporal fractal
-    dt_pre  = temporal_fractal(sorted(pre_events,  key=lambda e: e['t']))
-    dt_post = temporal_fractal(sorted(post_events, key=lambda e: e['t']))
+    # ── Fraktal boyutlar ─────────────────────────────────────────
+    log('Ds hesaplanıyor (uzamsal korelasyon boyutu)...')
+    ds_pre  = spatial_fractal_dim(pre_events)
+    ds_post = spatial_fractal_dim(post_events)
+    log(f'Ds öncesi : {ds_pre}  |  Ds sonrası: {ds_post}')
+
+    log('Dt hesaplanıyor (zamansal korelasyon boyutu)...')
+    dt_pre  = temporal_fractal_dim(sorted(pre_events,  key=lambda e: e['t']))
+    dt_post = temporal_fractal_dim(sorted(post_events, key=lambda e: e['t']))
     log(f'Dt öncesi : {dt_pre}  |  Dt sonrası: {dt_post}')
 
-    # Faz tespiti
+    # ── b-Dt sliding window korelasyonu ──────────────────────────
+    log('b-Dt korelasyon serisi hesaplanıyor...')
+    r_b_dt_pre,  b_ser_pre,  dt_ser_pre  = b_dt_correlation(pre_by_time)
+    r_b_dt_post, b_ser_post, dt_ser_post = b_dt_correlation(post_by_time)
+    log(f'r(b,Dt) öncesi: {r_b_dt_pre}  |  sonrası: {r_b_dt_post}')
+
+    # ── Geliştirilmiş FTLS+ alarm matrisi ────────────────────────
+    alarm, R_b, R_Ds, R_Dt = ftls_plus_alarm(
+        b_ref_final, b_after_final,
+        ds_pre, ds_post,
+        dt_pre, dt_post,
+        r_b_dt=r_b_dt_post
+    )
+    log(f'FTLS+ Alarm      : {alarm}  (R_b={R_b} | R_Ds={R_Ds} | R_Dt={R_Dt})')
+
+    # Faz tespiti (b-Dt korelasyonu)
     phase = detect_phase(b_after_final, b_ref_final, dt_post, dt_pre)
     log(f'Sismik Faz       : {phase}')
 
     # Sonuçları JSON'a yaz
     results = {
-        'FTLS_PRE_EVENTS'   : len(pre_events),
-        'FTLS_POST_EVENTS'  : len(post_events),
-        'FTLS_MC_PRE'       : mc_pre,
-        'FTLS_MC_POST'      : mc_post,
-        'FTLS_B_REF_MLE'    : b_ref_mle,
-        'FTLS_B_REF_SIGMA'  : sb_ref,
-        'FTLS_B_REF_POS'    : b_ref_pos,
-        'FTLS_B_AFTER_MLE'  : b_after_mle,
-        'FTLS_B_AFTER_SIGMA': sb_aft,
-        'FTLS_B_AFTER_POS'  : b_after_pos,
-        'FTLS_B_REF'        : b_ref_final,
-        'FTLS_B_AFTER'      : b_after_final,
-        'FTLS_RATIO'        : ratio,
-        'FTLS_ALARM'        : alarm,
-        'FTLS_DT_PRE'       : dt_pre,
-        'FTLS_DT_POST'      : dt_post,
-        'FTLS_PHASE'        : phase,
-        'FTLS_A_PRE'        : a_pre,
-        'FTLS_A_POST'       : a_post,
-        'FTLS_ANALYSIS_DATE': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
-        'FTLS_PRE_WINDOW'   : f'{t_pre_start.date()} → {t_pre_end.date()}',
-        'FTLS_POST_WINDOW'  : f'{t_post_start.date()} → {t_post_end.date()}',
-        'FTLS_GK_RADIUS_KM' : GK_RADIUS_KM,
-        'FTLS_METHOD'       : 'b-positive (Gulia 2024) + MLE (Aki 1965) | Scordilis (2006) Mw homogenization',
+        'FTLS_PRE_EVENTS'    : len(pre_events),
+        'FTLS_POST_EVENTS'   : len(post_events),
+        'FTLS_MC_PRE'        : mc_pre,
+        'FTLS_MC_POST'       : mc_post,
+        'FTLS_B_REF_MLE'     : b_ref_mle,
+        'FTLS_B_REF_SIGMA'   : sb_ref,
+        'FTLS_B_REF_POS'     : b_ref_pos,
+        'FTLS_B_AFTER_MLE'   : b_after_mle,
+        'FTLS_B_AFTER_SIGMA' : sb_aft,
+        'FTLS_B_AFTER_POS'   : b_after_pos,
+        'FTLS_B_REF'         : b_ref_final,
+        'FTLS_B_AFTER'       : b_after_final,
+        'FTLS_R_B'           : R_b,
+        'FTLS_ALARM'         : alarm,
+        # Fraktal boyutlar
+        'FTLS_DS_PRE'        : ds_pre,
+        'FTLS_DS_POST'       : ds_post,
+        'FTLS_R_DS'          : R_Ds,
+        'FTLS_DT_PRE'        : dt_pre,
+        'FTLS_DT_POST'       : dt_post,
+        'FTLS_R_DT'          : R_Dt,
+        # b-Dt korelasyon
+        'FTLS_R_B_DT_PRE'    : r_b_dt_pre,
+        'FTLS_R_B_DT_POST'   : r_b_dt_post,
+        # Faz ve aktivite
+        'FTLS_PHASE'         : phase,
+        'FTLS_A_PRE'         : a_pre,
+        'FTLS_A_POST'        : a_post,
+        'FTLS_ANALYSIS_DATE' : datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
+        'FTLS_PRE_WINDOW'    : f'{t_pre_start.date()} → {t_pre_end.date()}',
+        'FTLS_POST_WINDOW'   : f'{t_post_start.date()} → {t_post_end.date()}',
+        'FTLS_GK_RADIUS_KM'  : GK_RADIUS_KM,
+        'FTLS_METHOD'        : 'FTLS+ | b-positive (Gulia 2024) + MLE (Aki 1965) | Ds/Dt Grassberger-Procaccia | Scordilis (2006)',
     }
 
     try:
@@ -346,12 +556,12 @@ def run_analysis(json_path):
     log('══════════════════════════════════════════════════')
     log(f'  FTLS KARŞILAŞTIRMALI ANALİZ — Mindanao Mw 7.8')
     log('══════════════════════════════════════════════════')
-    log(f'  Öncesi  : {len(pre_events):4d} olay | Mc={mc_pre} | b_ref={b_ref_final}')
-    log(f'  Sonrası : {len(post_events):4d} olay | Mc={mc_post} | b_after={b_after_final}')
-    log(f'  Oran    : b_after/b_ref = {ratio}')
+    log(f'  Öncesi  : {len(pre_events):4d} olay | Mc={mc_pre} | b_ref={b_ref_final} | Ds={ds_pre} | Dt={dt_pre}')
+    log(f'  Sonrası : {len(post_events):4d} olay | Mc={mc_post} | b_aft={b_after_final} | Ds={ds_post} | Dt={dt_post}')
+    log(f'  Oranlar : R_b={R_b} | R_Ds={R_Ds} | R_Dt={R_Dt}')
+    log(f'  r(b,Dt) : öncesi={r_b_dt_pre} → sonrası={r_b_dt_post}')
     log(f'  ALARM   : ■ {alarm}')
     log(f'  FAZ     : {phase}')
-    log(f'  Dt      : öncesi={dt_pre} → sonrası={dt_post}')
     log('══════════════════════════════════════════════════')
 
     return results

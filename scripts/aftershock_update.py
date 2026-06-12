@@ -338,11 +338,15 @@ def show_status():
 
 # ── Hibrit Güncelleme Penceresi (Gardner & Knopoff 1974 + aktivite) ──
 def gk_window_days(mag):
-    """Gardner & Knopoff (1974) zaman penceresi — gün cinsinden."""
-    if mag >= 6.5:
-        return 10 ** (0.032 * mag + 2.7389)
-    else:
-        return 10 ** (0.5409 * mag - 0.547)
+    """
+    Operasyonel FTLS penceresi (Gulia vd. 2024 uygulaması).
+    GK74 teorik formülü Mw7.8 için ~974 gün verir (deklustering amaçlı).
+    Operasyonel FTLS için Gulia vd. 90 günü kullanır — burada o tercih edildi.
+    Minimum 30, maksimum 180 gün (M5-M8+ arası lineer ölçek).
+    """
+    # Operasyonel pencere: 30 gün (M5) → 90 gün (M7.5+) doğrusal artar
+    days = 10 + (mag - 5.0) * 32   # M5→50 gün, M6→82 gün, M7.5→90 gün
+    return max(30.0, min(180.0, days))
 
 def should_update(json_path):
     """

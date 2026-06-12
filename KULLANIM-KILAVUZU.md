@@ -136,6 +136,73 @@ Her iki şablonda (PAGE + POST) hero bölümünün hemen altında yan yana iki v
 
 ---
 
+## Blogger Otomatik Güncelleme
+
+Her sabah **09:00 İstanbul** saatinde GitHub Actions otomatik olarak:
+1. Artçı sismik verileri günceller
+2. PAGE + POST HTML dosyalarını yeniden üretir
+3. Blogger'daki sayfaları günceller
+
+### Manuel güncelleme — Claude'a söyleyin
+
+```
+Mindanao-2026.json parametrelerini güncelle, blogger page ve post sayfalarını yenile
+```
+
+Claude şu adımları otomatik yapar:
+- `aftershock_update.py` → veri + HTML günceller
+- `blogger_update.py` → Blogger PAGE + POST'u gönderir
+
+### Doğrudan script ile güncelleme
+
+```bash
+# Tek event
+python scripts/blogger_update.py events/Mindanao-2026/Mindanao-2026.json
+
+# Tüm eventler
+python scripts/blogger_update.py
+```
+
+### Yeni deprem için JSON'a eklenecek alanlar
+
+```json
+"BLOGGER_PAGE_ID": "Blogger PAGE ID",
+"BLOGGER_POST_ID": "Blogger POST ID"
+```
+
+Blogger URL'den ID bulma:
+- PAGE: `blogger.com/blog/page/edit/4033408817556081896/**ID_BURAYA**`
+- POST: `blogger.com/blog/post/edit/4033408817556081896/**ID_BURAYA**`
+
+---
+
+## Vaka Çalışması — Mindanao Mw 7.8 (Referans İş Akışı)
+
+### Claude'a söylenen komut
+```
+Mindanao-2026.json parametrelerini güncelle, blogger page ve post sayfalarını yenile
+```
+
+### Otomatik gerçekleşen adımlar
+| Adım | Script | Sonuç |
+|------|--------|-------|
+| 1 | `aftershock_update.py aftershock-update` | 479 artçı güncellendi |
+| 2 | `generate.py` | PAGE + POST HTML üretildi |
+| 3 | `blogger_update.py events/Mindanao-2026/Mindanao-2026.json` | Blogger güncellendi |
+| 4 | `git push` | GitHub'a yüklendi |
+
+### Mindanao JSON'daki Blogger alanları
+```json
+"BLOGGER_PAGE_ID": "2105708432870999540",
+"BLOGGER_POST_ID": "2692320355804154267"
+```
+
+### Çıktı dosyaları
+- `OUTPUT/SEISMO/SeismoReport-2026-Mindanao-Mw78.html` → Blogger PAGE
+- `OUTPUT/POSTS/Mindanao-Mw78-Post.html` → Blogger POST
+
+---
+
 ## Cuba Mw 6.1 — Hızlı Başlangıç
 
 **Deprem bilgileri:**

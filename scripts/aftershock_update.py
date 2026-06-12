@@ -17,7 +17,8 @@ Calisma mantigi:
 """
 
 import os, sys, json, re, subprocess, urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import math
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -335,9 +336,95 @@ def show_status():
         ts = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M')
         log(f'Son HTML guncellemesi: {ts}')
 
+# ── Hibrit Güncelleme Penceresi (Gardner & Knopoff 1974 + aktivite) ──
+def gk_window_days(mag):
+    """Gardner & Knopoff (1974) zaman penceresi — gün cinsinden."""
+    if mag >= 6.5:
+        return 10 ** (0.032 * mag + 2.7389)
+    else:
+        return 10 ** (0.5409 * mag - 0.547)
+
+def should_update(json_path):
+    """
+    Hibrit kural:
+      1. Ana depremden bu yana geçen süre < G&K penceresi (bilimsel üst sınır)
+      2. Son 7 günde en az 1 adet M≥4 artçı varsa güncelle (aktivite eşiği)
+      3. UPDATE_MIN_DAYS dolmamışsa her koşulda güncelle (zorunlu minimum)
+
+    Döndürür: (True/False, açıklama)
+    """
+    try:
+        with open(json_path, encoding='utf-8') as f:
+            cfg = json.load(f)
+    except Exception:
+        return True, "JSON okunamadı — güncelleme yapılıyor"
+
+    # Güncelleme kuralı JSON'da tanımlı değilse her zaman güncelle
+    rule = cfg.get("UPDATE_STOP_RULE", "hybrid")
+    if rule == "always":
+        return True, "UPDATE_STOP_RULE=always"
+
+    eq_date_str = cfg.get("EQ_DATE") or cfg.get("start", "")
+    if not eq_date_str:
+        return True, "EQ_DATE tanımlı değil — güncelleme yapılıyor"
+
+    try:
+        eq_date = datetime.fromisoformat(eq_date_str.replace("Z", "")).replace(tzinfo=timezone.utc)
+    except Exception:
+        return True, "EQ_DATE parse edilemedi"
+
+    now = datetime.now(timezone.utc)
+    elapsed_days = (now - eq_date).total_seconds() / 86400
+    mag = float(cfg.get("EQ_MAG", 7.0))
+    min_days = int(cfg.get("UPDATE_MIN_DAYS", 30))
+    gk_days = gk_window_days(mag)
+
+    # Zorunlu minimum pencere
+    if elapsed_days < min_days:
+        return True, f"Zorunlu min pencere: {elapsed_days:.0f}/{min_days} gün"
+
+    # G&K üst sınırı aşıldıysa dur
+    if elapsed_days > gk_days:
+        return False, f"G&K penceresi doldu: {elapsed_days:.0f} > {gk_days:.0f} gün (Mw {mag})"
+
+    # Aktivite kontrolü: ham veride son 7 günde M≥4 var mı?
+    raw_path = json_path.replace(".json", "-aftershocks.csv")
+    # aftershocks_raw.txt yolunu CFG'den al
+    raw_path = CFG.get('raw', '')
+    if raw_path and os.path.exists(raw_path):
+        cutoff = now - timedelta(days=7)
+        recent_m4 = 0
+        with open(raw_path, encoding='utf-8') as f:
+            for line in f:
+                if '|' not in line or line.startswith('#'):
+                    continue
+                parts = line.split('|')
+                if len(parts) < 11:
+                    continue
+                try:
+                    t = datetime.fromisoformat(parts[1].strip().replace("Z","")).replace(tzinfo=timezone.utc)
+                    m = float(parts[10].strip())
+                    if t >= cutoff and m >= 4.0:
+                        recent_m4 += 1
+                except Exception:
+                    pass
+        if recent_m4 == 0:
+            return False, f"Aktivite durdu: son 7 günde M≥4 artçı yok ({elapsed_days:.0f} gün geçti)"
+        return True, f"Aktif sekans: son 7 günde {recent_m4} adet M≥4 ({elapsed_days:.0f} gün geçti)"
+
+    return True, f"Ham veri bulunamadı — güncelleme yapılıyor ({elapsed_days:.0f} gün geçti)"
+
 # ── Ana akis ─────────────────────────────────────────────────────
 def cmd_aftershock_update():
     log('=== aftershock-update basladi ===')
+
+    # Hibrit pencere kontrolü
+    do_update, reason = should_update(CFG['json'])
+    log(f'Guncelleme karari: {"EVET" if do_update else "HAYIR"} — {reason}')
+    if not do_update:
+        log('=== Guncelleme atlandı (pencere doldu) ===')
+        return
+
     try:
         new_lines = fetch_emsc()
     except Exception as ex:

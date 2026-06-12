@@ -167,7 +167,7 @@ Kullanim: generate.py tarafindan otomatik doldurulur — bu dosyaya dokunma
     author      :"Prof. Dr. Ali Osman Öncel",
     affiliation :"İstanbul Üniversitesi–Cerrahpaşa, Jeofizik Mühendisliği Bölümü",
     subtitle    :"Filipinler Yay Sistemi | Sarangani Açıkları | EMSC/USGS/GFZ | Ters Faylanma Analizi",
-    filename    :"SeismoReport-2026-Mindanao-Mw78",
+    filename    :"SeismoReport-2026-Mindanao-Mw78.html",
   };
   function captureState(){const s=new Map();document.querySelectorAll(".panel").forEach(p=>{s.set(p,{display:p.style.display,hasOpen:p.classList.contains("open")});});return s;}
   function openAllPanels(){document.querySelectorAll(".panel").forEach(p=>{p.style.setProperty("display","block","important");p.classList.add("open");});document.querySelectorAll(".accordion").forEach(a=>a.classList.add("active"));}
@@ -324,6 +324,46 @@ ${body}</div></body></html>`;
     </div>
     <button onclick="ExportEngine.exportPdf()" style="padding:12px 22px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📄 PDF / Yazdır</button>
     <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
+  </div>
+
+  <!-- FTLS+ Seviye 4 Analiz Paneli -->
+  <div style="background:linear-gradient(135deg,#0a1e2e,#0d2535);border:1px solid #1e3a4f;border-radius:10px;padding:22px 26px;margin:28px 0;font-family:'Segoe UI',sans-serif;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span style="font-size:1.4em;">🚦</span>
+      <h3 style="margin:0;color:#e8f4ff;font-size:1.05em;letter-spacing:.03em;">FTLS<sup>+</sup> Gerçek Zamanlı Sismik Durum</h3>
+      <span style="margin-left:auto;font-size:.75em;color:#4a7a9b;">2026-06-12 09:22 UTC</span>
+    </div>
+    <!-- Alarm badge -->
+    <div style="text-align:center;margin-bottom:18px;">
+      <span style="display:inline-block;padding:8px 32px;border-radius:6px;font-weight:700;font-size:1.15em;letter-spacing:.08em;
+        background:rgba(180,20,20,.85);color:#fff;border:2px solid #e53935;">
+        ■ KIRMIZI
+      </span>
+      <div style="margin-top:8px;color:#7a9ab5;font-size:.82em;">Phase I — Yüksek Stres / Öncü Şok Riski</div>
+    </div>
+    <!-- Oran tablosu -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;">
+      <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:12px;text-align:center;">
+        <div style="color:#7ab8d4;font-size:.75em;margin-bottom:4px;">R<sub>b</sub> = b<sub>after</sub>/b<sub>ref</sub></div>
+        <div style="color:#e8f4ff;font-size:1.3em;font-weight:700;">0.844</div>
+        <div style="color:#4a7a9b;font-size:.7em;">eşik &lt; 0.90</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:12px;text-align:center;">
+        <div style="color:#7ab8d4;font-size:.75em;margin-bottom:4px;">R<sub>Ds</sub> = D<sub>s,after</sub>/D<sub>s,ref</sub></div>
+        <div style="color:#e8f4ff;font-size:1.3em;font-weight:700;">1.409</div>
+        <div style="color:#4a7a9b;font-size:.7em;">uzamsal kümelenme</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:12px;text-align:center;">
+        <div style="color:#7ab8d4;font-size:.75em;margin-bottom:4px;">R<sub>Dt</sub> = D<sub>t,after</sub>/D<sub>t,ref</sub></div>
+        <div style="color:#e8f4ff;font-size:1.3em;font-weight:700;">1.305</div>
+        <div style="color:#4a7a9b;font-size:.7em;">zamansal inatçılık</div>
+      </div>
+    </div>
+    <!-- Alt bilgi -->
+    <div style="border-top:1px solid #1e3a4f;padding-top:10px;color:#4a7a9b;font-size:.75em;line-height:1.6;">
+      b-positive (Gulia 2024) · Grassberger-Procaccia D<sub>s</sub>/D<sub>t</sub> · Scordilis (2006) M<sub>w</sub> · GK74 r=560 km ·
+      <span style="color:#7a9ab5;">2026-02-27 → 2026-06-07 (öncesi 2000 olay)</span>
+    </div>
   </div>
 
   <!-- Review Article -->
@@ -692,7 +732,7 @@ ${body}</div></body></html>`;
         <em>N(t) = K / (t + c)<sup>p</sup></em>
       </p>
       <p>
-        <strong>Mindanao Mw 7.8 — Hesaplanan Parametreler (Nelder-Mead, N=478 artçı):</strong><br>
+        <strong>Mindanao Mw 7.8 — Hesaplanan Parametreler (Nelder-Mead, N=484 artçı):</strong><br>
         <strong>K</strong> = 15.50 &nbsp;·&nbsp;
         <strong>c</strong> = 0.0001 &nbsp;·&nbsp;
         <strong>p</strong> = <span style="color:#f5a623;font-weight:700;">0.564</span>
@@ -708,7 +748,7 @@ ${body}</div></body></html>`;
       <div style="background:rgba(244,67,54,.12);border-left:4px solid #e53935;border-radius:6px;padding:14px 18px;margin-top:4px;">
         <strong style="color:#ef9a9a;">⚠️ Yavaş Sönümlenme — Yüksek Sismik Kalıcılık</strong>
         <p style="margin:8px 0 6px;font-size:.9em;">
-          <em>Sönümlenme hızı için kritik eşik <strong><em>p</em> = 0.7</strong>'dir. Bu değerin altı "Yüksek Sismik Kalıcılık" (High Persistence) olarak tanımlanır: artçı frekansı beklenen hızda azalmamakta, sismik enerji verimsiz ve zamana yayılarak boşalmaktadır. Mindanao 2026 için hesaplanan <strong>p = 0.4931</strong>, bu eşiğin belirgin biçimde altında kalarak bölgenin <strong>aylarca aktif kalabileceğine</strong> işaret etmektedir. Yapısal olarak yorulmuş binalar için bu uzun süreli tehlike penceresi kritik önem taşımaktadır.
+          <em>Sönümlenme hızı için kritik eşik <strong><em>p</em> = 0.7</strong>'dir. Bu değerin altı "Yüksek Sismik Kalıcılık" (High Persistence) olarak tanımlanır: artçı frekansı beklenen hızda azalmamakta, sismik enerji verimsiz ve zamana yayılarak boşalmaktadır. Mindanao 2026 için hesaplanan <strong>p = 0.4909</strong>, bu eşiğin belirgin biçimde altında kalarak bölgenin <strong>aylarca aktif kalabileceğine</strong> işaret etmektedir. Yapısal olarak yorulmuş binalar için bu uzun süreli tehlike penceresi kritik önem taşımaktadır.
         </p>
         <table style="width:100%;border-collapse:collapse;font-size:.86em;margin-top:8px;table-layout:fixed;">
         <colgroup><col style="width:30%"><col style="width:12%"><col style="width:58%"></colgroup>
@@ -817,7 +857,7 @@ ${body}</div></body></html>`;
           zaman serileri → Phase I (yüklenme) / II (geçiş) / III (sonlanma) analizi
         </li>
         <li>
-          <strong>Mevcut veri:</strong> 478 artçı (M ≥ 3.0, EMSC; 2026-06-07–10);
+          <strong>Mevcut veri:</strong> 484 artçı (M ≥ 3.0, EMSC; 2026-06-07–10);
           pencere analizi için yeterli — 3 tam pencere + izleme sürmekte
         </li>
       </ul>
@@ -873,7 +913,7 @@ ${body}</div></body></html>`;
         <p style="font-size:.84em;margin:4px 0 0;">
           Tüm b<sub>ref</sub> senaryolarında b<sub>gerçek</sub>/b<sub>ref</sub> &lt; 0.90 → <strong>KIRMIZI durum</strong>. Bu bulgu;
           (1) bölgede gerilmenin henüz tam boşalmadığını, (2) Mw 7.8'in ana şok olduğunu ancak sistemin kapanmadığını,
-          (3) düşük p = 0.4931 ile birleşince <strong>"Yüksek Sismik Kalıcılık"</strong> tablosunun devam ettiğini göstermektedir.
+          (3) düşük p = 0.4909 ile birleşince <strong>"Yüksek Sismik Kalıcılık"</strong> tablosunun devam ettiğini göstermektedir.
         </p>
       </div>
     </div>
@@ -882,7 +922,7 @@ ${body}</div></body></html>`;
     <div class="method-card">
       <h4>📐 7. Büyüklük Homojenleştirmesi — mb/m → Mw Dönüşümü</h4>
       <p>
-        EMSC kataloğundaki 478 artçının büyüklük türü dağılımı:
+        EMSC kataloğundaki 484 artçının büyüklük türü dağılımı:
         <strong>272 olay "m"</strong> (BMKG/PIVS yerel/gövde dalgası),
         <strong>50 olay "mb"</strong> (gövde dalgası),
         <strong>3 olay "Mw"</strong> (NEIC/GFZ).
@@ -931,7 +971,7 @@ ${body}</div></body></html>`;
         Maksimum Eğrilik Yöntemi (Wiemer &amp; Wyss, 2000):
         M<sub>c</sub>, kümülatif frekans eğrisinin en büyük eğime sahip olduğu büyüklük
         olarak belirlenir. Mindanao kataloğu için M<sub>c</sub> = <strong>3.5</strong>
-        (N=478 olay).
+        (N=484 olay).
       </p>
 
       <p style="font-size:.9em;font-weight:600;color:#7ecbff;margin:12px 0 6px;">
@@ -964,7 +1004,7 @@ ${body}</div></body></html>`;
         Nelder-Mead nonlineer LS ile K, c, p optimize edilir
       </div>
       <p style="font-size:.87em;">
-        Mindanao 2026: <strong>K = 14.9964, c ≈ 0.0001, p = 0.4931</strong>.
+        Mindanao 2026: <strong>K = 15.064, c ≈ 0.0001, p = 0.4909</strong>.
         p &lt; 0.7 → Yüksek Sismik Kalıcılık.
         Tipik aralık: p = 0.8–1.2 (Utsu, 1957).
       </p>
@@ -1010,7 +1050,7 @@ ${body}</div></body></html>`;
       <p style="font-size:.87em;">
         Pencere: <strong>100 ardışık olay</strong>, kaydırma adımı: <strong>10 olay</strong>.
         Her pencerede b(t), D<sub>s</sub>(t), D<sub>t</sub>(t) hesaplanır.
-        Mevcut N=478; 3 tam pencere mevcut — izleme sürmekte.
+        Mevcut N=484; 3 tam pencere mevcut — izleme sürmekte.
         Phase I/II/III geçiş noktaları b–D korelasyonunun işaret değiştirdiği andır.
       </p>
 
@@ -1094,8 +1134,8 @@ ${body}</div></body></html>`;
         <li>Hipocenter derinliği 55.2 km, W-faz santroid derinliği 35.5 km; enerji geniş alana yayılmış, 2000 km'yi aşan mesafelerde hissedilmiştir. Santroid derinliği, Cotabato arayüzü (megathrust) üzerinde bir levha sınırı depremi ile tutarlıdır.</li>
         <li>116 EMSC tanık raporu, yakın alandan uzak alana uzanan sistematik yoğunluk azalmasını belgelemekte ve teorik sönümleme modelleriyle uyumludur.</li>
         <li>Yerel tsunami uyarısı verilen depremde okyanus geneli yıkıcı tsunami potansiyeli düşük değerlendirilmiştir.</li>
-        <li>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık <strong>b=0.5911</strong>; iki segmentli analiz M3.5–5.0 b₁=0.829, M5.0+ b₂=1.12. Slope break M5.0'de mb doyumundan kaynaklanmakta olup iki ayrı katalog nüfusunu yansıtmaktadır.</li>
-        <li>FTLS (Gulia vd. 2024): b/b<sub>ref</sub> &lt; 0.90 → <strong style="color:#ef9a9a;">🔴 KIRMIZI durum</strong> — tüm b<sub>ref</sub> senaryolarında gerilme boşalımı tamamlanmamış; p = 0.4931 (Yüksek Kalıcılık) ile birleşince sismik risk aylarca masada kalacaktır.</li>
+        <li>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık <strong>b=0.596</strong>; iki segmentli analiz M3.5–5.0 b₁=0.829, M5.0+ b₂=1.12. Slope break M5.0'de mb doyumundan kaynaklanmakta olup iki ayrı katalog nüfusunu yansıtmaktadır.</li>
+        <li>FTLS (Gulia vd. 2024): b/b<sub>ref</sub> &lt; 0.90 → <strong style="color:#ef9a9a;">🔴 KIRMIZI durum</strong> — tüm b<sub>ref</sub> senaryolarında gerilme boşalımı tamamlanmamış; p = 0.4909 (Yüksek Kalıcılık) ile birleşince sismik risk aylarca masada kalacaktır.</li>
       </ul>
     </div>
 
@@ -1160,7 +1200,7 @@ ${body}</div></body></html>`;
                   font-size:.84em;color:#ef9a9a;margin-bottom:8px;">
         <strong>Kritik Güzergahlar:</strong> Koronadal–General Santos kara yolu (km 14–28),
         Digos–Kiblawan dağ yolu, Mt. Parker etekleri (Tulunan–Malapatan bölgesi).
-        p = 0.4931 ile 90 gün boyunca devam eden M4.5+ artçılar, muson yağışlarıyla
+        p = 0.4909 ile 90 gün boyunca devam eden M4.5+ artçılar, muson yağışlarıyla
         birleşince heyelan tetikleme riskini artırmaktadır.
       </div>
 
@@ -1178,7 +1218,7 @@ ${body}</div></body></html>`;
     <!-- Sivil Savunma -->
     <div class="review-section-title">6d. Sivil Savunma Tavsiyeleri — Yapısal Yorulma ve Risk Yönetimi</div>
     <p class="review-body-text">
-      Düşük p = 0.4931 (Yüksek Sismik Kalıcılık) ve düşük b=0.5911 (FTLS KIRMIZI)
+      Düşük p = 0.4909 (Yüksek Sismik Kalıcılık) ve düşük b=0.596 (FTLS KIRMIZI)
       kombinasyonu, zaten hasarlı yapılara yönelik ek M6.0+ artçı riskini aylarca
       sürdürmektedir. Yapısal yorulma (structural fatigue) çerçevesinde
       aşağıdaki operasyonel önlemler acil olarak değerlendirilmelidir.
@@ -1221,13 +1261,13 @@ ${body}</div></body></html>`;
           <strong>FTLS İzleme Eşiği:</strong>
           b/b<sub>ref</sub> ≥ 0.90 (SARI) gerçekleşene dek kırmızı alarm
           protokolü sürdürülmeli. Bu eşiğin aşılması beklenen süre:
-          p = 0.4931 ile <strong>30–60 gün sonra</strong> (N ≈ 600–800 olaya ulaşıldığında).
+          p = 0.4909 ile <strong>30–60 gün sonra</strong> (N ≈ 600–800 olaya ulaşıldığında).
         </li>
       </ul>
       <div style="background:rgba(244,67,54,.08);border-radius:6px;padding:10px 14px;
                   margin-top:10px;font-size:.85em;">
         <strong style="color:#ef9a9a;">Kombinasyon Riski:</strong>
-        b=0.5911 + p = 0.4931 + FTLS KIRMIZI + muson mevsimi + sıvılaşma potansiyeli =
+        b=0.596 + p = 0.4909 + FTLS KIRMIZI + muson mevsimi + sıvılaşma potansiyeli =
         <strong>yüksek müdahale önceliği</strong>.
         Normal koşullar altında 30 gün içinde sönümlenecek bir sekans,
         bu parametrelerle <strong>90+ güne yayılmaktadır.</strong>
@@ -1237,14 +1277,14 @@ ${body}</div></body></html>`;
     <!-- 6b. 90 Gunluk Risk Ongorüsü -->
     <div class="review-section-title">6b. Gelecek 90 Günlük Sismik Risk Öngörüsü</div>
     <p class="review-body-text">
-      Hesaplanan parametre seti (Omori-Utsu K = 14.9964, p = 0.4931; G-R b=0.5911, Mc=3.5;
+      Hesaplanan parametre seti (Omori-Utsu K = 15.064, p = 0.4909; G-R b=0.596, Mc=3.5;
       FTLS <span style="color:#ef9a9a;font-weight:600;">🔴 KIRMIZI</span>) kullanılarak
       artçı sarsıntı dizisinin 90 günlük beklentisi niceliksel olarak modellenmiştir.
     </p>
 
     <!-- Omori Hız Projeksiyonu -->
     <div class="method-card">
-      <h4>📉 Omori-Utsu Hız Projeksiyonu — p = 0.4931</h4>
+      <h4>📉 Omori-Utsu Hız Projeksiyonu — p = 0.4909</h4>
       <table class="review-table" style="font-size:.87em;table-layout:fixed;margin-top:8px;">
         <colgroup><col style="width:22%"><col style="width:22%"><col style="width:22%"><col style="width:34%"></colgroup>
         <thead>
@@ -1268,7 +1308,7 @@ ${body}</div></body></html>`;
         </tbody>
       </table>
       <p style="font-size:.83em;color:#94a3b8;margin-top:8px;">
-        p = 0.4931 &lt; 0.7 → sönümlenme normalin <strong>%36 altında</strong>.
+        p = 0.4909 &lt; 0.7 → sönümlenme normalin <strong>%36 altında</strong>.
         p=1.0 (normal) senaryosunda aynı dönem için ~180 olay beklenirdi;
         yavaş sönümlenme ~2.8× daha uzun tehlike penceresi yaratmaktadır.
       </p>
@@ -1280,7 +1320,7 @@ ${body}</div></body></html>`;
       <table class="review-table" style="font-size:.87em;table-layout:fixed;margin-top:8px;">
         <colgroup><col style="width:14%"><col style="width:20%"><col style="width:20%"><col style="width:46%"></colgroup>
         <thead>
-          <tr><th>M eşiği</th><th>b=0.5911 beklenti</th><th>b₂=1.12 beklenti</th><th>Sismik bağlam</th></tr>
+          <tr><th>M eşiği</th><th>b=0.596 beklenti</th><th>b₂=1.12 beklenti</th><th>Sismik bağlam</th></tr>
         </thead>
         <tbody>
           <tr><td>M ≥ 4.0</td><td>~241</td><td>~175</td><td>Yapı hasarı için alt sınır; çok sık</td></tr>
@@ -1296,14 +1336,14 @@ ${body}</div></body></html>`;
         </tbody>
       </table>
       <div style="font-size:.83em;color:#94a3b8;margin-top:8px;line-height:1.6;">
-        <strong>b=0.5911</strong> (tüm aralık, üst tahmin) ·
+        <strong>b=0.596</strong> (tüm aralık, üst tahmin) ·
         <strong>b₂=1.12</strong> (M5.0+ segmenti, alt tahmin) ·
         İki sütun aralığı gerçek beklentiyi kapsamaktadır.
         Halihazırda gözlenen <strong>3 adet M6+</strong>,
         <a href="https://en.wikipedia.org/wiki/Bath%27s_law" target="_blank"
            style="color:#90caf9;">Bath Yasası</a>
         beklentisini (en büyük artçı ≈ Mw 7.8 − 1.2 = <strong>Mw 6.6</strong>) karşılamıştır;
-        ancak b=0.5911 ve FTLS KIRMIZI statüsü ek büyük artçıların olabileceğine işaret etmektedir.
+        ancak b=0.596 ve FTLS KIRMIZI statüsü ek büyük artçıların olabileceğine işaret etmektedir.
       </div>
     </div>
 
@@ -1316,7 +1356,7 @@ ${body}</div></body></html>`;
           M6.0+ olasılığı aylık ≈ 4–6 olay.</li>
         <li><strong>Orta dönem (30–90 gün):</strong> Günlük hız 3–6 seviyesine gerilerken
           toplam ek 235 olay (M≥3.5) bekleniyor.
-          p = 0.4931 nedeniyle arka plan seviyesine dönüş gecikmeli — normal depremlere kıyasla
+          p = 0.4909 nedeniyle arka plan seviyesine dönüş gecikmeli — normal depremlere kıyasla
           yaklaşık 3× daha yavaş sönümlenme.</li>
         <li><strong>Bath Yasası durumu:</strong> Mevcut en büyük artçı M6.7 (Bath beklentisi M6.6) —
           bu eşik karşılandı. Ancak FTLS KIRMIZI + düşük b + düşük p kombinasyonu
@@ -1339,7 +1379,7 @@ ${body}</div></body></html>`;
              alt="Gutenberg-Richter G-R Grafiği">
         <figcaption style="font-size:.78em;color:#90a4ae;margin-top:4px;text-align:center;">
           Şekil 5b-1 — Gutenberg-Richter Frekans-Büyüklük İlişkisi.
-          b=0.5911 (tam aralık, Aki 1965); b₁=0.829 (M3.5–5.0, mb),
+          b=0.596 (tam aralık, Aki 1965); b₁=0.829 (M3.5–5.0, mb),
           b₂=1.12 (M5.0+, Mw). Kırılma noktası M5.0'de m<sub>b</sub>
           doyumundan kaynaklanmaktadır (Scordilis 2006).
           Mindanao artçı dizisi, 7–15 Haziran 2026.
@@ -1408,7 +1448,7 @@ ${body}</div></body></html>`;
       <div style="background:rgba(255,167,38,.1);border:1px solid rgba(255,167,38,.35);
                   border-radius:8px;padding:14px 18px;margin-top:14px;">
         <strong style="color:#ffcc80;font-size:.95em;">
-          📍 Mindanao 2026 — Mevcut Durum (Pencere 3, N=478)
+          📍 Mindanao 2026 — Mevcut Durum (Pencere 3, N=484)
         </strong>
         <table style="width:100%;border-collapse:collapse;font-size:.84em;margin:10px 0 6px;">
           <tr>
@@ -1430,7 +1470,7 @@ ${body}</div></body></html>`;
           </tr>
         </table>
         <p style="font-size:.83em;color:#94a3b8;margin:6px 0 0;">
-          N=478 ile yalnızca 3 tam pencere mevcut (100 olay / 10 adım).
+          N=484 ile yalnızca 3 tam pencere mevcut (100 olay / 10 adım).
           Güvenilir b–D<sub>t</sub> eğrisi için minimum <strong>N ≈ 500</strong> ve
           <strong>5+ pencere</strong> gerekmektedir.
           Katalog günlük güncellendikçe korelasyon işaretinin belirlenmesi mümkün olacak;
@@ -1502,7 +1542,7 @@ ${body}</div></body></html>`;
              alt="Mindanao Logic Tree PSHA">
         <figcaption style="font-size:.78em;color:#90a4ae;margin-top:4px;text-align:center;">
           Şekil 6e-2 — Logic Tree PSHA: 27 Dal, Epistemik Belirsizlik Fraktilleri
-          (P1: b=0.5911/0.90/1.12 | P2: Interface/+0.5σ/Intraslab |
+          (P1: b=0.596/0.90/1.12 | P2: Interface/+0.5σ/Intraslab |
           P3: M<sub>max</sub>=7.8/8.0/8.2 | Baker, Bradley &amp; Stafford 2021 §7.3)
         </figcaption>
       </figure>
@@ -1510,7 +1550,7 @@ ${body}</div></body></html>`;
 
     <div class="info-note" style="border-color:rgba(229,57,53,.4);background:rgba(229,57,53,.06);">
       <strong>🔴 Logic Tree FTLS Etkisi (27 Dal, Baker 2021 §7.3):</strong>
-      b=0.5911 (FTLS Kırmızı) dalında %10/50yr tasarım ivmesi
+      b=0.596 (FTLS Kırmızı) dalında %10/50yr tasarım ivmesi
       <strong>0.771 g</strong>;
       bölgesel arka planda (b=0.90) ise
       <strong>0.695 g</strong> olarak hesaplanmıştır.
@@ -2159,25 +2199,25 @@ ${body}</div></body></html>`;
   var canvasGR    = document.getElementById('omori-chart-gr');
   if (!canvasOmori && !canvasGR) return;
 
-  var obsLog  = [{"x": -0.7128, "y": 1.7146}, {"x": -0.626, "y": 1.3268}, {"x": -0.2789, "y": 0.9797}, {"x": -0.1921, "y": 0.8929}, {"x": 0.0683, "y": 1.1096}, {"x": 0.155, "y": 1.0229}, {"x": 0.2418, "y": 0.9361}, {"x": 0.3286, "y": 1.0711}, {"x": 0.4154, "y": 0.8875}, {"x": 0.5022, "y": 1.0437}, {"x": 0.589, "y": 1.0661}, {"x": 0.6757, "y": 0.8701}, {"x": 0.7625, "y": 0.7834}, {"x": 0.8493, "y": 0.9307}, {"x": 0.9361, "y": 1.0434}, {"x": 1.0229, "y": 0.7571}, {"x": 1.1097, "y": 0.9713}, {"x": 1.1964, "y": 0.8266}, {"x": 1.2832, "y": 0.648}, {"x": 1.37, "y": 0.6925}, {"x": 1.4568, "y": 0.5227}, {"x": 1.5436, "y": 0.77}, {"x": 1.6304, "y": 0.6937}, {"x": 1.7171, "y": 0.5399}, {"x": 1.8039, "y": 0.4651}, {"x": 1.8907, "y": 0.5261}, {"x": 1.9775, "y": 0.5086}];
-  var fitLog  = [{"x": -0.7583, "y": 1.549803}, {"x": -0.735, "y": 1.538302}, {"x": -0.7117, "y": 1.526801}, {"x": -0.6883, "y": 1.515299}, {"x": -0.665, "y": 1.503798}, {"x": -0.6417, "y": 1.492295}, {"x": -0.6183, "y": 1.480793}, {"x": -0.595, "y": 1.46929}, {"x": -0.5716, "y": 1.457787}, {"x": -0.5483, "y": 1.446284}, {"x": -0.525, "y": 1.434781}, {"x": -0.5016, "y": 1.423277}, {"x": -0.4783, "y": 1.411774}, {"x": -0.455, "y": 1.40027}, {"x": -0.4316, "y": 1.388766}, {"x": -0.4083, "y": 1.377261}, {"x": -0.385, "y": 1.365757}, {"x": -0.3616, "y": 1.354252}, {"x": -0.3383, "y": 1.342747}, {"x": -0.3149, "y": 1.331243}, {"x": -0.2916, "y": 1.319738}, {"x": -0.2683, "y": 1.308232}, {"x": -0.2449, "y": 1.296727}, {"x": -0.2216, "y": 1.285222}, {"x": -0.1983, "y": 1.273716}, {"x": -0.1749, "y": 1.262211}, {"x": -0.1516, "y": 1.250705}, {"x": -0.1283, "y": 1.2392}, {"x": -0.1049, "y": 1.227694}, {"x": -0.0816, "y": 1.216188}, {"x": -0.0582, "y": 1.204682}, {"x": -0.0349, "y": 1.193176}, {"x": -0.0116, "y": 1.18167}, {"x": 0.0118, "y": 1.170164}, {"x": 0.0351, "y": 1.158657}, {"x": 0.0584, "y": 1.147151}, {"x": 0.0818, "y": 1.135645}, {"x": 0.1051, "y": 1.124138}, {"x": 0.1285, "y": 1.112632}, {"x": 0.1518, "y": 1.101125}, {"x": 0.1751, "y": 1.089619}, {"x": 0.1985, "y": 1.078112}, {"x": 0.2218, "y": 1.066606}, {"x": 0.2451, "y": 1.055099}, {"x": 0.2685, "y": 1.043592}, {"x": 0.2918, "y": 1.032086}, {"x": 0.3151, "y": 1.020579}, {"x": 0.3385, "y": 1.009072}, {"x": 0.3618, "y": 0.997565}, {"x": 0.3852, "y": 0.986058}, {"x": 0.4085, "y": 0.974552}, {"x": 0.4318, "y": 0.963045}, {"x": 0.4552, "y": 0.951538}, {"x": 0.4785, "y": 0.940031}, {"x": 0.5018, "y": 0.928524}, {"x": 0.5252, "y": 0.917017}, {"x": 0.5485, "y": 0.90551}, {"x": 0.5718, "y": 0.894003}, {"x": 0.5952, "y": 0.882496}, {"x": 0.6185, "y": 0.870989}, {"x": 0.6419, "y": 0.859482}, {"x": 0.6652, "y": 0.847975}, {"x": 0.6885, "y": 0.836468}, {"x": 0.7119, "y": 0.824961}, {"x": 0.7352, "y": 0.813454}, {"x": 0.7585, "y": 0.801946}, {"x": 0.7819, "y": 0.790439}, {"x": 0.8052, "y": 0.778932}, {"x": 0.8286, "y": 0.767425}, {"x": 0.8519, "y": 0.755918}, {"x": 0.8752, "y": 0.744411}, {"x": 0.8986, "y": 0.732904}, {"x": 0.9219, "y": 0.721396}, {"x": 0.9452, "y": 0.709889}, {"x": 0.9686, "y": 0.698382}, {"x": 0.9919, "y": 0.686875}, {"x": 1.0152, "y": 0.675368}, {"x": 1.0386, "y": 0.66386}, {"x": 1.0619, "y": 0.652353}, {"x": 1.0853, "y": 0.640846}, {"x": 1.1086, "y": 0.629339}, {"x": 1.1319, "y": 0.617831}, {"x": 1.1553, "y": 0.606324}, {"x": 1.1786, "y": 0.594817}, {"x": 1.2019, "y": 0.58331}, {"x": 1.2253, "y": 0.571803}, {"x": 1.2486, "y": 0.560295}, {"x": 1.2719, "y": 0.548788}, {"x": 1.2953, "y": 0.537281}, {"x": 1.3186, "y": 0.525774}, {"x": 1.342, "y": 0.514266}, {"x": 1.3653, "y": 0.502759}, {"x": 1.3886, "y": 0.491252}, {"x": 1.412, "y": 0.479744}, {"x": 1.4353, "y": 0.468237}, {"x": 1.4586, "y": 0.45673}, {"x": 1.482, "y": 0.445223}, {"x": 1.5053, "y": 0.433715}, {"x": 1.5287, "y": 0.422208}, {"x": 1.552, "y": 0.410701}, {"x": 1.5753, "y": 0.399193}, {"x": 1.5987, "y": 0.387686}, {"x": 1.622, "y": 0.376179}, {"x": 1.6453, "y": 0.364672}, {"x": 1.6687, "y": 0.353164}, {"x": 1.692, "y": 0.341657}, {"x": 1.7153, "y": 0.33015}, {"x": 1.7387, "y": 0.318642}, {"x": 1.762, "y": 0.307135}, {"x": 1.7854, "y": 0.295628}, {"x": 1.8087, "y": 0.284121}, {"x": 1.832, "y": 0.272613}, {"x": 1.8554, "y": 0.261106}, {"x": 1.8787, "y": 0.249599}, {"x": 1.902, "y": 0.238091}, {"x": 1.9254, "y": 0.226584}, {"x": 1.9487, "y": 0.215077}, {"x": 1.972, "y": 0.203569}, {"x": 1.9954, "y": 0.192062}, {"x": 2.0187, "y": 0.180555}];
-  var grObs   = [{"x": 2.8, "y": 2.6794}, {"x": 2.9, "y": 2.6284}, {"x": 3.0, "y": 2.6031}, {"x": 3.1, "y": 2.5647}, {"x": 3.2, "y": 2.5302}, {"x": 3.3, "y": 2.4669}, {"x": 3.4, "y": 2.4133}, {"x": 3.5, "y": 2.3502}, {"x": 3.6, "y": 2.2553}, {"x": 3.7, "y": 2.1818}, {"x": 3.8, "y": 2.0755}, {"x": 3.9, "y": 2.0253}, {"x": 4.0, "y": 1.9542}, {"x": 4.1, "y": 1.8808}, {"x": 4.2, "y": 1.8388}, {"x": 4.3, "y": 1.8261}, {"x": 4.4, "y": 1.8129}, {"x": 4.5, "y": 1.8129}, {"x": 4.6, "y": 1.8062}, {"x": 4.7, "y": 1.8062}, {"x": 4.8, "y": 1.7993}, {"x": 4.9, "y": 1.7853}, {"x": 5.0, "y": 1.7324}, {"x": 5.1, "y": 1.6902}, {"x": 5.2, "y": 1.6128}, {"x": 5.3, "y": 1.415}, {"x": 5.4, "y": 1.2553}, {"x": 5.5, "y": 1.1461}, {"x": 5.6, "y": 1.0}, {"x": 5.7, "y": 0.9542}, {"x": 5.8, "y": 0.699}, {"x": 5.9, "y": 0.6021}, {"x": 6.0, "y": 0.4771}, {"x": 6.1, "y": 0.4771}, {"x": 6.2, "y": 0.0}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
-  var grFit   = [{"x": 3.5, "y": 2.3503}, {"x": 3.6, "y": 2.2911}, {"x": 3.7, "y": 2.232}, {"x": 3.8, "y": 2.1729}, {"x": 3.9, "y": 2.1138}, {"x": 4.0, "y": 2.0547}, {"x": 4.1, "y": 1.9956}, {"x": 4.2, "y": 1.9365}, {"x": 4.3, "y": 1.8774}, {"x": 4.4, "y": 1.8183}, {"x": 4.5, "y": 1.7592}, {"x": 4.6, "y": 1.7}, {"x": 4.7, "y": 1.6409}, {"x": 4.8, "y": 1.5818}, {"x": 4.9, "y": 1.5227}, {"x": 5.0, "y": 1.4636}, {"x": 5.1, "y": 1.4045}, {"x": 5.2, "y": 1.3454}, {"x": 5.3, "y": 1.2863}, {"x": 5.4, "y": 1.2272}, {"x": 5.5, "y": 1.1681}, {"x": 5.6, "y": 1.1089}, {"x": 5.7, "y": 1.0498}, {"x": 5.8, "y": 0.9907}, {"x": 5.9, "y": 0.9316}, {"x": 6.0, "y": 0.8725}, {"x": 6.1, "y": 0.8134}, {"x": 6.2, "y": 0.7543}, {"x": 6.3, "y": 0.6952}, {"x": 6.4, "y": 0.6361}, {"x": 6.5, "y": 0.577}, {"x": 6.6, "y": 0.5178}];
-  var dcObs   = [{"x": -1.699, "y": -2.967}, {"x": -1.64, "y": -2.7125}, {"x": -1.581, "y": -2.6933}, {"x": -1.522, "y": -2.5871}, {"x": -1.463, "y": -2.467}, {"x": -1.404, "y": -2.3748}, {"x": -1.345, "y": -2.2315}, {"x": -1.286, "y": -2.1144}, {"x": -1.227, "y": -2.0316}, {"x": -1.168, "y": -1.9161}, {"x": -1.109, "y": -1.8184}, {"x": -1.05, "y": -1.7139}, {"x": -0.991, "y": -1.5831}, {"x": -0.932, "y": -1.4755}, {"x": -0.873, "y": -1.3672}, {"x": -0.814, "y": -1.2532}, {"x": -0.755, "y": -1.1499}, {"x": -0.696, "y": -1.0435}, {"x": -0.637, "y": -0.9431}, {"x": -0.578, "y": -0.8419}, {"x": -0.519, "y": -0.7472}, {"x": -0.46, "y": -0.6542}, {"x": -0.401, "y": -0.562}, {"x": -0.342, "y": -0.4782}, {"x": -0.283, "y": -0.3996}, {"x": -0.224, "y": -0.3273}, {"x": -0.165, "y": -0.2661}, {"x": -0.1059, "y": -0.2131}, {"x": -0.0469, "y": -0.1704}, {"x": 0.0121, "y": -0.1373}, {"x": 0.0711, "y": -0.1104}, {"x": 0.1301, "y": -0.088}, {"x": 0.1891, "y": -0.0716}, {"x": 0.2481, "y": -0.0606}, {"x": 0.3071, "y": -0.0519}, {"x": 0.3661, "y": -0.0431}, {"x": 0.4251, "y": -0.0329}, {"x": 0.4841, "y": -0.0229}, {"x": 0.5431, "y": -0.0148}, {"x": 0.6021, "y": -0.008}];
-  var dcFit   = [{"x": -1.699, "y": -2.624}, {"x": -1.6415, "y": -2.5444}, {"x": -1.584, "y": -2.4647}, {"x": -1.5265, "y": -2.385}, {"x": -1.469, "y": -2.3053}, {"x": -1.4115, "y": -2.2256}, {"x": -1.354, "y": -2.1459}, {"x": -1.2966, "y": -2.0663}, {"x": -1.2391, "y": -1.9866}, {"x": -1.1816, "y": -1.9069}, {"x": -1.1241, "y": -1.8272}, {"x": -1.0666, "y": -1.7475}, {"x": -1.0091, "y": -1.6678}, {"x": -0.9516, "y": -1.5882}, {"x": -0.8941, "y": -1.5085}, {"x": -0.8367, "y": -1.4288}, {"x": -0.7792, "y": -1.3491}, {"x": -0.7217, "y": -1.2694}, {"x": -0.6642, "y": -1.1897}, {"x": -0.6067, "y": -1.11}, {"x": -0.5492, "y": -1.0304}, {"x": -0.4917, "y": -0.9507}, {"x": -0.4342, "y": -0.871}, {"x": -0.3767, "y": -0.7913}, {"x": -0.3193, "y": -0.7116}, {"x": -0.2618, "y": -0.6319}, {"x": -0.2043, "y": -0.5523}, {"x": -0.1468, "y": -0.4726}, {"x": -0.0893, "y": -0.3929}, {"x": -0.0318, "y": -0.3132}, {"x": 0.0257, "y": -0.2335}, {"x": 0.0832, "y": -0.1538}, {"x": 0.1406, "y": -0.0742}, {"x": 0.1981, "y": 0.0055}, {"x": 0.2556, "y": 0.0852}, {"x": 0.3131, "y": 0.1649}, {"x": 0.3706, "y": 0.2446}, {"x": 0.4281, "y": 0.3243}, {"x": 0.4856, "y": 0.404}, {"x": 0.5431, "y": 0.4836}];
-  var histData = [{"x": 0.016, "y": 0.9853}, {"x": 0.0479, "y": 4.7153}, {"x": 0.0798, "y": 4.293}, {"x": 0.1118, "y": 4.293}, {"x": 0.1437, "y": 2.2521}, {"x": 0.1756, "y": 2.5336}, {"x": 0.2075, "y": 2.6743}, {"x": 0.2395, "y": 1.9002}, {"x": 0.2714, "y": 1.2668}, {"x": 0.3033, "y": 1.126}, {"x": 0.3353, "y": 0.7742}, {"x": 0.3672, "y": 0.6334}, {"x": 0.3991, "y": 1.0557}, {"x": 0.4311, "y": 0.7038}, {"x": 0.463, "y": 0.2111}, {"x": 0.4949, "y": 0.3519}, {"x": 0.5269, "y": 0.563}, {"x": 0.5588, "y": 0.3519}, {"x": 0.5907, "y": 0.4926}, {"x": 0.6226, "y": 0.1408}];
-  var histExp  = [{"x": 0.016, "y": 4.187722}, {"x": 0.0479, "y": 3.627274}, {"x": 0.0798, "y": 3.141831}, {"x": 0.1118, "y": 2.721355}, {"x": 0.1437, "y": 2.357153}, {"x": 0.1756, "y": 2.041692}, {"x": 0.2075, "y": 1.76845}, {"x": 0.2395, "y": 1.531776}, {"x": 0.2714, "y": 1.326776}, {"x": 0.3033, "y": 1.149212}, {"x": 0.3353, "y": 0.995411}, {"x": 0.3672, "y": 0.862194}, {"x": 0.3991, "y": 0.746805}, {"x": 0.4311, "y": 0.646859}, {"x": 0.463, "y": 0.560289}, {"x": 0.4949, "y": 0.485305}, {"x": 0.5269, "y": 0.420356}, {"x": 0.5588, "y": 0.364099}, {"x": 0.5907, "y": 0.315371}, {"x": 0.6226, "y": 0.273165}];
-  var grObsMw  = [{"x": 2.8, "y": 2.6794}, {"x": 2.9, "y": 2.6794}, {"x": 3.0, "y": 2.6794}, {"x": 3.1, "y": 2.6794}, {"x": 3.2, "y": 2.6794}, {"x": 3.3, "y": 2.6794}, {"x": 3.4, "y": 2.6794}, {"x": 3.5, "y": 2.6794}, {"x": 3.6, "y": 2.6513}, {"x": 3.7, "y": 2.6284}, {"x": 3.8, "y": 2.6031}, {"x": 3.9, "y": 2.5647}, {"x": 4.0, "y": 2.5302}, {"x": 4.1, "y": 2.4133}, {"x": 4.2, "y": 2.3502}, {"x": 4.3, "y": 2.2553}, {"x": 4.4, "y": 2.1818}, {"x": 4.5, "y": 2.0755}, {"x": 4.6, "y": 2.0253}, {"x": 4.7, "y": 1.8808}, {"x": 4.8, "y": 1.8325}, {"x": 4.9, "y": 1.8062}, {"x": 5.0, "y": 1.7404}, {"x": 5.1, "y": 1.7076}, {"x": 5.2, "y": 1.6232}, {"x": 5.3, "y": 1.4314}, {"x": 5.4, "y": 1.2788}, {"x": 5.5, "y": 1.1761}, {"x": 5.6, "y": 1.0}, {"x": 5.7, "y": 0.9542}, {"x": 5.8, "y": 0.699}, {"x": 5.9, "y": 0.6021}, {"x": 6.0, "y": 0.4771}, {"x": 6.1, "y": 0.4771}, {"x": 6.2, "y": 0.0}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
-  var grFit1   = [{"x": 3.5, "y": 2.3502}, {"x": 3.6, "y": 2.2277}, {"x": 3.7, "y": 2.1052}, {"x": 3.8, "y": 1.9828}, {"x": 3.9, "y": 1.8603}, {"x": 4.0, "y": 1.7378}, {"x": 4.1, "y": 1.6153}, {"x": 4.2, "y": 1.4928}, {"x": 4.3, "y": 1.3704}, {"x": 4.4, "y": 1.2479}, {"x": 4.5, "y": 1.1254}, {"x": 4.6, "y": 1.0029}, {"x": 4.7, "y": 0.8804}, {"x": 4.8, "y": 0.758}, {"x": 4.9, "y": 0.6355}, {"x": 5.0, "y": 0.513}];
+  var obsLog  = [{"x": -0.7127, "y": 1.7133}, {"x": -0.6256, "y": 1.3253}, {"x": -0.2776, "y": 0.9772}, {"x": -0.1906, "y": 0.8902}, {"x": 0.0705, "y": 1.2312}, {"x": 0.1575, "y": 0.8432}, {"x": 0.2445, "y": 1.0572}, {"x": 0.3315, "y": 0.9702}, {"x": 0.4185, "y": 0.8832}, {"x": 0.5055, "y": 1.0392}, {"x": 0.5925, "y": 1.0613}, {"x": 0.6796, "y": 0.8652}, {"x": 0.7666, "y": 0.7782}, {"x": 0.8536, "y": 0.9252}, {"x": 0.9406, "y": 1.0378}, {"x": 1.0276, "y": 0.786}, {"x": 1.1146, "y": 0.9652}, {"x": 1.2016, "y": 0.8202}, {"x": 1.2887, "y": 0.6897}, {"x": 1.3757, "y": 0.6664}, {"x": 1.4627, "y": 0.538}, {"x": 1.5497, "y": 0.7627}, {"x": 1.6367, "y": 0.6862}, {"x": 1.7237, "y": 0.52}, {"x": 1.8107, "y": 0.4687}, {"x": 1.8977, "y": 0.5578}, {"x": 1.9848, "y": 0.4857}];
+  var fitLog  = [{"x": -0.7583, "y": 1.550089}, {"x": -0.7349, "y": 1.538609}, {"x": -0.7115, "y": 1.527128}, {"x": -0.6881, "y": 1.515648}, {"x": -0.6647, "y": 1.504167}, {"x": -0.6413, "y": 1.492686}, {"x": -0.618, "y": 1.481204}, {"x": -0.5946, "y": 1.469722}, {"x": -0.5712, "y": 1.45824}, {"x": -0.5478, "y": 1.446758}, {"x": -0.5244, "y": 1.435276}, {"x": -0.501, "y": 1.423793}, {"x": -0.4776, "y": 1.41231}, {"x": -0.4542, "y": 1.400827}, {"x": -0.4308, "y": 1.389344}, {"x": -0.4074, "y": 1.377861}, {"x": -0.384, "y": 1.366377}, {"x": -0.3606, "y": 1.354894}, {"x": -0.3372, "y": 1.34341}, {"x": -0.3138, "y": 1.331926}, {"x": -0.2904, "y": 1.320442}, {"x": -0.267, "y": 1.308957}, {"x": -0.2436, "y": 1.297473}, {"x": -0.2202, "y": 1.285989}, {"x": -0.1968, "y": 1.274504}, {"x": -0.1734, "y": 1.26302}, {"x": -0.15, "y": 1.251535}, {"x": -0.1266, "y": 1.24005}, {"x": -0.1032, "y": 1.228565}, {"x": -0.0798, "y": 1.21708}, {"x": -0.0564, "y": 1.205595}, {"x": -0.033, "y": 1.19411}, {"x": -0.0096, "y": 1.182625}, {"x": 0.0138, "y": 1.17114}, {"x": 0.0372, "y": 1.159654}, {"x": 0.0606, "y": 1.148169}, {"x": 0.084, "y": 1.136684}, {"x": 0.1074, "y": 1.125198}, {"x": 0.1308, "y": 1.113713}, {"x": 0.1542, "y": 1.102227}, {"x": 0.1776, "y": 1.090742}, {"x": 0.201, "y": 1.079256}, {"x": 0.2244, "y": 1.06777}, {"x": 0.2478, "y": 1.056285}, {"x": 0.2712, "y": 1.044799}, {"x": 0.2946, "y": 1.033313}, {"x": 0.318, "y": 1.021827}, {"x": 0.3414, "y": 1.010341}, {"x": 0.3648, "y": 0.998856}, {"x": 0.3882, "y": 0.98737}, {"x": 0.4116, "y": 0.975884}, {"x": 0.435, "y": 0.964398}, {"x": 0.4584, "y": 0.952912}, {"x": 0.4818, "y": 0.941426}, {"x": 0.5052, "y": 0.92994}, {"x": 0.5286, "y": 0.918454}, {"x": 0.552, "y": 0.906968}, {"x": 0.5754, "y": 0.895482}, {"x": 0.5988, "y": 0.883996}, {"x": 0.6222, "y": 0.872509}, {"x": 0.6456, "y": 0.861023}, {"x": 0.669, "y": 0.849537}, {"x": 0.6924, "y": 0.838051}, {"x": 0.7158, "y": 0.826565}, {"x": 0.7392, "y": 0.815079}, {"x": 0.7626, "y": 0.803593}, {"x": 0.786, "y": 0.792106}, {"x": 0.8094, "y": 0.78062}, {"x": 0.8328, "y": 0.769134}, {"x": 0.8562, "y": 0.757648}, {"x": 0.8796, "y": 0.746162}, {"x": 0.903, "y": 0.734675}, {"x": 0.9264, "y": 0.723189}, {"x": 0.9498, "y": 0.711703}, {"x": 0.9732, "y": 0.700217}, {"x": 0.9966, "y": 0.68873}, {"x": 1.02, "y": 0.677244}, {"x": 1.0434, "y": 0.665758}, {"x": 1.0667, "y": 0.654272}, {"x": 1.0901, "y": 0.642785}, {"x": 1.1135, "y": 0.631299}, {"x": 1.1369, "y": 0.619813}, {"x": 1.1603, "y": 0.608326}, {"x": 1.1837, "y": 0.59684}, {"x": 1.2071, "y": 0.585354}, {"x": 1.2305, "y": 0.573868}, {"x": 1.2539, "y": 0.562381}, {"x": 1.2773, "y": 0.550895}, {"x": 1.3007, "y": 0.539409}, {"x": 1.3241, "y": 0.527922}, {"x": 1.3475, "y": 0.516436}, {"x": 1.3709, "y": 0.50495}, {"x": 1.3943, "y": 0.493463}, {"x": 1.4177, "y": 0.481977}, {"x": 1.4411, "y": 0.470491}, {"x": 1.4645, "y": 0.459004}, {"x": 1.4879, "y": 0.447518}, {"x": 1.5113, "y": 0.436032}, {"x": 1.5347, "y": 0.424545}, {"x": 1.5581, "y": 0.413059}, {"x": 1.5815, "y": 0.401573}, {"x": 1.6049, "y": 0.390086}, {"x": 1.6283, "y": 0.3786}, {"x": 1.6517, "y": 0.367114}, {"x": 1.6751, "y": 0.355627}, {"x": 1.6985, "y": 0.344141}, {"x": 1.7219, "y": 0.332654}, {"x": 1.7453, "y": 0.321168}, {"x": 1.7687, "y": 0.309682}, {"x": 1.7921, "y": 0.298195}, {"x": 1.8155, "y": 0.286709}, {"x": 1.8389, "y": 0.275223}, {"x": 1.8623, "y": 0.263736}, {"x": 1.8857, "y": 0.25225}, {"x": 1.9091, "y": 0.240764}, {"x": 1.9325, "y": 0.229277}, {"x": 1.9559, "y": 0.217791}, {"x": 1.9793, "y": 0.206304}, {"x": 2.0027, "y": 0.194818}, {"x": 2.0261, "y": 0.183332}];
+  var grObs   = [{"x": 2.8, "y": 2.6848}, {"x": 2.9, "y": 2.6335}, {"x": 3.0, "y": 2.6085}, {"x": 3.1, "y": 2.5705}, {"x": 3.2, "y": 2.5366}, {"x": 3.3, "y": 2.4742}, {"x": 3.4, "y": 2.42}, {"x": 3.5, "y": 2.356}, {"x": 3.6, "y": 2.2601}, {"x": 3.7, "y": 2.1875}, {"x": 3.8, "y": 2.0792}, {"x": 3.9, "y": 2.0294}, {"x": 4.0, "y": 1.9542}, {"x": 4.1, "y": 1.8808}, {"x": 4.2, "y": 1.8388}, {"x": 4.3, "y": 1.8261}, {"x": 4.4, "y": 1.8129}, {"x": 4.5, "y": 1.8129}, {"x": 4.6, "y": 1.8062}, {"x": 4.7, "y": 1.8062}, {"x": 4.8, "y": 1.7993}, {"x": 4.9, "y": 1.7853}, {"x": 5.0, "y": 1.7324}, {"x": 5.1, "y": 1.6902}, {"x": 5.2, "y": 1.6128}, {"x": 5.3, "y": 1.415}, {"x": 5.4, "y": 1.2553}, {"x": 5.5, "y": 1.1461}, {"x": 5.6, "y": 1.0}, {"x": 5.7, "y": 0.9542}, {"x": 5.8, "y": 0.699}, {"x": 5.9, "y": 0.6021}, {"x": 6.0, "y": 0.4771}, {"x": 6.1, "y": 0.4771}, {"x": 6.2, "y": 0.0}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
+  var grFit   = [{"x": 3.5, "y": 2.356}, {"x": 3.6, "y": 2.2964}, {"x": 3.7, "y": 2.2368}, {"x": 3.8, "y": 2.1772}, {"x": 3.9, "y": 2.1176}, {"x": 4.0, "y": 2.058}, {"x": 4.1, "y": 1.9984}, {"x": 4.2, "y": 1.9388}, {"x": 4.3, "y": 1.8792}, {"x": 4.4, "y": 1.8196}, {"x": 4.5, "y": 1.76}, {"x": 4.6, "y": 1.7004}, {"x": 4.7, "y": 1.6408}, {"x": 4.8, "y": 1.5812}, {"x": 4.9, "y": 1.5216}, {"x": 5.0, "y": 1.462}, {"x": 5.1, "y": 1.4024}, {"x": 5.2, "y": 1.3428}, {"x": 5.3, "y": 1.2832}, {"x": 5.4, "y": 1.2236}, {"x": 5.5, "y": 1.164}, {"x": 5.6, "y": 1.1044}, {"x": 5.7, "y": 1.0448}, {"x": 5.8, "y": 0.9852}, {"x": 5.9, "y": 0.9256}, {"x": 6.0, "y": 0.866}, {"x": 6.1, "y": 0.8064}, {"x": 6.2, "y": 0.7468}, {"x": 6.3, "y": 0.6872}, {"x": 6.4, "y": 0.6276}, {"x": 6.5, "y": 0.568}, {"x": 6.6, "y": 0.5084}];
+  var dcObs   = [{"x": -1.699, "y": -2.9743}, {"x": -1.64, "y": -2.7214}, {"x": -1.581, "y": -2.7023}, {"x": -1.522, "y": -2.595}, {"x": -1.463, "y": -2.4723}, {"x": -1.404, "y": -2.3793}, {"x": -1.345, "y": -2.2353}, {"x": -1.286, "y": -2.1179}, {"x": -1.227, "y": -2.0355}, {"x": -1.168, "y": -1.9198}, {"x": -1.109, "y": -1.821}, {"x": -1.05, "y": -1.715}, {"x": -0.991, "y": -1.5842}, {"x": -0.932, "y": -1.4757}, {"x": -0.873, "y": -1.3678}, {"x": -0.814, "y": -1.2544}, {"x": -0.755, "y": -1.1515}, {"x": -0.696, "y": -1.0449}, {"x": -0.637, "y": -0.944}, {"x": -0.578, "y": -0.8428}, {"x": -0.519, "y": -0.7477}, {"x": -0.46, "y": -0.6546}, {"x": -0.401, "y": -0.5625}, {"x": -0.342, "y": -0.4789}, {"x": -0.283, "y": -0.4005}, {"x": -0.224, "y": -0.3284}, {"x": -0.165, "y": -0.2675}, {"x": -0.1059, "y": -0.2149}, {"x": -0.0469, "y": -0.1724}, {"x": 0.0121, "y": -0.1396}, {"x": 0.0711, "y": -0.1129}, {"x": 0.1301, "y": -0.0906}, {"x": 0.1891, "y": -0.0744}, {"x": 0.2481, "y": -0.0636}, {"x": 0.3071, "y": -0.0549}, {"x": 0.3661, "y": -0.0462}, {"x": 0.4251, "y": -0.036}, {"x": 0.4841, "y": -0.0258}, {"x": 0.5431, "y": -0.0163}, {"x": 0.6021, "y": -0.0082}];
+  var dcFit   = [{"x": -1.699, "y": -2.6286}, {"x": -1.6415, "y": -2.5488}, {"x": -1.584, "y": -2.4691}, {"x": -1.5265, "y": -2.3893}, {"x": -1.469, "y": -2.3095}, {"x": -1.4115, "y": -2.2297}, {"x": -1.354, "y": -2.1499}, {"x": -1.2966, "y": -2.0702}, {"x": -1.2391, "y": -1.9904}, {"x": -1.1816, "y": -1.9106}, {"x": -1.1241, "y": -1.8308}, {"x": -1.0666, "y": -1.751}, {"x": -1.0091, "y": -1.6712}, {"x": -0.9516, "y": -1.5915}, {"x": -0.8941, "y": -1.5117}, {"x": -0.8367, "y": -1.4319}, {"x": -0.7792, "y": -1.3521}, {"x": -0.7217, "y": -1.2723}, {"x": -0.6642, "y": -1.1926}, {"x": -0.6067, "y": -1.1128}, {"x": -0.5492, "y": -1.033}, {"x": -0.4917, "y": -0.9532}, {"x": -0.4342, "y": -0.8734}, {"x": -0.3767, "y": -0.7937}, {"x": -0.3193, "y": -0.7139}, {"x": -0.2618, "y": -0.6341}, {"x": -0.2043, "y": -0.5543}, {"x": -0.1468, "y": -0.4745}, {"x": -0.0893, "y": -0.3947}, {"x": -0.0318, "y": -0.315}, {"x": 0.0257, "y": -0.2352}, {"x": 0.0832, "y": -0.1554}, {"x": 0.1406, "y": -0.0756}, {"x": 0.1981, "y": 0.0042}, {"x": 0.2556, "y": 0.0839}, {"x": 0.3131, "y": 0.1637}, {"x": 0.3706, "y": 0.2435}, {"x": 0.4281, "y": 0.3233}, {"x": 0.4856, "y": 0.4031}, {"x": 0.5431, "y": 0.4829}];
+  var histData = [{"x": 0.016, "y": 0.9722}, {"x": 0.0479, "y": 4.722}, {"x": 0.0798, "y": 4.3054}, {"x": 0.1118, "y": 4.3054}, {"x": 0.1437, "y": 2.2221}, {"x": 0.1756, "y": 2.4999}, {"x": 0.2075, "y": 2.6388}, {"x": 0.2395, "y": 1.8749}, {"x": 0.2714, "y": 1.2499}, {"x": 0.3033, "y": 1.1111}, {"x": 0.3353, "y": 0.8333}, {"x": 0.3672, "y": 0.625}, {"x": 0.3991, "y": 1.0416}, {"x": 0.4311, "y": 0.6944}, {"x": 0.463, "y": 0.2083}, {"x": 0.4949, "y": 0.3472}, {"x": 0.5269, "y": 0.5555}, {"x": 0.5588, "y": 0.3472}, {"x": 0.5907, "y": 0.4861}, {"x": 0.6226, "y": 0.2778}];
+  var histExp  = [{"x": 0.016, "y": 4.171101}, {"x": 0.0479, "y": 3.615096}, {"x": 0.0798, "y": 3.133207}, {"x": 0.1118, "y": 2.715553}, {"x": 0.1437, "y": 2.353572}, {"x": 0.1756, "y": 2.039843}, {"x": 0.2075, "y": 1.767934}, {"x": 0.2395, "y": 1.53227}, {"x": 0.2714, "y": 1.328019}, {"x": 0.3033, "y": 1.150995}, {"x": 0.3353, "y": 0.997569}, {"x": 0.3672, "y": 0.864594}, {"x": 0.3991, "y": 0.749344}, {"x": 0.4311, "y": 0.649457}, {"x": 0.463, "y": 0.562885}, {"x": 0.4949, "y": 0.487853}, {"x": 0.5269, "y": 0.422823}, {"x": 0.5588, "y": 0.366461}, {"x": 0.5907, "y": 0.317612}, {"x": 0.6226, "y": 0.275274}];
+  var grObsMw  = [{"x": 2.8, "y": 2.6848}, {"x": 2.9, "y": 2.6848}, {"x": 3.0, "y": 2.6848}, {"x": 3.1, "y": 2.6848}, {"x": 3.2, "y": 2.6848}, {"x": 3.3, "y": 2.6848}, {"x": 3.4, "y": 2.6848}, {"x": 3.5, "y": 2.6848}, {"x": 3.6, "y": 2.6571}, {"x": 3.7, "y": 2.6335}, {"x": 3.8, "y": 2.6085}, {"x": 3.9, "y": 2.5705}, {"x": 4.0, "y": 2.5366}, {"x": 4.1, "y": 2.42}, {"x": 4.2, "y": 2.356}, {"x": 4.3, "y": 2.2601}, {"x": 4.4, "y": 2.1875}, {"x": 4.5, "y": 2.0792}, {"x": 4.6, "y": 2.0294}, {"x": 4.7, "y": 1.8808}, {"x": 4.8, "y": 1.8325}, {"x": 4.9, "y": 1.8062}, {"x": 5.0, "y": 1.7404}, {"x": 5.1, "y": 1.7076}, {"x": 5.2, "y": 1.6232}, {"x": 5.3, "y": 1.4314}, {"x": 5.4, "y": 1.2788}, {"x": 5.5, "y": 1.1761}, {"x": 5.6, "y": 1.0}, {"x": 5.7, "y": 0.9542}, {"x": 5.8, "y": 0.699}, {"x": 5.9, "y": 0.6021}, {"x": 6.0, "y": 0.4771}, {"x": 6.1, "y": 0.4771}, {"x": 6.2, "y": 0.0}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
+  var grFit1   = [{"x": 3.5, "y": 2.3561}, {"x": 3.6, "y": 2.2331}, {"x": 3.7, "y": 2.1101}, {"x": 3.8, "y": 1.9871}, {"x": 3.9, "y": 1.8641}, {"x": 4.0, "y": 1.7411}, {"x": 4.1, "y": 1.6181}, {"x": 4.2, "y": 1.4951}, {"x": 4.3, "y": 1.3721}, {"x": 4.4, "y": 1.2491}, {"x": 4.5, "y": 1.1261}, {"x": 4.6, "y": 1.0032}, {"x": 4.7, "y": 0.8802}, {"x": 4.8, "y": 0.7572}, {"x": 4.9, "y": 0.6342}, {"x": 5.0, "y": 0.5112}];
   var grFit2   = [{"x": 5.0, "y": 1.7324}, {"x": 5.1, "y": 1.6318}, {"x": 5.2, "y": 1.5312}, {"x": 5.3, "y": 1.4306}, {"x": 5.4, "y": 1.33}, {"x": 5.5, "y": 1.2294}, {"x": 5.6, "y": 1.1287}, {"x": 5.7, "y": 1.0281}, {"x": 5.8, "y": 0.9275}, {"x": 5.9, "y": 0.8269}, {"x": 6.0, "y": 0.7263}, {"x": 6.1, "y": 0.6257}, {"x": 6.2, "y": 0.5251}, {"x": 6.3, "y": 0.4245}, {"x": 6.4, "y": 0.3239}, {"x": 6.5, "y": 0.2233}, {"x": 6.6, "y": 0.1226}];
   var mBreak   = 5.0;
 
-  var labelOmori = 'Omori-Utsu  p=0.4931  K=14.9964  c=0.0001h  R²=0.6475';
-  var labelGR    = 'G-R fit  log N = 4.4191 − 0.5911·M  (b=0.5911, Mc=3.5)';
-  var labelGR1   = 'Seg-1 (M3.5–5.0): b=1.2248  [mb/m]';
+  var labelOmori = 'Omori-Utsu  p=0.4909  K=15.064  c=0.0001h  R²=0.6435';
+  var labelGR    = 'G-R fit  log N = 4.442 − 0.596·M  (b=0.596, Mc=3.5)';
+  var labelGR1   = 'Seg-1 (M3.5–5.0): b=1.2299  [mb/m]';
   var labelGR2   = 'Seg-2 (M5.0+): b=1.0061  [Mw doğal]';
   var labelGRmw  = 'Mw-dönüştürülmüş (Scordilis 2006)';
-  var labelDc    = 'GP fit  Dc=1.3861  R²=0.9497';
+  var labelDc    = 'GP fit  Dc=1.3878  R²=0.9491';
 
   function loadChartJS(cb) {
     if (window.Chart) { cb(); return; }
@@ -2343,7 +2383,7 @@ ${body}</div></body></html>`;
         type: 'bar',
         data: {
           datasets: [
-            { label: 'Gözlenen yoğunluk  (Dt=-0.1205)',
+            { label: 'Gözlenen yoğunluk  (Dt=-0.1189)',
                data: histData, backgroundColor:'rgba(255,180,50,0.65)',
                borderColor:'#ffaa22', borderWidth:1, type:'bar' },
             { label: 'Poisson beklentisi (üstel)',

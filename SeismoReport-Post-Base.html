@@ -192,6 +192,36 @@ function googleTranslateElementInit() {
 {{POST_STEPS_SECTION}}
 <div class="ep-divider"></div>
 
+<!-- FTLS+ Durum Paneli -->
+<div style="background:linear-gradient(135deg,#0a1e2e,#0d2535);border:1px solid #1e3a4f;border-radius:10px;padding:18px 22px;margin:20px 0 28px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <span style="font-size:1.2em;">🚦</span>
+    <span style="color:#e8f4ff;font-weight:700;font-size:.95em;">FTLS<sup>+</sup> Sismik Durum</span>
+    <span style="margin-left:auto;font-size:.72em;color:#4a7a9b;">{{FTLS_ANALYSIS_DATE}}</span>
+  </div>
+  <div style="text-align:center;margin-bottom:14px;">
+    <span style="display:inline-block;padding:6px 26px;border-radius:6px;font-weight:700;font-size:1.05em;letter-spacing:.07em;
+      background:{{FTLS_ALARM_BG}};color:{{FTLS_ALARM_FG}};border:2px solid {{FTLS_ALARM_BORDER}};">
+      ■ {{FTLS_ALARM}}
+    </span>
+    <div style="margin-top:6px;color:#7a9ab5;font-size:.78em;">{{FTLS_PHASE}}</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+    <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:10px;text-align:center;">
+      <div style="color:#7ab8d4;font-size:.7em;">R<sub>b</sub></div>
+      <div style="color:#e8f4ff;font-size:1.15em;font-weight:700;">{{FTLS_R_B}}</div>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:10px;text-align:center;">
+      <div style="color:#7ab8d4;font-size:.7em;">R<sub>Ds</sub></div>
+      <div style="color:#e8f4ff;font-size:1.15em;font-weight:700;">{{FTLS_R_DS}}</div>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:10px;text-align:center;">
+      <div style="color:#7ab8d4;font-size:.7em;">R<sub>Dt</sub></div>
+      <div style="color:#e8f4ff;font-size:1.15em;font-weight:700;">{{FTLS_R_DT}}</div>
+    </div>
+  </div>
+</div>
+
 <!-- METİN -->
 {{POST_BODY_SECTION}}
 <!-- DIŞA AKTARMA -->

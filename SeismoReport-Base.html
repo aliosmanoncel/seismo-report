@@ -326,6 +326,46 @@ ${body}</div></body></html>`;
     <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
   </div>
 
+  <!-- FTLS+ Seviye 4 Analiz Paneli -->
+  <div style="background:linear-gradient(135deg,#0a1e2e,#0d2535);border:1px solid #1e3a4f;border-radius:10px;padding:22px 26px;margin:28px 0;font-family:'Segoe UI',sans-serif;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span style="font-size:1.4em;">🚦</span>
+      <h3 style="margin:0;color:#e8f4ff;font-size:1.05em;letter-spacing:.03em;">FTLS<sup>+</sup> Gerçek Zamanlı Sismik Durum</h3>
+      <span style="margin-left:auto;font-size:.75em;color:#4a7a9b;">{{FTLS_ANALYSIS_DATE}}</span>
+    </div>
+    <!-- Alarm badge -->
+    <div style="text-align:center;margin-bottom:18px;">
+      <span style="display:inline-block;padding:8px 32px;border-radius:6px;font-weight:700;font-size:1.15em;letter-spacing:.08em;
+        background:{{FTLS_ALARM_BG}};color:{{FTLS_ALARM_FG}};border:2px solid {{FTLS_ALARM_BORDER}};">
+        ■ {{FTLS_ALARM}}
+      </span>
+      <div style="margin-top:8px;color:#7a9ab5;font-size:.82em;">{{FTLS_PHASE}}</div>
+    </div>
+    <!-- Oran tablosu -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;">
+      <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:12px;text-align:center;">
+        <div style="color:#7ab8d4;font-size:.75em;margin-bottom:4px;">R<sub>b</sub> = b<sub>after</sub>/b<sub>ref</sub></div>
+        <div style="color:#e8f4ff;font-size:1.3em;font-weight:700;">{{FTLS_R_B}}</div>
+        <div style="color:#4a7a9b;font-size:.7em;">eşik &lt; 0.90</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:12px;text-align:center;">
+        <div style="color:#7ab8d4;font-size:.75em;margin-bottom:4px;">R<sub>Ds</sub> = D<sub>s,after</sub>/D<sub>s,ref</sub></div>
+        <div style="color:#e8f4ff;font-size:1.3em;font-weight:700;">{{FTLS_R_DS}}</div>
+        <div style="color:#4a7a9b;font-size:.7em;">uzamsal kümelenme</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:7px;padding:12px;text-align:center;">
+        <div style="color:#7ab8d4;font-size:.75em;margin-bottom:4px;">R<sub>Dt</sub> = D<sub>t,after</sub>/D<sub>t,ref</sub></div>
+        <div style="color:#e8f4ff;font-size:1.3em;font-weight:700;">{{FTLS_R_DT}}</div>
+        <div style="color:#4a7a9b;font-size:.7em;">zamansal inatçılık</div>
+      </div>
+    </div>
+    <!-- Alt bilgi -->
+    <div style="border-top:1px solid #1e3a4f;padding-top:10px;color:#4a7a9b;font-size:.75em;line-height:1.6;">
+      b-positive (Gulia 2024) · Grassberger-Procaccia D<sub>s</sub>/D<sub>t</sub> · Scordilis (2006) M<sub>w</sub> · GK74 r=560 km ·
+      <span style="color:#7a9ab5;">{{FTLS_PRE_WINDOW}} (öncesi {{FTLS_PRE_EVENTS}} olay)</span>
+    </div>
+  </div>
+
   <!-- Review Article -->
   {{REVIEW_SECTION_HTML}}
 

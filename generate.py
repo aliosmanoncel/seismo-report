@@ -46,9 +46,35 @@ def fill_template(base_file, data):
         print(f"  UYARI: Doldurulamayan placeholder’lar: {set(leftovers)}")
     return html
 
+FTLS_COLORS = {
+    'KIRMIZI': {'bg': 'rgba(180,20,20,.85)', 'fg': '#fff', 'border': '#e53935'},
+    'SARI':    {'bg': 'rgba(180,130,0,.85)', 'fg': '#fff', 'border': '#f9a825'},
+    'YEŞİL':   {'bg': 'rgba(20,130,60,.85)', 'fg': '#fff', 'border': '#43a047'},
+}
+
+def enrich_ftls(data):
+    """FTLS+ için hesaplanmış renk ve görüntüleme alanlarını ekle."""
+    alarm = data.get('FTLS_ALARM', '')
+    c = FTLS_COLORS.get(alarm, {'bg': 'rgba(40,60,80,.85)', 'fg': '#aaa', 'border': '#4a7a9b'})
+    data.setdefault('FTLS_ALARM_BG',     c['bg'])
+    data.setdefault('FTLS_ALARM_FG',     c['fg'])
+    data.setdefault('FTLS_ALARM_BORDER', c['border'])
+    # Kısa görüntüleme alanları — None → '—'
+    for key in ('FTLS_R_B', 'FTLS_R_DS', 'FTLS_R_DT',
+                'FTLS_B_REF', 'FTLS_B_AFTER',
+                'FTLS_DS_PRE', 'FTLS_DS_POST',
+                'FTLS_DT_PRE', 'FTLS_DT_POST',
+                'FTLS_PRE_EVENTS', 'FTLS_POST_EVENTS',
+                'FTLS_PHASE', 'FTLS_PRE_WINDOW', 'FTLS_ANALYSIS_DATE'):
+        if data.get(key) is None:
+            data[key] = '—'
+    return data
+
 def generate(json_path):
     with open(json_path, encoding="utf-8") as f:
         data = json.load(f)
+
+    data = enrich_ftls(data)
 
     # ── PAGE ────────────────────────────────────────────────────────────────
     base_name = data.get("BASE_TEMPLATE", "SeismoReport-Base.html")
@@ -58,7 +84,7 @@ def generate(json_path):
         sys.exit(1)
 
     html = fill_template(base_file, data)
-    filename = data.get("FILENAME", "output")
+    filename = data.get("FILENAME", "output").removesuffix(".html")
     out_dir = BASE_DIRS.get(base_name, os.path.join(ROOT, "OUTPUT"))
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, filename + ".html")

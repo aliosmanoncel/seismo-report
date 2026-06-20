@@ -29,7 +29,8 @@ BASE_DIRS = {
 JS_CODE_KEYS = {"MAP_INIT_JS", "AFTERSHOCK_MAP_JS", "OMORI_CHART_JS",
                 "REVIEW_SECTION_HTML", "APPENDIX_SECTIONS_HTML",
                 "STAT_CARDS_HTML", "HERO_LINKS_HTML", "FOOTER_HTML",
-                "POST_STAT_TABLE", "POST_STEPS_SECTION", "POST_BODY_SECTION", "POST_REFS"}
+                "POST_STAT_TABLE", "POST_STEPS_SECTION", "POST_BODY_SECTION", "POST_REFS",
+                "GR_PLOT_BASE64", "HYPODD_PLOT_BASE64"}
 
 def fill_template(base_file, data):
     with open(base_file, encoding="utf-8") as f:

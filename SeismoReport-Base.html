@@ -324,6 +324,7 @@ ${body}</div></body></html>`;
     </div>
     <button onclick="ExportEngine.exportPdf()" style="padding:12px 22px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📄 PDF / Yazdır</button>
     <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
+    <button id="sr-tts-btn" style="padding:12px 22px;background:linear-gradient(135deg,#1e3a5f,#1e40af);border:1px solid rgba(59,158,255,0.45);border-radius:10px;color:#90caf9;font-weight:700;font-size:0.92em;cursor:pointer;white-space:nowrap;">🔊 Dinle</button>
   </div>
 
   <!-- FTLS+ Seviye 4 Analiz Paneli -->
@@ -540,6 +541,83 @@ ${body}</div></body></html>`;
     });
   })();
   {{OMORI_CHART_JS}}
+</script>
+
+<script>
+(function(){
+  var synth=window.speechSynthesis;
+  if(!synth)return;
+  var speaking=false,paused=false,activeEl=null,segments=[];
+
+  function getLang(){var m=document.cookie.match(/googtrans=\/[^\/]+\/([^;]+)/);return m?m[1].trim():'tr';}
+
+  function buildSegments(){
+    segments=[];
+    var root=document.querySelector('.report-body')||document.querySelector('main')||document.body;
+    var els=root.querySelectorAll('p,h1,h2,h3,h4,li,blockquote,td,.panel p,.panel li');
+    var pos=0,parts=[];
+    els.forEach(function(el){
+      if(el.closest('script,style,button,noscript,.export-toolbar,.report-footer'))return;
+      var txt=(el.innerText||el.textContent||'').replace(/\s{2,}/g,' ').trim();
+      if(txt.length<4)return;
+      for(var i=0;i<segments.length;i++){if(segments[i].el.contains(el))return;}
+      segments.push({el:el,start:pos,end:pos+txt.length});
+      parts.push(txt);
+      pos+=txt.length+1;
+    });
+    return parts.join(' ').slice(0,50000);
+  }
+
+  function clearHL(){
+    if(activeEl){activeEl.style.background='';activeEl.style.outline='';activeEl.style.borderRadius='';activeEl=null;}
+  }
+
+  function hlEl(el){
+    if(el===activeEl)return;
+    clearHL();
+    activeEl=el;
+    el.style.background='rgba(59,158,255,0.15)';
+    el.style.outline='2px solid rgba(59,158,255,0.4)';
+    el.style.borderRadius='4px';
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  function findSeg(ci){
+    for(var i=0;i<segments.length;i++){if(ci>=segments[i].start&&ci<segments[i].end)return segments[i].el;}
+    return null;
+  }
+
+  function setState(s,btn){
+    if(s==='playing'){btn.textContent='⏸ Duraklat';btn.style.background='linear-gradient(135deg,#92400e,#b45309)';}
+    else if(s==='paused'){btn.textContent='▶ Devam';btn.style.background='linear-gradient(135deg,#14532d,#166534)';}
+    else{btn.textContent='🔊 Dinle';btn.style.background='linear-gradient(135deg,#1e3a5f,#1e40af)';}
+  }
+
+  function initTTS(){
+    var btn=document.getElementById('sr-tts-btn');
+    if(!btn)return;
+    btn.addEventListener('click',function(){
+      if(!speaking&&!paused){
+        synth.cancel();
+        var text=buildSegments();
+        var utt=new SpeechSynthesisUtterance(text);
+        utt.lang=getLang();utt.rate=0.92;
+        utt.addEventListener('boundary',function(e){
+          if(e.name==='word'||e.name==='sentence'){var el=findSeg(e.charIndex);if(el)hlEl(el);}
+        });
+        utt.onend=utt.onerror=function(){speaking=false;paused=false;setState('idle',btn);clearHL();};
+        synth.speak(utt);speaking=true;setState('playing',btn);
+      } else if(speaking){
+        synth.pause();speaking=false;paused=true;setState('paused',btn);
+      } else if(paused){
+        synth.resume();paused=false;speaking=true;setState('playing',btn);
+      }
+    });
+    window.addEventListener('beforeunload',function(){synth.cancel();});
+  }
+
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initTTS);}else{initTTS();}
+})();
 </script>
 </body>
 </html>

@@ -18,7 +18,7 @@ Kullanım:
   python scripts/ftls_background.py events/Mindanao-2026/Mindanao-2026.json
 """
 
-import os, sys, json, math, urllib.request, urllib.parse
+import os, sys, json, math, urllib.request, urllib.parse, base64, io
 from datetime import datetime, timezone, timedelta
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -410,6 +410,307 @@ def detect_phase(b_after, b_ref, dt_after, dt_pre):
     else:
         return 'Phase III — Stres Boşalımı / Sönümlenme'
 
+# ── HypoDD-style 3B Artçı Görselleştirme ─────────────────────────
+def hypodd_plots_base64(post_events, mainshock):
+    """
+    Katalog koordinatlarından 3 panelli artçı haritalaması:
+      Sol üst : Map view (Lon–Lat, büyüklük→boyut, derinlik→renk)
+      Sağ üst : Derinlik cross-section (mesafe–derinlik)
+      Alt     : 3B scatter (Lon–Lat–Derinlik)
+    Base64 PNG döndürür.
+    """
+    try:
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        import matplotlib.cm as cm
+        import matplotlib.colors as mcolors
+        import numpy as np
+        from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
+    except ImportError:
+        log('matplotlib/mpl_toolkits bulunamadı — HypoDD plot atlandı')
+        return None
+
+    if len(post_events) < 5:
+        return None
+
+    lats  = np.array([e['lat']  for e in post_events])
+    lons  = np.array([e['lon']  for e in post_events])
+    deps  = np.array([e['dep']  for e in post_events])
+    mags  = np.array([e['mw']   for e in post_events])
+
+    m_lat = mainshock['lat']
+    m_lon = mainshock['lon']
+    m_dep = mainshock['depth']
+    m_mag = mainshock['mag']
+
+    # Mesafe mainshock'tan (km) — haversine
+    dists = np.array([haversine(m_lat, m_lon, la, lo)
+                      for la, lo in zip(lats, lons)])
+
+    # ── Renk paleti ──────────────────────────────────────────────
+    bg    = '#0a1e2e'
+    panel = '#0d2535'
+    text_c = '#cdd8e0'
+    grid_c = '#1e3a50'
+    star_c = '#f5a623'
+    cmap   = cm.plasma_r   # sığ=sarı, derin=mor
+
+    norm = mcolors.Normalize(vmin=max(0, deps.min()), vmax=deps.max())
+    sizes = (mags - mags.min() + 0.5) ** 2.8 * 4  # büyüklük → boyut
+
+    fig = plt.figure(figsize=(12, 9), facecolor=bg)
+    fig.patch.set_facecolor(bg)
+
+    # ── Panel 1: Map view ─────────────────────────────────────────
+    ax_map = fig.add_subplot(2, 2, 1)
+    ax_map.set_facecolor(panel)
+    sc = ax_map.scatter(lons, lats, c=deps, cmap=cmap, norm=norm,
+                        s=sizes, alpha=0.75, linewidths=0.2,
+                        edgecolors='white', zorder=3)
+    ax_map.scatter(m_lon, m_lat, c=star_c, s=220, marker='*',
+                   zorder=6, edgecolors='white', linewidths=0.8)
+    cb = fig.colorbar(sc, ax=ax_map, pad=0.02, fraction=0.03)
+    cb.set_label('Derinlik (km)', color=text_c, fontsize=8)
+    cb.ax.yaxis.set_tick_params(color=text_c, labelsize=7)
+    plt.setp(cb.ax.yaxis.get_ticklabels(), color=text_c)
+    ax_map.set_xlabel('Boylam (°E)', fontsize=8, color=text_c)
+    ax_map.set_ylabel('Enlem (°N)', fontsize=8, color=text_c)
+    ax_map.set_title('Map View — Artçı Dağılımı', fontsize=9,
+                     color=text_c, pad=5)
+    ax_map.tick_params(colors=text_c, labelsize=7)
+    for sp in ax_map.spines.values():
+        sp.set_edgecolor(grid_c)
+    ax_map.grid(True, color=grid_c, linewidth=0.4, linestyle='--', alpha=0.5)
+
+    # ── Panel 2: Derinlik cross-section ──────────────────────────
+    ax_xsec = fig.add_subplot(2, 2, 2)
+    ax_xsec.set_facecolor(panel)
+    sc2 = ax_xsec.scatter(dists, deps, c=mags, cmap='RdYlGn_r',
+                           s=sizes * 0.8, alpha=0.75, linewidths=0.2,
+                           edgecolors='white', zorder=3)
+    ax_xsec.scatter(0, m_dep, c=star_c, s=220, marker='*',
+                    zorder=6, edgecolors='white', linewidths=0.8)
+    ax_xsec.invert_yaxis()
+    cb2 = fig.colorbar(sc2, ax=ax_xsec, pad=0.02, fraction=0.03)
+    cb2.set_label('Büyüklük (Mw)', color=text_c, fontsize=8)
+    cb2.ax.yaxis.set_tick_params(color=text_c, labelsize=7)
+    plt.setp(cb2.ax.yaxis.get_ticklabels(), color=text_c)
+    ax_xsec.set_xlabel('Ana Şoka Mesafe (km)', fontsize=8, color=text_c)
+    ax_xsec.set_ylabel('Derinlik (km)', fontsize=8, color=text_c)
+    ax_xsec.set_title('Cross-Section — Derinlik Profili', fontsize=9,
+                      color=text_c, pad=5)
+    ax_xsec.tick_params(colors=text_c, labelsize=7)
+    for sp in ax_xsec.spines.values():
+        sp.set_edgecolor(grid_c)
+    ax_xsec.grid(True, color=grid_c, linewidth=0.4, linestyle='--', alpha=0.5)
+
+    # ── Panel 3: 3B scatter (alt geniş panel) ────────────────────
+    ax3d = fig.add_subplot(2, 1, 2, projection='3d')
+    ax3d.set_facecolor(panel)
+    ax3d.patch.set_facecolor(panel)
+    p3 = ax3d.scatter(lons, lats, -deps,
+                      c=deps, cmap=cmap, norm=norm,
+                      s=sizes * 0.7, alpha=0.70,
+                      linewidths=0.1, edgecolors='white', depthshade=True)
+    ax3d.scatter(m_lon, m_lat, -m_dep,
+                 c=star_c, s=280, marker='*', zorder=10,
+                 edgecolors='white', linewidths=0.8, depthshade=False)
+    ax3d.set_xlabel('Boylam', fontsize=7, color=text_c, labelpad=4)
+    ax3d.set_ylabel('Enlem', fontsize=7, color=text_c, labelpad=4)
+    ax3d.set_zlabel('Derinlik (km, ters)', fontsize=7, color=text_c, labelpad=4)
+    ax3d.set_title('3B Artçı Dağılımı — Katalog Konumları',
+                   fontsize=9, color=text_c, pad=6)
+    ax3d.tick_params(colors=text_c, labelsize=6)
+    ax3d.xaxis.pane.fill = False
+    ax3d.yaxis.pane.fill = False
+    ax3d.zaxis.pane.fill = False
+    ax3d.xaxis.pane.set_edgecolor(grid_c)
+    ax3d.yaxis.pane.set_edgecolor(grid_c)
+    ax3d.zaxis.pane.set_edgecolor(grid_c)
+    ax3d.grid(True, color=grid_c, linewidth=0.3, alpha=0.4)
+    ax3d.view_init(elev=22, azim=-60)
+
+    # ── Başlık ve altyazı ─────────────────────────────────────────
+    fig.suptitle(
+        f'HypoDD-Style Artçı Haritalaması  |  Mindanao Mw {m_mag}  |  '
+        f'{len(post_events)} olay',
+        color=text_c, fontsize=11, fontweight='bold', y=0.99
+    )
+    fig.text(0.5, 0.005,
+             'Katalog konumları: EMSC  ·  Scordilis (2006) Mw homojenleştirme  ·  '
+             'Renk: derinlik (km)  ·  Boyut: büyüklük  ·  ★ Ana şok  ·  Öncel, A.O. (2026)',
+             ha='center', va='bottom', color='#6a8fa8', fontsize=7, style='italic')
+
+    plt.tight_layout(rect=[0, 0.02, 1, 0.97])
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png', dpi=120, bbox_inches='tight',
+                facecolor=bg, edgecolor='none')
+    plt.close(fig)
+    buf.seek(0)
+    b64 = base64.b64encode(buf.read()).decode('ascii')
+    log(f'HypoDD plot üretildi ({len(b64)//1024} KB base64)')
+    return b64
+
+
+# ── G-R Plot üretimi ─────────────────────────────────────────────
+def gr_plot_base64(post_events, mc_post, b_after_mle, a_post,
+                   t_post_start, t_post_end, analysis_date):
+    """
+    İki panelli G-R grafiği üretir:
+      Üst : Diferansiyel frekans histogramı (slope break görünür)
+      Alt : Kümülatif N(≥M) — standart G-R sunum
+    Base64 PNG string döndürür.
+    """
+    try:
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        import matplotlib.ticker as ticker
+        import numpy as np
+    except ImportError:
+        log('matplotlib bulunamadı — G-R plot atlandı')
+        return None
+
+    if len(post_events) < 20:
+        return None
+
+    mags = sorted([e['mw'] for e in post_events])
+    bin_size = 0.1
+    m_min = math.floor(min(mags) * 10) / 10
+    m_max = math.ceil(max(mags) * 10) / 10
+    bins  = np.arange(m_min, m_max + bin_size, bin_size)
+    bins  = np.round(bins, 1)
+
+    # Kümülatif N(≥M)
+    cum_n  = [sum(1 for m in mags if m >= b) for b in bins]
+    # Diferansiyel (her kutudaki sayı)
+    diff_n = []
+    for i, b in enumerate(bins):
+        hi = bins[i+1] if i+1 < len(bins) else b + bin_size
+        diff_n.append(sum(1 for m in mags if b <= m < hi))
+
+    # Sıfır değerlerini filtrele (log için)
+    cum_mask  = [n > 0 for n in cum_n]
+    diff_mask = [n > 0 for n in diff_n]
+
+    bins_cum  = bins[cum_mask]
+    cum_vals  = np.array(cum_n)[cum_mask]
+    bins_diff = bins[diff_mask]
+    diff_vals = np.array(diff_n)[diff_mask]
+
+    # ── İki segment fit ──────────────────────────────────────────
+    # mb segment: Mc ≤ M < 5.0 → b₁
+    # Mw segment: M ≥ 5.0     → b₂
+    def fit_segment(mags_all, m_lo, m_hi):
+        seg = [m for m in mags_all if m_lo <= m < m_hi]
+        if len(seg) < 5:
+            return None, None
+        mc_seg = m_lo
+        b, _ = b_mle(sorted(seg), mc_seg)
+        a    = a_value(seg, mc_seg)
+        return b, a
+
+    b1, a1 = fit_segment(mags, mc_post, 5.0)
+    b2, a2 = fit_segment(mags, 5.0, 99.0)
+
+    # ── Renk paleti (koyu arka plan) ─────────────────────────────
+    bg      = '#0a1e2e'
+    panel   = '#0d2535'
+    accent  = '#3b9eff'
+    red_c   = '#ef5350'
+    green_c = '#43a047'
+    text_c  = '#cdd8e0'
+    grid_c  = '#1e3a50'
+    mc_c    = '#f9a825'
+
+    fig, (ax_diff, ax_cum) = plt.subplots(
+        2, 1, figsize=(7, 8),
+        facecolor=bg,
+        gridspec_kw={'hspace': 0.38}
+    )
+
+    for ax in (ax_diff, ax_cum):
+        ax.set_facecolor(panel)
+        ax.tick_params(colors=text_c, labelsize=8)
+        ax.xaxis.label.set_color(text_c)
+        ax.yaxis.label.set_color(text_c)
+        for spine in ax.spines.values():
+            spine.set_edgecolor(grid_c)
+        ax.grid(True, color=grid_c, linewidth=0.5, linestyle='--', alpha=0.6)
+        ax.set_xlabel('Büyüklük (Mw)', fontsize=9, color=text_c)
+
+    # ── ÜST: Diferansiyel ───────────────────────────────────────
+    ax_diff.bar(bins_diff, diff_vals, width=bin_size * 0.8,
+                color=accent, alpha=0.75, edgecolor='none')
+    ax_diff.set_yscale('log')
+    ax_diff.set_ylabel('Frekans (dN)', fontsize=9)
+    ax_diff.set_title('Diferansiyel G-R  (slope break görünür)',
+                      color=text_c, fontsize=9, pad=6)
+
+    # Mc çizgisi
+    ax_diff.axvline(mc_post, color=mc_c, linewidth=1.2,
+                    linestyle='--', alpha=0.9, label=f'Mc={mc_post}')
+
+    # Segment fit çizgileri üst panelde
+    m_range1 = np.linspace(mc_post, 5.0, 50)
+    m_range2 = np.linspace(5.0, m_max, 30)
+    if b1 and a1:
+        fit1 = 10 ** (a1 - b1 * m_range1)
+        ax_diff.plot(m_range1, fit1, color=red_c, linewidth=1.5,
+                     linestyle='-', label=f'b₁={b1} (mb, M<5.0)', alpha=0.9)
+    if b2 and a2 and len(m_range2) > 2:
+        fit2 = 10 ** (a2 - b2 * m_range2)
+        ax_diff.plot(m_range2, fit2, color=green_c, linewidth=1.5,
+                     linestyle='-', label=f'b₂={b2} (Mw, M≥5.0)', alpha=0.9)
+    ax_diff.legend(fontsize=7.5, facecolor=bg, edgecolor=grid_c,
+                   labelcolor=text_c, framealpha=0.85)
+
+    # ── ALT: Kümülatif ───────────────────────────────────────────
+    ax_cum.scatter(bins_cum, cum_vals, s=22, color=accent,
+                   zorder=5, alpha=0.9)
+    ax_cum.set_yscale('log')
+    ax_cum.set_ylabel('N(≥M)  Kümülatif', fontsize=9)
+    ax_cum.set_title('Kümülatif G-R  (standart sunum)',
+                     color=text_c, fontsize=9, pad=6)
+
+    # Mc çizgisi
+    ax_cum.axvline(mc_post, color=mc_c, linewidth=1.2,
+                   linestyle='--', alpha=0.9, label=f'Mc={mc_post}')
+
+    # Fit çizgisi (tam aralık, b_after_mle)
+    if b_after_mle and a_post:
+        m_fit = np.linspace(mc_post, m_max, 100)
+        n_fit = 10 ** (a_post - b_after_mle * m_fit)
+        ax_cum.plot(m_fit, n_fit, color=red_c, linewidth=1.8,
+                    linestyle='-',
+                    label=f'b={b_after_mle} (MLE, tam aralık)', alpha=0.9)
+    ax_cum.legend(fontsize=7.5, facecolor=bg, edgecolor=grid_c,
+                  labelcolor=text_c, framealpha=0.85)
+
+    # ── Başlık ve altyazı ────────────────────────────────────────
+    date_str = (f"{t_post_start.strftime('%d %b')}–"
+                f"{t_post_end.strftime('%d %b %Y')}")
+    fig.text(0.5, 0.97,
+             f'Gutenberg-Richter  |  Mindanao Mw 7.8  |  Artçı Sekansı ({date_str})',
+             ha='center', va='top', color=text_c, fontsize=10, fontweight='bold')
+    fig.text(0.5, 0.01,
+             f'Öncel, A.O. (2026)  ·  EMSC katalog  ·  Scordilis (2006) homojenleştirme  ·  {analysis_date}',
+             ha='center', va='bottom', color='#6a8fa8', fontsize=7.5, style='italic')
+
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png', dpi=130, bbox_inches='tight',
+                facecolor=bg, edgecolor='none')
+    plt.close(fig)
+    buf.seek(0)
+    b64 = base64.b64encode(buf.read()).decode('ascii')
+    log(f'G-R plot üretildi ({len(b64)//1024} KB base64)')
+    return b64, b1, b2
+
+
 # ── Ana analiz ────────────────────────────────────────────────────
 def run_analysis(json_path):
     log('=== FTLS Arka Plan Analizi başladı ===')
@@ -504,6 +805,22 @@ def run_analysis(json_path):
     phase = detect_phase(b_after_final, b_ref_final, dt_post, dt_pre)
     log(f'Sismik Faz       : {phase}')
 
+    # ── HypoDD-style 3B plot üret ─────────────────────────────────
+    log('HypoDD-style 3B artçı haritalaması üretiliyor...')
+    hypodd_b64 = hypodd_plots_base64(post_events, MAINSHOCK)
+
+    # ── G-R plot üret ────────────────────────────────────────────
+    log('G-R plot üretiliyor...')
+    analysis_date = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    gr_result = gr_plot_base64(
+        post_events, mc_post, b_after_mle, a_post,
+        t_post_start, t_post_end, analysis_date
+    )
+    gr_b64 = None
+    gr_b1 = gr_b2 = None
+    if gr_result:
+        gr_b64, gr_b1, gr_b2 = gr_result
+
     # Sonuçları JSON'a yaz
     results = {
         'FTLS_PRE_EVENTS'    : len(pre_events),
@@ -539,6 +856,13 @@ def run_analysis(json_path):
         'FTLS_POST_WINDOW'   : f'{t_post_start.date()} → {t_post_end.date()}',
         'FTLS_GK_RADIUS_KM'  : GK_RADIUS_KM,
         'FTLS_METHOD'        : 'FTLS+ | b-positive (Gulia 2024) + MLE (Aki 1965) | Ds/Dt Grassberger-Procaccia | Scordilis (2006)',
+        # HypoDD-style 3B artçı haritalaması
+        'HYPODD_PLOT_BASE64' : hypodd_b64,
+        # G-R grafik ve segment b-değerleri
+        'GR_PLOT_BASE64'     : gr_b64,
+        'GR_B1_MB'           : gr_b1,   # b₁: Mc–5.0 mb segmenti
+        'GR_B2_MW'           : gr_b2,   # b₂: ≥5.0 Mw segmenti
+        'PARAM_B'            : b_after_mle,  # tam aralık (kümülatif fit)
     }
 
     try:

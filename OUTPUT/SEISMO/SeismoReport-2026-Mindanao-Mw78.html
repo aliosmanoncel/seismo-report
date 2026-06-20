@@ -324,6 +324,7 @@ ${body}</div></body></html>`;
     </div>
     <button onclick="ExportEngine.exportPdf()" style="padding:12px 22px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📄 PDF / Yazdır</button>
     <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
+    <button id="sr-tts-btn" style="padding:12px 22px;background:linear-gradient(135deg,#1e3a5f,#1e40af);border:1px solid rgba(59,158,255,0.45);border-radius:10px;color:#90caf9;font-weight:700;font-size:0.92em;cursor:pointer;white-space:nowrap;">🔊 Dinle</button>
   </div>
 
   <!-- FTLS+ Seviye 4 Analiz Paneli -->
@@ -545,72 +546,6 @@ ${body}</div></body></html>`;
       Cotabato Çukuru ve çevresi, Mindanao'nun batı ve güneybatısında yakınsak levha sınırlarının oluşturduğu aktif bir çöküntü sistemidir. Güneybatıya dalan bu subduksiyon segmenti üzerinde biriken stres, 35–55 km arasındaki levha arayüzünde periyodik olarak büyük kırılmalar şeklinde boşalmaktadır. W-faz santroid derinliğinin 35.5 km olarak belirlenmesi, kırılmanın Cotabato Hendeği'nin üst subduksiyon arayüzüyle uyumlu olduğunu desteklemektedir. 2026 depremi, bu segmentin modern dönemde kayıt altına alınan en büyük olaylarından biridir. Mekanizma bakımından 1976 Moro Körfezi (Mw 7.9) depremiyle aynı sınıfa — <strong>levha arayüzü (megathrust) kırılması</strong> — dahildir; her iki olay da Cotabato subdüksiyon sisteminin ana arayüz düzleminde gerçekleşmiştir.
     </p>
 
-    <!-- Inter-plate vs Intraslab Akademik Tartışması -->
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.78em;font-weight:700;color:#e8f0f5;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Mekanizma Tartışması: Interface (Megathrust) mi — Intraslab mı?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">
-        <div style="background:rgba(59,158,255,0.1);border:1px solid rgba(59,158,255,0.3);border-radius:8px;padding:12px 14px;">
-          <div style="font-size:0.76em;font-weight:700;color:#3b9eff;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Inter-plate / Interface Görüşü ✓</div>
-          <div style="font-size:0.78em;font-weight:600;color:#93c5fd;margin-bottom:5px;">Öncel (2026) · USGS/NEIC · GFZ · EMSC</div>
-          <ul style="font-size:0.83em;color:#cbd5e1;line-height:1.7;margin:0;padding-left:15px;">
-            <li>Santroid derinliği <strong>35.5 km</strong> — Cotabato Hendeği arayüzüyle uyumlu</li>
-            <li>DC bileşeni <strong>%87</strong> — saf ters faylanma (slab bükülmesi değil)</li>
-            <li>NP2: 161°/45° — arayüz geometrisiyle örtüşüyor</li>
-            <li>4 bağımsız ajans tutarlı sonuç verdi</li>
-            <li>Kozismik yükselim (Jose Abad Santos) megathrust beklentisiyle uyumlu</li>
-          </ul>
-        </div>
-        <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.28);border-radius:8px;padding:12px 14px;">
-          <div style="font-size:0.76em;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Intraslab Görüşü (Alternatif)</div>
-          <div style="font-size:0.78em;font-weight:600;color:#c084fc;margin-bottom:5px;">Hubbard &amp; Bradley (2026)</div>
-          <ul style="font-size:0.83em;color:#cbd5e1;line-height:1.7;margin:0;padding-left:15px;">
-            <li>Hipocenter derinliği <strong>55–57 km</strong> — hendek geometrisiyle tam örtüşmüyor</li>
-            <li>Fay düzlemi yönelimi Cotabato hendek ekseniyle kısmi sapma gösteriyor</li>
-            <li>Bu derinlik aralığı dalan levhanın bükülme gerilmesiyle uyumlu olabilir</li>
-            <li>Intraslab: hipocenter–santroid farkı ≈ 20 km beklenebilir</li>
-          </ul>
-        </div>
-      </div>
-      <div style="background:rgba(34,197,94,0.07);border-radius:6px;padding:9px 12px;font-size:0.83em;color:#cbd5e1;line-height:1.65;">
-        <strong style="color:#86efac;">Bu çalışmanın değerlendirmesi:</strong> Dört ajansın bağımsız moment tensör tutarlılığı, %87 DC bileşeni ve santroid derinliğinin 35.5 km olması, <strong>interface/megathrust</strong> yorumunu destekleyen daha güçlü kanıt setini oluşturmaktadır. Bununla birlikte, hipocenter–santroid derinlik farkının (~20 km) intraslab hipotezini henüz kesin olarak dışarıda bırakmadığı not edilmelidir. Fark pratik açıdan kritiktir: intraslab depremlerin aynı büyüklük için <strong>~3× daha yüksek stres düşümü</strong> ve <strong>~4× daha yoğun artçı aktivite</strong> üretmesi beklenir (Shimazaki, 1978; Kanamori &amp; Anderson, 1975).
-      </div>
-    </div>
-
-    <div style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.22);border-radius:10px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.78em;font-weight:700;color:#f5a623;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Filipinler Büyük Deprem Kronolojisi — Karşılaştırmalı Tablo</div>
-      <table style="width:100%;border-collapse:collapse;font-size:0.83em;">
-        <thead>
-          <tr style="background:rgba(245,166,35,0.15);">
-            <th style="padding:7px 10px;text-align:left;color:#fde68a;font-weight:700;border-bottom:1px solid rgba(245,166,35,0.3);">Olay</th>
-            <th style="padding:7px 10px;text-align:center;color:#fde68a;font-weight:700;border-bottom:1px solid rgba(245,166,35,0.3);">Büyüklük</th>
-            <th style="padding:7px 10px;text-align:left;color:#fde68a;font-weight:700;border-bottom:1px solid rgba(245,166,35,0.3);">Bölge / Mekanizma</th>
-            <th style="padding:7px 10px;text-align:left;color:#fde68a;font-weight:700;border-bottom:1px solid rgba(245,166,35,0.3);">Öne Çıkan Etki</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:7px 10px;color:#cbd5e1;">1976 Moro Körfezi</td>
-            <td style="padding:7px 10px;text-align:center;color:#f5a623;font-weight:700;">Mw 7.9</td>
-            <td style="padding:7px 10px;color:#94a3b8;">Cotabato Hendeği · Megathrust</td>
-            <td style="padding:7px 10px;color:#94a3b8;">Tsunami; ~8.000 can kaybı</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);">
-            <td style="padding:7px 10px;color:#cbd5e1;">1990 Kuzey Luzon</td>
-            <td style="padding:7px 10px;text-align:center;color:#f5a623;font-weight:700;">Mw 7.7</td>
-            <td style="padding:7px 10px;color:#94a3b8;">Filipin Fayı · Doğrultu Atımlı</td>
-            <td style="padding:7px 10px;color:#94a3b8;">Yüzey kırığı; şiddetli zemin sarsıntısı; ~2.000 can kaybı</td>
-          </tr>
-          <tr style="background:rgba(59,158,255,0.08);">
-            <td style="padding:7px 10px;color:#e8f0f5;font-weight:600;">2026 Mindanao <span style="color:#3b9eff;font-size:0.85em;">(bu çalışma)</span></td>
-            <td style="padding:7px 10px;text-align:center;color:#3b9eff;font-weight:700;">Mw 7.8</td>
-            <td style="padding:7px 10px;color:#94a3b8;">Cotabato Hendeği · Megathrust · 35.5 km santroid</td>
-            <td style="padding:7px 10px;color:#86efac;">Kozismik yükselim; lokal tsunami uyarısı; liquefikasyon</td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="font-size:0.73em;color:#64748b;margin-top:8px;">1990 Luzon depremi farklı fay sistemi (Filipin Fayı, doğrultu atımlı) üzerinde gerçekleşmiş olup mekanizma bakımından 2026 olayından ayrışır; bununla birlikte bölgesel sismik tehlikenin çok-kaynaklı yapısını örnekler.</div>
-    </div>
-
     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgafCJxBSZ8sbLwz8dFr_MODg-qkiGItiiK4Iu_PDrXmsG-57EBiiV27hhIyqYHGBmafUgNkGSi0le5sVGJI-KiIER5ib2NVbDo4ZDBsfrQw0X9QwBY6_dT0lsFTv0ej2lcK1gzdlkJCbc6kDazv28xSvWeLaJIBKBWDNjzJ1-f4GIgwKeso9DPUUQqTQM/s600/MOMENT.jpg" class="figure" alt="Moment Tensor Çözümleri">
     <div class="figure-caption"><strong>Şekil 1 — Moment Tensor Çözümleri (EMSC · USGS · GFZ · GlobalCMT).</strong> Dört bağımsız ajansın moment tensor beach-ball diyagramları güçlü ters faylanma (thrust) mekanizmasını doğrulamaktadır. P-ekseni yaklaşık K–G doğrultusunda, T-ekseni ise yataya yakın konumdadır. Bu desen, Filipinler Yay Sistemi'ndeki sıkışmalı tektonik rejimle tam uyum içindedir.</div>
 
@@ -780,87 +715,6 @@ ${body}</div></body></html>`;
     </div>
 
 
-    <!-- 5a. Bölgesel Bağlam: Heidarzadeh vd. 2025 -->
-    <div class="review-section-title">5a. Bölgesel Tsunami Tehlikesi: Filipinler Hendeklerinden Karşılaştırmalı Veriler</div>
-    <p class="review-body-text">
-      Heidarzadeh vd. (2025), Filipinler'in doğusundaki <strong>Filipin Hendeği</strong> (Philippine Trench) kaynaklı tsunami tehlikesini iki gerçek Mw 7.6 olayı (2012 ve 2023) ve üç hipotetik senaryo (Mw 8.0, 8.5, 9.0) üzerinden modellemiştir. 2026 Mindanao depremi farklı bir subdüksiyon sisteminde — <strong>Cotabato Hendeği</strong> (güneybatı) — gerçekleşmiş olsa da, bu çalışma Filipinler bölgesinde benzer mekanizmaların ürettiği tsunami ve kozismik deformasyon değerlerine dair kritik nicel referanslar sunmaktadır.
-    </p>
-
-    <div style="background:rgba(20,184,166,0.07);border:1px solid rgba(20,184,166,0.22);border-radius:10px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.78em;font-weight:700;color:#14b8a6;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;">Karşılaştırmalı Veriler — Heidarzadeh vd. (2025) · Ocean Engineering 329</div>
-      <table style="width:100%;border-collapse:collapse;font-size:0.83em;">
-        <thead>
-          <tr style="background:rgba(20,184,166,0.15);">
-            <th style="padding:7px 10px;text-align:left;color:#5eead4;font-weight:700;border-bottom:1px solid rgba(20,184,166,0.3);">Parametre</th>
-            <th style="padding:7px 10px;text-align:center;color:#5eead4;font-weight:700;border-bottom:1px solid rgba(20,184,166,0.3);">2023 Phil. Trench Mw 7.6</th>
-            <th style="padding:7px 10px;text-align:center;color:#5eead4;font-weight:700;border-bottom:1px solid rgba(20,184,166,0.3);">2026 Cotabato Mw 7.8 (bu çalışma)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:7px 10px;color:#cbd5e1;">Mekanizma</td>
-            <td style="padding:7px 10px;text-align:center;color:#94a3b8;">Thrust (ters faylanma)</td>
-            <td style="padding:7px 10px;text-align:center;color:#86efac;font-weight:600;">Thrust · %87 DC</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);">
-            <td style="padding:7px 10px;color:#cbd5e1;">Maks. deniz tabanı yükselmesi</td>
-            <td style="padding:7px 10px;text-align:center;color:#94a3b8;">37 cm (USGS kaynak modeli)</td>
-            <td style="padding:7px 10px;text-align:center;color:#fbbf24;font-weight:600;">Daha büyük beklenir<br><span style="font-size:0.82em;font-weight:400;">(Mw 0.2 büyük + sığ santroid)</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:7px 10px;color:#cbd5e1;">Davao tid. ist. tsunami genlemi</td>
-            <td style="padding:7px 10px;text-align:center;color:#94a3b8;">12.5 cm · Periyot <strong style="color:#cbd5e1;">6.7–28.2 dk</strong></td>
-            <td style="padding:7px 10px;text-align:center;color:#fbbf24;font-weight:600;">PTWC uyarısı: 0.5–1.5 m bölgesel</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);">
-            <td style="padding:7px 10px;color:#cbd5e1;">Hipotetik Mw 9.0 kıyı dalgası</td>
-            <td style="padding:7px 10px;text-align:center;color:#ef4444;font-weight:600;" colspan="2">Maks. 17.4 m · ~800 km kıyı şeridi etkilenir · 2011 Japonya ve 2004 Hint Okyanusu ile kıyaslanabilir</td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="font-size:0.73em;color:#64748b;margin-top:8px;">Not: Filipin Hendeği (doğu, Philippine Trench) ile Cotabato Hendeği (güneybatı) farklı subdüksiyon sistemleridir. Tablo bölgesel kıyaslamalı perspektif sunar; doğrudan özdeşlik anlamına gelmez. Kaynak: Heidarzadeh vd. (2025), Ocean Engineering 329, 120985.</div>
-    </div>
-
-    <p class="review-body-text">
-      Heidarzadeh vd. (2025) aynı çalışmada Filipinler'in doğusundaki Dapa belediyesi (Surigao del Norte, Siargao Adası) için tsunami risk analizi yapmış; Mw 8.5 senaryosunda resmi tahliye merkezinin su altında kalacağını, 218 binanın etkileneceğini saptamıştır. Bu bulgu, 2026 Cotabato Hendeği depremi için de geçerli olan temel ilkeyi pekiştirmektedir: <em>kıyıdaki tahliye merkezleri tsunami riskine karşı savunmasız olabilir ve acil durum planları buna göre revize edilmelidir.</em>
-    </p>
-
-    <!-- Süper Döngü Çerçevesi -->
-    <div style="background:rgba(245,87,108,0.07);border:1px solid rgba(245,87,108,0.25);border-radius:10px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.78em;font-weight:700;color:#f5576c;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:9px;">Süper Döngü (Supercycle) Çerçevesi — 2026 Mw 7.8'in Uzun Vadeli Bağlamı</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.7;margin:0 0 10px;">McCaffrey (2007) ve Satake &amp; Atwater (2007)'a dayanan Heidarzadeh vd. (2025), Filipinler'deki tüm subdüksiyon zonlarının — Cotabato ve Filipin Hendekleri dahil — potansiyel olarak <strong>kilitli (locked)</strong> olduğunu ve yaklaşık <strong>1000 yıllık geri dönüş süresiyle</strong> Mw 9.0 büyüklüğünde olaylar üretebileceğini vurgular. 2026 Mw 7.8 olayı, bu uzun vadeli "deprem süper döngüsü" içinde görece küçük bir boşalma olarak değerlendirilebilir; ana arayüz üzerinde biriken stres henüz tamamıyla tükenmemiştir.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
-        <div style="background:rgba(245,87,108,0.1);border-radius:8px;padding:10px 12px;text-align:center;">
-          <div style="font-size:1.6em;font-weight:700;color:#f5576c;line-height:1;">~1000 yıl</div>
-          <div style="font-size:0.75em;color:#94a3b8;margin-top:4px;">Mw 9.0 tekerrür periyodu<br>(Satake, 2015)</div>
-        </div>
-        <div style="background:rgba(245,87,108,0.1);border-radius:8px;padding:10px 12px;text-align:center;">
-          <div style="font-size:1.6em;font-weight:700;color:#fbbf24;line-height:1;">17.4 m</div>
-          <div style="font-size:0.75em;color:#94a3b8;margin-top:4px;">Maks. kıyı tsunami yüks.<br>Mw 9.0 senaryosu</div>
-        </div>
-        <div style="background:rgba(245,87,108,0.1);border-radius:8px;padding:10px 12px;text-align:center;">
-          <div style="font-size:1.6em;font-weight:700;color:#f5576c;line-height:1;">~800 km</div>
-          <div style="font-size:0.75em;color:#94a3b8;margin-top:4px;">Etkilenen Filipinler kıyısı<br>(Mw 9.0 sim.)</div>
-        </div>
-        <div style="background:rgba(245,87,108,0.1);border-radius:8px;padding:10px 12px;text-align:center;">
-          <div style="font-size:1.6em;font-weight:700;color:#22c55e;line-height:1;">Mw 7.8</div>
-          <div style="font-size:0.75em;color:#94a3b8;margin-top:4px;">2026 — döngü içinde<br>kısmi boşalma</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Magnitude-Dışı Risk Faktörleri -->
-    <div style="background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.22);border-radius:10px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.78em;font-weight:700;color:#a855f7;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Büyüklük Ötesi Risk: Tsunami Hasarını Belirleyen Faktörler</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.7;margin:0 0 8px;">Heidarzadeh vd. (2025), Mw 8.5 senaryosunun bazı parametrelerde Mw 9.0'dan <em>daha yıkıcı</em> çıkabildiğini saptamıştır. Bu bulgu, tsunami hasarının büyüklükle doğrudan ilişkili olmayabileceğini kanıtlar. Belirleyici faktörler şunlardır:</p>
-      <ul style="font-size:0.875em;color:#cbd5e1;line-height:1.75;margin:0;padding-left:18px;">
-        <li><strong style="color:#d8b4fe;">Depremin konumu ve derinliği</strong> — kırılma alanının kıyıya mesafesi ve santroid derinliği</li>
-        <li><strong style="color:#d8b4fe;">Kabuk deformasyon kalıbı</strong> — yükselim ve çökme alanlarının kıyı morfolojisiyle örtüşmesi</li>
-        <li><strong style="color:#d8b4fe;">Yerel rezonans</strong> — körfez, koy ve kıta sahanlığı geometrisi dalgayı amplifikasyona uğratabilir</li>
-        <li><strong style="color:#d8b4fe;">Batimetrik veri kalitesi</strong> — düşük çözünürlüklü batimetri, modelleme sonuçlarını önemli ölçüde etkiler</li>
-      </ul>
-    </div>
-
     <!-- 5b. Artci Sarsinti Analiz Metodolojisi -->
     <div class="review-section-title">5b. Artçı Sarsıntı Analiz Metodolojisi</div>
     <p class="review-body-text">
@@ -879,7 +733,7 @@ ${body}</div></body></html>`;
         <em>N(t) = K / (t + c)<sup>p</sup></em>
       </p>
       <p>
-        <strong>Mindanao Mw 7.8 — Hesaplanan Parametreler (Nelder-Mead, N=481 artçı):</strong><br>
+        <strong>Mindanao Mw 7.8 — Hesaplanan Parametreler (Nelder-Mead, N=814 artçı):</strong><br>
         <strong>K</strong> = 15.50 &nbsp;·&nbsp;
         <strong>c</strong> = 0.0001 &nbsp;·&nbsp;
         <strong>p</strong> = <span style="color:#f5a623;font-weight:700;">0.564</span>
@@ -895,7 +749,7 @@ ${body}</div></body></html>`;
       <div style="background:rgba(244,67,54,.12);border-left:4px solid #e53935;border-radius:6px;padding:14px 18px;margin-top:4px;">
         <strong style="color:#ef9a9a;">⚠️ Yavaş Sönümlenme — Yüksek Sismik Kalıcılık</strong>
         <p style="margin:8px 0 6px;font-size:.9em;">
-          <em>Sönümlenme hızı için kritik eşik <strong><em>p</em> = 0.7</strong>'dir. Bu değerin altı "Yüksek Sismik Kalıcılık" (High Persistence) olarak tanımlanır: artçı frekansı beklenen hızda azalmamakta, sismik enerji verimsiz ve zamana yayılarak boşalmaktadır. Mindanao 2026 için hesaplanan <strong>p = 0.4917</strong>, bu eşiğin belirgin biçimde altında kalarak bölgenin <strong>aylarca aktif kalabileceğine</strong> işaret etmektedir. Yapısal olarak yorulmuş binalar için bu uzun süreli tehlike penceresi kritik önem taşımaktadır.
+          <em>Sönümlenme hızı için kritik eşik <strong><em>p</em> = 0.7</strong>'dir. Bu değerin altı "Yüksek Sismik Kalıcılık" (High Persistence) olarak tanımlanır: artçı frekansı beklenen hızda azalmamakta, sismik enerji verimsiz ve zamana yayılarak boşalmaktadır. Mindanao 2026 için hesaplanan <strong>p = 0.4189</strong>, bu eşiğin belirgin biçimde altında kalarak bölgenin <strong>aylarca aktif kalabileceğine</strong> işaret etmektedir. Yapısal olarak yorulmuş binalar için bu uzun süreli tehlike penceresi kritik önem taşımaktadır.
         </p>
         <table style="width:100%;border-collapse:collapse;font-size:.86em;margin-top:8px;table-layout:fixed;">
         <colgroup><col style="width:30%"><col style="width:12%"><col style="width:58%"></colgroup>
@@ -1004,7 +858,7 @@ ${body}</div></body></html>`;
           zaman serileri → Phase I (yüklenme) / II (geçiş) / III (sonlanma) analizi
         </li>
         <li>
-          <strong>Mevcut veri:</strong> 481 artçı (M ≥ 3.0, EMSC; 2026-06-07–10);
+          <strong>Mevcut veri:</strong> 814 artçı (M ≥ 3.0, EMSC; 2026-06-07–10);
           pencere analizi için yeterli — 3 tam pencere + izleme sürmekte
         </li>
       </ul>
@@ -1060,7 +914,7 @@ ${body}</div></body></html>`;
         <p style="font-size:.84em;margin:4px 0 0;">
           Tüm b<sub>ref</sub> senaryolarında b<sub>gerçek</sub>/b<sub>ref</sub> &lt; 0.90 → <strong>KIRMIZI durum</strong>. Bu bulgu;
           (1) bölgede gerilmenin henüz tam boşalmadığını, (2) Mw 7.8'in ana şok olduğunu ancak sistemin kapanmadığını,
-          (3) düşük p = 0.4917 ile birleşince <strong>"Yüksek Sismik Kalıcılık"</strong> tablosunun devam ettiğini göstermektedir.
+          (3) düşük p = 0.4189 ile birleşince <strong>"Yüksek Sismik Kalıcılık"</strong> tablosunun devam ettiğini göstermektedir.
         </p>
       </div>
     </div>
@@ -1069,7 +923,7 @@ ${body}</div></body></html>`;
     <div class="method-card">
       <h4>📐 7. Büyüklük Homojenleştirmesi — mb/m → Mw Dönüşümü</h4>
       <p>
-        EMSC kataloğundaki 481 artçının büyüklük türü dağılımı:
+        EMSC kataloğundaki 814 artçının büyüklük türü dağılımı:
         <strong>272 olay "m"</strong> (BMKG/PIVS yerel/gövde dalgası),
         <strong>50 olay "mb"</strong> (gövde dalgası),
         <strong>3 olay "Mw"</strong> (NEIC/GFZ).
@@ -1118,7 +972,7 @@ ${body}</div></body></html>`;
         Maksimum Eğrilik Yöntemi (Wiemer &amp; Wyss, 2000):
         M<sub>c</sub>, kümülatif frekans eğrisinin en büyük eğime sahip olduğu büyüklük
         olarak belirlenir. Mindanao kataloğu için M<sub>c</sub> = <strong>3.5</strong>
-        (N=481 olay).
+        (N=814 olay).
       </p>
 
       <p style="font-size:.9em;font-weight:600;color:#7ecbff;margin:12px 0 6px;">
@@ -1141,10 +995,6 @@ ${body}</div></body></html>`;
         Stein &amp; Wysession (2003, s. 274): <em>"The number of earthquakes that occur yearly around the world varies with magnitude, with successively smaller earthquakes being more common. This observation was quantified by Gutenberg and Richter in the 1940s via the logarithmic earthquake frequency–magnitude [relation] in which N is the number of earthquakes with magnitude greater than or equal to M occurring in a given time… the slope, b, is generally about 1… significant variations occur on smaller scales. The b value of earthquake swarms is often much larger than 1… Some patches have b values much less than 1, implying shorter recurrence time. These patches have been interpreted as possible asperities or stress concentrations."</em>
       </blockquote>
 
-      <div style="background:rgba(59,158,255,0.07);border-left:3px solid rgba(59,158,255,0.5);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 12px;font-size:0.86em;color:#cbd5e1;line-height:1.7;">
-        <strong style="color:#7ecbff;">CE Modeli Bağlamı (Ishibe &amp; Shimazaki, 2009):</strong> Japonya'nın dokuz büyük interplaka deprem kaynak bölgesinde yapılan karşılaştırmalı analiz, tüm bölgelerde gözlenen küçük-orta büyüklükteki deprem sayısının G-R ilişkisinden <em>beklenenin çok altında</em> kaldığını ortaya koymuştur. Bu "sismik sessizlik" Karakteristik Deprem (CE) modeliyle örtüşmektedir: interplaka arayüzlerinde enerji, küçük olaylarla değil, belirli büyüklükteki karakteristik depremlerle periyodik olarak boşalmaktadır. Mindanao Mw 7.8 artçı dizisinde gözlemlenen <strong>b = 0.5937</strong> düşük değeri, tipik tektonik ortam için karakteristiktir ve kısmen bu interplaka kayma baskınlığıyla ilişkilendirilebilir.
-      </div>
-
       <p style="font-size:.9em;font-weight:600;color:#7ecbff;margin:12px 0 6px;">
         C. Omori–Utsu p-Değeri
       </p>
@@ -1155,122 +1005,13 @@ ${body}</div></body></html>`;
         Nelder-Mead nonlineer LS ile K, c, p optimize edilir
       </div>
       <p style="font-size:.87em;">
-        Mindanao 2026: <strong>K = 15.0236, c ≈ 0.0001, p = 0.4917</strong>.
+        Mindanao 2026: <strong>K = 15.3513, c ≈ 0.0001, p = 0.4189</strong>.
         p &lt; 0.7 → Yüksek Sismik Kalıcılık.
         Tipik aralık: p = 0.8–1.2 (Utsu, 1957).
       </p>
       <blockquote style="border-left:3px solid rgba(100,181,246,.5);margin:10px 0 10px 8px;padding:6px 14px;font-size:.84em;color:#90caf9;font-style:italic;line-height:1.6;text-align:justify;">
         Stein &amp; Wysession (2003, s. 277): <em>"The smaller aftershocks following a mainshock have a characteristic distribution in size and time… The diminishing number of aftershocks with time is typical for large earthquakes."</em>
       </blockquote>
-
-      <!-- K vs p — Mekanizma Diagnostiği -->
-      <div style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.25);border-radius:8px;padding:13px 16px;margin:10px 0 14px;">
-        <div style="font-size:0.76em;font-weight:700;color:#86efac;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">K ve p Ayrımı — Mekanizma Diagnostiği (Yamanaka &amp; Shimazaki, 1990)</div>
-        <p style="font-size:0.855em;color:#cbd5e1;line-height:1.7;margin:0 0 10px;">Yamanaka &amp; Shimazaki (1990), Omori–Utsu formülündeki iki parametrenin <em>farklı fiziksel gerçeklikleri</em> yansıttığını ortaya koymuştur:</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-          <div style="background:rgba(34,197,94,0.1);border-radius:6px;padding:10px 12px;">
-            <div style="font-size:0.82em;font-weight:700;color:#4ade80;margin-bottom:5px;">K — Üretkenlik Sabiti</div>
-            <p style="font-size:0.82em;color:#cbd5e1;line-height:1.65;margin:0;"><strong>Mekanizmaya bağlı.</strong> İntraslab depremlerin stres düşümü (~12 MPa) interplaka olayların ~3 katı (~4 MPa) olduğundan, fay düzlemindeki stres heterojenliği çok daha fazla "ikincil kırılma" gerektirir. Sonuç: intraslab K değeri interface K'sından <strong>~4× büyük</strong> olur. Artçı sayısı (N_aftershock) kataloğa yansır; K ile dolaylı test edilebilir.</p>
-          </div>
-          <div style="background:rgba(59,158,255,0.1);border-radius:6px;padding:10px 12px;">
-            <div style="font-size:0.82em;font-weight:700;color:#93c5fd;margin-bottom:5px;">p — Sönümlenme Hızı</div>
-            <p style="font-size:0.82em;color:#cbd5e1;line-height:1.65;margin:0;"><strong>Mekanizmadan büyük ölçüde bağımsız.</strong> Büyük depremlerin çoğunda p ≈ 0.8–1.2 (Utsu, 1957). Özellikle intraslab olaylar için p ≈ 1.0 beklenir (Ishibe &amp; Shimazaki, 2009 — 1994 Hokkaido-Toho-Oki intraslab: p = 1.06). Düşük p, mekanizma türünden değil, bölgesel sismojenik koşullardan (jeoisı, kama geometrisi) kaynaklanır.</p>
-          </div>
-        </div>
-        <div style="background:rgba(245,87,108,0.1);border-left:3px solid rgba(245,87,108,0.5);border-radius:0 6px 6px 0;padding:9px 12px;font-size:0.84em;color:#cbd5e1;line-height:1.7;">
-          <strong style="color:#fca5a5;">Mindanao 2026 için tanısal değerlendirme:</strong>
-          Gözlemlenen <strong>p = 0.4917</strong> değeri intraslab senaryosuyla çelişmektedir: intraslab olaylar tipik olarak p ≈ 1.0 üretir ve artçılar hızla sönümlenir. Mindanao'daki anomal derecede düşük p, Cotabato Hendeği subdüksiyon kama geometrisi ve düşük bölgesel jeoisı ile uyumlu bir <strong>interface/megathrust sönümlenme profilini</strong> sergilemektedir. Dolayısıyla p değeri hem bağımsız bir mekanizma göstergesi hem de günlük izlemenin bilimsel zeminini oluşturmaktadır.
-        </div>
-        <div style="margin-top:10px;background:rgba(168,85,247,0.08);border-radius:6px;padding:9px 12px;font-size:0.83em;color:#cbd5e1;line-height:1.65;">
-          <strong style="color:#c084fc;">Günlük p izlemenin önemi:</strong> Bu çalışmada p değeri artan artçı kataloğuyla <em>günlük olarak güncellenmektedir</em>. p(t)'nin zamana göre evrimi üç kritik sinyali verir: (1) <strong>p → 1.0'a yaklaşıyorsa</strong> → sistem beklenen interface profiline dönüyor, risk azalıyor; (2) <strong>p sabit / düşüyorsa</strong> → yüksek sismik kalıcılık devam ediyor; (3) <strong>p zamanla 1.0'a hiç yaklaşmıyorsa</strong> → Cotabato kama geometrisindeki yüksek deviatoric stresin inatçı yapısının doğrudan kanıtı. p ≈ 1.0 eşiğine ulaşılmadıkça hasarlı binalara giriş izni gibi kritik sivil savunma kararları için sismolojik triyaj tabanı oluşturmaya devam eder.
-        </div>
-
-        <!-- 2.8x tehlike penceresi ve K testi -->
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div style="background:rgba(245,87,108,0.09);border-radius:6px;padding:10px 12px;">
-            <div style="font-size:0.76em;font-weight:700;color:#fca5a5;margin-bottom:5px;">Tehlike Penceresi Katsayısı</div>
-            <div style="font-size:1.6em;font-weight:700;color:#ef4444;text-align:center;line-height:1.1;">2.8 ×</div>
-            <p style="font-size:0.79em;color:#94a3b8;margin:6px 0 0;line-height:1.55;">p = 0.564'ün p = 1.0'a göre ürettiği tehlike süresi farkı. Normal interface sekansının sönümlendiği noktada Mindanao sekansı hâlâ aktiftir — bu fark <strong>90+ güne</strong> karşılık gelir.</p>
-          </div>
-          <div style="background:rgba(34,197,94,0.09);border-radius:6px;padding:10px 12px;">
-            <div style="font-size:0.76em;font-weight:700;color:#86efac;margin-bottom:5px;">K Üretkenlik Testi — Kırılma Alanı Yöntemi</div>
-            <p style="font-size:0.79em;color:#94a3b8;margin:0;line-height:1.55;">Mindanao kırılma alanı: <strong>RLD ≈ 148 km · W ≈ 65 km</strong> (Wells &amp; Coppersmith, 1994). Bu alandan beklenen artçı sayısı ile gözlemlenen N karşılaştırılarak K normalize edilebilir. Interface beklentisi (K<sub>iface</sub>) ile gözlemi örtüşüyorsa intraslab hipotezi (<strong>K<sub>intraslab</sub> ≈ 4 × K<sub>iface</sub></strong>) istatistiksel olarak reddedilmiş olur.</p>
-          </div>
-        </div>
-
-        <!-- YENİ AÇILIM 1: Sismik İnatçılık kavramı -->
-        <div style="margin-top:12px;background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.3);border-radius:8px;padding:12px 16px;">
-          <div style="font-size:0.76em;font-weight:700;color:#c084fc;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Yeni Kavramsal Açılım — "Sismik İnatçılık" (Seismic Persistence)</div>
-          <p style="font-size:0.855em;color:#cbd5e1;line-height:1.75;margin:0 0 10px;">
-            Bu çalışmada önerilen yeni bir tanısal eşik: <strong>p &lt; 0.7 → "Yüksek Sismik İnatçılık" (High Seismic Stubbornness)</strong>. Geleneksel Omori–Utsu literatüründe <em>yalnızca artçı sayısı (K) mekanizma göstergesi</em> olarak kullanılırken, <strong>p değeri enerjinin boşalma hızını</strong> ölçen bağımsız bir boyutu temsil eder. Bu iki parametre <em>ortogonal</em> bilgi taşır:
-          </p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-            <div style="background:rgba(34,197,94,0.08);border-radius:6px;padding:9px 12px;">
-              <div style="font-size:0.79em;font-weight:700;color:#4ade80;margin-bottom:4px;">K → "Ne kadar artçı?"</div>
-              <p style="font-size:0.79em;color:#94a3b8;margin:0;line-height:1.6;">Kırılma alanının stres heterojenliğini ve mekanizma türünü yansıtır. Intraslab: yüksek stres düşümü → fazla ikincil kırılma → K büyük. Interface: düşük stres düşümü → K küçük. <em>Mekanizma diagnostiği.</em></p>
-            </div>
-            <div style="background:rgba(59,158,255,0.08);border-radius:6px;padding:9px 12px;">
-              <div style="font-size:0.79em;font-weight:700;color:#93c5fd;margin-bottom:4px;">p → "Ne kadar hızlı biter?"</div>
-              <p style="font-size:0.79em;color:#94a3b8;margin:0;line-height:1.6;">Bölgesel jeoisı, kama geometrisi ve sismojenik koşulların ürünüdür. Mekanizmadan büyük ölçüde bağımsızdır. <em>Tehlike penceresinin zaman uzunluğunu</em> belirler. Düşük p → enerji yavaş boşalır → "inatçı" sekans.</p>
-            </div>
-          </div>
-          <div style="background:rgba(168,85,247,0.1);border-left:3px solid rgba(168,85,247,0.5);border-radius:0 6px 6px 0;padding:8px 12px;font-size:0.83em;color:#cbd5e1;line-height:1.7;">
-            <strong style="color:#c084fc;">Mindanao 2026 Sismik İnatçılık Profili:</strong>
-            K = 15.0 (düşük, interface ile uyumlu) + p = 0.49 (çok düşük, inatçı).
-            Bu kombinasyon yeni bir sınıflandırma önermektedir: <em>"Düşük Üretkenlik–Yüksek İnatçılık"</em> sekans tipi.
-            Megathrust arayüzünde Cotabato kama geometrisinin kilitleme derinliği ve düşük bölgesel jeoisının yarattığı özel sismojenik koşulların parmak izi olabilir.
-            p(t) → 1.0 eşiğine ulaşılması bu koşulların normalleştiğinin göstergesidir.
-          </div>
-        </div>
-
-        <!-- YENİ AÇILIM 2: Shimazaki veri kısıtı ve modern test -->
-        <div style="margin-top:12px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:12px 16px;">
-          <div style="font-size:0.76em;font-weight:700;color:#fbbf24;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Shimazaki (1978/1990) — Veri Kısıtları ve Modern Yeniden Test</div>
-          <p style="font-size:0.855em;color:#cbd5e1;line-height:1.75;margin:0 0 9px;">
-            Shimazaki'nin öncü çalışmaları iki farklı veri dönemine dayanmaktadır:
-          </p>
-          <ul style="font-size:0.84em;color:#cbd5e1;line-height:1.75;margin:0 0 10px;padding-left:18px;">
-            <li><strong>Shimazaki (1978):</strong> JMA 1926–1967 kataloğu + Usami tarihsel verileri. Levha içi–levha sınırı zamansal korelasyonu. Okyanusal artçı kaydı eksik — offshore Mc çok yüksekti.</li>
-            <li><strong>Yamanaka &amp; Shimazaki (1990):</strong> Japon yayı kara istasyonları ağı. "4× K" saptaması için kullanılan eşik büyüklükleri düşük-Mc bölgelerini tam temsil etmiyordu. 1997 öncesinde offshore artçı tespiti yetersizdi (Ishibe &amp; Shimazaki, 2009).</li>
-          </ul>
-          <div style="background:rgba(245,158,11,0.1);border-left:3px solid rgba(245,158,11,0.5);border-radius:0 6px 6px 0;padding:8px 12px;font-size:0.83em;color:#cbd5e1;line-height:1.7;">
-            <strong style="color:#fbbf24;">Günümüz Avantajı:</strong>
-            2026 Mindanao sekansında N = 481 olay, Mc = 3.5 ile yüksek çözünürlüklü bir artçı kataloğu mevcuttur.
-            Nelder-Mead nonlineer en küçük kareler ile optimize edilen K = 15.0, c ≈ 0.0001, <strong>p = 0.4917</strong> parametreleri,
-            1990'ın kaba saptamalarını <em>günümüz katalog kalitesiyle</em> sınaya olanak vermektedir.
-            Bu, "4× K intraslab" iddiasının Filipin yayında ilk kez yüksek çözünürlüklü veriyle test edildiği çalışmalardan birini oluşturmaktadır.
-          </div>
-        </div>
-
-        <!-- YENİ AÇILIM 3: Doktora Final Projesi Önerisi -->
-        <div style="margin-top:12px;background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.3);border-radius:8px;padding:12px 16px;">
-          <div style="font-size:0.76em;font-weight:700;color:#22d3ee;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Araştırma Önerisi — Doktora Final Projesi</div>
-          <div style="font-size:0.9em;font-weight:700;color:#e2e8f0;margin-bottom:8px;line-height:1.5;">
-            "2020–2026 Büyük Deprem Sekanslarında Omori-p Parametresi: Interface vs. Intraslab Mekanizma Ayrımı İçin Karşılaştırmalı Analiz"
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
-            <div style="background:rgba(6,182,212,0.08);border-radius:6px;padding:8px 10px;">
-              <div style="font-size:0.73em;font-weight:700;color:#22d3ee;margin-bottom:4px;">Adım 1 — Vaka Seçimi</div>
-              <p style="font-size:0.78em;color:#94a3b8;margin:0;line-height:1.55;">2020–2026 arası Mw ≥ 7.0 depremleri mekanizma bazında sınıflandır (interface / intraslab / intraplate). Mindanao 2023 Mw 7.6 (referans) ve 2026 Mw 7.8 (test vakası) dahil.</p>
-            </div>
-            <div style="background:rgba(6,182,212,0.08);border-radius:6px;padding:8px 10px;">
-              <div style="font-size:0.73em;font-weight:700;color:#22d3ee;margin-bottom:4px;">Adım 2 — Parametre Kestirimi</div>
-              <p style="font-size:0.78em;color:#94a3b8;margin:0;line-height:1.55;">Her sekans için Nelder-Mead nonlineer LS ile K, c ve p optimize et. Mc her katalog için ayrı MLE ile belirle. Bootstrap ile güven aralığı hesapla.</p>
-            </div>
-            <div style="background:rgba(6,182,212,0.08);border-radius:6px;padding:8px 10px;">
-              <div style="font-size:0.73em;font-weight:700;color:#22d3ee;margin-bottom:4px;">Adım 3 — Hipotez Testi</div>
-              <p style="font-size:0.78em;color:#94a3b8;margin:0;line-height:1.55;">Shimazaki'nin "K<sub>intraslab</sub> ≈ 4 × K<sub>iface</sub>" iddiasını modern katalogla test et. p-değeri kalıcılığının mekanizma sınıflamasına katkısını istatistiksel olarak değerlendir.</p>
-            </div>
-          </div>
-          <div style="background:rgba(6,182,212,0.1);border-left:3px solid rgba(6,182,212,0.5);border-radius:0 6px 6px 0;padding:8px 12px;font-size:0.83em;color:#cbd5e1;line-height:1.7;">
-            <strong style="color:#22d3ee;">Akademik Katkı:</strong>
-            Shimazaki (1978)'in "yükleme evresi" teorisini, 2026 sismolojisinin "sönümlenme evresi" verileriyle (Phase III analizi) ilk kez birleştiren çalışma olacaktır.
-            Sonuç: sismik inatçılık (p &lt; 0.7) kavramını, mekanizma bağımsız bir <em>tehlike penceresi uzatıcısı</em> olarak kodifiye eden
-            <strong>"Seviye 4" karar destek çatısı</strong> — hasarlı binalara giriş izni gibi hayati kararlar için sayısal sismolojik triyaj zemini.
-          </div>
-        </div>
-
-      </div>
 
       <p style="font-size:.9em;font-weight:600;color:#7ecbff;margin:12px 0 6px;">
         D. Mekansal Fraktal Boyut D<sub>s</sub> — Grassberger-Procaccia (1983)
@@ -1310,7 +1051,7 @@ ${body}</div></body></html>`;
       <p style="font-size:.87em;">
         Pencere: <strong>100 ardışık olay</strong>, kaydırma adımı: <strong>10 olay</strong>.
         Her pencerede b(t), D<sub>s</sub>(t), D<sub>t</sub>(t) hesaplanır.
-        Mevcut N=481; 3 tam pencere mevcut — izleme sürmekte.
+        Mevcut N=814; 3 tam pencere mevcut — izleme sürmekte.
         Phase I/II/III geçiş noktaları b–D korelasyonunun işaret değiştirdiği andır.
       </p>
 
@@ -1394,8 +1135,8 @@ ${body}</div></body></html>`;
         <li>Hipocenter derinliği 55.2 km, W-faz santroid derinliği 35.5 km; enerji geniş alana yayılmış, 2000 km'yi aşan mesafelerde hissedilmiştir. Santroid derinliği, Cotabato arayüzü (megathrust) üzerinde bir levha sınırı depremi ile tutarlıdır.</li>
         <li>116 EMSC tanık raporu, yakın alandan uzak alana uzanan sistematik yoğunluk azalmasını belgelemekte ve teorik sönümleme modelleriyle uyumludur.</li>
         <li>Yerel tsunami uyarısı verilen depremde okyanus geneli yıkıcı tsunami potansiyeli düşük değerlendirilmiştir.</li>
-        <li>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık <strong>b=0.5937</strong>; iki segmentli analiz M3.5–5.0 b₁=0.829, M5.0+ b₂=1.12. Slope break M5.0'de mb doyumundan kaynaklanmakta olup iki ayrı katalog nüfusunu yansıtmaktadır.</li>
-        <li>FTLS (Gulia vd. 2024): b/b<sub>ref</sub> &lt; 0.90 → <strong style="color:#ef9a9a;">🔴 KIRMIZI durum</strong> — tüm b<sub>ref</sub> senaryolarında gerilme boşalımı tamamlanmamış; p = 0.4917 (Yüksek Kalıcılık) ile birleşince sismik risk aylarca masada kalacaktır.</li>
+        <li>Gutenberg-Richter analizi (Mc=3.5, Aki 1965): tam aralık <strong>b=0.5851</strong>; iki segmentli analiz M3.5–5.0 b₁=0.829, M5.0+ b₂=1.12. Slope break M5.0'de mb doyumundan kaynaklanmakta olup iki ayrı katalog nüfusunu yansıtmaktadır.</li>
+        <li>FTLS (Gulia vd. 2024): b/b<sub>ref</sub> &lt; 0.90 → <strong style="color:#ef9a9a;">🔴 KIRMIZI durum</strong> — tüm b<sub>ref</sub> senaryolarında gerilme boşalımı tamamlanmamış; p = 0.4189 (Yüksek Kalıcılık) ile birleşince sismik risk aylarca masada kalacaktır.</li>
       </ul>
     </div>
 
@@ -1460,7 +1201,7 @@ ${body}</div></body></html>`;
                   font-size:.84em;color:#ef9a9a;margin-bottom:8px;">
         <strong>Kritik Güzergahlar:</strong> Koronadal–General Santos kara yolu (km 14–28),
         Digos–Kiblawan dağ yolu, Mt. Parker etekleri (Tulunan–Malapatan bölgesi).
-        p = 0.4917 ile 90 gün boyunca devam eden M4.5+ artçılar, muson yağışlarıyla
+        p = 0.4189 ile 90 gün boyunca devam eden M4.5+ artçılar, muson yağışlarıyla
         birleşince heyelan tetikleme riskini artırmaktadır.
       </div>
 
@@ -1478,30 +1219,11 @@ ${body}</div></body></html>`;
     <!-- Sivil Savunma -->
     <div class="review-section-title">6d. Sivil Savunma Tavsiyeleri — Yapısal Yorulma ve Risk Yönetimi</div>
     <p class="review-body-text">
-      Düşük p = 0.4917 (Yüksek Sismik Kalıcılık) ve düşük b=0.5937 (FTLS KIRMIZI)
+      Düşük p = 0.4189 (Yüksek Sismik Kalıcılık) ve düşük b=0.5851 (FTLS KIRMIZI)
       kombinasyonu, zaten hasarlı yapılara yönelik ek M6.0+ artçı riskini aylarca
       sürdürmektedir. Yapısal yorulma (structural fatigue) çerçevesinde
       aşağıdaki operasyonel önlemler acil olarak değerlendirilmelidir.
     </p>
-
-    <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:13px 16px;margin:10px 0 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#fca5a5;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:7px;">⚠ Tahliye Merkezi Güvenilirliği — Bölgesel Ders (Heidarzadeh vd., 2025)</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0 0 12px;">Heidarzadeh vd. (2025), Filipinler'in doğusunda Siargao Adası'nın Dapa belediyesi için yaptıkları tsunami risk modellemesinde, Mw 8.5 senaryosunda <strong>resmi tahliye merkezinin tsunami tarafından su altında kalacağını</strong> saptamıştır (218 bina etkilenir; yoğun bölgede yol erişimi kesilir). Bu bulgu Cotabato Hendeği kıyıları için de kritik bir ilke ortaya koyar: <em>kıyı yakınındaki tahliye merkezleri büyük senaryo depremlerinde işlevini yitirebilir.</em> General Santos, Glan ve Maasim kıyılarındaki tahliye merkezlerinin konumsal yeterliliği yetkili kurumlar tarafından gözden geçirilmelidir.</p>
-      <div style="border-top:1px solid rgba(239,68,68,0.2);padding-top:10px;">
-        <div style="font-size:0.75em;font-weight:700;color:#fca5a5;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;">Mühendislik Eşikleri — Suppasri vd. (2013) · Heidarzadeh vd. (2025)</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <div style="background:rgba(239,68,68,0.1);border-radius:6px;padding:9px 12px;text-align:center;">
-            <div style="font-size:1.5em;font-weight:700;color:#ef4444;line-height:1;">≥ 2.0 m</div>
-            <div style="font-size:0.75em;color:#94a3b8;margin-top:4px;">Su basma derinliği eşiği<br><strong style="color:#fca5a5;">Binalarda kesin hasar</strong></div>
-          </div>
-          <div style="background:rgba(245,166,35,0.1);border-radius:6px;padding:9px 12px;text-align:center;">
-            <div style="font-size:1.5em;font-weight:700;color:#f5a623;line-height:1;">≥ 0.25 m</div>
-            <div style="font-size:0.75em;color:#94a3b8;margin-top:4px;">Yol su derinliği eşiği<br><strong style="color:#fde68a;">Araç geçişi imkânsız</strong></div>
-          </div>
-        </div>
-        <p style="font-size:0.78em;color:#64748b;margin:8px 0 0;line-height:1.6;">Bu eşikler afet sonrası müdahale planlamasında kritiktir: 0.25 m su derinliğinde yollar kapanmakta, ambulans ve kurtarma ekiplerinin ulaşımı kesintiye uğramaktadır. Deprem + tsunami birlikte gerçekleştiğinde, sarsıntı hasarı gören yollar çok daha düşük su derinliklerinde geçilemez hale gelebilir.</p>
-      </div>
-    </div>
     <div class="rec-card" style="border-color:rgba(244,67,54,.5);">
       <h4>🏗️ Yapısal Yorulma — 90 Günlük Risk Yönetimi</h4>
       <ul style="line-height:2.0;">
@@ -1540,13 +1262,13 @@ ${body}</div></body></html>`;
           <strong>FTLS İzleme Eşiği:</strong>
           b/b<sub>ref</sub> ≥ 0.90 (SARI) gerçekleşene dek kırmızı alarm
           protokolü sürdürülmeli. Bu eşiğin aşılması beklenen süre:
-          p = 0.4917 ile <strong>30–60 gün sonra</strong> (N ≈ 600–800 olaya ulaşıldığında).
+          p = 0.4189 ile <strong>30–60 gün sonra</strong> (N ≈ 600–800 olaya ulaşıldığında).
         </li>
       </ul>
       <div style="background:rgba(244,67,54,.08);border-radius:6px;padding:10px 14px;
                   margin-top:10px;font-size:.85em;">
         <strong style="color:#ef9a9a;">Kombinasyon Riski:</strong>
-        b=0.5937 + p = 0.4917 + FTLS KIRMIZI + muson mevsimi + sıvılaşma potansiyeli =
+        b=0.5851 + p = 0.4189 + FTLS KIRMIZI + muson mevsimi + sıvılaşma potansiyeli =
         <strong>yüksek müdahale önceliği</strong>.
         Normal koşullar altında 30 gün içinde sönümlenecek bir sekans,
         bu parametrelerle <strong>90+ güne yayılmaktadır.</strong>
@@ -1556,14 +1278,14 @@ ${body}</div></body></html>`;
     <!-- 6b. 90 Gunluk Risk Ongorüsü -->
     <div class="review-section-title">6b. Gelecek 90 Günlük Sismik Risk Öngörüsü</div>
     <p class="review-body-text">
-      Hesaplanan parametre seti (Omori-Utsu K = 15.0236, p = 0.4917; G-R b=0.5937, Mc=3.5;
+      Hesaplanan parametre seti (Omori-Utsu K = 15.3513, p = 0.4189; G-R b=0.5851, Mc=3.5;
       FTLS <span style="color:#ef9a9a;font-weight:600;">🔴 KIRMIZI</span>) kullanılarak
       artçı sarsıntı dizisinin 90 günlük beklentisi niceliksel olarak modellenmiştir.
     </p>
 
     <!-- Omori Hız Projeksiyonu -->
     <div class="method-card">
-      <h4>📉 Omori-Utsu Hız Projeksiyonu — p = 0.4917</h4>
+      <h4>📉 Omori-Utsu Hız Projeksiyonu — p = 0.4189</h4>
       <table class="review-table" style="font-size:.87em;table-layout:fixed;margin-top:8px;">
         <colgroup><col style="width:22%"><col style="width:22%"><col style="width:22%"><col style="width:34%"></colgroup>
         <thead>
@@ -1587,7 +1309,7 @@ ${body}</div></body></html>`;
         </tbody>
       </table>
       <p style="font-size:.83em;color:#94a3b8;margin-top:8px;">
-        p = 0.4917 &lt; 0.7 → sönümlenme normalin <strong>%36 altında</strong>.
+        p = 0.4189 &lt; 0.7 → sönümlenme normalin <strong>%36 altında</strong>.
         p=1.0 (normal) senaryosunda aynı dönem için ~180 olay beklenirdi;
         yavaş sönümlenme ~2.8× daha uzun tehlike penceresi yaratmaktadır.
       </p>
@@ -1599,7 +1321,7 @@ ${body}</div></body></html>`;
       <table class="review-table" style="font-size:.87em;table-layout:fixed;margin-top:8px;">
         <colgroup><col style="width:14%"><col style="width:20%"><col style="width:20%"><col style="width:46%"></colgroup>
         <thead>
-          <tr><th>M eşiği</th><th>b=0.5937 beklenti</th><th>b₂=1.12 beklenti</th><th>Sismik bağlam</th></tr>
+          <tr><th>M eşiği</th><th>b=0.5851 beklenti</th><th>b₂=1.12 beklenti</th><th>Sismik bağlam</th></tr>
         </thead>
         <tbody>
           <tr><td>M ≥ 4.0</td><td>~241</td><td>~175</td><td>Yapı hasarı için alt sınır; çok sık</td></tr>
@@ -1615,14 +1337,14 @@ ${body}</div></body></html>`;
         </tbody>
       </table>
       <div style="font-size:.83em;color:#94a3b8;margin-top:8px;line-height:1.6;">
-        <strong>b=0.5937</strong> (tüm aralık, üst tahmin) ·
+        <strong>b=0.5851</strong> (tüm aralık, üst tahmin) ·
         <strong>b₂=1.12</strong> (M5.0+ segmenti, alt tahmin) ·
         İki sütun aralığı gerçek beklentiyi kapsamaktadır.
         Halihazırda gözlenen <strong>3 adet M6+</strong>,
         <a href="https://en.wikipedia.org/wiki/Bath%27s_law" target="_blank"
            style="color:#90caf9;">Bath Yasası</a>
         beklentisini (en büyük artçı ≈ Mw 7.8 − 1.2 = <strong>Mw 6.6</strong>) karşılamıştır;
-        ancak b=0.5937 ve FTLS KIRMIZI statüsü ek büyük artçıların olabileceğine işaret etmektedir.
+        ancak b=0.5851 ve FTLS KIRMIZI statüsü ek büyük artçıların olabileceğine işaret etmektedir.
       </div>
     </div>
 
@@ -1635,7 +1357,7 @@ ${body}</div></body></html>`;
           M6.0+ olasılığı aylık ≈ 4–6 olay.</li>
         <li><strong>Orta dönem (30–90 gün):</strong> Günlük hız 3–6 seviyesine gerilerken
           toplam ek 235 olay (M≥3.5) bekleniyor.
-          p = 0.4917 nedeniyle arka plan seviyesine dönüş gecikmeli — normal depremlere kıyasla
+          p = 0.4189 nedeniyle arka plan seviyesine dönüş gecikmeli — normal depremlere kıyasla
           yaklaşık 3× daha yavaş sönümlenme.</li>
         <li><strong>Bath Yasası durumu:</strong> Mevcut en büyük artçı M6.7 (Bath beklentisi M6.6) —
           bu eşik karşılandı. Ancak FTLS KIRMIZI + düşük b + düşük p kombinasyonu
@@ -1658,12 +1380,12 @@ ${body}</div></body></html>`;
              alt="Gutenberg-Richter G-R Grafiği">
         <figcaption style="font-size:.78em;color:#90a4ae;margin-top:4px;text-align:center;">
           Şekil 5b-1 — Gutenberg-Richter Frekans-Büyüklük İlişkisi.
-          b=0.5937 (tam aralık, Aki 1965); b₁=0.829 (M3.5–5.0, mb),
+          b=0.5851 (tam aralık, Aki 1965); b₁=0.829 (M3.5–5.0, mb),
           b₂=1.12 (M5.0+, Mw). Kırılma noktası M5.0'de m<sub>b</sub>
           doyumundan kaynaklanmaktadır (Scordilis 2006).
           Mindanao artçı dizisi, 7–15 Haziran 2026.
           <strong>Öncel, A.O. (2026)</strong>.<br>
-          <span style="font-size:.85em;color:#90a4b4;font-style:italic;">Figure 5b-1 — Gutenberg-Richter Frequency-Magnitude Relationship. b=0.5937 (full range, Aki 1965); b₁=0.829 (M3.5–5.0, mᵇ), b₂=1.12 (M5.0+, Mw). The break point originates from m<sub>b</sub> saturation at M5.0 (Scordilis 2006). Mindanao aftershock sequence, June 7–15, 2026. Öncel, A.O. (2026).</span>
+          <span style="font-size:.85em;color:#90a4b4;font-style:italic;">Figure 5b-1 — Gutenberg-Richter Frequency-Magnitude Relationship. b=0.5851 (full range, Aki 1965); b₁=0.829 (M3.5–5.0, mᵇ), b₂=1.12 (M5.0+, Mw). The break point originates from m<sub>b</sub> saturation at M5.0 (Scordilis 2006). Mindanao aftershock sequence, June 7–15, 2026. Öncel, A.O. (2026).</span>
         </figcaption>
       </figure>
     </div>
@@ -1697,57 +1419,6 @@ ${body}</div></body></html>`;
       D<sub>t</sub> arasındaki korelasyonun işaret değiştirmesi, sismik çevrim
       fazını (gerilme birikimi/boşalımı) belirler.
     </p>
-
-    <!-- Shimazaki 1978 + Ishibe 2009 bağlamı -->
-    <div style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.22);border-radius:10px;padding:14px 18px;margin:0 0 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#f5a623;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:9px;">Sismik Çevrim Teorisi — Tarihsel Referans Çerçevesi</div>
-
-      <div style="font-size:0.84em;font-weight:600;color:#fde68a;margin-bottom:5px;">① Plakaiçi–İnterplaka Sismisitesi Bağlantısı (Shimazaki, 1978)</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.7;margin:0 0 12px;">Shimazaki (1978), Kuzeydoğu Japonya Tohoku bölgesinde son 100 yılın tüm plakaiçi (intraplate) aktif dönemlerinin, Japonya Hendeği boyunca gerçekleşen <strong>büyük interplaka depremlerle istatistiksel olarak bağıntılı</strong> olduğunu (%96.5 güven düzeyi) kanıtlamıştır. Kilit bulgular:</p>
-      <ul style="font-size:0.875em;color:#cbd5e1;line-height:1.8;margin:0 0 10px;padding-left:18px;">
-        <li>Büyük interplaka depremlerden <strong>10–15 yıl önce sismik sessizlik (quiescence)</strong> dönemi gözlemlenmiştir.</li>
-        <li>M ≥ 5.8 plakaiçi depremlerin <strong>¼'ü</strong> büyük interplaka olaydan &lt;5 yıl önce gerçekleşmiştir (öncü aktivasyon).</li>
-        <li>Geriye kalan <strong>½'si</strong> büyük olaydan &lt;10 yıl sonra meydana gelmiştir (tetiklenmiş aktivasyon).</li>
-        <li>Mekanizma: Okyanus levhasının yükleme-boşaltma döngüsü, kıta içi deprem oluşumunu hem tetikler hem de baskılar.</li>
-      </ul>
-      <p style="font-size:0.855em;color:#94a3b8;line-height:1.65;margin:0 0 12px;font-style:italic;">Mindanao bağlamı: 2026 Mw 7.8 sonrası gözlemlenen bölgesel sismik aktivasyon, Cotabato subdüksiyon sisteminin boşaltma-sonrası gerilme yeniden dağılımına (Coulomb stres transferi) bağlı kısa süreli plakaiçi tetiklenmesiyle kısmen açıklanabilir.</p>
-
-      <div style="font-size:0.84em;font-weight:600;color:#fde68a;margin-bottom:5px;">② Karakteristik Deprem Modeli ve Inter-sismik Sessizlik (Ishibe &amp; Shimazaki, 2009)</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.7;margin:0 0 8px;">Ishibe &amp; Shimazaki (2009), Japonya'daki dokuz büyük interplaka kaynak bölgesinde gözlenen sismisiteyi, karakteristik depremin (CE) tekerrür hızından G-R ilişkisiyle beklenenle karşılaştırmıştır. <strong>Tüm bölgelerde</strong> gözlemlenen küçük-orta büyüklük depremi sayısı, beklenenin çok altında kalmış; inter-sismik dönemin <em>anormal biçimde sakin</em> olduğu belgelenmiştir. Off-Tokachi bölgesinde iki ardışık Mw 8+ olay arasındaki tam bir sismik döngüde büyüklük dağılımı, karakteristik deprem ile diğer olaylar arasında <strong>1.1 büyüklük farkı</strong> içermektedir.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:8px;">
-        <div style="background:rgba(245,166,35,0.1);border-radius:7px;padding:9px 12px;text-align:center;">
-          <div style="font-size:1.3em;font-weight:700;color:#f5a623;">9 / 9</div>
-          <div style="font-size:0.73em;color:#94a3b8;margin-top:3px;">Tüm interplaka kaynak<br>bölgelerinde G-R altı sismisiite</div>
-        </div>
-        <div style="background:rgba(245,166,35,0.1);border-radius:7px;padding:9px 12px;text-align:center;">
-          <div style="font-size:1.3em;font-weight:700;color:#fbbf24;">ΔM ≈ 1.1</div>
-          <div style="font-size:0.73em;color:#94a3b8;margin-top:3px;">CE ile 2. büyük olay<br>arasındaki büyüklük farkı</div>
-        </div>
-        <div style="background:rgba(245,166,35,0.1);border-radius:7px;padding:9px 12px;text-align:center;">
-          <div style="font-size:1.3em;font-weight:700;color:#f5a623;">&gt;80%</div>
-          <div style="font-size:0.73em;color:#94a3b8;margin-top:3px;">Sismik döngünün kataloğa<br>giren oranı (çoğu bölge)</div>
-        </div>
-      </div>
-      <div style="margin-top:12px;border-top:1px solid rgba(245,166,35,0.2);padding-top:10px;">
-        <div style="font-size:0.78em;font-weight:700;color:#fde68a;margin-bottom:7px;">③ Tekerrür Süreleri ve Zaman-Öngörülebilir Model (Shimazaki &amp; Nakata, 1980)</div>
-        <p style="font-size:0.855em;color:#cbd5e1;line-height:1.7;margin:0 0 8px;">Ishibe &amp; Shimazaki (2009)'daki Tablo 1, Japonya'nın dokuz büyük interplaka kaynak bölgesinde ölçülen ortalama tekerrür sürelerini sunmaktadır: off-Shikotan ve off-Nemuro <strong>72.2 yıl</strong>, off-Tokachi <strong>72.2 yıl</strong>, off-Miyagi <strong>37.1 yıl</strong>, Tonankai <strong>86.4 yıl</strong>, Nankai <strong>90.1 yıl</strong>. Bu veriler, sığ interplaka kırılmaları için tipik <strong>~72–114 yıllık</strong> tekerrür penceresiyle örtüşmektedir. Shimazaki &amp; Nakata (1980) "zaman-öngörülebilir" (time-predictable) modelde, dikey yükselim verilerini kullanarak bir sonraki büyük Nankai depreminin zamanını başarıyla öngörmüştür. Bu yaklaşım, Cotabato Hendeği için GPS tabanlı yükselim gözlemlerinin birikmesiyle benzer öngörü çalışmalarının mümkün olabileceğine işaret etmektedir.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-          <div style="background:rgba(245,166,35,0.1);border-radius:6px;padding:8px 10px;text-align:center;">
-            <div style="font-size:1.2em;font-weight:700;color:#f5a623;">37–114 yıl</div>
-            <div style="font-size:0.72em;color:#94a3b8;margin-top:3px;">Sığ interplaka<br>tekerrür aralığı (Japonya)</div>
-          </div>
-          <div style="background:rgba(245,166,35,0.1);border-radius:6px;padding:8px 10px;text-align:center;">
-            <div style="font-size:1.2em;font-weight:700;color:#fbbf24;">~100–150 yıl</div>
-            <div style="font-size:0.72em;color:#94a3b8;margin-top:3px;">Cotabato tahmini<br>(30–50 mm/yıl kayma)</div>
-          </div>
-          <div style="background:rgba(245,87,108,0.1);border-radius:6px;padding:8px 10px;text-align:center;">
-            <div style="font-size:1.2em;font-weight:700;color:#f5576c;">~1000 yıl</div>
-            <div style="font-size:0.72em;color:#94a3b8;margin-top:3px;">Süper döngü<br>Mw 9.0 (Satake, 2015)</div>
-          </div>
-        </div>
-      </div>
-      <div style="font-size:0.73em;color:#64748b;margin-top:10px;">Kaynak: Shimazaki, K. (1978). BSSA 68(1), 181–192 · Ishibe, T. &amp; Shimazaki, K. (2009). EPS 61, 1041–1052 · Shimazaki, K. &amp; Nakata, T. (1980). GRL 7, 279–282. Japonya hendek analogları; Cotabato sistemine doğrudan değil, metodolojik kıyaslama olarak uygulanmalıdır.</div>
-    </div>
       <blockquote style="border-left:3px solid rgba(255,167,38,.4);margin:10px 0 10px 8px;padding:6px 14px;font-size:.84em;color:#ffcc80;font-style:italic;line-height:1.6;text-align:justify;">
         Baker, Bradley &amp; Stafford (2021, s. 31): <em>"Elastic rebound theory essentially states that a region of the Earth's crust will be gradually loaded as a result of tectonic processes. The shear stress at a given location will gradually increase as a result of this loading. At some point, this accumulated stress exceeds the frictional resistance of a fault, and an earthquake initiates."</em>
       </blockquote>
@@ -1802,7 +1473,7 @@ ${body}</div></body></html>`;
       <div style="background:rgba(255,167,38,.1);border:1px solid rgba(255,167,38,.35);
                   border-radius:8px;padding:14px 18px;margin-top:14px;">
         <strong style="color:#ffcc80;font-size:.95em;">
-          📍 Mindanao 2026 — Mevcut Durum (Pencere 3, N=481)
+          📍 Mindanao 2026 — Mevcut Durum (Pencere 3, N=814)
         </strong>
         <table style="width:100%;border-collapse:collapse;font-size:.84em;margin:10px 0 6px;">
           <tr>
@@ -1824,7 +1495,7 @@ ${body}</div></body></html>`;
           </tr>
         </table>
         <p style="font-size:.83em;color:#94a3b8;margin:6px 0 0;">
-          N=481 ile yalnızca 3 tam pencere mevcut (100 olay / 10 adım).
+          N=814 ile yalnızca 3 tam pencere mevcut (100 olay / 10 adım).
           Güvenilir b–D<sub>t</sub> eğrisi için minimum <strong>N ≈ 500</strong> ve
           <strong>5+ pencere</strong> gerekmektedir.
           Katalog günlük güncellendikçe korelasyon işaretinin belirlenmesi mümkün olacak;
@@ -1896,7 +1567,7 @@ ${body}</div></body></html>`;
              alt="Mindanao Logic Tree PSHA">
         <figcaption style="font-size:.78em;color:#90a4ae;margin-top:4px;text-align:center;">
           Şekil 6e-2 — Logic Tree PSHA: 27 Dal, Epistemik Belirsizlik Fraktilleri
-          (P1: b=0.5937/0.90/1.12 | P2: Interface/+0.5σ/Intraslab |
+          (P1: b=0.5851/0.90/1.12 | P2: Interface/+0.5σ/Intraslab |
           P3: M<sub>max</sub>=7.8/8.0/8.2 | Baker, Bradley &amp; Stafford 2021 §7.3)
         </figcaption>
       </figure>
@@ -1904,7 +1575,7 @@ ${body}</div></body></html>`;
 
     <div class="info-note" style="border-color:rgba(229,57,53,.4);background:rgba(229,57,53,.06);">
       <strong>🔴 Logic Tree FTLS Etkisi (27 Dal, Baker 2021 §7.3):</strong>
-      b=0.5937 (FTLS Kırmızı) dalında %10/50yr tasarım ivmesi
+      b=0.5851 (FTLS Kırmızı) dalında %10/50yr tasarım ivmesi
       <strong>0.771 g</strong>;
       bölgesel arka planda (b=0.90) ise
       <strong>0.695 g</strong> olarak hesaplanmıştır.
@@ -1920,210 +1591,6 @@ ${body}</div></body></html>`;
       killed approximately 8.5 million people and caused $2 trillion of damage."</em>
       — PSHA bu riskin olasılıksal çerçevesini sağlar.
     </blockquote>
-
-    <div class="review-section-title">5d. Kozismik Yükselim (Coseismic Uplift) — Saha Gözlemi ve Sismotektonik Yorum</div>
-    <p class="review-body-text">7 Haziran 2026 Mindanao Mw 7.8 depremi, sadece titreşim kayıtlarıyla değil; kıyı şeridinde kalıcı morfolojik değişiklikler şeklinde de kendini göstermiştir. Dr. Ma. Cleofas O.'nun LinkedIn paylaşımında aktardığı saha gözlemi — Jose Abad Santos, Barangay Kitayo'da denizin sahilden çekilmesi ve bir daha geri dönmemesi — sismoloji literatüründe <strong>kozismik yükselim (coseismic uplift)</strong> olarak tanımlanan fenomenin somut bir örneğidir. Yer kabuğunun deprem sırasında (kozismik olarak) kalıcı biçimde yükselmesi, sahil şeridini deniz seviyesinin üzerine taşımakta ve su çekilmesini kalıcı kılmaktadır.</p>
-
-    <div class="analysis-card" style="border-left:3px solid rgba(59,158,255,0.6);background:rgba(59,158,255,0.06);border-radius:8px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.82em;font-weight:700;color:#7ecbff;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Saha Gözlemi — Birincil Tanıklık</div>
-      <p style="margin:0 0 6px;font-size:0.92em;color:#ddeeff;line-height:1.65;">
-        <strong>Yer:</strong> Jose Abad Santos, Barangay Kitayo — Mindanao, Filipinler<br>
-        <strong>Kaynak:</strong> Dr. Ma. Cleofas O. (LinkedIn paylaşımı; görsel: <em>vanished.jpg</em>)<br>
-        <strong>Gözlem:</strong> Deprem sonrasında deniz sahilden çekilmiş ve <em>kalıcı olarak geri dönmemiştir.</em><br>
-        <strong>Sismolojik Sınıflandırma:</strong> Tsunami çekilmesi değil, yer kabuğunun kalıcı dikey deformasyonu (kozismik yükselim).
-      </p>
-    </div>
-
-    <div style="text-align:center;margin:18px 0 6px;">
-      <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxdfvJTSGemWmsOVZRVupSQ9WqKl3uP6XW1qQuyL19S3CSeaNjFUwmaPHad8bMo7RskTvW7UTLpksRuW2Je-aif3wjYeWKVXoHxShBzEU-GUEqYZBvy3JnSUBiCz_DVIL2YG6J7twVvwKQ32_O8Pnjck7CEddz787EsSlCp4F-SyDMjOexDmaDdvzqNn4/s997/vanished.jpg" target="_blank">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxdfvJTSGemWmsOVZRVupSQ9WqKl3uP6XW1qQuyL19S3CSeaNjFUwmaPHad8bMo7RskTvW7UTLpksRuW2Je-aif3wjYeWKVXoHxShBzEU-GUEqYZBvy3JnSUBiCz_DVIL2YG6J7twVvwKQ32_O8Pnjck7CEddz787EsSlCp4F-SyDMjOexDmaDdvzqNn4/s600/vanished.jpg"
-             alt="Jose Abad Santos, Barangay Kitayo — Kozismik Yükselim Sonrası Kıyı Şeridi"
-             style="max-width:520px;width:100%;border-radius:8px;border:1px solid rgba(59,158,255,0.3);box-shadow:0 4px 18px rgba(0,0,0,0.5);" />
-      </a>
-    </div>
-    <div class="figure-caption" style="text-align:center;font-size:0.83em;color:#94a3b8;margin:6px auto 18px;max-width:540px;line-height:1.6;">
-      <strong>Şekil 5d.1 —</strong> Jose Abad Santos, Barangay Kitayo (Mindanao, Filipinler). 7 Haziran 2026 Mw 7.8 depremi sonrasında sahil şeridinin kalıcı olarak genişlemesi: kozismik yükselim (coseismic uplift) sonucu deniz seviyesinin altında kalan alanlar karaya dönüşmüş; sakinler suyun bir daha geri gelmediğini bildirmiştir. Tekne iskelesi, daha önce su içinde iken şimdi kuru zemin üzerinde kalmaktadır. Kaynak: Dr. Ma. Cleofas O. (LinkedIn, 2026).
-    </div>
-
-    <!-- GMA News Video + Zaman Damgaları -->
-    <div style="margin:20px 0 24px;background:rgba(0,0,0,0.35);border:1px solid rgba(59,158,255,0.2);border-radius:12px;overflow:hidden;">
-      <div style="padding:12px 16px 10px;background:rgba(59,158,255,0.08);border-bottom:1px solid rgba(59,158,255,0.15);display:flex;align-items:center;gap:10px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M10 15l5.19-3L10 9v6z" fill="#ef4444"/><path d="M21.58 7.19a2.76 2.76 0 0 0-1.94-1.95C17.88 4.79 12 4.79 12 4.79s-5.88 0-7.64.46A2.76 2.76 0 0 0 2.42 7.2 29 29 0 0 0 2 12a29 29 0 0 0 .42 4.81 2.76 2.76 0 0 0 1.94 1.95c1.76.46 7.64.46 7.64.46s5.88 0 7.64-.46a2.76 2.76 0 0 0 1.94-1.95A29 29 0 0 0 22 12a29 29 0 0 0-.42-4.81z" fill="none" stroke="#ef4444" stroke-width="1.5"/></svg>
-        <div>
-          <div style="font-size:0.82em;font-weight:700;color:#e8f0f5;line-height:1.2;">GMA News — Mindanao 7.8 Lindol Haberi</div>
-          <div style="font-size:0.72em;color:#64748b;margin-top:2px;">Kıyı Yükselmesi · Artçı Sarsıntılar · PHIVOLCS Değerlendirmesi</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:0;">
-        <!-- Video iframe -->
-        <div style="flex:1 1 320px;min-width:280px;background:#000;">
-          <iframe id="gma-yt"
-            src="https://www.youtube.com/embed/bGXTKXm73gU?start=0&rel=0&modestbranding=1"
-            title="GMA News: Mindanao 7.8 Lindol Sonrası Kıyı Yükselmesi"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            style="width:100%;aspect-ratio:16/9;display:block;"></iframe>
-        </div>
-        <!-- Zaman Damgaları -->
-        <div style="flex:0 0 220px;min-width:200px;padding:12px 10px;background:rgba(10,14,26,0.7);display:flex;flex-direction:column;gap:4px;">
-          <div style="font-size:0.72em;font-weight:700;color:#7ecbff;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;padding-left:4px;">Zaman Damgaları</div>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=0&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(59,158,255,0.12);border:1px solid rgba(59,158,255,0.25);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(59,158,255,0.25)'" onmouseout="this.style.background='rgba(59,158,255,0.12)'">
-            <span style="color:#3b9eff;font-weight:700;font-size:0.9em;font-family:monospace;">00:00</span><br>Giriş: 7.8 Büyüklüğündeki Deprem
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=21&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(59,158,255,0.22)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'">
-            <span style="color:#3b9eff;font-weight:700;font-size:0.9em;font-family:monospace;">00:21</span><br>Artçı Sarsıntılar ve Yerel Etkileri
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=51&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(59,158,255,0.22)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'">
-            <span style="color:#3b9eff;font-weight:700;font-size:0.9em;font-family:monospace;">00:51</span><br>Sel ve Yağış Sonrası Durum
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=62&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(59,158,255,0.22)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'">
-            <span style="color:#3b9eff;font-weight:700;font-size:0.9em;font-family:monospace;">01:02</span><br>Kayıp Arama ve Can Kayıpları
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=81&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(59,158,255,0.22)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'">
-            <span style="color:#3b9eff;font-weight:700;font-size:0.9em;font-family:monospace;">01:21</span><br>DSWD Yardımları ve Saha Ziyareti
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=116&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(59,158,255,0.22)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'">
-            <span style="color:#3b9eff;font-weight:700;font-size:0.9em;font-family:monospace;">01:56</span><br>Gönüllü Yardımlar ve Dayanışma
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=124&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(34,197,94,0.28)'" onmouseout="this.style.background='rgba(34,197,94,0.12)'">
-            <span style="color:#22c55e;font-weight:700;font-size:0.9em;font-family:monospace;">02:04</span><br><strong style="color:#86efac;">★ Kıyı Yükselmesi Gözlemleri</strong>
-          </button>
-          <button onclick="document.getElementById('gma-yt').src='https://www.youtube.com/embed/bGXTKXm73gU?start=147&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;transition:background 0.2s;"
-            onmouseover="this.style.background='rgba(34,197,94,0.22)'" onmouseout="this.style.background='rgba(34,197,94,0.08)'">
-            <span style="color:#22c55e;font-weight:700;font-size:0.9em;font-family:monospace;">02:27</span><br>PHIVOLCS Değerlendirmesi
-          </button>
-        </div>
-      </div>
-      <div style="padding:8px 14px;background:rgba(0,0,0,0.2);font-size:0.73em;color:#475569;border-top:1px solid rgba(255,255,255,0.05);">
-        Kaynak: GMA News (2026). Zaman damgaları Türkçe başlıklandırılmıştır · ★ işaretli bölüm kozismik yükselim görüntülerini içermektedir.
-      </div>
-    </div>
-
-    <!-- Video 2: Tektonik Bağlam ve Tarihsel Karşılaştırma -->
-    <div style="margin:16px 0 24px;background:rgba(0,0,0,0.35);border:1px solid rgba(245,166,35,0.2);border-radius:12px;overflow:hidden;">
-      <div style="padding:12px 16px 10px;background:rgba(245,166,35,0.08);border-bottom:1px solid rgba(245,166,35,0.15);display:flex;align-items:center;gap:10px;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M10 15l5.19-3L10 9v6z" fill="#ef4444"/><path d="M21.58 7.19a2.76 2.76 0 0 0-1.94-1.95C17.88 4.79 12 4.79 12 4.79s-5.88 0-7.64.46A2.76 2.76 0 0 0 2.42 7.2 29 29 0 0 0 2 12a29 29 0 0 0 .42 4.81 2.76 2.76 0 0 0 1.94 1.95c1.76.46 7.64.46 7.64.46s5.88 0 7.64-.46a2.76 2.76 0 0 0 1.94-1.95A29 29 0 0 0 22 12a29 29 0 0 0-.42-4.81z" fill="none" stroke="#ef4444" stroke-width="1.5"/></svg>
-        <div>
-          <div style="font-size:0.82em;font-weight:700;color:#e8f0f5;line-height:1.2;">Tektonik Bağlam ve Tarihsel Karşılaştırma</div>
-          <div style="font-size:0.72em;color:#64748b;margin-top:2px;">Cotabato Trench · 1976 &amp; 1990 Karşılaştırması · Subdüksiyon · Liquefikasyon · PHIVOLCS</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:0;">
-        <div style="flex:1 1 320px;min-width:280px;background:#000;">
-          <iframe id="ctx-yt"
-            src="https://www.youtube.com/embed/qGIVrDssUfQ?start=0&rel=0&modestbranding=1"
-            title="Mindanao 7.8 Tektonik Bağlam ve Tarihsel Karşılaştırma"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            style="width:100%;aspect-ratio:16/9;display:block;"></iframe>
-        </div>
-        <div style="flex:0 0 220px;min-width:200px;padding:12px 10px;background:rgba(10,14,26,0.7);display:flex;flex-direction:column;gap:4px;">
-          <div style="font-size:0.72em;font-weight:700;color:#fbbf24;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;padding-left:4px;">Zaman Damgaları</div>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=0&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.25);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.28)'" onmouseout="this.style.background='rgba(245,166,35,0.12)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">00:00</span><br>Giriş: 7.8 Mindanao Depremi
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=7&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">00:07</span><br>Endonezya Bölgesel Tsunami Uyarıları
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=20&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">00:20</span><br>Cotabato Trench Tektonik Aktivitesi
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=47&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">00:47</span><br>Son 50 Yılda Büyük Depremler
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=66&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.28);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(168,85,247,0.25)'" onmouseout="this.style.background='rgba(168,85,247,0.10)'">
-            <span style="color:#c084fc;font-weight:700;font-size:0.9em;font-family:monospace;">01:06</span><br><strong style="color:#d8b4fe;">★ 1990 Luzon Depremi Etkileri</strong>
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=75&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.28);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(168,85,247,0.25)'" onmouseout="this.style.background='rgba(168,85,247,0.10)'">
-            <span style="color:#c084fc;font-weight:700;font-size:0.9em;font-family:monospace;">01:15</span><br><strong style="color:#d8b4fe;">★ 1976 Moro Gulf ve Tsunami</strong>
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=110&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.28);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(168,85,247,0.25)'" onmouseout="this.style.background='rgba(168,85,247,0.10)'">
-            <span style="color:#c084fc;font-weight:700;font-size:0.9em;font-family:monospace;">01:50</span><br><strong style="color:#d8b4fe;">★ 1976 vs 2026 Karşılaştırması</strong>
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=143&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">02:23</span><br>Subdüksiyon ve Deprem Dinamiği
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=168&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">02:48</span><br>Liquefikasyon ve Hasar Beklentisi
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=201&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">03:21</span><br>PHIVOLCS İzleme ve Saha Çalışmaları
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=233&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">03:53</span><br>Hükümet Müdahalesi ve Bakan Ziyaretleri
-          </button>
-          <button onclick="document.getElementById('ctx-yt').src='https://www.youtube.com/embed/qGIVrDssUfQ?start=265&rel=0&modestbranding=1&autoplay=1'"
-            style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.18);border-radius:6px;padding:7px 10px;cursor:pointer;text-align:left;color:#cbd5e1;font-size:0.78em;line-height:1.4;"
-            onmouseover="this.style.background='rgba(245,166,35,0.22)'" onmouseout="this.style.background='rgba(245,166,35,0.07)'">
-            <span style="color:#f5a623;font-weight:700;font-size:0.9em;font-family:monospace;">04:25</span><br>Altyapı Hasarı ve İyileştirme
-          </button>
-        </div>
-      </div>
-      <div style="padding:8px 14px;background:rgba(0,0,0,0.2);font-size:0.73em;color:#475569;border-top:1px solid rgba(255,255,255,0.05);">
-        Kaynak: YouTube (2026). Zaman damgaları Türkçe başlıklandırılmıştır · ★ işaretli bölümler tarihsel karşılaştırma verileri içermektedir (rapor Bölüm 3 karşılaştırmalı tablosuyla çapraz referans).
-      </div>
-    </div>
-
-    <div class="review-subsection">Mekanizma: Ters Faylanma ve Dikey Deformasyon</div>
-    <p class="review-body-text">Bu olayın sismotektonik açıklaması, Mindanao Mw 7.8 depreminin mekanizmasıyla doğrudan örtüşmektedir. Çift-kuvvet tensörü analizi %87 çift-kuvvet (DC) bileşeni göstermekte; bu da saf bir <strong>ters faylanma (megathrust)</strong> olayına işaret etmektedir. Ters faylanmada üstteki levha, alttakinin üzerine çıkarak deniz tabanını ve kıyı şeridini <em>dikey olarak yukarı iter</em>. Cotabato Hendeği arayüzüne karşılık gelen NP2 düzleminin gidişi (~161°) ve batıya eğimi (~45°), bu mekanizmanın Jose Abad Santos kıyısındaki dikey yer değiştirmeyi açıklayacak geometrik uyuma sahip olduğunu doğrulamaktadır. Santroid derinliği 35.5 km ve kırılma episantrına sahil hattının yakınlığı, yükselimin sahada bu denli belirgin görülmesinin fiziksel temelidir.</p>
-
-    <div class="review-subsection">Nicel Karşılaştırma: Benzer Thrust Olaylarında Ölçülen Yükselim Değerleri</div>
-    <p class="review-body-text">Heidarzadeh vd. (2025), Filipin Hendeği'nde gerçekleşen iki Mw 7.6 thrust depreminde USGS kaynak modeline dayalı kozismik deformasyonu hesaplamıştır: Aralık 2023 olayında deniz tabanı yükselmesi <strong>37 cm</strong> (çökme 13 cm), Ağustos 2012 olayında ise deniz tabanı yükselmesi <strong>58 cm</strong>'e ulaşmıştır. 2026 Mindanao depremi bu referans olaylardan 0.2 birim daha büyük (Mw 7.8) olup santroid derinliği daha sığdır (35.5 km). Sismik moment ölçeklenmesi göz önüne alındığında, Cotabato kıyılarında gerçekleşen dikey deformasyonun 2023 Filipin Hendeği olayından <em>belirgin biçimde büyük</em> olması beklenmekte; bu durum Jose Abad Santos'ta gözlemlenen belirgin kıyı genişlemesinin fiziksel temeliyle örtüşmektedir.</p>
-
-    <div class="review-subsection">Tarihsel Analog: 1802 Sado Depremi (Japonya)</div>
-    <p class="review-body-text">Benzer bir kozismik yükselim, 1802 yılında Japonya'nın Sado Adası'nda yaşanan depremde belgelenmiştir. Scholz (2002), bu olayda yaklaşık 2 metrelik dikey yer yükselmesi sonucunda kıyı şeridinin denizden yaklaşık 500 metre geri çekildiğini ve liman alanlarının kalıcı olarak karaya dönüştüğünü aktarmaktadır. Jose Abad Santos'taki gözlem, bu analog vakada gözlemlenene yapısal ve morfolojik açıdan büyük benzerlik taşımaktadır: her iki durumda da suyun geri dönmemesi, kırılmanın sismik dalga ile değil kalıcı statik deformasyon ile oluştuğunun kanıtıdır.</p>
-
-    <div class="review-subsection">Deniz Sekileri (Marine Terraces) ve Mindanao'nun Tektonik Tarihi</div>
-    <p class="review-body-text">Literatür, megathrust depremlerinin ardışık tekrarlanmasıyla kıyı şeritlerinde <strong>deniz sekileri (marine terraces)</strong> oluşturduğunu belgelemektedir. Her büyük olay, öncekinin üzerine yeni bir basamak ekler. Jose Abad Santos'ta ortaya çıkan yeni sahil şeridi, Mindanao'nun jeolojik tarihindeki en <em>taze ve gözlemlenebilir sismik seki örneği</em> olmaktadır. Bu açıdan gözlem, hem anlık bir afet kaydı hem de Cotabato subdüksiyon sisteminin uzun vadeli yükselim kronikasına ait bir veri noktasıdır.</p>
-
-    <div class="analysis-card" style="border-left:3px solid rgba(34,197,94,0.6);background:rgba(34,197,94,0.05);border-radius:8px;padding:14px 18px;margin:14px 0;">
-      <div style="font-size:0.82em;font-weight:700;color:#86efac;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Referanslama Rehberi — Akademik Kullanım İçin</div>
-      <ul style="margin:0;padding-left:18px;font-size:0.91em;color:#ddeeff;line-height:1.75;">
-        <li><strong>Gözlem (Saha/Tanıklık):</strong> Dr. Ma. Cleofas O., LinkedIn (2026) — Barangay Kitayo sahil gözlemi; <em>vanished.jpg</em> görseli. <em>Birincil tanıklık / vaka analizi.</em></li>
-        <li><strong>Bilimsel Açıklama (Mekanizma):</strong> Öncel, A.O. (2026) — Mindanao Mw 7.8 SeismoReport; megathrust mekanizması (%87 DC, NP2: 161°/45°).</li>
-        <li><strong>Tarihsel Analog (Sado 1802):</strong> Scholz, C.H. (2002). <em>The Mechanics of Earthquakes and Faulting</em> (2. bs.). Cambridge University Press. s. 126–130.</li>
-        <li><strong>Genel Kavram (Marine Terraces):</strong> Yerel kıyı yükselmesi literatürü; USGS/PHIVOLCS saha raporları.</li>
-      </ul>
-    </div>
 
     <div class="review-section-title">7. Kaynaklar / References</div>
     <div class="review-ref-item">Hamburger, M. W. vd. (2010). Earthquake history of the Philippines. <em>J. Geophys. Res.</em>, 115, B10405.</div>
@@ -2149,13 +1616,6 @@ ${body}</div></body></html>`;
     <div class="review-ref-item">Cardwell, R.K., Isacks, B.L., Karig, D.E. (1980). The spatial distribution of earthquakes, focal mechanism solutions, and subducted lithosphere in the Philippine and northeastern Indonesian islands. In Hayes, D.E. (Ed.), The Tectonic and Geological Evolution of Southeast Asian Seas and Islands. AGU, Washington D.C., pp. 1–35.</div>
     <div class="review-ref-item">Bautista, M.L.P., Bautista, B.C., Narag, I.C. (2008). The Philippine Fault: A key to understanding Philippine tectonics. Journal of Asian Earth Sciences, 33(3–4), 237–251.</div>
     <div class="review-ref-item">Grünthal, G. (Ed.) (1998). European Macroseismic Scale 1998 (EMS-98). Cahiers du Centre Européen de Géodynamique et de Séismologie, 15, Luxembourg.</div>
-    <div class="review-ref-item">Yamanaka, Y. &amp; Shimazaki, K. (1990). Scaling relationship between the number of aftershocks and the size of the main shock. <em>Journal of Physics of the Earth</em>, 38(4), 305–324. [Artçı üretkenlik katsayısı (K); intraslab ~4× interplate; kırılma alanı–artçı sayısı ölçekleme ilişkisi — 5b Metodoloji (K vs p Mekanizma Diagnostiği) bölümünde referanslandırılmıştır.]</div>
-    <div class="review-ref-item">Shimazaki, K. &amp; Nakata, T. (1980). Time-predictable recurrence model for large earthquakes. <em>Geophysical Research Letters</em>, 7(4), 279–282. [Zaman-öngörülebilir model; dikey yükselim verisinden tekerrür süresi hesabı — 5c Sismik Çevrim bölümünde referanslandırılmıştır.]</div>
-    <div class="review-ref-item">Shimazaki, K. (1978). Correlation between intraplate seismicity and interplate earthquakes in Tohoku, Northeast Japan. <em>Bulletin of the Seismological Society of America</em>, 68(1), 181–192. [Plakaiçi–interplaka sismisitesi bağlantısı; büyük olaydan 10–15 yıl önce sessizlik; artçı dönem tetiklenmesi — 5c Sismik Çevrim bölümünde referanslandırılmıştır.]</div>
-    <div class="review-ref-item">Ishibe, T. &amp; Shimazaki, K. (2009). Seismicity in source regions of large interplate earthquakes around Japan and the characteristic earthquake model. <em>Earth, Planets and Space</em>, 61, 1041–1052. [CE modeli; inter-sismik dönem G-R altı sismisitesi; ΔM ≈ 1.1 büyüklük farkı — b-değeri ve 5c Sismik Çevrim bölümünde referanslandırılmıştır.]</div>
-    <div class="review-ref-item">Heidarzadeh, M., Gusman, A. R., Mulia, I. E., Chua, C. T., &amp; Suppasri, A. (2025). Tsunami hazards and risks from the Philippine Trench: The cases of 2012 and 2023 Mw 7.6 tsunamigenic earthquakes. <em>Ocean Engineering</em>, 329, 120985. doi:10.1016/j.oceaneng.2025.120985 [Kozismik deformasyon değerleri, Davao tide gauge verileri, Dapa tahliye merkezi risk analizi ve Mw 9.0 hipotetik senaryo için referanslandırılmıştır.]</div>
-    <div class="review-ref-item">Scholz, C. H. (2002). <em>The Mechanics of Earthquakes and Faulting</em> (2nd ed.). Cambridge University Press. [Coseismic uplift ve 1802 Sado depremi analojisi için bkz. s. 126–130]</div>
-    <div class="review-ref-item">Dr. Ma. Cleofas O. (2026, Haziran). Barangay Kitayo, Jose Abad Santos sahil gözlemi — "Denizin yok olması" tanıklığı [LinkedIn paylaşımı; görsel: vanished.jpg]. Saha tanıklığı / birincil gözlem kaydı olarak kullanılmıştır.</div>
 
   </div>
 
@@ -2764,25 +2224,25 @@ ${body}</div></body></html>`;
   var canvasGR    = document.getElementById('omori-chart-gr');
   if (!canvasOmori && !canvasGR) return;
 
-  var obsLog  = [{"x": -0.7127, "y": 1.7141}, {"x": -0.6259, "y": 1.3262}, {"x": -0.2783, "y": 0.9787}, {"x": -0.1915, "y": 0.8918}, {"x": 0.0692, "y": 1.1083}, {"x": 0.156, "y": 1.0214}, {"x": 0.2429, "y": 1.0594}, {"x": 0.3298, "y": 0.9726}, {"x": 0.4167, "y": 0.8857}, {"x": 0.5036, "y": 1.0419}, {"x": 0.5904, "y": 1.0641}, {"x": 0.6773, "y": 0.8681}, {"x": 0.7642, "y": 0.7812}, {"x": 0.8511, "y": 0.9284}, {"x": 0.938, "y": 1.0411}, {"x": 1.0248, "y": 0.7547}, {"x": 1.1117, "y": 0.9688}, {"x": 1.1986, "y": 0.8441}, {"x": 1.2855, "y": 0.6701}, {"x": 1.3723, "y": 0.6704}, {"x": 1.4592, "y": 0.5421}, {"x": 1.5461, "y": 0.7453}, {"x": 1.633, "y": 0.7008}, {"x": 1.7199, "y": 0.5487}, {"x": 1.8067, "y": 0.4376}, {"x": 1.8936, "y": 0.5391}, {"x": 1.9805, "y": 0.5122}];
-  var fitLog  = [{"x": -0.7583, "y": 1.549529}, {"x": -0.735, "y": 1.538048}, {"x": -0.7116, "y": 1.526567}, {"x": -0.6883, "y": 1.515085}, {"x": -0.6649, "y": 1.503604}, {"x": -0.6415, "y": 1.492122}, {"x": -0.6182, "y": 1.480639}, {"x": -0.5948, "y": 1.469157}, {"x": -0.5714, "y": 1.457674}, {"x": -0.5481, "y": 1.446191}, {"x": -0.5247, "y": 1.434707}, {"x": -0.5014, "y": 1.423224}, {"x": -0.478, "y": 1.41174}, {"x": -0.4546, "y": 1.400256}, {"x": -0.4313, "y": 1.388772}, {"x": -0.4079, "y": 1.377288}, {"x": -0.3845, "y": 1.365804}, {"x": -0.3612, "y": 1.354319}, {"x": -0.3378, "y": 1.342835}, {"x": -0.3145, "y": 1.33135}, {"x": -0.2911, "y": 1.319865}, {"x": -0.2677, "y": 1.30838}, {"x": -0.2444, "y": 1.296895}, {"x": -0.221, "y": 1.285409}, {"x": -0.1976, "y": 1.273924}, {"x": -0.1743, "y": 1.262439}, {"x": -0.1509, "y": 1.250953}, {"x": -0.1276, "y": 1.239467}, {"x": -0.1042, "y": 1.227982}, {"x": -0.0808, "y": 1.216496}, {"x": -0.0575, "y": 1.20501}, {"x": -0.0341, "y": 1.193524}, {"x": -0.0108, "y": 1.182038}, {"x": 0.0126, "y": 1.170552}, {"x": 0.036, "y": 1.159066}, {"x": 0.0593, "y": 1.14758}, {"x": 0.0827, "y": 1.136093}, {"x": 0.1061, "y": 1.124607}, {"x": 0.1294, "y": 1.113121}, {"x": 0.1528, "y": 1.101634}, {"x": 0.1761, "y": 1.090148}, {"x": 0.1995, "y": 1.078661}, {"x": 0.2229, "y": 1.067175}, {"x": 0.2462, "y": 1.055688}, {"x": 0.2696, "y": 1.044202}, {"x": 0.293, "y": 1.032715}, {"x": 0.3163, "y": 1.021228}, {"x": 0.3397, "y": 1.009742}, {"x": 0.363, "y": 0.998255}, {"x": 0.3864, "y": 0.986768}, {"x": 0.4098, "y": 0.975282}, {"x": 0.4331, "y": 0.963795}, {"x": 0.4565, "y": 0.952308}, {"x": 0.4799, "y": 0.940821}, {"x": 0.5032, "y": 0.929334}, {"x": 0.5266, "y": 0.917847}, {"x": 0.5499, "y": 0.906361}, {"x": 0.5733, "y": 0.894874}, {"x": 0.5967, "y": 0.883387}, {"x": 0.62, "y": 0.8719}, {"x": 0.6434, "y": 0.860413}, {"x": 0.6668, "y": 0.848926}, {"x": 0.6901, "y": 0.837439}, {"x": 0.7135, "y": 0.825952}, {"x": 0.7368, "y": 0.814465}, {"x": 0.7602, "y": 0.802978}, {"x": 0.7836, "y": 0.791491}, {"x": 0.8069, "y": 0.780004}, {"x": 0.8303, "y": 0.768517}, {"x": 0.8537, "y": 0.75703}, {"x": 0.877, "y": 0.745543}, {"x": 0.9004, "y": 0.734055}, {"x": 0.9237, "y": 0.722568}, {"x": 0.9471, "y": 0.711081}, {"x": 0.9705, "y": 0.699594}, {"x": 0.9938, "y": 0.688107}, {"x": 1.0172, "y": 0.67662}, {"x": 1.0406, "y": 0.665133}, {"x": 1.0639, "y": 0.653646}, {"x": 1.0873, "y": 0.642159}, {"x": 1.1106, "y": 0.630671}, {"x": 1.134, "y": 0.619184}, {"x": 1.1574, "y": 0.607697}, {"x": 1.1807, "y": 0.59621}, {"x": 1.2041, "y": 0.584723}, {"x": 1.2274, "y": 0.573236}, {"x": 1.2508, "y": 0.561749}, {"x": 1.2742, "y": 0.550261}, {"x": 1.2975, "y": 0.538774}, {"x": 1.3209, "y": 0.527287}, {"x": 1.3443, "y": 0.5158}, {"x": 1.3676, "y": 0.504313}, {"x": 1.391, "y": 0.492826}, {"x": 1.4143, "y": 0.481338}, {"x": 1.4377, "y": 0.469851}, {"x": 1.4611, "y": 0.458364}, {"x": 1.4844, "y": 0.446877}, {"x": 1.5078, "y": 0.43539}, {"x": 1.5312, "y": 0.423902}, {"x": 1.5545, "y": 0.412415}, {"x": 1.5779, "y": 0.400928}, {"x": 1.6012, "y": 0.389441}, {"x": 1.6246, "y": 0.377954}, {"x": 1.648, "y": 0.366466}, {"x": 1.6713, "y": 0.354979}, {"x": 1.6947, "y": 0.343492}, {"x": 1.7181, "y": 0.332005}, {"x": 1.7414, "y": 0.320518}, {"x": 1.7648, "y": 0.30903}, {"x": 1.7881, "y": 0.297543}, {"x": 1.8115, "y": 0.286056}, {"x": 1.8349, "y": 0.274569}, {"x": 1.8582, "y": 0.263082}, {"x": 1.8816, "y": 0.251594}, {"x": 1.905, "y": 0.240107}, {"x": 1.9283, "y": 0.22862}, {"x": 1.9517, "y": 0.217133}, {"x": 1.975, "y": 0.205645}, {"x": 1.9984, "y": 0.194158}, {"x": 2.0218, "y": 0.182671}];
-  var grObs   = [{"x": 2.8, "y": 2.6821}, {"x": 2.9, "y": 2.6314}, {"x": 3.0, "y": 2.6064}, {"x": 3.1, "y": 2.5682}, {"x": 3.2, "y": 2.534}, {"x": 3.3, "y": 2.4713}, {"x": 3.4, "y": 2.4166}, {"x": 3.5, "y": 2.3541}, {"x": 3.6, "y": 2.2601}, {"x": 3.7, "y": 2.1875}, {"x": 3.8, "y": 2.0792}, {"x": 3.9, "y": 2.0294}, {"x": 4.0, "y": 1.9542}, {"x": 4.1, "y": 1.8808}, {"x": 4.2, "y": 1.8388}, {"x": 4.3, "y": 1.8261}, {"x": 4.4, "y": 1.8129}, {"x": 4.5, "y": 1.8129}, {"x": 4.6, "y": 1.8062}, {"x": 4.7, "y": 1.8062}, {"x": 4.8, "y": 1.7993}, {"x": 4.9, "y": 1.7853}, {"x": 5.0, "y": 1.7324}, {"x": 5.1, "y": 1.6902}, {"x": 5.2, "y": 1.6128}, {"x": 5.3, "y": 1.415}, {"x": 5.4, "y": 1.2553}, {"x": 5.5, "y": 1.1461}, {"x": 5.6, "y": 1.0}, {"x": 5.7, "y": 0.9542}, {"x": 5.8, "y": 0.699}, {"x": 5.9, "y": 0.6021}, {"x": 6.0, "y": 0.4771}, {"x": 6.1, "y": 0.4771}, {"x": 6.2, "y": 0.0}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
-  var grFit   = [{"x": 3.5, "y": 2.3542}, {"x": 3.6, "y": 2.2948}, {"x": 3.7, "y": 2.2354}, {"x": 3.8, "y": 2.176}, {"x": 3.9, "y": 2.1167}, {"x": 4.0, "y": 2.0573}, {"x": 4.1, "y": 1.9979}, {"x": 4.2, "y": 1.9386}, {"x": 4.3, "y": 1.8792}, {"x": 4.4, "y": 1.8198}, {"x": 4.5, "y": 1.7605}, {"x": 4.6, "y": 1.7011}, {"x": 4.7, "y": 1.6417}, {"x": 4.8, "y": 1.5823}, {"x": 4.9, "y": 1.523}, {"x": 5.0, "y": 1.4636}, {"x": 5.1, "y": 1.4042}, {"x": 5.2, "y": 1.3449}, {"x": 5.3, "y": 1.2855}, {"x": 5.4, "y": 1.2261}, {"x": 5.5, "y": 1.1667}, {"x": 5.6, "y": 1.1074}, {"x": 5.7, "y": 1.048}, {"x": 5.8, "y": 0.9886}, {"x": 5.9, "y": 0.9293}, {"x": 6.0, "y": 0.8699}, {"x": 6.1, "y": 0.8105}, {"x": 6.2, "y": 0.7512}, {"x": 6.3, "y": 0.6918}, {"x": 6.4, "y": 0.6324}, {"x": 6.5, "y": 0.5731}, {"x": 6.6, "y": 0.5137}];
-  var dcObs   = [{"x": -1.699, "y": -2.9689}, {"x": -1.64, "y": -2.716}, {"x": -1.581, "y": -2.6969}, {"x": -1.522, "y": -2.5911}, {"x": -1.463, "y": -2.468}, {"x": -1.404, "y": -2.3757}, {"x": -1.345, "y": -2.2311}, {"x": -1.286, "y": -2.1135}, {"x": -1.227, "y": -2.0309}, {"x": -1.168, "y": -1.9156}, {"x": -1.109, "y": -1.8173}, {"x": -1.05, "y": -1.7117}, {"x": -0.991, "y": -1.5806}, {"x": -0.932, "y": -1.4723}, {"x": -0.873, "y": -1.3646}, {"x": -0.814, "y": -1.2511}, {"x": -0.755, "y": -1.1481}, {"x": -0.696, "y": -1.0421}, {"x": -0.637, "y": -0.9416}, {"x": -0.578, "y": -0.8405}, {"x": -0.519, "y": -0.7457}, {"x": -0.46, "y": -0.6526}, {"x": -0.401, "y": -0.5607}, {"x": -0.342, "y": -0.4772}, {"x": -0.283, "y": -0.399}, {"x": -0.224, "y": -0.3271}, {"x": -0.165, "y": -0.2662}, {"x": -0.1059, "y": -0.2137}, {"x": -0.0469, "y": -0.1713}, {"x": 0.0121, "y": -0.1385}, {"x": 0.0711, "y": -0.1117}, {"x": 0.1301, "y": -0.0893}, {"x": 0.1891, "y": -0.073}, {"x": 0.2481, "y": -0.0621}, {"x": 0.3071, "y": -0.0534}, {"x": 0.3661, "y": -0.0447}, {"x": 0.4251, "y": -0.0344}, {"x": 0.4841, "y": -0.0244}, {"x": 0.5431, "y": -0.0157}, {"x": 0.6021, "y": -0.0081}];
-  var dcFit   = [{"x": -1.699, "y": -2.6238}, {"x": -1.6415, "y": -2.5441}, {"x": -1.584, "y": -2.4645}, {"x": -1.5265, "y": -2.3848}, {"x": -1.469, "y": -2.3051}, {"x": -1.4115, "y": -2.2254}, {"x": -1.354, "y": -2.1458}, {"x": -1.2966, "y": -2.0661}, {"x": -1.2391, "y": -1.9864}, {"x": -1.1816, "y": -1.9067}, {"x": -1.1241, "y": -1.8271}, {"x": -1.0666, "y": -1.7474}, {"x": -1.0091, "y": -1.6677}, {"x": -0.9516, "y": -1.5881}, {"x": -0.8941, "y": -1.5084}, {"x": -0.8367, "y": -1.4287}, {"x": -0.7792, "y": -1.349}, {"x": -0.7217, "y": -1.2694}, {"x": -0.6642, "y": -1.1897}, {"x": -0.6067, "y": -1.11}, {"x": -0.5492, "y": -1.0304}, {"x": -0.4917, "y": -0.9507}, {"x": -0.4342, "y": -0.871}, {"x": -0.3767, "y": -0.7913}, {"x": -0.3193, "y": -0.7117}, {"x": -0.2618, "y": -0.632}, {"x": -0.2043, "y": -0.5523}, {"x": -0.1468, "y": -0.4726}, {"x": -0.0893, "y": -0.393}, {"x": -0.0318, "y": -0.3133}, {"x": 0.0257, "y": -0.2336}, {"x": 0.0832, "y": -0.154}, {"x": 0.1406, "y": -0.0743}, {"x": 0.1981, "y": 0.0054}, {"x": 0.2556, "y": 0.0851}, {"x": 0.3131, "y": 0.1647}, {"x": 0.3706, "y": 0.2444}, {"x": 0.4281, "y": 0.3241}, {"x": 0.4856, "y": 0.4038}, {"x": 0.5431, "y": 0.4834}];
-  var histData = [{"x": 0.016, "y": 0.9787}, {"x": 0.0479, "y": 4.7536}, {"x": 0.0798, "y": 4.3342}, {"x": 0.1118, "y": 4.2643}, {"x": 0.1437, "y": 2.237}, {"x": 0.1756, "y": 2.5166}, {"x": 0.2075, "y": 2.6564}, {"x": 0.2395, "y": 1.8875}, {"x": 0.2714, "y": 1.2583}, {"x": 0.3033, "y": 1.1185}, {"x": 0.3353, "y": 0.769}, {"x": 0.3672, "y": 0.6292}, {"x": 0.3991, "y": 1.0486}, {"x": 0.4311, "y": 0.6991}, {"x": 0.463, "y": 0.2097}, {"x": 0.4949, "y": 0.3495}, {"x": 0.5269, "y": 0.5592}, {"x": 0.5588, "y": 0.3495}, {"x": 0.5907, "y": 0.4893}, {"x": 0.6226, "y": 0.2097}];
-  var histExp  = [{"x": 0.016, "y": 4.185214}, {"x": 0.0479, "y": 3.625438}, {"x": 0.0798, "y": 3.140531}, {"x": 0.1118, "y": 2.720482}, {"x": 0.1437, "y": 2.356615}, {"x": 0.1756, "y": 2.041415}, {"x": 0.2075, "y": 1.768374}, {"x": 0.2395, "y": 1.531852}, {"x": 0.2714, "y": 1.326965}, {"x": 0.3033, "y": 1.149482}, {"x": 0.3353, "y": 0.995738}, {"x": 0.3672, "y": 0.862557}, {"x": 0.3991, "y": 0.747189}, {"x": 0.4311, "y": 0.647252}, {"x": 0.463, "y": 0.560681}, {"x": 0.4949, "y": 0.485689}, {"x": 0.5269, "y": 0.420728}, {"x": 0.5588, "y": 0.364455}, {"x": 0.5907, "y": 0.315709}, {"x": 0.6226, "y": 0.273482}];
-  var grObsMw  = [{"x": 2.8, "y": 2.6821}, {"x": 2.9, "y": 2.6821}, {"x": 3.0, "y": 2.6821}, {"x": 3.1, "y": 2.6821}, {"x": 3.2, "y": 2.6821}, {"x": 3.3, "y": 2.6821}, {"x": 3.4, "y": 2.6821}, {"x": 3.5, "y": 2.6821}, {"x": 3.6, "y": 2.6542}, {"x": 3.7, "y": 2.6314}, {"x": 3.8, "y": 2.6064}, {"x": 3.9, "y": 2.5682}, {"x": 4.0, "y": 2.534}, {"x": 4.1, "y": 2.4166}, {"x": 4.2, "y": 2.3541}, {"x": 4.3, "y": 2.2601}, {"x": 4.4, "y": 2.1875}, {"x": 4.5, "y": 2.0792}, {"x": 4.6, "y": 2.0294}, {"x": 4.7, "y": 1.8808}, {"x": 4.8, "y": 1.8325}, {"x": 4.9, "y": 1.8062}, {"x": 5.0, "y": 1.7404}, {"x": 5.1, "y": 1.7076}, {"x": 5.2, "y": 1.6232}, {"x": 5.3, "y": 1.4314}, {"x": 5.4, "y": 1.2788}, {"x": 5.5, "y": 1.1761}, {"x": 5.6, "y": 1.0}, {"x": 5.7, "y": 0.9542}, {"x": 5.8, "y": 0.699}, {"x": 5.9, "y": 0.6021}, {"x": 6.0, "y": 0.4771}, {"x": 6.1, "y": 0.4771}, {"x": 6.2, "y": 0.0}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
-  var grFit1   = [{"x": 3.5, "y": 2.3541}, {"x": 3.6, "y": 2.2317}, {"x": 3.7, "y": 2.1092}, {"x": 3.8, "y": 1.9868}, {"x": 3.9, "y": 1.8643}, {"x": 4.0, "y": 1.7419}, {"x": 4.1, "y": 1.6195}, {"x": 4.2, "y": 1.497}, {"x": 4.3, "y": 1.3746}, {"x": 4.4, "y": 1.2521}, {"x": 4.5, "y": 1.1297}, {"x": 4.6, "y": 1.0073}, {"x": 4.7, "y": 0.8848}, {"x": 4.8, "y": 0.7624}, {"x": 4.9, "y": 0.6399}, {"x": 5.0, "y": 0.5175}];
-  var grFit2   = [{"x": 5.0, "y": 1.7324}, {"x": 5.1, "y": 1.6318}, {"x": 5.2, "y": 1.5312}, {"x": 5.3, "y": 1.4306}, {"x": 5.4, "y": 1.33}, {"x": 5.5, "y": 1.2294}, {"x": 5.6, "y": 1.1287}, {"x": 5.7, "y": 1.0281}, {"x": 5.8, "y": 0.9275}, {"x": 5.9, "y": 0.8269}, {"x": 6.0, "y": 0.7263}, {"x": 6.1, "y": 0.6257}, {"x": 6.2, "y": 0.5251}, {"x": 6.3, "y": 0.4245}, {"x": 6.4, "y": 0.3239}, {"x": 6.5, "y": 0.2233}, {"x": 6.6, "y": 0.1226}];
+  var obsLog  = [{"x": -0.7049, "y": 1.6416}, {"x": -0.604, "y": 1.2396}, {"x": -0.3011, "y": 1.2377}, {"x": -0.2002, "y": 1.1368}, {"x": -0.0992, "y": 1.2119}, {"x": 0.0018, "y": 1.2359}, {"x": 0.1027, "y": 1.1349}, {"x": 0.2037, "y": 0.909}, {"x": 0.3046, "y": 1.0299}, {"x": 0.4056, "y": 0.929}, {"x": 0.5065, "y": 0.9741}, {"x": 0.6075, "y": 1.0695}, {"x": 0.7085, "y": 0.7722}, {"x": 0.8094, "y": 0.9054}, {"x": 0.9104, "y": 1.004}, {"x": 1.0113, "y": 0.8284}, {"x": 1.1123, "y": 0.9547}, {"x": 1.2132, "y": 0.7841}, {"x": 1.3142, "y": 0.6831}, {"x": 1.4152, "y": 0.5822}, {"x": 1.5161, "y": 0.7105}, {"x": 1.6171, "y": 0.7175}, {"x": 1.718, "y": 0.5303}, {"x": 1.819, "y": 0.4698}, {"x": 1.9199, "y": 0.5669}, {"x": 2.0209, "y": 0.5178}, {"x": 2.1219, "y": 0.3333}, {"x": 2.2228, "y": 0.2052}, {"x": 2.3238, "y": 0.1983}, {"x": 2.4247, "y": 0.0859}];
+  var fitLog  = [{"x": -0.7583, "y": 1.503711}, {"x": -0.7312, "y": 1.492345}, {"x": -0.704, "y": 1.480978}, {"x": -0.6769, "y": 1.469611}, {"x": -0.6498, "y": 1.458244}, {"x": -0.6226, "y": 1.446877}, {"x": -0.5955, "y": 1.435509}, {"x": -0.5683, "y": 1.424141}, {"x": -0.5412, "y": 1.412773}, {"x": -0.514, "y": 1.401404}, {"x": -0.4869, "y": 1.390036}, {"x": -0.4597, "y": 1.378667}, {"x": -0.4326, "y": 1.367298}, {"x": -0.4054, "y": 1.355928}, {"x": -0.3783, "y": 1.344559}, {"x": -0.3511, "y": 1.333189}, {"x": -0.324, "y": 1.321819}, {"x": -0.2968, "y": 1.310449}, {"x": -0.2697, "y": 1.299079}, {"x": -0.2425, "y": 1.287709}, {"x": -0.2154, "y": 1.276338}, {"x": -0.1882, "y": 1.264968}, {"x": -0.1611, "y": 1.253597}, {"x": -0.1339, "y": 1.242226}, {"x": -0.1068, "y": 1.230855}, {"x": -0.0796, "y": 1.219484}, {"x": -0.0525, "y": 1.208113}, {"x": -0.0253, "y": 1.196742}, {"x": 0.0018, "y": 1.185371}, {"x": 0.029, "y": 1.174}, {"x": 0.0561, "y": 1.162628}, {"x": 0.0832, "y": 1.151257}, {"x": 0.1104, "y": 1.139886}, {"x": 0.1375, "y": 1.128514}, {"x": 0.1647, "y": 1.117143}, {"x": 0.1918, "y": 1.105771}, {"x": 0.219, "y": 1.094399}, {"x": 0.2461, "y": 1.083028}, {"x": 0.2733, "y": 1.071656}, {"x": 0.3004, "y": 1.060284}, {"x": 0.3276, "y": 1.048912}, {"x": 0.3547, "y": 1.037541}, {"x": 0.3819, "y": 1.026169}, {"x": 0.409, "y": 1.014797}, {"x": 0.4362, "y": 1.003425}, {"x": 0.4633, "y": 0.992053}, {"x": 0.4905, "y": 0.980681}, {"x": 0.5176, "y": 0.969309}, {"x": 0.5448, "y": 0.957937}, {"x": 0.5719, "y": 0.946565}, {"x": 0.5991, "y": 0.935193}, {"x": 0.6262, "y": 0.923821}, {"x": 0.6534, "y": 0.912449}, {"x": 0.6805, "y": 0.901077}, {"x": 0.7077, "y": 0.889704}, {"x": 0.7348, "y": 0.878332}, {"x": 0.762, "y": 0.86696}, {"x": 0.7891, "y": 0.855588}, {"x": 0.8162, "y": 0.844216}, {"x": 0.8434, "y": 0.832844}, {"x": 0.8705, "y": 0.821471}, {"x": 0.8977, "y": 0.810099}, {"x": 0.9248, "y": 0.798727}, {"x": 0.952, "y": 0.787355}, {"x": 0.9791, "y": 0.775983}, {"x": 1.0063, "y": 0.76461}, {"x": 1.0334, "y": 0.753238}, {"x": 1.0606, "y": 0.741866}, {"x": 1.0877, "y": 0.730494}, {"x": 1.1149, "y": 0.719121}, {"x": 1.142, "y": 0.707749}, {"x": 1.1692, "y": 0.696377}, {"x": 1.1963, "y": 0.685005}, {"x": 1.2235, "y": 0.673632}, {"x": 1.2506, "y": 0.66226}, {"x": 1.2778, "y": 0.650888}, {"x": 1.3049, "y": 0.639515}, {"x": 1.3321, "y": 0.628143}, {"x": 1.3592, "y": 0.616771}, {"x": 1.3864, "y": 0.605398}, {"x": 1.4135, "y": 0.594026}, {"x": 1.4407, "y": 0.582654}, {"x": 1.4678, "y": 0.571282}, {"x": 1.495, "y": 0.559909}, {"x": 1.5221, "y": 0.548537}, {"x": 1.5492, "y": 0.537165}, {"x": 1.5764, "y": 0.525792}, {"x": 1.6035, "y": 0.51442}, {"x": 1.6307, "y": 0.503048}, {"x": 1.6578, "y": 0.491675}, {"x": 1.685, "y": 0.480303}, {"x": 1.7121, "y": 0.468931}, {"x": 1.7393, "y": 0.457558}, {"x": 1.7664, "y": 0.446186}, {"x": 1.7936, "y": 0.434814}, {"x": 1.8207, "y": 0.423441}, {"x": 1.8479, "y": 0.412069}, {"x": 1.875, "y": 0.400697}, {"x": 1.9022, "y": 0.389324}, {"x": 1.9293, "y": 0.377952}, {"x": 1.9565, "y": 0.36658}, {"x": 1.9836, "y": 0.355207}, {"x": 2.0108, "y": 0.343835}, {"x": 2.0379, "y": 0.332463}, {"x": 2.0651, "y": 0.32109}, {"x": 2.0922, "y": 0.309718}, {"x": 2.1194, "y": 0.298346}, {"x": 2.1465, "y": 0.286973}, {"x": 2.1737, "y": 0.275601}, {"x": 2.2008, "y": 0.264229}, {"x": 2.228, "y": 0.252856}, {"x": 2.2551, "y": 0.241484}, {"x": 2.2822, "y": 0.230112}, {"x": 2.3094, "y": 0.218739}, {"x": 2.3365, "y": 0.207367}, {"x": 2.3637, "y": 0.195994}, {"x": 2.3908, "y": 0.184622}, {"x": 2.418, "y": 0.17325}, {"x": 2.4451, "y": 0.161877}, {"x": 2.4723, "y": 0.150505}];
+  var grObs   = [{"x": 2.8, "y": 2.9106}, {"x": 2.9, "y": 2.8407}, {"x": 3.0, "y": 2.7917}, {"x": 3.1, "y": 2.7435}, {"x": 3.2, "y": 2.7059}, {"x": 3.3, "y": 2.6253}, {"x": 3.4, "y": 2.5729}, {"x": 3.5, "y": 2.5024}, {"x": 3.6, "y": 2.4065}, {"x": 3.7, "y": 2.3345}, {"x": 3.8, "y": 2.2148}, {"x": 3.9, "y": 2.1673}, {"x": 4.0, "y": 2.1072}, {"x": 4.1, "y": 2.0531}, {"x": 4.2, "y": 2.0128}, {"x": 4.3, "y": 2.0043}, {"x": 4.4, "y": 1.9956}, {"x": 4.5, "y": 1.9956}, {"x": 4.6, "y": 1.9912}, {"x": 4.7, "y": 1.9912}, {"x": 4.8, "y": 1.9777}, {"x": 4.9, "y": 1.9445}, {"x": 5.0, "y": 1.8808}, {"x": 5.1, "y": 1.8261}, {"x": 5.2, "y": 1.7482}, {"x": 5.3, "y": 1.5185}, {"x": 5.4, "y": 1.3979}, {"x": 5.5, "y": 1.2553}, {"x": 5.6, "y": 1.0414}, {"x": 5.7, "y": 1.0}, {"x": 5.8, "y": 0.7782}, {"x": 5.9, "y": 0.699}, {"x": 6.0, "y": 0.6021}, {"x": 6.1, "y": 0.6021}, {"x": 6.2, "y": 0.301}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
+  var grFit   = [{"x": 3.5, "y": 2.5025}, {"x": 3.6, "y": 2.4439}, {"x": 3.7, "y": 2.3854}, {"x": 3.8, "y": 2.3269}, {"x": 3.9, "y": 2.2684}, {"x": 4.0, "y": 2.2099}, {"x": 4.1, "y": 2.1514}, {"x": 4.2, "y": 2.0929}, {"x": 4.3, "y": 2.0344}, {"x": 4.4, "y": 1.9759}, {"x": 4.5, "y": 1.9174}, {"x": 4.6, "y": 1.8588}, {"x": 4.7, "y": 1.8003}, {"x": 4.8, "y": 1.7418}, {"x": 4.9, "y": 1.6833}, {"x": 5.0, "y": 1.6248}, {"x": 5.1, "y": 1.5663}, {"x": 5.2, "y": 1.5078}, {"x": 5.3, "y": 1.4493}, {"x": 5.4, "y": 1.3908}, {"x": 5.5, "y": 1.3323}, {"x": 5.6, "y": 1.2737}, {"x": 5.7, "y": 1.2152}, {"x": 5.8, "y": 1.1567}, {"x": 5.9, "y": 1.0982}, {"x": 6.0, "y": 1.0397}, {"x": 6.1, "y": 0.9812}, {"x": 6.2, "y": 0.9227}, {"x": 6.3, "y": 0.8642}, {"x": 6.4, "y": 0.8057}, {"x": 6.5, "y": 0.7472}, {"x": 6.6, "y": 0.6886}];
+  var dcObs   = [{"x": -1.699, "y": -3.02}, {"x": -1.64, "y": -2.7825}, {"x": -1.581, "y": -2.7623}, {"x": -1.522, "y": -2.6406}, {"x": -1.463, "y": -2.5343}, {"x": -1.404, "y": -2.4405}, {"x": -1.345, "y": -2.2754}, {"x": -1.286, "y": -2.1612}, {"x": -1.227, "y": -2.0696}, {"x": -1.168, "y": -1.952}, {"x": -1.109, "y": -1.8472}, {"x": -1.05, "y": -1.7359}, {"x": -0.991, "y": -1.6057}, {"x": -0.932, "y": -1.5023}, {"x": -0.873, "y": -1.3887}, {"x": -0.814, "y": -1.273}, {"x": -0.755, "y": -1.1679}, {"x": -0.696, "y": -1.0604}, {"x": -0.637, "y": -0.9591}, {"x": -0.578, "y": -0.8568}, {"x": -0.519, "y": -0.7621}, {"x": -0.46, "y": -0.6712}, {"x": -0.401, "y": -0.5828}, {"x": -0.342, "y": -0.5007}, {"x": -0.283, "y": -0.4234}, {"x": -0.224, "y": -0.3521}, {"x": -0.165, "y": -0.2901}, {"x": -0.1059, "y": -0.2368}, {"x": -0.0469, "y": -0.1947}, {"x": 0.0121, "y": -0.1617}, {"x": 0.0711, "y": -0.135}, {"x": 0.1301, "y": -0.1133}, {"x": 0.1891, "y": -0.0964}, {"x": 0.2481, "y": -0.0822}, {"x": 0.3071, "y": -0.0688}, {"x": 0.3661, "y": -0.0551}, {"x": 0.4251, "y": -0.0406}, {"x": 0.4841, "y": -0.0274}, {"x": 0.5431, "y": -0.0156}, {"x": 0.6021, "y": -0.0067}];
+  var dcFit   = [{"x": -1.699, "y": -2.6755}, {"x": -1.6415, "y": -2.5947}, {"x": -1.584, "y": -2.5138}, {"x": -1.5265, "y": -2.4329}, {"x": -1.469, "y": -2.3521}, {"x": -1.4115, "y": -2.2712}, {"x": -1.354, "y": -2.1903}, {"x": -1.2966, "y": -2.1095}, {"x": -1.2391, "y": -2.0286}, {"x": -1.1816, "y": -1.9477}, {"x": -1.1241, "y": -1.8669}, {"x": -1.0666, "y": -1.786}, {"x": -1.0091, "y": -1.7051}, {"x": -0.9516, "y": -1.6243}, {"x": -0.8941, "y": -1.5434}, {"x": -0.8367, "y": -1.4625}, {"x": -0.7792, "y": -1.3816}, {"x": -0.7217, "y": -1.3008}, {"x": -0.6642, "y": -1.2199}, {"x": -0.6067, "y": -1.139}, {"x": -0.5492, "y": -1.0582}, {"x": -0.4917, "y": -0.9773}, {"x": -0.4342, "y": -0.8964}, {"x": -0.3767, "y": -0.8156}, {"x": -0.3193, "y": -0.7347}, {"x": -0.2618, "y": -0.6538}, {"x": -0.2043, "y": -0.573}, {"x": -0.1468, "y": -0.4921}, {"x": -0.0893, "y": -0.4112}, {"x": -0.0318, "y": -0.3304}, {"x": 0.0257, "y": -0.2495}, {"x": 0.0832, "y": -0.1686}, {"x": 0.1406, "y": -0.0878}, {"x": 0.1981, "y": -0.0069}, {"x": 0.2556, "y": 0.074}, {"x": 0.3131, "y": 0.1548}, {"x": 0.3706, "y": 0.2357}, {"x": 0.4281, "y": 0.3166}, {"x": 0.4856, "y": 0.3975}, {"x": 0.5431, "y": 0.4783}];
+  var histData = [{"x": 0.0294, "y": 2.2295}, {"x": 0.0881, "y": 3.2774}, {"x": 0.1468, "y": 1.9174}, {"x": 0.2055, "y": 2.2072}, {"x": 0.2642, "y": 1.4269}, {"x": 0.3229, "y": 1.0479}, {"x": 0.3816, "y": 0.7134}, {"x": 0.4403, "y": 0.5797}, {"x": 0.499, "y": 0.602}, {"x": 0.5577, "y": 0.7803}, {"x": 0.6164, "y": 0.3567}, {"x": 0.6751, "y": 0.3567}, {"x": 0.7339, "y": 0.1561}, {"x": 0.7926, "y": 0.2675}, {"x": 0.8513, "y": 0.1784}, {"x": 0.91, "y": 0.3121}, {"x": 0.9687, "y": 0.2007}, {"x": 1.0274, "y": 0.2007}, {"x": 1.0861, "y": 0.1784}, {"x": 1.1448, "y": 0.0446}];
+  var histExp  = [{"x": 0.0294, "y": 2.507005}, {"x": 0.0881, "y": 2.137628}, {"x": 0.1468, "y": 1.822674}, {"x": 0.2055, "y": 1.554125}, {"x": 0.2642, "y": 1.325144}, {"x": 0.3229, "y": 1.1299}, {"x": 0.3816, "y": 0.963423}, {"x": 0.4403, "y": 0.821474}, {"x": 0.499, "y": 0.70044}, {"x": 0.5577, "y": 0.597238}, {"x": 0.6164, "y": 0.509242}, {"x": 0.6751, "y": 0.434212}, {"x": 0.7339, "y": 0.370236}, {"x": 0.7926, "y": 0.315686}, {"x": 0.8513, "y": 0.269174}, {"x": 0.91, "y": 0.229514}, {"x": 0.9687, "y": 0.195698}, {"x": 1.0274, "y": 0.166864}, {"x": 1.0861, "y": 0.142279}, {"x": 1.1448, "y": 0.121316}];
+  var grObsMw  = [{"x": 2.8, "y": 2.9106}, {"x": 2.9, "y": 2.9106}, {"x": 3.0, "y": 2.9106}, {"x": 3.1, "y": 2.9106}, {"x": 3.2, "y": 2.9106}, {"x": 3.3, "y": 2.9106}, {"x": 3.4, "y": 2.9106}, {"x": 3.5, "y": 2.9106}, {"x": 3.6, "y": 2.8802}, {"x": 3.7, "y": 2.8407}, {"x": 3.8, "y": 2.7917}, {"x": 3.9, "y": 2.7435}, {"x": 4.0, "y": 2.7059}, {"x": 4.1, "y": 2.5729}, {"x": 4.2, "y": 2.5024}, {"x": 4.3, "y": 2.4065}, {"x": 4.4, "y": 2.3345}, {"x": 4.5, "y": 2.2148}, {"x": 4.6, "y": 2.1673}, {"x": 4.7, "y": 2.0531}, {"x": 4.8, "y": 2.0}, {"x": 4.9, "y": 1.959}, {"x": 5.0, "y": 1.8865}, {"x": 5.1, "y": 1.8388}, {"x": 5.2, "y": 1.7559}, {"x": 5.3, "y": 1.5315}, {"x": 5.4, "y": 1.415}, {"x": 5.5, "y": 1.2788}, {"x": 5.6, "y": 1.0414}, {"x": 5.7, "y": 1.0}, {"x": 5.8, "y": 0.7782}, {"x": 5.9, "y": 0.699}, {"x": 6.0, "y": 0.6021}, {"x": 6.1, "y": 0.6021}, {"x": 6.2, "y": 0.301}, {"x": 6.3, "y": 0.0}, {"x": 6.4, "y": 0.0}, {"x": 6.5, "y": 0.0}];
+  var grFit1   = [{"x": 3.5, "y": 2.5024}, {"x": 3.6, "y": 2.3872}, {"x": 3.7, "y": 2.272}, {"x": 3.8, "y": 2.1568}, {"x": 3.9, "y": 2.0415}, {"x": 4.0, "y": 1.9263}, {"x": 4.1, "y": 1.8111}, {"x": 4.2, "y": 1.6958}, {"x": 4.3, "y": 1.5806}, {"x": 4.4, "y": 1.4654}, {"x": 4.5, "y": 1.3501}, {"x": 4.6, "y": 1.2349}, {"x": 4.7, "y": 1.1197}, {"x": 4.8, "y": 1.0045}, {"x": 4.9, "y": 0.8892}, {"x": 5.0, "y": 0.774}];
+  var grFit2   = [{"x": 5.0, "y": 1.8808}, {"x": 5.1, "y": 1.7737}, {"x": 5.2, "y": 1.6667}, {"x": 5.3, "y": 1.5596}, {"x": 5.4, "y": 1.4526}, {"x": 5.5, "y": 1.3455}, {"x": 5.6, "y": 1.2384}, {"x": 5.7, "y": 1.1314}, {"x": 5.8, "y": 1.0243}, {"x": 5.9, "y": 0.9173}, {"x": 6.0, "y": 0.8102}, {"x": 6.1, "y": 0.7031}, {"x": 6.2, "y": 0.5961}, {"x": 6.3, "y": 0.489}, {"x": 6.4, "y": 0.382}, {"x": 6.5, "y": 0.2749}, {"x": 6.6, "y": 0.1678}];
   var mBreak   = 5.0;
 
-  var labelOmori = 'Omori-Utsu  p=0.4917±0.178  K=15.0236  c=0.0001h  R²=0.651';
-  var labelGR    = 'G-R fit  log N = 4.4321 − 0.5937·M  (b=0.5937, Mc=3.5)';
-  var labelGR1   = 'Seg-1 (M3.5–5.0): b=1.2244  [mb/m]';
-  var labelGR2   = 'Seg-2 (M5.0+): b=1.0061  [Mw doğal]';
+  var labelOmori = 'Omori-Utsu  p=0.4189±0.096  K=15.3513  c=0.0001h  R²=0.7954';
+  var labelGR    = 'G-R fit  log N = 4.5503 − 0.5851·M  (b=0.5851, Mc=3.5)';
+  var labelGR1   = 'Seg-1 (M3.5–5.0): b=1.1523  [mb/m]';
+  var labelGR2   = 'Seg-2 (M5.0+): b=1.0706  [Mw doğal]';
   var labelGRmw  = 'Mw-dönüştürülmüş (Scordilis 2006)';
-  var labelDc    = 'GP fit  Dc=1.3859  R²=0.9492';
+  var labelDc    = 'GP fit  Dc=1.4067  R²=0.9491';
 
   function loadChartJS(cb) {
     if (window.Chart) { cb(); return; }
@@ -2948,7 +2408,7 @@ ${body}</div></body></html>`;
         type: 'bar',
         data: {
           datasets: [
-            { label: 'Gözlenen yoğunluk  (Dt=-0.1186)',
+            { label: 'Gözlenen yoğunluk  (Dt=-0.0652)',
                data: histData, backgroundColor:'rgba(255,180,50,0.65)',
                borderColor:'#ffaa22', borderWidth:1, type:'bar' },
             { label: 'Poisson beklentisi (üstel)',
@@ -2981,352 +2441,81 @@ ${body}</div></body></html>`;
 })();
 </script>
 
-<!-- ════════════════════════════════════════════
-     SÖZLÜK — Temel Sismoloji ve Tektonik Terimleri
-════════════════════════════════════════════ -->
-<div style="margin:32px 16px 0;padding:24px 28px;background:linear-gradient(135deg,#0f1623 0%,#141c2e 100%);border:1px solid rgba(59,158,255,0.2);border-radius:14px;">
-  <div style="font-size:0.72em;font-weight:700;color:#7ecbff;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:4px;">Terimler Sözlüğü</div>
-  <h2 style="font-size:1.15em;font-weight:700;color:#e8f0f5;margin:0 0 18px;border-bottom:2px solid rgba(59,158,255,0.25);padding-bottom:10px;">Temel Sismoloji ve Sismotektonik Kavramlar</h2>
+<script>
+(function(){
+  var synth=window.speechSynthesis;
+  if(!synth)return;
+  var speaking=false,paused=false,activeEl=null,segments=[];
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
+  function getLang(){var m=document.cookie.match(/googtrans=\/[^\/]+\/([^;]+)/);return m?m[1].trim():'tr';}
 
-    <div style="background:rgba(59,158,255,0.07);border:1px solid rgba(59,158,255,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#3b9eff;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Kozismik Yükselim</div>
-      <div style="font-size:0.82em;font-weight:600;color:#94c6ff;margin-bottom:6px;font-style:italic;">Coseismic Uplift</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Deprem sırasında yer kabuğunun <em>anlık ve kalıcı</em> olarak dikey yönde yükselmesi. Ters faylanma (thrust) ve megathrust olaylarında üst levha, alt levhanın üzerine çıkarak kıyı şeridini deniz seviyesinin üzerine taşır. Geçici (dinamik) değil; statik ve kalıcı deformasyondur. Jose Abad Santos'ta gözlemlenen sahil genişlemesinin nedenidir.</p>
-    </div>
+  function buildSegments(){
+    segments=[];
+    var root=document.querySelector('.report-body')||document.querySelector('main')||document.body;
+    var els=root.querySelectorAll('p,h1,h2,h3,h4,li,blockquote,td,.panel p,.panel li');
+    var pos=0,parts=[];
+    els.forEach(function(el){
+      if(el.closest('script,style,button,noscript,.export-toolbar,.report-footer'))return;
+      var txt=(el.innerText||el.textContent||'').replace(/\s{2,}/g,' ').trim();
+      if(txt.length<4)return;
+      for(var i=0;i<segments.length;i++){if(segments[i].el.contains(el))return;}
+      segments.push({el:el,start:pos,end:pos+txt.length});
+      parts.push(txt);
+      pos+=txt.length+1;
+    });
+    return parts.join(' ').slice(0,50000);
+  }
 
-    <div style="background:rgba(245,166,35,0.07);border:1px solid rgba(245,166,35,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#f5a623;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Megathrust</div>
-      <div style="font-size:0.82em;font-weight:600;color:#ffd080;margin-bottom:6px;font-style:italic;">Megathrust / Levha Arayüzü Kırılması</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Subdüksiyon bölgelerinde iki levhanın temas ettiği arayüz boyunca gelişen büyük ölçekli ters faylanma. Dünyanın en büyük depremlerini üretir (Mw 8–9+). 2026 Mindanao depremi, Cotabato Hendeği'nin megathrust segmenti üzerinde %87 DC bileşenli saf ters faylanma olarak sınıflandırılmıştır.</p>
-    </div>
+  function clearHL(){
+    if(activeEl){activeEl.style.background='';activeEl.style.outline='';activeEl.style.borderRadius='';activeEl=null;}
+  }
 
-    <div style="background:rgba(245,87,108,0.07);border:1px solid rgba(245,87,108,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#f5576c;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Ters Faylanma</div>
-      <div style="font-size:0.82em;font-weight:600;color:#fca5a5;margin-bottom:6px;font-style:italic;">Thrust / Reverse Faulting</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Sıkışma (kompresyon) tektoniğinin egemen olduğu ortamlarda üst bloğun alt bloğun üzerine çıktığı fay türü. Fay düzlemi yataya yakın eğim açısıyla (<45°) karakterizedir. Moment tensör çözümünde yüksek DC bileşeni ve nodal düzlemlerden birinin sığ eğimli olması ile tanınır.</p>
-    </div>
+  function hlEl(el){
+    if(el===activeEl)return;
+    clearHL();
+    activeEl=el;
+    el.style.background='rgba(59,158,255,0.15)';
+    el.style.outline='2px solid rgba(59,158,255,0.4)';
+    el.style.borderRadius='4px';
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+  }
 
-    <div style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#22c55e;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Deniz Sekisi</div>
-      <div style="font-size:0.82em;font-weight:600;color:#86efac;margin-bottom:6px;font-style:italic;">Marine Terrace / Sismik Seki</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Tekrarlayan megathrust depremlerinin kozismik yükselimlerinin birikmesiyle kıyılarda oluşan basamaklı kara platformları. Her büyük deprem bir basamak ekler; böylece kıyı profili bölgenin uzun vadeli tektonik yükselim tarihini kaydeder. Jose Abad Santos'taki yeni sahil şeridi, bu serinin en taze örneğidir.</p>
-    </div>
+  function findSeg(ci){
+    for(var i=0;i<segments.length;i++){if(ci>=segments[i].start&&ci<segments[i].end)return segments[i].el;}
+    return null;
+  }
 
-    <div style="background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#a855f7;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Moment Tensör</div>
-      <div style="font-size:0.82em;font-weight:600;color:#d8b4fe;margin-bottom:6px;font-style:italic;">Moment Tensor / Odak Mekanizması</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Deprem kaynağındaki kuvvet sistemini matematiksel olarak tanımlayan tensör. Çift-kuvvet (DC) bileşeni saf kayma, CLVD bileşeni karmaşık kırılma süreçlerini yansıtır. 2026 Mindanao olayı için DC = %87; bu değer saf ters faylanma ile tam uyumludur. Odak mekanizması çözümü kırmızı-beyaz "beachball" diyagramı ile görselleştirilir.</p>
-    </div>
+  function setState(s,btn){
+    if(s==='playing'){btn.textContent='⏸ Duraklat';btn.style.background='linear-gradient(135deg,#92400e,#b45309)';}
+    else if(s==='paused'){btn.textContent='▶ Devam';btn.style.background='linear-gradient(135deg,#14532d,#166534)';}
+    else{btn.textContent='🔊 Dinle';btn.style.background='linear-gradient(135deg,#1e3a5f,#1e40af)';}
+  }
 
-    <div style="background:rgba(20,184,166,0.07);border:1px solid rgba(20,184,166,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#14b8a6;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Subdüksiyon</div>
-      <div style="font-size:0.82em;font-weight:600;color:#5eead4;margin-bottom:6px;font-style:italic;">Subduction / Dalma-Batma</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Yoğun okyanusal levhanın, daha hafif karasal levhanın altına dalması sürecidir. Cotabato Hendeği'nde Filipin Denizi Levhası, Mindanao altına dalmakta; bu yakınsak sınırda biriken stres periyodik megathrust depremlerini üretmektedir. Dalma derinliği arttıkça fay arayüzü daha dik bir geometri kazanır.</p>
-    </div>
+  function initTTS(){
+    var btn=document.getElementById('sr-tts-btn');
+    if(!btn)return;
+    btn.addEventListener('click',function(){
+      if(!speaking&&!paused){
+        synth.cancel();
+        var text=buildSegments();
+        var utt=new SpeechSynthesisUtterance(text);
+        utt.lang=getLang();utt.rate=0.92;
+        utt.addEventListener('boundary',function(e){
+          if(e.name==='word'||e.name==='sentence'){var el=findSeg(e.charIndex);if(el)hlEl(el);}
+        });
+        utt.onend=utt.onerror=function(){speaking=false;paused=false;setState('idle',btn);clearHL();};
+        synth.speak(utt);speaking=true;setState('playing',btn);
+      } else if(speaking){
+        synth.pause();speaking=false;paused=true;setState('paused',btn);
+      } else if(paused){
+        synth.resume();paused=false;speaking=true;setState('playing',btn);
+      }
+    });
+    window.addEventListener('beforeunload',function(){synth.cancel();});
+  }
 
-    <div style="background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#fbbf24;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Makrosismik Yoğunluk</div>
-      <div style="font-size:0.82em;font-weight:600;color:#fde68a;margin-bottom:6px;font-style:italic;">Macroseismic Intensity / EMS-98</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Depremin belirli bir noktada insanlar, yapılar ve doğal çevre üzerindeki etkisini tanımlayan gözlemsel ölçek. Alet ölçümleri yerine tanık ifadelerine dayanır; Avrupa Makrosismik Skalası (EMS-98) veya Modifiye Mercalli (MMI) ile ifade edilir. EMSC'nin 116 "I Felt It" raporu bu analizin temelini oluşturur.</p>
-    </div>
-
-    <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#ef4444;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Santroid Derinliği</div>
-      <div style="font-size:0.82em;font-weight:600;color:#fca5a5;margin-bottom:6px;font-style:italic;">Centroid Depth / W-faz Derinliği</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Depremin sismik enerji yayımının ağırlık merkezi; kırılmanın başladığı hipocenter'den farklıdır. W-faz analizi ile uzak istasyonlardan hesaplanır ve gerçek fay yüzeyinin ortalama derinliğini yansıtır. 2026 Mindanao için hipocenter 55.2 km, santroid 35.5 km — kırılmanın üst subdüksiyon arayüzüyle uyumlu olduğunu gösterir.</p>
-    </div>
-
-    <div style="background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:14px 16px;">
-      <div style="font-size:0.78em;font-weight:700;color:#3b82f6;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px;">Kayma Bölünmesi</div>
-      <div style="font-size:0.82em;font-weight:600;color:#93c5fd;margin-bottom:6px;font-style:italic;">Slip Partitioning / Shear Partitioning</div>
-      <p style="font-size:0.875em;color:#cbd5e1;line-height:1.65;margin:0;">Eğik subdüksiyonda levha hareketinin iki bileşene ayrılması: yakınsak (dik) bileşen arayüz boyunca ters faylanma, yanal bileşen ise yay-paralel doğrultu atımlı faylar (örn. Filipin Fayı) üzerinde gerçekleşir. Aurelio (2000) bu modeli Filipinler için detaylıca belgelemiştir.</p>
-    </div>
-
-  </div>
-
-  <div style="margin-top:16px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.78em;color:#64748b;line-height:1.6;text-align:center;">
-    Sözlük kaynakları: Scholz (2002) <em>The Mechanics of Earthquakes and Faulting</em>; Baker, Bradley &amp; Stafford (2021) <em>Seismic Hazard and Risk Analysis</em>; Aurelio (2000); Öncel (2026) SeismoReport v3.1
-  </div>
-</div>
-
-<!-- FINAL PROJESİ -->
-<div style="margin:36px 16px 0;padding:28px 30px;background:linear-gradient(135deg,#0c1a2e 0%,#0f1f38 100%);border:2px solid rgba(6,182,212,0.35);border-radius:16px;box-shadow:0 8px 32px rgba(6,182,212,0.12);">
-
-  <!-- Başlık -->
-  <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(6,182,212,0.2);">
-    <div style="background:rgba(6,182,212,0.15);border-radius:10px;padding:10px 14px;font-size:1.8em;line-height:1;">🎓</div>
-    <div>
-      <div style="font-size:0.7em;font-weight:700;color:#22d3ee;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:3px;">Kompleks Depremlerin Analizi — Dersi Final Projesi</div>
-      <h2 style="font-size:1.05em;font-weight:700;color:#e8f0f5;margin:0;line-height:1.4;">Sismik İnatçılık Testi: 2020–2026 Büyük Depremlerde p(İntra-plate) ile p(Inter-plate) Karşılaştırması</h2>
-    </div>
-  </div>
-
-  <!-- Shimazaki 1978 Hipotezi -->
-  <div style="background:rgba(245,158,11,0.08);border:2px solid rgba(245,158,11,0.4);border-radius:12px;padding:16px 20px;margin-bottom:20px;">
-    <div style="font-size:0.72em;font-weight:700;color:#fbbf24;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;">📜 Temel Hipotez — Shimazaki (1978), BSSA 68(1):181–192</div>
-    <blockquote style="margin:0 0 12px;padding:10px 14px;background:rgba(245,158,11,0.06);border-left:4px solid rgba(245,158,11,0.5);border-radius:0 6px 6px 0;font-size:0.875em;color:#fde68a;line-height:1.75;font-style:italic;">
-      "All of the active periods of intraplate earthquakes for the past 100 years in Tohoku, northeast Japan
-      correlate with the occurrence of great interplate earthquakes along the Japan trench.
-      One-fourth of intraplate earthquakes preceded interplate earthquakes by less than 5 years;
-      a further one-half followed them by less than 10 years."
-    </blockquote>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div style="background:rgba(245,158,11,0.08);border-radius:8px;padding:10px 13px;">
-        <div style="font-size:0.76em;font-weight:700;color:#fbbf24;margin-bottom:5px;">Shimazaki'nin Mekanizması</div>
-        <p style="font-size:0.82em;color:#94a3b8;margin:0;line-height:1.65;">Levha sınırında birikim (yükleme) dönemi → levha içi gerilim artar → intra-plate depremi tetikler. Büyük interplaka depremi → levha içi gerilimi boşaltır → yeni quiescence başlar. <strong>Yükleme–boşalma döngüsü</strong> intra-plate sismisite ile senkronize (96.5% güven düzeyi).</p>
-      </div>
-      <div style="background:rgba(245,158,11,0.08);border-radius:8px;padding:10px 13px;">
-        <div style="font-size:0.76em;font-weight:700;color:#fbbf24;margin-bottom:5px;">Bu Projenin Sorusu</div>
-        <p style="font-size:0.82em;color:#94a3b8;margin:0;line-height:1.65;">Shimazaki'nin mekanizma farkı, <strong>artçı sönümlenme hızına (Omori-p)</strong> yansır mı? Modern katalogda <strong>p(İntra-plate) ≠ p(Inter-plate)</strong> midir? 2020–2026 M≥7 depremleri bu soruyu eşleştirilmiş büyüklük çiftleriyle test eder.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Araştırma Sorusu -->
-  <div style="background:rgba(168,85,247,0.08);border-left:4px solid rgba(168,85,247,0.5);border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:20px;">
-    <div style="font-size:0.72em;font-weight:700;color:#c084fc;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;">Araştırma Sorusu (Test Edilebilir Hipotez)</div>
-    <p style="font-size:0.9em;color:#e2e8f0;line-height:1.75;margin:0;font-style:italic;">
-      H₀: p(İntra-plate) = p(Inter-plate) &nbsp;|&nbsp;
-      H₁: p(İntra-plate) ≠ p(Inter-plate)<br>
-      Eğer H₁ doğrulanırsa: hangi tip daha "inatçı" (p &lt; 0.7)?
-      Shimazaki'nin yükleme–boşalma farkı Omori parametresinde ölçülebilir mi?
-    </p>
-  </div>
-
-  <!-- 5+5 Kuralı + Büyüklük Eşleştirmesi -->
-  <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:14px 18px;margin-bottom:16px;">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-      <div style="font-size:1.3em;">⚖️</div>
-      <div style="font-size:0.76em;font-weight:700;color:#fca5a5;letter-spacing:0.1em;text-transform:uppercase;">5+5 Kuralı — Büyüklük Eşleştirmesi Zorunlu</div>
-    </div>
-    <p style="font-size:0.84em;color:#94a3b8;line-height:1.7;margin:0 0 10px;">K parametresi Mw ile ölçeklenir; p büyük ölçüde bağımsız olsa da katalog tamlığı (Mc) ve artçı sayısı (N) Mw'ye göre değişir. Adil karşılaştırma için intra-plate ve inter-plate vakalarının <strong>ΔMw ≤ 0.3 (ideal: Mw 7.5 ± 0.3)</strong> aralığında eşleştirilmesi gerekir. Aksi hâlde büyüklük etkisi p farklılığını gizler. Önerilen yapı: <strong>5 inter-plate + 5 intra-plate</strong> (her biri eşleştirilmiş).</p>
-    <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:10px 14px;">
-      <div style="font-size:0.76em;font-weight:700;color:#fca5a5;margin-bottom:6px;">Yönlü Hipotez — Beklenen Sonuç</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="background:rgba(245,87,108,0.08);border-radius:6px;padding:8px 11px;">
-          <div style="font-size:0.78em;font-weight:700;color:#f87171;margin-bottom:4px;">Intraslab → p yüksek (hızlı)</div>
-          <p style="font-size:0.79em;color:#94a3b8;margin:0;line-height:1.6;">Daha yüksek stres düşümü (~12 MPa) → ikincil kırılmalar hızla tükenir → sönümlenme hızlı. Beklenti: p ≈ 1.0 (Hokkaido-Toho-Oki 1994: p = 1.06, Ishibe &amp; Shimazaki 2009).</p>
-        </div>
-        <div style="background:rgba(59,158,255,0.08);border-radius:6px;padding:8px 11px;">
-          <div style="font-size:0.78em;font-weight:700;color:#93c5fd;margin-bottom:4px;">Interface → p düşük (inatçı)</div>
-          <p style="font-size:0.79em;color:#94a3b8;margin:0;line-height:1.6;">Geniş arayüz, kama geometrisi, düşük jeoisı → sönümlenme yavaş. Mindanao 2026: <strong>p = 0.564</strong> → "Sismik İnatçılık" eşiği p &lt; 0.7 ile örtüşüyor.</p>
-        </div>
-      </div>
-      <div style="margin-top:8px;font-size:0.81em;color:#cbd5e1;line-height:1.65;background:rgba(239,68,68,0.07);border-radius:5px;padding:6px 10px;">
-        <strong style="color:#fca5a5;">İstatistiksel hedef:</strong> H₁ (tek yönlü): p(İntra) &gt; p(Inter), α = 0.05, Mann-Whitney U testi.
-        Mindanao 2026 referans değeri p = 0.564 bu karşılaştırmada <em>interface</em> grubunun en inatçı ucunu temsil eder.
-      </div>
-    </div>
-  </div>
-
-  <!-- Vaka Çiftleri -->
-  <div style="font-size:0.78em;font-weight:700;color:#22d3ee;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Eşleştirilmiş Vaka Çiftleri — En Az 5 Çift (2020–2026, M≥7)</div>
-  <div style="overflow-x:auto;margin-bottom:8px;">
-    <table style="width:100%;border-collapse:collapse;font-size:0.82em;">
-      <thead>
-        <tr style="background:rgba(6,182,212,0.12);">
-          <th style="padding:8px 10px;text-align:center;color:#22d3ee;border-bottom:1px solid rgba(6,182,212,0.3);">#</th>
-          <th style="padding:8px 10px;text-align:left;color:#22d3ee;border-bottom:1px solid rgba(6,182,212,0.3);">Inter-plate Vaka</th>
-          <th style="padding:8px 10px;text-align:center;color:#22d3ee;border-bottom:1px solid rgba(6,182,212,0.3);">Mw</th>
-          <th style="padding:8px 10px;text-align:left;color:#22d3ee;border-bottom:1px solid rgba(6,182,212,0.3);">Eşleşen Intra-plate Vaka</th>
-          <th style="padding:8px 10px;text-align:center;color:#22d3ee;border-bottom:1px solid rgba(6,182,212,0.3);">Mw</th>
-          <th style="padding:8px 10px;text-align:center;color:#22d3ee;border-bottom:1px solid rgba(6,182,212,0.3);">ΔMw</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-          <td style="padding:8px 10px;text-align:center;color:#7ecbff;font-weight:700;">1</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Alaska</strong> — Tem. 2021 <span style="font-size:0.8em;color:#94a3b8;">(Aleutian megathrust, M<sub>d</sub> 20 km)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">8.2</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Kermadec</strong> — 4 Mar. 2021 <span style="font-size:0.8em;color:#94a3b8;">(derin intraslab, ~580 km — Wadati-Benioff)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.4</td>
-          <td style="padding:8px 10px;text-align:center;color:#fbbf24;">0.8</td>
-        </tr>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);">
-          <td style="padding:8px 10px;text-align:center;color:#7ecbff;font-weight:700;">2</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Kermadec</strong> — 5 Mar. 2021 <span style="font-size:0.8em;color:#94a3b8;">(Tonga–Kermadec arayüzü)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">8.1</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Noto, Japonya</strong> — Oca. 2024 <span style="font-size:0.8em;color:#94a3b8;">(kıta içi intraplate, ters/oblik fay)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.5</td>
-          <td style="padding:8px 10px;text-align:center;color:#fbbf24;">0.6</td>
-        </tr>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-          <td style="padding:8px 10px;text-align:center;color:#7ecbff;font-weight:700;">3</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Mindanao</strong> — Haz. 2026 ★ <span style="font-size:0.8em;color:#94a3b8;">(Cotabato megathrust — bu rapor)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.8</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Türkiye–Suriye</strong> — Şub. 2023 <span style="font-size:0.8em;color:#94a3b8;">(Doğu Anadolu Fayı, kıta içi doğrultu atımlı)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.8</td>
-          <td style="padding:8px 10px;text-align:center;color:#4ade80;font-weight:700;">0.0 ✓</td>
-        </tr>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);">
-          <td style="padding:8px 10px;text-align:center;color:#7ecbff;font-weight:700;">4</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Alaska</strong> — Tem. 2020 <span style="font-size:0.8em;color:#94a3b8;">(Aleutian arayüzü, tsunami eşlik etti)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.8</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Kuzey Maluku</strong> — Nis. 2026 <span style="font-size:0.8em;color:#94a3b8;">(karmaşık tektonik / intraslab bileşeni)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.4</td>
-          <td style="padding:8px 10px;text-align:center;color:#4ade80;font-weight:700;">0.4 ✓</td>
-        </tr>
-        <tr>
-          <td style="padding:8px 10px;text-align:center;color:#7ecbff;font-weight:700;">5</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Mindanao</strong> — Ara. 2023 <span style="font-size:0.8em;color:#94a3b8;">(Filipin Hendeği arayüzü)</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#f59e0b;font-weight:700;">7.6</td>
-          <td style="padding:8px 10px;color:#e2e8f0;"><strong>Öğrenci Seçimi</strong> <span style="font-size:0.8em;color:#22d3ee;">← USGS portalından ΔMw≤0.4 intraslab vaka</span></td>
-          <td style="padding:8px 10px;text-align:center;color:#22d3ee;font-weight:700;">7.2–8.0</td>
-          <td style="padding:8px 10px;text-align:center;color:#22d3ee;">≤0.4</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:0.76em;color:#475569;margin:6px 0 0;line-height:1.5;">★ Çift 3 ideal kontrol: aynı Mw, farklı tektonik ortam (subdüksiyon arayüzü vs. kıta içi). Öğrenci 5. çifti USGS portalından seçer — bu adım projenin veri okur-yazarlığı bileşenidir.</p>
-
-  <!-- Chignik + Mindanao çift rol notu -->
-  <div style="margin:12px 0 20px;background:rgba(6,182,212,0.06);border:1px solid rgba(6,182,212,0.2);border-radius:8px;padding:11px 15px;">
-    <div style="font-size:0.74em;font-weight:700;color:#22d3ee;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:7px;">Ek Vaka Önerileri (5+5'e Ulaşmak İçin)</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.82em;color:#94a3b8;line-height:1.65;">
-      <div><strong style="color:#f59e0b;">Chignik, Alaska (Jul 2021) Mw 6.9+</strong><br>Derin odaklı, Alaska-Aleutian subdüksiyon dilimi içinde Wadati-Benioff bölgesi — intraslab için güçlü aday. USGS portalında artçı kataloğu mevcut. ΔMw eşleştirmesi Alaska 2020 Mw 7.8 ile değil; ek inter-plate Mw 7.0 vakası bulunmalı.</div>
-      <div><strong style="color:#f59e0b;">Mindanao 2026 — Çift Rol</strong><br>Öncel (2026) megathrust / Hubbard &amp; Bradley intraslab tartışması nedeniyle bu vaka <em>hem interface hem intraslab grubuna</em> aday gösterilebilir. Her iki sınıflandırmada p = 0.564 hangi gruba daha iyi uyuyor? Bu "sınır vakası" projenin en güçlü tartışma noktasıdır.</div>
-    </div>
-  </div>
-
-  <!-- Metodoloji -->
-  <div style="font-size:0.78em;font-weight:700;color:#22d3ee;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Metodoloji — 4 Adım</div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:20px;">
-    <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:9px;padding:12px 14px;">
-      <div style="font-size:0.73em;font-weight:700;color:#22d3ee;text-transform:uppercase;margin-bottom:5px;">① Katalog İndirme</div>
-      <p style="font-size:0.81em;color:#94a3b8;margin:0;line-height:1.6;">USGS portalından her vaka için ±90 gün, M≥M<sub>c</sub>. 3D fay kutusu sınırı (Wells &amp; Coppersmith 1994). CSV çıktısı.</p>
-    </div>
-    <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:9px;padding:12px 14px;">
-      <div style="font-size:0.73em;font-weight:700;color:#22d3ee;text-transform:uppercase;margin-bottom:5px;">② M<sub>c</sub> + p Kestirimi</div>
-      <p style="font-size:0.81em;color:#94a3b8;margin:0;line-height:1.6;">MLE (Aki 1965) ile M<sub>c</sub>. Sonra λ(t)=K/(t+c)<sup>p</sup> Nelder-Mead ile K, c, p. Bootstrap %95 GA. Her çift için ayrı.</p>
-    </div>
-    <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:9px;padding:12px 14px;">
-      <div style="font-size:0.73em;font-weight:700;color:#22d3ee;text-transform:uppercase;margin-bottom:5px;">③ İstatistiksel Test</div>
-      <p style="font-size:0.81em;color:#94a3b8;margin:0;line-height:1.6;">Çift başına p(İntra)−p(Inter) farkı. 5 çift için Mann-Whitney U: H₀ reddedilirse p&lt;0.05, mekanizma etkisi doğrulanır.</p>
-    </div>
-    <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:9px;padding:12px 14px;">
-      <div style="font-size:0.73em;font-weight:700;color:#22d3ee;text-transform:uppercase;margin-bottom:5px;">④ Shimazaki Testi</div>
-      <p style="font-size:0.81em;color:#94a3b8;margin:0;line-height:1.6;">Sonuç Shimazaki (1978) ile karşılaştırılır. K/alan normalize değeriyle Yamanaka &amp; Shimazaki (1990) "4×" testi paralel yapılır.</p>
-    </div>
-  </div>
-
-  <!-- Beklenen Sonuçlar -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-    <div style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:13px 16px;">
-      <div style="font-size:0.76em;font-weight:700;color:#4ade80;text-transform:uppercase;margin-bottom:6px;">H₁ Doğrulanırsa</div>
-      <p style="font-size:0.83em;color:#cbd5e1;line-height:1.65;margin:0;">p(İntra) &lt; p(Inter): intra-plate sekanslar daha inatçı. Shimazaki'nin mekanizma farkı Omori parametresine yansımış. p &lt; 0.7 "intra-plate parmak izi" olarak kodifiye edilir → sivil savunma uygulaması doğrudan.</p>
-    </div>
-    <div style="background:rgba(245,87,108,0.07);border:1px solid rgba(245,87,108,0.2);border-radius:10px;padding:13px 16px;">
-      <div style="font-size:0.76em;font-weight:700;color:#fca5a5;text-transform:uppercase;margin-bottom:6px;">H₀ Korunsun (Red Edilmezse)</div>
-      <p style="font-size:0.83em;color:#cbd5e1;line-height:1.65;margin:0;">p mekanizmadan bağımsız: bölgesel jeoisı/kama geometrisi baskın. Bu da özgün bulgudur: Shimazaki etkisi artçı <em>sayısında</em> (K) görünür, sönümlenme <em>hızında</em> (p) değil. İkili ayrım netleşir.</p>
-    </div>
-  </div>
-
-  <!-- 3 Yol -->
-  <div style="background:rgba(59,158,255,0.06);border:1px solid rgba(59,158,255,0.22);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
-    <div style="font-size:0.73em;font-weight:700;color:#7ecbff;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">Projeyi Nasıl Yaparsınız? — 3 Yol</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">
-      <div style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:9px;padding:12px 14px;">
-        <div style="font-size:0.8em;font-weight:700;color:#4ade80;margin-bottom:6px;">🎬 Yol 1 — Video + Excel</div>
-        <p style="font-size:0.8em;color:#94a3b8;margin:0 0 7px;line-height:1.6;">USGS portalından CSV indirme (video ↓). Excel'de log-log regresyon ile Utsu (1957) yöntemiyle p tahmini. Grafik ve tablo ile sunum.</p>
-        <div style="font-size:0.74em;color:#64748b;border-top:1px solid rgba(255,255,255,0.08);padding-top:6px;">Araç: Excel — Kod gerektirmez</div>
-      </div>
-      <div style="background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.2);border-radius:9px;padding:12px 14px;">
-        <div style="font-size:0.8em;font-weight:700;color:#c084fc;margin-bottom:6px;">🤖 Yol 2 — AI + GitHub</div>
-        <p style="font-size:0.8em;color:#94a3b8;margin:0 0 7px;line-height:1.6;">SeismoReport GitHub'ı açın → Claude/ChatGPT'ye CSV'yi verin → "Nelder-Mead ile K, c, p hesapla, bootstrap GA ekle" sorun. AI kod yazar + yorumlar.</p>
-        <div style="font-size:0.74em;color:#64748b;border-top:1px solid rgba(255,255,255,0.08);padding-top:6px;">Araç: AI asistan — Orta düzey</div>
-      </div>
-      <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:9px;padding:12px 14px;">
-        <div style="font-size:0.8em;font-weight:700;color:#22d3ee;margin-bottom:6px;">🐍 Yol 3 — Python Geliştirme</div>
-        <p style="font-size:0.8em;color:#94a3b8;margin:0 0 7px;line-height:1.6;">Gulia vd. (2024) FTLS iş akışını referans alarak kendi Nelder-Mead modülünü yaz: <code style="background:rgba(0,0,0,0.3);padding:1px 5px;border-radius:3px;font-size:0.9em;">omori_compare.py</code>. ObsPy + SciPy. 10 vakayı otomatik analiz eder. GitHub'a yükle → yazılım katkısı.</p>
-        <div style="font-size:0.74em;color:#64748b;border-top:1px solid rgba(255,255,255,0.08);padding-top:6px;">Araç: Python — İleri düzey / Dergi düzeyi</div>
-      </div>
-      <div style="background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.25);border-radius:9px;padding:12px 14px;">
-        <div style="font-size:0.8em;font-weight:700;color:#fbbf24;margin-bottom:6px;">🧠 Yol 4 — AI / Makine Öğrenmesi</div>
-        <p style="font-size:0.8em;color:#94a3b8;margin:0 0 7px;line-height:1.6;">GitHub deposundaki p(t) ve K değerlerini eğitim verisi olarak kullan. Scikit-learn ile ikili sınıflandırıcı (Random Forest veya SVM) eğit: <strong>girdi</strong> → {p, K/alan, Mw, derinlik}; <strong>çıktı</strong> → {interface, intraslab}. Hedef doğruluk: ≥ %85. Mindanao 2026'yı test vakası olarak kullan.</p>
-        <div style="font-size:0.74em;color:#64748b;border-top:1px solid rgba(255,255,255,0.08);padding-top:6px;">Araç: Python + ML — Makale + yazılım / En üst düzey</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Video embed -->
-  <div style="margin-bottom:20px;">
-    <div style="font-size:0.73em;font-weight:700;color:#7ecbff;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">📹 Yol 1 için: USGS Portalı — Veri İndirme Rehberi (Prof. Dr. Ali Osman Öncel)</div>
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:10px;">
-      <iframe src="https://www.youtube.com/embed/y0B0-fWCZU0" title="USGS Deprem Veri Portalı" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:5px;">
-      <a href="https://youtu.be/y0B0-fWCZU0?t=0" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(59,158,255,0.18)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'"><span style="background:#3b9eff;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">00:00</span><span style="font-size:0.79em;color:#cbd5e1;">Portal Tanıtımı</span></a>
-      <a href="https://youtu.be/y0B0-fWCZU0?t=29" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(59,158,255,0.18)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'"><span style="background:#3b9eff;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">00:29</span><span style="font-size:0.79em;color:#cbd5e1;">Bölge Seçimi</span></a>
-      <a href="https://youtu.be/y0B0-fWCZU0?t=104" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(59,158,255,0.18)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'"><span style="background:#3b9eff;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">01:44</span><span style="font-size:0.79em;color:#cbd5e1;">Büyüklük Filtresi</span></a>
-      <a href="https://youtu.be/y0B0-fWCZU0?t=214" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(59,158,255,0.18)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'"><span style="background:#3b9eff;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">03:34</span><span style="font-size:0.79em;color:#cbd5e1;">Sorgu Çalıştır</span></a>
-      <a href="https://youtu.be/y0B0-fWCZU0?t=447" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(34,197,94,0.2)'" onmouseout="this.style.background='rgba(34,197,94,0.1)'"><span style="background:#22c55e;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">07:27</span><span style="font-size:0.79em;color:#86efac;font-weight:600;">CSV İndirme ← kritik adım</span></a>
-      <a href="https://youtu.be/y0B0-fWCZU0?t=523" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(59,158,255,0.18)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'"><span style="background:#3b9eff;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">08:43</span><span style="font-size:0.79em;color:#cbd5e1;">Marmara Uygulaması</span></a>
-      <a href="https://youtu.be/y0B0-fWCZU0?t=590" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:6px;padding:4px 9px;text-decoration:none;" onmouseover="this.style.background='rgba(59,158,255,0.18)'" onmouseout="this.style.background='rgba(59,158,255,0.08)'"><span style="background:#3b9eff;color:#fff;font-size:0.72em;font-weight:700;padding:1px 6px;border-radius:3px;">09:50</span><span style="font-size:0.79em;color:#cbd5e1;">3B Görselleştirme</span></a>
-    </div>
-  </div>
-
-  <!-- PhD Yeterliliği -->
-  <div style="background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.3);border-radius:10px;padding:14px 18px;margin-bottom:20px;">
-    <div style="font-size:0.73em;font-weight:700;color:#fbbf24;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🏛️ Doktora Final Projesi Olarak Yeterliliği</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-      <div>
-        <div style="font-size:0.78em;font-weight:700;color:#4ade80;margin-bottom:5px;">✅ Bilimsel Güç</div>
-        <ul style="font-size:0.81em;color:#cbd5e1;line-height:1.75;margin:0;padding-left:16px;">
-          <li>Seminal literatüre dayalı net, test edilebilir hipotez</li>
-          <li>Gerçek veri, modern katalog, tekrarlanabilir metodoloji</li>
-          <li>Mann-Whitney U ile istatistiksel doğrulama</li>
-          <li>Büyüklük eşleştirmesi ile kontrollü karşılaştırma</li>
-          <li>Canlı veri: Mindanao 2026 p(t) günlük güncelleme</li>
-          <li>H₀ veya H₁ — her ikisi de özgün bilimsel katkı üretir</li>
-        </ul>
-      </div>
-      <div>
-        <div style="font-size:0.78em;font-weight:700;color:#fbbf24;margin-bottom:5px;">⚡ Yayına Taşıyan Adımlar</div>
-        <ul style="font-size:0.81em;color:#cbd5e1;line-height:1.75;margin:0;padding-left:16px;">
-          <li>5 çifti <strong>10 çifte</strong> çıkarmak istatistiksel gücü ikiye katlar</li>
-          <li>ΔMw ≤ 0.3 ile daha sıkı eşleştirme</li>
-          <li>p(t) zaman serisi karşılaştırması (dinamik)</li>
-          <li><code>omori_compare.py</code> Python modülü → yazılım katkısı</li>
-          <li>Mindanao 2026 ile anlık validasyon paragrafı</li>
-        </ul>
-      </div>
-    </div>
-    <!-- Seviye 4 Çerçevesi -->
-    <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:8px;padding:12px 14px;margin-bottom:10px;">
-      <div style="font-size:0.76em;font-weight:700;color:#22d3ee;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">🏆 Seviye 4 Akademik Derinlik Çerçevesi (NotebookLM Değerlendirmesi)</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-        <div style="background:rgba(6,182,212,0.08);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:0.75em;font-weight:700;color:#22d3ee;margin-bottom:4px;">① Nicel Soru</div>
-          <p style="font-size:0.78em;color:#94a3b8;margin:0;line-height:1.55;">"Mekanizma farkı p-değerini istatistiksel olarak anlamlı düzeyde değiştirir mi?" — Ölçülebilir, test edilebilir, yanlışlanabilir.</p>
-        </div>
-        <div style="background:rgba(6,182,212,0.08);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:0.75em;font-weight:700;color:#22d3ee;margin-bottom:4px;">② Modern Araçlar</div>
-          <p style="font-size:0.78em;color:#94a3b8;margin:0;line-height:1.55;">Python + GitHub açık kaynak + AI/ML sınıflandırıcı + canlı veri akışı. Yeniden üretilebilir (reproducible science).</p>
-        </div>
-        <div style="background:rgba(6,182,212,0.08);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:0.75em;font-weight:700;color:#22d3ee;margin-bottom:4px;">③ Operasyonel Çıktı</div>
-          <p style="font-size:0.78em;color:#94a3b8;margin:0;line-height:1.55;">p(t) → 1.0 eşiği: hasarlı binalara giriş izni için sismolojik triyaj. Bilim → karar desteği köprüsü.</p>
-        </div>
-      </div>
-    </div>
-    <div style="background:rgba(251,191,36,0.07);border-left:3px solid rgba(251,191,36,0.5);border-radius:0 6px 6px 0;padding:9px 13px;font-size:0.84em;color:#cbd5e1;line-height:1.7;">
-      <strong style="color:#fbbf24;">Sonuç:</strong>
-      5+5 eşleştirilmiş çift + Shimazaki (1978) hipotez çerçevesi + Nelder-Mead p kestirimi + yönlü Mann-Whitney U testi
-      → <strong>Doktora final projesi için bilimsel olarak yeterli, özgün ve mükemmeldir.</strong>
-      Yol 4 (AI/ML sınıflandırıcı) + 10 çift + <code>omori_compare.py</code> eklenirse <em>Seismological Research Letters</em> veya <em>Earth and Planetary Science Letters</em> düzeyine çıkar.
-    </div>
-  </div>
-
-  <!-- Danışman -->
-  <div style="padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.78em;color:#64748b;line-height:1.65;text-align:center;">
-    Danışman: <strong style="color:#7ecbff;">Prof. Dr. Ali Osman Öncel</strong> · İstanbul Üniversitesi-Cerrahpaşa, Jeofizik Mühendisliği Bölümü ·
-    Veri: <em>SeismoReport 2026 Mindanao Mw 7.8</em> (GitHub, açık erişim) ·
-    Referanslar: Shimazaki (1978); Yamanaka &amp; Shimazaki (1990); Ishibe &amp; Shimazaki (2009); Öncel &amp; Wilson (2007); Wells &amp; Coppersmith (1994)
-  </div>
-
-</div>
-
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initTTS);}else{initTTS();}
+})();
+</script>
 </body>
 </html>

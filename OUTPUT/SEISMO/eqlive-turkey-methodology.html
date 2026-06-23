@@ -1,0 +1,575 @@
+<!--
+EQ-LiveTurkiye — Kapsamlı Teknik Metodoloji Raporu
+Canlı Sismik İzleme · Katalog Derleme · Mw Homojenizasyonu · b-Değeri Analizi
+Yazar: Prof. Dr. Ali Osman Öncel, İÜC Jeofizik Mühendisliği
+SeismoReport v3.1
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>EQ-LiveTürkiye — Technical Methodology Report 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+  <style>
+    :root { --bg:#0a0e15; --text:#e8f0f5; --panel:#12171f; --accent:#3b9eff; --card-border:rgba(255,255,255,0.12); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Roboto',sans-serif; background:linear-gradient(to bottom,var(--bg) 0%,#0f1419 100%); color:var(--text); line-height:1.75; min-height:100vh; }
+    .container { max-width:1150px; margin:0 auto; padding:20px; }
+    .header-ribbon { background:linear-gradient(135deg,#1a6fc4 0%,#0e3d6e 100%); color:#fff; padding:16px; text-align:center; font-weight:700; border-radius:10px; margin-bottom:20px; font-size:1.05em; letter-spacing:0.02em; }
+    .hero-box { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:40px 24px 30px; text-align:center; border-radius:16px; border:1px solid var(--card-border); margin-bottom:30px; box-shadow:0 12px 36px rgba(0,0,0,0.48); position:relative; overflow:hidden; }
+    .hero-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,rgba(59,158,255,0.5),transparent); }
+    .hero-box h1 { font-size:1.85em; margin-bottom:10px; color:var(--accent); }
+    .meta-strip { text-align:center; font-size:0.82em; color:#7a8fa8; letter-spacing:0.03em; margin-bottom:10px; padding:6px 0; flex-wrap:wrap; display:flex; justify-content:center; gap:8px; }
+    .meta-strip span { background:rgba(59,158,255,0.08); border:1px solid rgba(59,158,255,0.2); border-radius:20px; padding:3px 10px; }
+    .accordion { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:18px 24px; border-radius:10px; border:1px solid var(--card-border); cursor:pointer; margin-bottom:4px; font-weight:700; display:flex; justify-content:space-between; align-items:center; transition:background 0.3s,transform 0.2s; user-select:none; font-size:0.97em; }
+    .accordion:hover { transform:translateY(-2px); }
+    .accordion.active { background:linear-gradient(135deg,#1e2535 0%,#252d3f 100%); border-color:var(--accent); border-radius:10px 10px 0 0; margin-bottom:0; }
+    .accordion::after { content:''; width:10px; height:10px; border-right:2px solid #7a9ab5; border-bottom:2px solid #7a9ab5; transform:rotate(45deg); transition:transform 0.3s ease; flex-shrink:0; }
+    .accordion.active::after { transform:rotate(-135deg); }
+    .panel { display:none; padding:24px; background:rgba(255,255,255,0.04); border-radius:0 0 10px 10px; border:1px solid var(--card-border); border-top:none; margin-bottom:12px; }
+    .panel.open { display:block; }
+    .panel p,.panel li,.panel td,.panel th { text-align:justify; hyphens:auto; }
+    .panel ul,.panel ol { padding-left:1.4em; margin:6px 0; }
+    .panel ul li,.panel ol li { margin-bottom:5px; }
+    .analysis-card { background:rgba(59,158,255,0.10); padding:16px 20px; border-radius:10px; border-left:4px solid var(--accent); margin:14px 0; }
+    .analysis-card h4 { margin-bottom:7px; color:var(--accent); }
+    .analysis-card p { text-align:justify; hyphens:auto; margin-bottom:0.8em; font-size:0.93em; }
+    .info-note { background:rgba(255,255,255,0.05); border-radius:8px; padding:12px 16px; margin:10px 0; font-size:0.91em; color:#b0c4d8; border-left:3px solid #555; line-height:1.75; }
+    .conclusion-card { background:rgba(22,163,74,0.10); border-left:4px solid #22c55e; padding:14px 18px; border-radius:10px; margin:12px 0; }
+    .conclusion-card h4 { color:#22c55e; margin-bottom:7px; }
+    .rec-card { background:rgba(245,87,108,0.09); border-left:4px solid #f5576c; padding:14px 18px; border-radius:10px; margin:12px 0; }
+    .rec-card h4 { color:#f5576c; margin-bottom:7px; }
+    .rec-card ul,.conclusion-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
+    .method-card { background:rgba(255,200,50,0.07); border-left:4px solid #f5a623; padding:14px 18px; border-radius:10px; margin:12px 0; }
+    .method-card h4 { color:#f5a623; margin-bottom:7px; font-size:0.96em; }
+    .method-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
+    .review-section-title { font-size:1.04em; font-weight:700; color:#7ecbff; border-bottom:2px solid rgba(59,158,255,0.3); padding-bottom:5px; margin:22px 0 10px; }
+    .review-body-text { text-align:justify; line-height:1.88; color:#e8f3ff; margin-bottom:12px; hyphens:auto; font-size:0.93em; }
+    .review-abstract { background:rgba(59,158,255,0.07); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:16px 20px; margin:16px 0; color:#eaf2ff; font-size:0.93em; line-height:1.85; }
+    .review-abstract strong { color:var(--accent); font-size:0.91em; display:block; margin-bottom:7px; letter-spacing:0.04em; }
+    .review-keywords span { background:rgba(59,158,255,0.15); border:1px solid rgba(59,158,255,0.35); border-radius:4px; padding:2px 9px; margin-right:5px; display:inline-block; margin-bottom:4px; color:#c8e0f8; font-size:0.83em; }
+    .review-table { width:100%; border-collapse:collapse; font-size:0.84em; margin:14px 0; }
+    .review-table th { background:rgba(59,158,255,0.22); color:#d8eeff; padding:8px 10px; text-align:left; border-bottom:2px solid rgba(59,158,255,0.4); }
+    .review-table td { padding:7px 10px; border-bottom:1px solid rgba(255,255,255,0.09); color:#ddeeff; vertical-align:top; line-height:1.55; }
+    .review-table tr:nth-child(odd) td { background:rgba(59,158,255,0.04); }
+    .review-table caption { font-style:italic; color:#b0c8e0; font-size:0.83em; text-align:left; margin-bottom:7px; caption-side:top; }
+    .review-ref-item { font-size:0.84em; color:#c8dff5; line-height:1.70; padding-left:2.2em; text-indent:-2.2em; margin-bottom:8px; }
+    .review-ref-item a { color:#64b5f6; text-decoration:none; }
+    .review-infobox { background:rgba(59,158,255,0.07); border:1px solid rgba(59,158,255,0.28); border-radius:8px; padding:12px 16px; margin:12px 0; font-size:0.90em; color:#ddeeff; line-height:1.75; }
+    .review-infobox strong { color:#f0f8ff; }
+    .qbox { background:rgba(245,200,50,0.07); border:1px solid rgba(245,200,50,0.25); border-radius:8px; padding:11px 15px; margin:10px 0; font-size:0.91em; color:#f5e8a0; line-height:1.75; }
+    .formula-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.18); border-radius:8px; padding:12px 20px; margin:12px 0; text-align:center; font-family:monospace; font-size:1.06em; color:#ffe080; letter-spacing:0.04em; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:18px 0; }
+    .stat-card { background:rgba(59,158,255,0.09); border:1px solid rgba(59,158,255,0.22); border-radius:10px; padding:12px 14px; text-align:center; }
+    .stat-val { font-size:1.8em; font-weight:700; color:var(--accent); line-height:1; }
+    .stat-lbl { font-size:0.70em; color:#7a9ab5; text-transform:uppercase; margin-top:5px; letter-spacing:0.07em; }
+    .pipeline-row { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; align-items:center; }
+    .pipe-step { background:rgba(59,158,255,0.12); border:1px solid rgba(59,158,255,0.3); border-radius:8px; padding:8px 14px; font-size:0.84em; color:#c8e0f8; font-weight:700; }
+    .pipe-arrow { color:#3b9eff; font-size:1.2em; }
+    .gh-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.18); border-radius:6px; padding:5px 12px; font-size:0.83em; color:#e0eeff; margin:4px; text-decoration:none; }
+    .gh-badge:hover { background:rgba(59,158,255,0.15); }
+    #bvalue-map { width:100%; height:420px; border-radius:10px; border:1px solid rgba(59,158,255,0.3); margin:16px 0; }
+    .map-legend { display:flex; align-items:center; gap:10px; margin:6px 0 14px; flex-wrap:wrap; font-size:0.81em; color:#94a3b8; }
+    .map-legend-bar { flex:1; min-width:160px; height:10px; border-radius:5px; background:linear-gradient(to right,#d73027,#fc8d59,#fee08b,#91cf60,#1a9850); }
+    .report-footer { text-align:center; font-size:0.81em; color:#6a7f96; border-top:1px solid rgba(255,255,255,0.07); margin-top:40px; padding:20px 0 10px; line-height:2; }
+
+    @media print {
+      @page { size:A4; margin:2cm 2.2cm 2.2cm 2.2cm; }
+      body { font-family:"Times New Roman",serif !important; font-size:11pt; background:white !important; color:#000 !important; }
+      .accordion { display:block !important; border:none !important; border-bottom:1.5pt solid #333 !important; padding:8pt 0 4pt !important; margin:16pt 0 6pt !important; background:none !important; }
+      .accordion::before { content:attr(data-label); font-size:12pt !important; font-weight:bold !important; color:#000 !important; display:block !important; }
+      .accordion::after { display:none !important; }
+      .panel { display:block !important; }
+      .header-ribbon,.meta-strip { display:none !important; }
+      #bvalue-map { height:260px !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-ribbon">
+    EQ-LiveTürkiye · Seismic Monitoring Platform · Technical Methodology Report · SeismoReport 2026
+  </div>
+
+  <div class="meta-strip">
+    <span>🌍 ISC 1900–1997 + EMSC 1998–2026</span>
+    <span>📐 Scordilis (2006) Mw Homogenization</span>
+    <span>📊 Gutenberg-Richter b-value Grid</span>
+    <span>⚡ Real-time EMSC Feed</span>
+    <span>🛠️ OpenQuake · Leaflet · Python</span>
+    <span>🇹🇷 83 918 Events · 19 719 Grid Points</span>
+  </div>
+
+  <div class="hero-box">
+    <h1>🌐 EQ-LiveTürkiye — Seismic Monitoring Platform</h1>
+    <div style="margin-bottom:18px;">
+      <div style="font-weight:700;font-size:1.05em;">Prof. Dr. Ali Osman Öncel</div>
+      <div style="color:#7a9ab5;font-size:0.85em;margin-top:3px;">Istanbul University–Cerrahpaşa · Department of Geophysical Engineering</div>
+      <div style="margin-top:10px;">
+        <a class="gh-badge" href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" target="_blank">🗺️ Live Map</a>
+        <a class="gh-badge" href="https://github.com/aliosmanoncel/EQ-LiveTurkiye" target="_blank">⭐ EQ-LiveTurkiye</a>
+        <a class="gh-badge" href="https://github.com/gem/oq-engine" target="_blank">🔶 GEM / oq-engine</a>
+        <a class="gh-badge" href="https://www.seismicportal.eu/fdsnws/event/1/" target="_blank">📡 EMSC FDSN API</a>
+        <a class="gh-badge" href="http://www.isc.ac.uk/fdsnws/event/1/" target="_blank">🌐 ISC FDSN API</a>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-val">83 918</div><div class="stat-lbl">Catalog Events</div></div>
+      <div class="stat-card"><div class="stat-val">126 yrs</div><div class="stat-lbl">Time Span (1900–2026)</div></div>
+      <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">Completeness Periods</div></div>
+      <div class="stat-card"><div class="stat-val">1.031</div><div class="stat-lbl">Turkey b-value</div></div>
+      <div class="stat-card"><div class="stat-val">19 719</div><div class="stat-lbl">Grid Points</div></div>
+      <div class="stat-card"><div class="stat-val">100 km</div><div class="stat-lbl">Fixed Area Radius</div></div>
+      <div class="stat-card"><div class="stat-val">M ≥ 3.0</div><div class="stat-lbl">EMSC Completeness</div></div>
+      <div class="stat-card"><div class="stat-val">Real-time</div><div class="stat-lbl">EMSC Live Feed</div></div>
+    </div>
+
+    <div class="review-abstract">
+      <strong>ABSTRACT</strong>
+      EQ-LiveTürkiye is an open-source seismic monitoring platform combining a real-time earthquake feed with a scientifically rigorous Gutenberg-Richter b-value hazard layer for Turkey. The platform integrates a 126-year composite catalog assembled from ISC (1900–1997) and EMSC (1998–2026) data using period-specific completeness thresholds (staircase method). Magnitude homogenization follows Scordilis (2006) empirical relations (ML/MD/mb → Mw). The b-value grid was computed using Aki (1965) maximum likelihood estimation with Utsu (1966) binomial correction, following the Fixed Area Method of Öncel & Wyss (2000): R=100 km, 10-km sliding step, N≥50. Turkey-wide b=1.031 is consistent with published literature. The platform is publicly accessible via GitHub Pages and built entirely on open-source tools.
+    </div>
+
+    <div class="review-keywords" style="margin-top:12px;">
+      <span>Earthquake catalog</span><span>Gutenberg-Richter</span><span>b-value</span><span>Turkey seismicity</span>
+      <span>Staircase completeness</span><span>Scordilis (2006)</span><span>Aki (1965) MLE</span>
+      <span>Öncel & Wyss (2000)</span><span>PSHA</span><span>OpenQuake</span><span>EMSC</span><span>ISC</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 1. PLATFORM OVERVIEW -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion active" data-label="1. Platform Overview" onclick="toggleAcc(this)">
+    <span>🌐 1. Platform Overview — What EQ-LiveTürkiye Shows</span>
+  </div>
+  <div class="panel open">
+    <div class="review-section-title">Purpose</div>
+    <p class="review-body-text">
+      EQ-LiveTürkiye is a browser-based seismic monitoring and hazard visualization platform for Turkey. It combines two complementary data streams: (1) a <strong>real-time EMSC earthquake feed</strong> that updates automatically with recent events, and (2) a <strong>pre-computed Gutenberg-Richter b-value grid</strong> derived from a 126-year composite catalog. Both layers are overlaid on an interactive Leaflet.js map, enabling simultaneous assessment of ongoing seismicity and long-term seismic hazard patterns.
+    </p>
+
+    <div class="review-section-title">Map Layers</div>
+    <div class="pipeline-row">
+      <div class="pipe-step">🔴 Recent Earthquakes<br><small>EMSC real-time</small></div>
+      <div class="pipe-arrow">+</div>
+      <div class="pipe-step">🟡 b-value Grid<br><small>CircleMarker overlay</small></div>
+      <div class="pipe-arrow">+</div>
+      <div class="pipe-step">🗺️ Base Tile<br><small>CartoDB Dark</small></div>
+      <div class="pipe-arrow">=</div>
+      <div class="pipe-step">🌐 Interactive Map<br><small>Leaflet.js</small></div>
+    </div>
+
+    <div class="review-section-title">Open-Source Stack</div>
+    <table class="review-table">
+      <caption>Table 1. Tools and repositories used in EQ-LiveTürkiye</caption>
+      <thead><tr><th>Component</th><th>Tool / Repository</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Live map</td><td><a href="https://leafletjs.com" style="color:#64b5f6;">Leaflet.js v1.9</a></td><td>Interactive map rendering, CircleMarker, LayerGroup</td></tr>
+        <tr><td>Earthquake feed</td><td><a href="https://www.seismicportal.eu" style="color:#64b5f6;">EMSC FDSN API</a></td><td>Real-time M≥2.0 events, Turkey bounding box</td></tr>
+        <tr><td>Historical catalog</td><td><a href="http://www.isc.ac.uk/fdsnws/event/1/query" style="color:#64b5f6;">ISC FDSN API</a> <span style="font-size:0.8em;color:#7a9ab5;">(web service, not GitHub)</span></td><td>1900–1997 staircase periods (M≥4.5–5.5)</td></tr>
+        <tr><td>Historical catalog</td><td><a href="https://www.seismicportal.eu/fdsnws/event/1/query" style="color:#64b5f6;">EMSC FDSN API</a></td><td>1998–2026 M≥3.0 homogeneous period</td></tr>
+        <tr><td>Catalog builder</td><td><code>fetch_combined_catalog.py</code></td><td>Python: ISC+EMSC merge, dedup, Scordilis Mw</td></tr>
+        <tr><td>b-value grid</td><td><code>build_bvalue_grid.py</code></td><td>Python: Aki MLE, Fixed Area Method, JSON output</td></tr>
+        <tr><td>PSHA framework</td><td><a href="https://github.com/gem/oq-engine" style="color:#64b5f6;">GEM / oq-engine</a></td><td>Reference: b-value as input to OpenQuake source model</td></tr>
+        <tr><td>Hosting</td><td><a href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" style="color:#64b5f6;">GitHub Pages</a></td><td>Static hosting of index.html + data JSON</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 2. DATA PIPELINE -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="2. Data Pipeline" onclick="toggleAcc(this)">
+    <span>🔄 2. Data Pipeline — From Raw Catalog to Grid</span>
+  </div>
+  <div class="panel">
+    <div class="review-section-title">End-to-End Pipeline</div>
+    <div class="pipeline-row">
+      <div class="pipe-step">📡 ISC FDSN<br><small>1900–1997</small></div>
+      <div class="pipe-arrow">+</div>
+      <div class="pipe-step">📡 EMSC FDSN<br><small>1998–2026</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">🔀 Staircase Merge<br><small>period Mc</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">🔁 Deduplication<br><small>±60s, &lt;50km</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">Mw Homogenization<br><small>Scordilis 2006</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">📊 b-value Grid<br><small>Aki+Utsu</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">🌐 JSON → Map<br><small>GitHub Pages</small></div>
+    </div>
+
+    <div class="review-section-title">Step 1 — FDSN Data Retrieval</div>
+    <p class="review-body-text">
+      Both ISC and EMSC provide FDSN-compliant web service APIs (<code>fdsnws/event/1/query</code>). The Python script <code>fetch_combined_catalog.py</code> queries each service in 5–10 year chunks to avoid API result limits (ISC: 20 000 events/query; EMSC: 20 000 events/query). The geographic bounding box is set to encompass Turkey and its near-field: 33–45°N, 23–48°E.
+    </p>
+    <div class="method-card">
+      <h4>⚙️ Retrieval parameters</h4>
+      <ul>
+        <li>Format: <code>text</code> (pipe-delimited, lightweight)</li>
+        <li>Ordering: <code>time-asc</code> per chunk</li>
+        <li>Rate limiting: 1.5 s sleep between requests</li>
+        <li>Retry: 2× delay on network error</li>
+        <li>Chunk size: 10 yr (ISC) / 5 yr (EMSC)</li>
+      </ul>
+    </div>
+
+    <div class="review-section-title">Step 2 — Staircase Completeness Merge</div>
+    <p class="review-body-text">
+      Seismic network density has evolved over time; a single magnitude threshold applied across the full 126-year record would either exclude large numbers of smaller events or include incomplete earlier periods. The <em>staircase</em> approach addresses this by applying the minimum completeness magnitude (<em>M</em><sub>c</sub>) appropriate for each time period, then taking the union of all sets.
+    </p>
+    <table class="review-table">
+      <caption>Table 2. Staircase completeness thresholds (+0.5 conservative correction applied to reference values)</caption>
+      <thead><tr><th>Period</th><th>Source</th><th>M<sub>c</sub></th><th>Events</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr><td>1900–1965</td><td>ISC</td><td>5.5</td><td>173</td><td>Pre-WWSSN; only large events reliably recorded</td></tr>
+        <tr><td>1965–1980</td><td>ISC</td><td>4.5</td><td>1 058</td><td>WWSSN fully operational; ref 4.0 + 0.5</td></tr>
+        <tr><td>1980–1990</td><td>ISC</td><td>4.0</td><td>1 318</td><td>Global network densification; ref 3.0 + 1.0</td></tr>
+        <tr><td>1990–1998</td><td>ISC</td><td>3.5</td><td>4 855</td><td>Digital broadband transition; ref 2.5 + 1.0</td></tr>
+        <tr><td>1998–2026</td><td>EMSC</td><td>3.0</td><td>76 506</td><td>Modern broadband; ref 2.5 + 0.5</td></tr>
+        <tr style="font-weight:700;"><td colspan="3">Total (after deduplication)</td><td>83 918</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="review-section-title">Step 3 — Duplicate Removal</div>
+    <p class="review-body-text">
+      Events present in both ISC and EMSC catalogs (especially near the 1998 overlap boundary) are identified by temporal and spatial proximity. Duplicates within 60 seconds and 50 km of each other are merged, retaining the higher-Mw estimate. This removes 396 duplicate pairs, yielding 83 918 unique events.
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 3. MAGNITUDE HOMOGENIZATION -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="3. Magnitude Homogenization" onclick="toggleAcc(this)">
+    <span>⚖️ 3. Magnitude Homogenization — Scordilis (2006)</span>
+  </div>
+  <div class="panel">
+    <div class="review-section-title">Why Homogenization Is Necessary</div>
+    <p class="review-body-text">
+      The composite ISC+EMSC catalog contains events reported in at least eight different magnitude scales (MD, ML, mb, Ms, Mw and variants). Mixing scales introduces systematic bias: a body-wave magnitude mb=5.0 is not equivalent to a moment magnitude Mw=5.0. For probabilistic seismic hazard analysis (PSHA) all magnitudes must be expressed on a single, physically meaningful scale — moment magnitude Mw.
+    </p>
+
+    <table class="review-table">
+      <caption>Table 3. Magnitude type distribution in the composite catalog</caption>
+      <thead><tr><th>Scale</th><th>Events</th><th>Primary source</th></tr></thead>
+      <tbody>
+        <tr><td>MD (coda duration)</td><td>32 686</td><td>EMSC regional networks</td></tr>
+        <tr><td>ML (local)</td><td>25 991</td><td>EMSC regional networks</td></tr>
+        <tr><td>mb (body-wave)</td><td>9 847</td><td>ISC global stations</td></tr>
+        <tr><td>ML (uppercase)</td><td>9 232</td><td>EMSC</td></tr>
+        <tr><td>md (lowercase)</td><td>2 545</td><td>EMSC</td></tr>
+        <tr><td>mw / Mw</td><td>1 294</td><td>ISC/EMSC moment tensor solutions</td></tr>
+        <tr><td>mL</td><td>707</td><td>EMSC</td></tr>
+      </tbody>
+    </table>
+
+    <div class="review-section-title">Scordilis (2006) Conversion Relations</div>
+    <p class="review-body-text">
+      Scordilis (2006) derived empirical global relations for converting the most common magnitude scales to Mw using a global dataset of ~20 000 earthquakes with known moment tensor solutions. These relations are applied in order of reliability.
+    </p>
+
+    <div class="analysis-card">
+      <h4>mb → Mw  (body-wave magnitude)</h4>
+      <div class="formula-box" style="font-size:0.95em;margin:8px 0;">Mw = 0.85·mb + 1.03 &nbsp;&nbsp;(3.5 ≤ mb ≤ 6.2)</div>
+      <p>Valid for teleseismic body-wave magnitudes from ISC global station network.</p>
+    </div>
+
+    <div class="analysis-card">
+      <h4>ML / MD → Mw  (local / coda magnitude)</h4>
+      <div class="formula-box" style="font-size:0.95em;margin:8px 0;">Mw = 0.0376·M² + 0.646·M − 0.269 &nbsp;&nbsp;(1.0 ≤ M ≤ 6.5)</div>
+      <p>Quadratic relation accounts for the non-linear saturation of local magnitude at higher values. Applied to ML, MD, md, and mL.</p>
+    </div>
+
+    <div class="analysis-card">
+      <h4>Ms → Mw  (surface-wave magnitude)</h4>
+      <div class="formula-box" style="font-size:0.95em;margin:8px 0 4px;">Mw = 0.646·Ms + 2.079 &nbsp;&nbsp;(3.0 ≤ Ms ≤ 6.1)<br>Mw = 0.994·Ms + 0.115 &nbsp;&nbsp;(Ms &gt; 6.1)</div>
+      <p>Two-segment relation reflects saturation of Ms for large earthquakes.</p>
+    </div>
+
+    <div class="review-section-title">Critical Note: Scordilis Bias in b-value Computation</div>
+    <div class="rec-card">
+      <h4>⚠️ Known Issue: ML=3.0 → Mw≈2.0</h4>
+      <ul>
+        <li>Scordilis ML→Mw: for ML=3.0 → Mw = 0.0376×9 + 0.646×3 − 0.269 = <strong>2.007</strong></li>
+        <li>Filtering by converted Mw≥3.0 drops ~66 000 EMSC events (MD/ML ≈ 3.0–4.5)</li>
+        <li>This inflates mean(Mw) from ~2.5 to ~4.2, producing artificially low b-values (~0.28)</li>
+        <li><strong>Fix:</strong> b-value grid computed using original reported <code>mag</code>, not converted Mw</li>
+        <li>Completeness filtering also uses original <code>mag ≥ Mc</code> (not converted Mw)</li>
+      </ul>
+    </div>
+
+    <div class="info-note">
+      The converted Mw field is retained in <code>eq_historical.json</code> for other uses (PSHA source models, moment rate calculations). Only the b-value computation bypasses it to avoid the conversion-induced bias.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 4. b-VALUE METHODOLOGY -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="4. b-value Methodology" onclick="toggleAcc(this)">
+    <span>📊 4. Gutenberg-Richter b-value — Aki (1965) + Öncel & Wyss (2000)</span>
+  </div>
+  <div class="panel">
+    <div class="review-section-title">Gutenberg-Richter Frequency-Magnitude Relation</div>
+    <div class="formula-box">log₁₀(N) = a − b·M</div>
+    <p class="review-body-text">
+      The b-value slope describes the relative proportion of large to small earthquakes. A b≈1 (global average) means each unit increase in magnitude corresponds to a 10-fold decrease in frequency. Lateral variations in b reflect differences in stress state, material heterogeneity, and temperature.
+    </p>
+
+    <div class="review-section-title">Aki (1965) Maximum Likelihood Estimation</div>
+    <div class="formula-box">b = log₁₀(e) / (M̄ − M<sub>c,eff</sub>)</div>
+    <p class="review-body-text">
+      The MLE is statistically superior to least-squares regression because it makes no assumption about the distribution of the dependent variable and produces unbiased estimates. Here <em>M̄</em> is the sample mean magnitude above <em>M</em><sub>c</sub>.
+    </p>
+
+    <div class="review-section-title">Utsu (1966) Binomial Correction</div>
+    <div class="formula-box">M<sub>c,eff</sub> = M<sub>c</sub> − ΔM = 3.0 − 0.05 = 2.95</div>
+    <p class="review-body-text">
+      Earthquake catalogs typically report magnitudes rounded to the nearest 0.1 unit. Utsu (1966) showed that this discretization introduces a systematic underestimate of b; the correction is ΔM = bin-width/2 = 0.05, yielding an effective completeness threshold of M<sub>c,eff</sub> = 2.95.
+    </p>
+
+    <div class="review-section-title">Fixed Area Method — Öncel & Wyss (2000)</div>
+    <div class="review-infobox">
+      <strong>Reference:</strong> Öncel, A. O. & Wyss, M. (2000). The major asperities of the 1999 Mw 7.4 İzmit earthquake defined by the microseismicity of the two decades before it. <em>Geophysical Journal International</em>, 143(2), 501–506.
+    </div>
+    <p class="review-body-text">
+      Rather than a moving window with variable area, the Fixed Area Method samples events within a constant-radius circle centered on each grid node. This ensures the spatial extent of the sample remains consistent across nodes, eliminating area-induced bias in b-value estimation. Öncel & Wyss (2000) applied R=20 km and 5-km step for the İzmit rupture zone; we scale to R=100 km and 10-km step for the Turkey-wide analysis.
+    </p>
+
+    <table class="review-table">
+      <caption>Table 4. Fixed Area Method parameters</caption>
+      <thead><tr><th>Parameter</th><th>Value</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr><td>Search radius R</td><td>100 km</td><td>Regional scale; ensures N≥50 across most of Turkey</td></tr>
+        <tr><td>Grid step</td><td>0.09° (~10 km)</td><td>Öncel & Wyss: 5 km; scaled to Turkey extent</td></tr>
+        <tr><td>Min. events N<sub>min</sub></td><td>50</td><td>Öncel & Wyss (2000) criterion</td></tr>
+        <tr><td>Completeness Mc</td><td>3.0 (EMSC mag)</td><td>EMSC 1998–2026 homogeneous period</td></tr>
+        <tr><td>Effective Mc</td><td>2.95 (Utsu)</td><td>Binomial correction ΔM=0.05</td></tr>
+        <tr><td>Grid domain</td><td>34–43°N, 25–45°E</td><td>Turkey land area + near offshore</td></tr>
+        <tr><td>Grid size</td><td>101 × 223 = 22 523 nodes</td><td>0.09° step</td></tr>
+        <tr><td>Mapped nodes</td><td>19 719 (87.5%)</td><td>2 804 nodes fail N≥50 criterion</td></tr>
+      </tbody>
+    </table>
+
+    <div class="review-section-title">Color Normalization</div>
+    <p class="review-body-text">
+      A fixed RdYlGn color scale is applied: b=0.5 → red (high stress), b=1.0 → yellow (normal), b=1.5 → green (low stress / heterogeneous). The normalized weight <em>w = 1 − (b − 0.5) / 1.0</em> is clipped to [0, 1]. This fixed scale ensures spatial comparability across zoom levels.
+    </p>
+
+    <div class="review-section-title">Zoom-Adaptive Display</div>
+    <div class="method-card">
+      <h4>⚙️ Zoom-level sampling strategy</h4>
+      <ul>
+        <li>Zoom &lt; 6: every 6th point (~0.54° ≈ 60 km resolution) — national overview</li>
+        <li>Zoom 6–8: every 3rd point (~0.27° ≈ 30 km) — regional view</li>
+        <li>Zoom ≥ 8: all points (0.09° ≈ 10 km) — local detail</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 5. b-VALUE MAP -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion active" data-label="5. Interactive b-value Map" onclick="toggleAcc(this)">
+    <span>🗺️ 5. Interactive b-value Map</span>
+  </div>
+  <div class="panel open">
+    <p class="review-body-text">
+      The map below renders the 19 719-node b-value grid computed from EMSC 1998–2026 (76 514 events, M≥3.0). Each circle represents the Aki (1965) MLE b-value for all events within R=100 km. Hover over any circle to see b and N. Use mouse wheel to zoom; the grid automatically resamples for density.
+    </p>
+    <div id="bvalue-map"></div>
+    <div class="map-legend">
+      <span style="color:#d73027;font-weight:700;">■ b≈0.5 (high stress)</span>
+      <div class="map-legend-bar"></div>
+      <span style="color:#1a9850;font-weight:700;">■ b≈1.5 (low stress)</span>
+      <span style="margin-left:10px;color:#7a9ab5;font-size:0.88em;">Aki (1965) MLE · Utsu (1966) · Mc=2.95 · R=100 km · N≥50 · EMSC 1998–2026</span>
+    </div>
+
+    <div class="review-section-title">Regional Interpretation</div>
+    <div class="analysis-card">
+      <h4>🔴 Low b-value zones (b &lt; 0.8) — Elevated stress</h4>
+      <p>Eastern Anatolian Fault Zone (EAFZ), particularly the Kahramanmaraş triple junction area. Low b-values here are consistent with high tectonic loading rates on the left-lateral EAFZ. The February 2023 Mw7.8 and Mw7.7 earthquake sequence epicentral region shows characteristic pre-seismic low-b signature in historical data.</p>
+    </div>
+    <div class="analysis-card" style="border-left-color:#22c55e;background:rgba(22,163,74,0.10);">
+      <h4 style="color:#22c55e;">🟢 High b-value zones (b &gt; 1.3) — Heterogeneous / geothermal</h4>
+      <p>Western Anatolia extensional province (Gediz, Büyük Menderes grabens), Central Anatolian volcanic arc, and parts of the Black Sea coastal zone. High b-values in these areas reflect crustal heterogeneity, elevated pore-fluid pressures, or thermally weakened fault zones.</p>
+    </div>
+
+    <div class="conclusion-card">
+      <h4>✅ Validation</h4>
+      <ul>
+        <li>Turkey-wide b = 1.031 (N=76 514) — consistent with published values (Kalafat et al. 2007: b≈1.0–1.1)</li>
+        <li>b range 0.460–2.249, mean 1.167 — physically plausible for tectonically diverse region</li>
+        <li>2 804 unmapped nodes (N&lt;50) concentrated in offshore Black Sea and low-seismicity Central Anatolia</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 6. PSHA / OpenQuake -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="6. PSHA Integration — OpenQuake Engine" onclick="toggleAcc(this)">
+    <span>🔶 6. PSHA Integration — GEM OpenQuake Engine</span>
+  </div>
+  <div class="panel">
+    <div class="review-section-title">From b-value Grid to Seismic Source Model</div>
+    <p class="review-body-text">
+      Probabilistic Seismic Hazard Analysis (PSHA) quantifies the probability of exceeding a given ground-motion intensity measure (e.g., PGA, Sa) at a site within a specified time window. The GEM Foundation's <a href="https://github.com/gem/oq-engine" style="color:#64b5f6;">OpenQuake Engine</a> is the leading open-source PSHA platform, used in the Global Earthquake Model and national hazard studies worldwide.
+    </p>
+
+    <p class="review-body-text">
+      In an OpenQuake source model, each area source or point source requires a Gutenberg-Richter MFD (Magnitude Frequency Distribution) defined by an a-value and b-value. The b-value grid produced here provides spatially resolved b-values that can be directly incorporated into OpenQuake <code>source_model.xml</code> files:
+    </p>
+
+    <div class="review-infobox">
+      <strong>OpenQuake source_model.xml — b-value entry example:</strong><br>
+      <code style="font-size:0.88em;color:#ffe080;">
+        &lt;areaSource id="TR_01" name="Marmara Region"&gt;<br>
+        &nbsp;&nbsp;&lt;truncGutenbergRichterMFD aValue="5.2" <strong>bValue="0.95"</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;minMag="5.0" maxMag="7.5"/&gt;<br>
+        &lt;/areaSource&gt;
+      </code><br><br>
+      The <code>bValue</code> field is populated from the spatial average of b-value grid cells overlapping each source zone.
+    </div>
+
+    <div class="review-section-title">Data Flow: EQ-LiveTürkiye → OpenQuake</div>
+    <div class="pipeline-row">
+      <div class="pipe-step">bvalue_grid.json<br><small>19 719 pts</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">Zone averaging<br><small>spatial join</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">source_model.xml<br><small>b per zone</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">oq engine<br><small>PSHA run</small></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">Hazard curves<br><small>PGA, Sa maps</small></div>
+    </div>
+
+    <div class="info-note">
+      The full PSHA workflow (fault sources, ground-motion models, logic tree) is beyond the scope of the EQ-LiveTürkiye platform. The b-value grid serves as one input to a larger source characterization process following TBDY-2018 (Turkish Building Earthquake Code) or Eurocode 8 frameworks.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 7. LIMITATIONS -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="7. Limitations" onclick="toggleAcc(this)">
+    <span>⚠️ 7. Limitations and Future Work</span>
+  </div>
+  <div class="panel">
+    <div class="rec-card">
+      <h4>⚠️ Current Limitations</h4>
+      <ul>
+        <li><strong>No declustering:</strong> Aftershock sequences (e.g., 2023 Kahramanmaraş swarm: ~10 000 events) inflate b-values in affected regions. Gardner-Knopoff (1974) or Reasenberg (1985) declustering not yet applied.</li>
+        <li><strong>Fixed Mc = 3.0:</strong> Local Mc may vary across Turkey. Wiemer & Wyss (2000) MAXC method could provide spatially variable Mc.</li>
+        <li><strong>EMSC only for b-grid:</strong> The pre-1998 ISC record is not used in b-value computation due to heterogeneous completeness. Extending to 1965 (Mc=4.5) could improve coverage in low-seismicity areas.</li>
+        <li><strong>No uncertainty bounds:</strong> b-value confidence intervals (Shi & Bolt 1982) are computed but not yet displayed on the map.</li>
+        <li><strong>Static grid:</strong> The b-value grid is pre-computed; the platform does not yet update it automatically when new EMSC data arrives.</li>
+      </ul>
+    </div>
+
+    <div class="conclusion-card">
+      <h4>✅ Planned Improvements</h4>
+      <ul>
+        <li>Gardner-Knopoff declustering for mainshock-only catalog</li>
+        <li>MAXC spatially variable Mc mapping</li>
+        <li>Shi & Bolt (1982) uncertainty bounds on b-value display</li>
+        <li>Automated catalog update via GitHub Actions (monthly refresh)</li>
+        <li>OpenQuake source model XML export script</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 8. REFERENCES -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="8. References" onclick="toggleAcc(this)">
+    <span>📖 8. References</span>
+  </div>
+  <div class="panel">
+    <div class="review-ref-item">Aki, K. (1965). Maximum likelihood estimate of b in the formula log N = a − bM and its confidence limits. <em>Bulletin of the Earthquake Research Institute</em>, 43, 237–239.</div>
+    <div class="review-ref-item">Gardner, J. K. & Knopoff, L. (1974). Is the sequence of earthquakes in Southern California, with aftershocks removed, Poissonian? <em>Bulletin of the Seismological Society of America</em>, 64(5), 1363–1367.</div>
+    <div class="review-ref-item">GEM Foundation (2023). OpenQuake Engine — Open-source seismic hazard and risk assessment. <a href="https://github.com/gem/oq-engine" target="_blank">github.com/gem/oq-engine</a></div>
+    <div class="review-ref-item">Gutenberg, B. & Richter, C. F. (1944). Frequency of earthquakes in California. <em>Bulletin of the Seismological Society of America</em>, 34(4), 185–188.</div>
+    <div class="review-ref-item">ISC — International Seismological Centre. Bulletin. <a href="http://www.isc.ac.uk" target="_blank">isc.ac.uk</a></div>
+    <div class="review-ref-item">EMSC — European Mediterranean Seismological Centre. <a href="https://www.seismicportal.eu" target="_blank">seismicportal.eu</a></div>
+    <div class="review-ref-item">Öncel, A. O. & Wyss, M. (2000). The major asperities of the 1999 Mw 7.4 İzmit earthquake defined by the microseismicity of the two decades before it. <em>Geophysical Journal International</em>, 143(2), 501–506.</div>
+    <div class="review-ref-item">Reasenberg, P. (1985). Second-order moment of central California seismicity, 1969–1982. <em>Journal of Geophysical Research</em>, 90(B7), 5479–5495.</div>
+    <div class="review-ref-item">Scordilis, E. M. (2006). Empirical global relations converting Ms and mb to moment magnitude. <em>Journal of Seismology</em>, 10(2), 225–236.</div>
+    <div class="review-ref-item">Shi, Y. & Bolt, B. A. (1982). The standard error of the magnitude-frequency b value. <em>Bulletin of the Seismological Society of America</em>, 72(5), 1677–1687.</div>
+    <div class="review-ref-item">Utsu, T. (1966). A statistical significance test of the difference in b-value between two earthquake groups. <em>Journal of Physics of the Earth</em>, 14(2), 37–40.</div>
+    <div class="review-ref-item">Wiemer, S. & Wyss, M. (2000). Minimum magnitude of completeness in earthquake catalogs: examples from Alaska, the western United States, and Japan. <em>Bulletin of the Seismological Society of America</em>, 90(4), 859–869.</div>
+    <div class="review-ref-item">Woessner, J. & Wiemer, S. (2005). Assessing the quality of earthquake catalogues: estimating the magnitude of completeness and its uncertainty. <em>Bulletin of the Seismological Society of America</em>, 95(2), 684–698.</div>
+  </div>
+
+  <div class="report-footer">
+    SeismoReport 2026 · Prof. Dr. Ali Osman Öncel · Istanbul University–Cerrahpaşa · Geophysical Engineering<br>
+    Platform: <a href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" style="color:#64b5f6;" target="_blank">aliosmanoncel.github.io/EQ-LiveTurkiye</a> ·
+    Repository: <a href="https://github.com/aliosmanoncel/EQ-LiveTurkiye" style="color:#64b5f6;" target="_blank">github.com/aliosmanoncel/EQ-LiveTurkiye</a><br>
+    Data: ISC (1900–1997) + EMSC (1998–2026) · Method: Aki (1965) + Utsu (1966) + Öncel &amp; Wyss (2000) · Scordilis (2006) Mw
+  </div>
+
+</div>
+
+<script>
+function toggleAcc(el){
+  const panel = el.nextElementSibling;
+  el.classList.toggle('active');
+  panel.classList.toggle('open');
+}
+
+// ── b-value map ──────────────────────────────────────────────────
+const BVALUE_URL = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_grid.json';
+
+const map = L.map('bvalue-map', { center:[38.5,35.0], zoom:6 });
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+  attribution:'© OpenStreetMap © CARTO', subdomains:'abcd', maxZoom:19
+}).addTo(map);
+
+function bColor(b){
+  const t = Math.max(0, Math.min(1,(b-0.5)/1.0));
+  if(t<0.5){
+    const g=Math.round(48+(233-48)*(t/0.5));
+    return `rgb(215,${g},39)`;
+  } else {
+    const r=Math.round(233-(233-26)*((t-0.5)/0.5));
+    const g=Math.round(215+(152-215)*((t-0.5)/0.5));
+    const bl=Math.round(39+(80-39)*((t-0.5)/0.5));
+    return `rgb(${r},${g},${bl})`;
+  }
+}
+
+let bLayer=null, bData=null;
+
+function buildLayer(){
+  if(!bData) return;
+  if(bLayer){map.removeLayer(bLayer);bLayer=null;}
+  const z=map.getZoom();
+  const step=z>=8?1:z>=6?3:6;
+  const r=z>=9?8:z>=7?6:z>=5?4:3;
+  bLayer=L.layerGroup(
+    bData.grid.filter((_,i)=>i%step===0).map(p=>
+      L.circleMarker([p.lat,p.lon],{radius:r,fillColor:bColor(p.b),fillOpacity:0.82,stroke:false})
+       .bindTooltip(`<b>b = ${p.b}</b><br>N = ${p.n}`,{sticky:true})
+    )
+  ).addTo(map);
+}
+
+fetch(BVALUE_URL).then(r=>r.json()).then(d=>{
+  bData=d;
+  buildLayer();
+  map.on('zoomend',buildLayer);
+}).catch(e=>{
+  document.getElementById('bvalue-map').innerHTML=
+    `<div style="padding:20px;color:#f5576c;">Map data unavailable: ${e.message}</div>`;
+});
+</script>
+</body>
+</html>

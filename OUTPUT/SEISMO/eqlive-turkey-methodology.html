@@ -502,36 +502,20 @@ function toggleAcc(el){
   el.nextElementSibling.classList.toggle('open');
 }
 
-const BVALUE_URL = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_grid.json';
+const BVALUE_PNG  = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_triangulation.png';
+const BVALUE_META = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_triangulation_meta.json';
 const map = L.map('bvalue-map',{center:[38.5,35.0],zoom:6});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
   attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
 }).addTo(map);
 
-function bColor(b){
-  const t=Math.max(0,Math.min(1,(b-0.5)/1.0));
-  if(t<0.5){const g=Math.round(48+(233-48)*(t/0.5));return `rgb(215,${g},39)`;}
-  const r=Math.round(233-(233-26)*((t-0.5)/0.5));
-  const g=Math.round(215+(152-215)*((t-0.5)/0.5));
-  const bl=Math.round(39+(80-39)*((t-0.5)/0.5));
-  return `rgb(${r},${g},${bl})`;
-}
-let bLayer=null,bData=null;
-function buildLayer(){
-  if(!bData)return;
-  if(bLayer){map.removeLayer(bLayer);bLayer=null;}
-  const z=map.getZoom();
-  const step=z>=8?1:z>=6?3:6;
-  const r=z>=9?8:z>=7?6:z>=5?4:3;
-  bLayer=L.layerGroup(
-    bData.grid.filter((_,i)=>i%step===0).map(p=>
-      L.circleMarker([p.lat,p.lon],{radius:r,fillColor:bColor(p.b),fillOpacity:0.82,stroke:false})
-       .bindTooltip(`<b>b = ${p.b}</b><br>N = ${p.n}`,{sticky:true})
-    )
+// Delaunay triangülasyon PNG — imageOverlay
+fetch(BVALUE_META).then(r=>r.json()).then(meta=>{
+  const b=meta.bounds;
+  L.imageOverlay(BVALUE_PNG,
+    [[b.minlat,b.minlon],[b.maxlat,b.maxlon]],
+    {opacity:0.85,interactive:false}
   ).addTo(map);
-}
-fetch(BVALUE_URL).then(r=>r.json()).then(d=>{
-  bData=d; buildLayer(); map.on('zoomend',buildLayer);
 }).catch(e=>{
   document.getElementById('bvalue-map').innerHTML=
     `<div style="padding:20px;color:#f5576c;">Harita yüklenemedi: ${e.message}</div>`;

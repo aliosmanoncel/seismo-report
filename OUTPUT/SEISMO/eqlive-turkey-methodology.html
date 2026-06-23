@@ -10,8 +10,6 @@ Prof. Dr. Ali Osman Öncel · İÜC Jeofizik Mühendisliği
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>EQ-LiveTürkiye — Metodoloji Raporu 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
   <style>
     :root { --bg:#0a0e15; --text:#e8f0f5; --panel:#12171f; --accent:#3b9eff; --card-border:rgba(255,255,255,0.12); }
     * { box-sizing:border-box; margin:0; padding:0; }
@@ -68,7 +66,6 @@ Prof. Dr. Ali Osman Öncel · İÜC Jeofizik Mühendisliği
     .pipe-arrow { color:#3b9eff; font-size:1.2em; }
     .gh-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.18); border-radius:6px; padding:5px 12px; font-size:0.83em; color:#e0eeff; margin:4px; text-decoration:none; }
     .gh-badge:hover { background:rgba(59,158,255,0.15); }
-    #bvalue-map { width:100%; height:420px; border-radius:10px; border:1px solid rgba(59,158,255,0.3); margin:16px 0; }
     .map-legend { display:flex; align-items:center; gap:10px; margin:6px 0 14px; flex-wrap:wrap; font-size:0.81em; color:#94a3b8; }
     .map-legend-bar { flex:1; min-width:160px; height:10px; border-radius:5px; background:linear-gradient(to right,#d73027,#fc8d59,#fee08b,#91cf60,#1a9850); }
     .report-footer { text-align:center; font-size:0.81em; color:#6a7f96; border-top:1px solid rgba(255,255,255,0.07); margin-top:40px; padding:20px 0 10px; line-height:2; }
@@ -80,7 +77,7 @@ Prof. Dr. Ali Osman Öncel · İÜC Jeofizik Mühendisliği
       .accordion::after { display:none !important; }
       .panel { display:block !important; }
       .header-ribbon,.meta-strip { display:none !important; }
-      #bvalue-map { height:260px !important; }
+      #bvalue-map { height:300px !important; }
     }
   </style>
 </head>
@@ -356,7 +353,11 @@ Prof. Dr. Ali Osman Öncel · İÜC Jeofizik Mühendisliği
   </div>
   <div class="panel open">
     <p class="review-body-text">Aşağıdaki harita 19 719 grid noktasından oluşan b-değeri dağılımını göstermektedir. b-değeri ızgarası <strong>Delaunay triangülasyonu ve lineer interpolasyon</strong> (scipy.interpolate.LinearNDInterpolator) yöntemiyle sürekli bir raster yüzeyine dönüştürülmüştür. Bu yöntem Surfer yazılımının "Triangulation with Linear Interpolation" seçeneğiyle eşdeğer olup yalnızca mevcut veri noktaları arasındaki üçgenler içinde tahmin yapar; N&lt;50 nedeniyle hesaplanamayan alanlar haritada şeffaf bırakılmıştır. Renk skalası Türkiye'nin b-değeri dağılımına göre kalibre edilmiştir (medyan b=1.15): kırmızı yüksek tektonik gerilimi (NAF, DAFZ), yeşil genişlemeli rejimleri (Batı Anadolu) temsil eder.</p>
-    <div id="bvalue-map"></div>
+    <iframe src="https://aliosmanoncel.github.io/EQ-LiveTurkiye/"
+      id="bvalue-map"
+      style="width:100%;height:480px;border:1px solid rgba(59,158,255,0.3);border-radius:10px;margin:16px 0;"
+      loading="lazy" allowfullscreen
+      title="EQ-LiveTürkiye Canlı Harita"></iframe>
     <div class="map-legend">
       <span style="color:#d73027;font-weight:700;">■ b≤0.7 (yüksek stres)</span>
       <div class="map-legend-bar"></div>
@@ -502,24 +503,6 @@ function toggleAcc(el){
   el.nextElementSibling.classList.toggle('open');
 }
 
-const BVALUE_PNG  = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_triangulation.png';
-const BVALUE_META = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_triangulation_meta.json';
-const map = L.map('bvalue-map',{center:[38.5,35.0],zoom:6});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
-  attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
-}).addTo(map);
-
-// Delaunay triangülasyon PNG — imageOverlay
-fetch(BVALUE_META).then(r=>r.json()).then(meta=>{
-  const b=meta.bounds;
-  L.imageOverlay(BVALUE_PNG,
-    [[b.minlat,b.minlon],[b.maxlat,b.maxlon]],
-    {opacity:0.85,interactive:false}
-  ).addTo(map);
-}).catch(e=>{
-  document.getElementById('bvalue-map').innerHTML=
-    `<div style="padding:20px;color:#f5576c;">Harita yüklenemedi: ${e.message}</div>`;
-});
 </script>
 </body>
 </html>

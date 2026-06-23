@@ -1,15 +1,14 @@
 <!--
-EQ-LiveTurkiye — Kapsamlı Teknik Metodoloji Raporu
-Canlı Sismik İzleme · Katalog Derleme · Mw Homojenizasyonu · b-Değeri Analizi
-Yazar: Prof. Dr. Ali Osman Öncel, İÜC Jeofizik Mühendisliği
-SeismoReport v3.1
+EQ-LiveTürkiye — Kapsamlı Teknik Metodoloji Raporu
+SeismoReport v3.1 · Yalnızca Türkçe + Google Translate
+Prof. Dr. Ali Osman Öncel · İÜC Jeofizik Mühendisliği
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>EQ-LiveTürkiye — Technical Methodology Report 2026</title>
+  <title>EQ-LiveTürkiye — Metodoloji Raporu 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
@@ -18,11 +17,11 @@ SeismoReport v3.1
     * { box-sizing:border-box; margin:0; padding:0; }
     body { font-family:'Roboto',sans-serif; background:linear-gradient(to bottom,var(--bg) 0%,#0f1419 100%); color:var(--text); line-height:1.75; min-height:100vh; }
     .container { max-width:1150px; margin:0 auto; padding:20px; }
-    .header-ribbon { background:linear-gradient(135deg,#1a6fc4 0%,#0e3d6e 100%); color:#fff; padding:16px; text-align:center; font-weight:700; border-radius:10px; margin-bottom:20px; font-size:1.05em; letter-spacing:0.02em; }
+    .header-ribbon { background:linear-gradient(135deg,#1a6fc4 0%,#0e3d6e 100%); color:#fff; padding:16px; text-align:center; font-weight:700; border-radius:10px; margin-bottom:20px; font-size:1.05em; }
     .hero-box { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:40px 24px 30px; text-align:center; border-radius:16px; border:1px solid var(--card-border); margin-bottom:30px; box-shadow:0 12px 36px rgba(0,0,0,0.48); position:relative; overflow:hidden; }
     .hero-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,rgba(59,158,255,0.5),transparent); }
     .hero-box h1 { font-size:1.85em; margin-bottom:10px; color:var(--accent); }
-    .meta-strip { text-align:center; font-size:0.82em; color:#7a8fa8; letter-spacing:0.03em; margin-bottom:10px; padding:6px 0; flex-wrap:wrap; display:flex; justify-content:center; gap:8px; }
+    .meta-strip { text-align:center; font-size:0.82em; color:#7a8fa8; margin-bottom:10px; padding:6px 0; display:flex; justify-content:center; flex-wrap:wrap; gap:8px; }
     .meta-strip span { background:rgba(59,158,255,0.08); border:1px solid rgba(59,158,255,0.2); border-radius:20px; padding:3px 10px; }
     .accordion { background:linear-gradient(135deg,var(--panel) 0%,#1a1f2e 100%); padding:18px 24px; border-radius:10px; border:1px solid var(--card-border); cursor:pointer; margin-bottom:4px; font-weight:700; display:flex; justify-content:space-between; align-items:center; transition:background 0.3s,transform 0.2s; user-select:none; font-size:0.97em; }
     .accordion:hover { transform:translateY(-2px); }
@@ -48,7 +47,7 @@ SeismoReport v3.1
     .method-card ul { margin:0; padding-left:1.3em; color:#c8d8e8; line-height:1.8; font-size:0.92em; }
     .review-section-title { font-size:1.04em; font-weight:700; color:#7ecbff; border-bottom:2px solid rgba(59,158,255,0.3); padding-bottom:5px; margin:22px 0 10px; }
     .review-body-text { text-align:justify; line-height:1.88; color:#e8f3ff; margin-bottom:12px; hyphens:auto; font-size:0.93em; }
-    .review-abstract { background:rgba(59,158,255,0.07); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:16px 20px; margin:16px 0; color:#eaf2ff; font-size:0.93em; line-height:1.85; }
+    .review-abstract { background:rgba(59,158,255,0.07); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:16px 20px; margin:16px 0; color:#eaf2ff; font-size:0.93em; line-height:1.85; text-align:justify; hyphens:auto; }
     .review-abstract strong { color:var(--accent); font-size:0.91em; display:block; margin-bottom:7px; letter-spacing:0.04em; }
     .review-keywords span { background:rgba(59,158,255,0.15); border:1px solid rgba(59,158,255,0.35); border-radius:4px; padding:2px 9px; margin-right:5px; display:inline-block; margin-bottom:4px; color:#c8e0f8; font-size:0.83em; }
     .review-table { width:100%; border-collapse:collapse; font-size:0.84em; margin:14px 0; }
@@ -56,11 +55,9 @@ SeismoReport v3.1
     .review-table td { padding:7px 10px; border-bottom:1px solid rgba(255,255,255,0.09); color:#ddeeff; vertical-align:top; line-height:1.55; }
     .review-table tr:nth-child(odd) td { background:rgba(59,158,255,0.04); }
     .review-table caption { font-style:italic; color:#b0c8e0; font-size:0.83em; text-align:left; margin-bottom:7px; caption-side:top; }
-    .review-ref-item { font-size:0.84em; color:#c8dff5; line-height:1.70; padding-left:2.2em; text-indent:-2.2em; margin-bottom:8px; }
+    .review-ref-item { font-size:0.84em; color:#c8dff5; line-height:1.70; padding-left:2.2em; text-indent:-2.2em; margin-bottom:8px; text-align:justify; }
     .review-ref-item a { color:#64b5f6; text-decoration:none; }
-    .review-infobox { background:rgba(59,158,255,0.07); border:1px solid rgba(59,158,255,0.28); border-radius:8px; padding:12px 16px; margin:12px 0; font-size:0.90em; color:#ddeeff; line-height:1.75; }
-    .review-infobox strong { color:#f0f8ff; }
-    .qbox { background:rgba(245,200,50,0.07); border:1px solid rgba(245,200,50,0.25); border-radius:8px; padding:11px 15px; margin:10px 0; font-size:0.91em; color:#f5e8a0; line-height:1.75; }
+    .review-infobox { background:rgba(59,158,255,0.07); border:1px solid rgba(59,158,255,0.28); border-radius:8px; padding:12px 16px; margin:12px 0; font-size:0.90em; color:#ddeeff; line-height:1.75; text-align:justify; hyphens:auto; }
     .formula-box { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.18); border-radius:8px; padding:12px 20px; margin:12px 0; text-align:center; font-family:monospace; font-size:1.06em; color:#ffe080; letter-spacing:0.04em; }
     .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:18px 0; }
     .stat-card { background:rgba(59,158,255,0.09); border:1px solid rgba(59,158,255,0.22); border-radius:10px; padding:12px 14px; text-align:center; }
@@ -75,7 +72,6 @@ SeismoReport v3.1
     .map-legend { display:flex; align-items:center; gap:10px; margin:6px 0 14px; flex-wrap:wrap; font-size:0.81em; color:#94a3b8; }
     .map-legend-bar { flex:1; min-width:160px; height:10px; border-radius:5px; background:linear-gradient(to right,#d73027,#fc8d59,#fee08b,#91cf60,#1a9850); }
     .report-footer { text-align:center; font-size:0.81em; color:#6a7f96; border-top:1px solid rgba(255,255,255,0.07); margin-top:40px; padding:20px 0 10px; line-height:2; }
-
     @media print {
       @page { size:A4; margin:2cm 2.2cm 2.2cm 2.2cm; }
       body { font-family:"Times New Roman",serif !important; font-size:11pt; background:white !important; color:#000 !important; }
@@ -91,26 +87,35 @@ SeismoReport v3.1
 <body>
 <div class="container">
 
-  <div class="header-ribbon">
-    EQ-LiveTürkiye · Seismic Monitoring Platform · Technical Methodology Report · SeismoReport 2026
+  <!-- Google Translate — şablon standardı -->
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 16px;margin:0 0 16px;">
+    <div style="font-size:0.78em;color:#7a9ab5;flex:1;min-width:160px;">🌍 SeismoReport v3.1 · Otomatik Çeviri</div>
+    <div id="google_translate_element"></div>
   </div>
+  <script type="text/javascript">
+  function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'tr',includedLanguages:'en,tr,it,de,fr,es,ar,ru,pt,nl,pl',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:false},'google_translate_element');}
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <div class="header-ribbon">EQ-LiveTürkiye · Sismik İzleme Platformu · Teknik Metodoloji Raporu · SeismoReport 2026</div>
 
   <div class="meta-strip">
-    <span>🌍 ISC 1900–1997 + EMSC 1998–2026</span>
-    <span>📐 Scordilis (2006) Mw Homogenization</span>
-    <span>📊 Gutenberg-Richter b-value Grid</span>
-    <span>⚡ Real-time EMSC Feed</span>
+    <span>📡 ISC 1900–1997 + EMSC 1998–2026</span>
+    <span>📐 Scordilis (2006) Mw Homojenizasyonu</span>
+    <span>📊 Gutenberg-Richter b-değeri Izgarası</span>
+    <span>⚡ EMSC Gerçek Zamanlı Veri</span>
     <span>🛠️ OpenQuake · Leaflet · Python</span>
-    <span>🇹🇷 83 918 Events · 19 719 Grid Points</span>
+    <span>🇹🇷 83 918 Olay · 19 719 Grid Noktası</span>
   </div>
 
   <div class="hero-box">
-    <h1>🌐 EQ-LiveTürkiye — Seismic Monitoring Platform</h1>
+    <h1>🌐 EQ-LiveTürkiye</h1>
+    <p style="color:#94a3b8;font-size:0.9em;margin-bottom:16px;">Sismik İzleme ve Tehlike Görselleştirme Platformu</p>
     <div style="margin-bottom:18px;">
       <div style="font-weight:700;font-size:1.05em;">Prof. Dr. Ali Osman Öncel</div>
-      <div style="color:#7a9ab5;font-size:0.85em;margin-top:3px;">Istanbul University–Cerrahpaşa · Department of Geophysical Engineering</div>
+      <div style="color:#7a9ab5;font-size:0.85em;margin-top:3px;">İstanbul Üniversitesi–Cerrahpaşa · Jeofizik Mühendisliği Bölümü</div>
       <div style="margin-top:10px;">
-        <a class="gh-badge" href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" target="_blank">🗺️ Live Map</a>
+        <a class="gh-badge" href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" target="_blank">🗺️ Canlı Harita</a>
         <a class="gh-badge" href="https://github.com/aliosmanoncel/EQ-LiveTurkiye" target="_blank">⭐ EQ-LiveTurkiye</a>
         <a class="gh-badge" href="https://github.com/gem/oq-engine" target="_blank">🔶 GEM / oq-engine</a>
         <a class="gh-badge" href="https://www.seismicportal.eu/fdsnws/event/1/" target="_blank">📡 EMSC FDSN API</a>
@@ -119,437 +124,401 @@ SeismoReport v3.1
     </div>
 
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-val">83 918</div><div class="stat-lbl">Catalog Events</div></div>
-      <div class="stat-card"><div class="stat-val">126 yrs</div><div class="stat-lbl">Time Span (1900–2026)</div></div>
-      <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">Completeness Periods</div></div>
-      <div class="stat-card"><div class="stat-val">1.031</div><div class="stat-lbl">Turkey b-value</div></div>
-      <div class="stat-card"><div class="stat-val">19 719</div><div class="stat-lbl">Grid Points</div></div>
-      <div class="stat-card"><div class="stat-val">100 km</div><div class="stat-lbl">Fixed Area Radius</div></div>
-      <div class="stat-card"><div class="stat-val">M ≥ 3.0</div><div class="stat-lbl">EMSC Completeness</div></div>
-      <div class="stat-card"><div class="stat-val">Real-time</div><div class="stat-lbl">EMSC Live Feed</div></div>
+      <div class="stat-card"><div class="stat-val">83 918</div><div class="stat-lbl">Katalog Olayı</div></div>
+      <div class="stat-card"><div class="stat-val">126 yıl</div><div class="stat-lbl">Zaman Aralığı</div></div>
+      <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">Tamamlılık Dönemi</div></div>
+      <div class="stat-card"><div class="stat-val">1.031</div><div class="stat-lbl">Türkiye b-değeri</div></div>
+      <div class="stat-card"><div class="stat-val">19 719</div><div class="stat-lbl">Grid Noktası</div></div>
+      <div class="stat-card"><div class="stat-val">100 km</div><div class="stat-lbl">Sabit Alan Yarıçapı</div></div>
+      <div class="stat-card"><div class="stat-val">M ≥ 3.0</div><div class="stat-lbl">EMSC Tamamlılık Eşiği</div></div>
+      <div class="stat-card"><div class="stat-val">Gerçek Zamanlı</div><div class="stat-lbl">EMSC Canlı Veri</div></div>
     </div>
 
     <div class="review-abstract">
-      <strong>ABSTRACT</strong>
-      EQ-LiveTürkiye is an open-source seismic monitoring platform combining a real-time earthquake feed with a scientifically rigorous Gutenberg-Richter b-value hazard layer for Turkey. The platform integrates a 126-year composite catalog assembled from ISC (1900–1997) and EMSC (1998–2026) data using period-specific completeness thresholds (staircase method). Magnitude homogenization follows Scordilis (2006) empirical relations (ML/MD/mb → Mw). The b-value grid was computed using Aki (1965) maximum likelihood estimation with Utsu (1966) binomial correction, following the Fixed Area Method of Öncel & Wyss (2000): R=100 km, 10-km sliding step, N≥50. Turkey-wide b=1.031 is consistent with published literature. The platform is publicly accessible via GitHub Pages and built entirely on open-source tools.
+      <strong>ÖZET</strong>
+      EQ-LiveTürkiye, Türkiye için gerçek zamanlı deprem akışını bilimsel açıdan sağlam bir Gutenberg-Richter b-değeri tehlike katmanıyla birleştiren açık kaynaklı bir sismik izleme platformudur. Platform; ISC (1900–1997) ve EMSC (1998–2026) verilerinden dönem bazlı tamamlılık eşikleriyle (merdiven yöntemi) derlenen 126 yıllık bileşik bir katalog kullanmaktadır. Büyüklük homojenizasyonu Scordilis (2006) ampirik ilişkileriyle (ML/MD/mb → Mw) gerçekleştirilmiştir. b-değeri ızgarası, Öncel & Wyss (2000) Sabit Alan Yöntemi (R=100 km, 10 km kaydırma adımı, N≥50) çerçevesinde Aki (1965) MLE ve Utsu (1966) binom düzeltmesiyle hesaplanmıştır. Tüm Türkiye için elde edilen b=1.031 değeri literatürle uyumludur. b-değeri dağılımı, Delaunay triangülasyon ve lineer interpolasyon (scipy) yöntemiyle sürekli bir raster yüzeyine dönüştürülmüş; N&lt;50 olan alanlar şeffaf bırakılmıştır. Renk skalası Türkiye medyan b=1.15'e göre kalibre edilmiş (0.7–1.3), NAF/DAFZ yüksek gerilim kuşakları ile Batı Anadolu genişlemeli rejimi net olarak ayrıştırılmıştır. Haritaya ayrıca ESRI World Hillshade topografya katmanı eklenmiştir.
     </div>
 
     <div class="review-keywords" style="margin-top:12px;">
-      <span>Earthquake catalog</span><span>Gutenberg-Richter</span><span>b-value</span><span>Turkey seismicity</span>
-      <span>Staircase completeness</span><span>Scordilis (2006)</span><span>Aki (1965) MLE</span>
-      <span>Öncel & Wyss (2000)</span><span>PSHA</span><span>OpenQuake</span><span>EMSC</span><span>ISC</span>
+      <span>Deprem kataloğu</span><span>Gutenberg-Richter</span><span>b-değeri</span>
+      <span>Türkiye sismisitesi</span><span>Merdiven tamamlılık</span><span>Scordilis (2006)</span>
+      <span>Aki (1965) MLE</span><span>Öncel & Wyss (2000)</span><span>Delaunay Triangülasyon</span>
+      <span>ESRI Topografya</span><span>PSHA</span><span>OpenQuake</span>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 1. PLATFORM OVERVIEW -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion active" data-label="1. Platform Overview" onclick="toggleAcc(this)">
-    <span>🌐 1. Platform Overview — What EQ-LiveTürkiye Shows</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 1. GENEL BAKIŞ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion active" data-label="1. Platforma Genel Bakış" onclick="toggleAcc(this)">
+    <span>🌐 1. Platforma Genel Bakış — EQ-LiveTürkiye Ne Gösteriyor?</span>
   </div>
   <div class="panel open">
-    <div class="review-section-title">Purpose</div>
-    <p class="review-body-text">
-      EQ-LiveTürkiye is a browser-based seismic monitoring and hazard visualization platform for Turkey. It combines two complementary data streams: (1) a <strong>real-time EMSC earthquake feed</strong> that updates automatically with recent events, and (2) a <strong>pre-computed Gutenberg-Richter b-value grid</strong> derived from a 126-year composite catalog. Both layers are overlaid on an interactive Leaflet.js map, enabling simultaneous assessment of ongoing seismicity and long-term seismic hazard patterns.
-    </p>
+    <div class="review-section-title">Amaç</div>
+    <p class="review-body-text">EQ-LiveTürkiye, Türkiye için tarayıcı tabanlı bir sismik izleme ve tehlike görselleştirme platformudur. Birbirini tamamlayan iki veri akışını bir arada sunar: (1) son depremleri otomatik olarak güncelleyen <strong>gerçek zamanlı EMSC deprem akışı</strong> ve (2) 126 yıllık bileşik bir katalogdan önceden hesaplanmış <strong>Gutenberg-Richter b-değeri ızgarası</strong>. Her iki katman da etkileşimli Leaflet.js haritası üzerinde çakıştırılmakta; böylece süregelen sismisitenin ve uzun vadeli sismik tehlike örüntülerinin eş zamanlı değerlendirilmesi mümkün kılınmaktadır.</p>
 
-    <div class="review-section-title">Map Layers</div>
+    <div class="review-section-title">Harita Katmanları</div>
     <div class="pipeline-row">
-      <div class="pipe-step">🔴 Recent Earthquakes<br><small>EMSC real-time</small></div>
+      <div class="pipe-step">🔴 Son Depremler<br><small>EMSC canlı</small></div>
       <div class="pipe-arrow">+</div>
-      <div class="pipe-step">🟡 b-value Grid<br><small>CircleMarker overlay</small></div>
+      <div class="pipe-step">🟡 b-değeri Raster<br><small>Triangülasyon PNG</small></div>
       <div class="pipe-arrow">+</div>
-      <div class="pipe-step">🗺️ Base Tile<br><small>CartoDB Dark</small></div>
+      <div class="pipe-step">🏔️ Topografya<br><small>ESRI Hillshade</small></div>
+      <div class="pipe-arrow">+</div>
+      <div class="pipe-step">🗺️ Altlık Harita<br><small>CartoDB Dark</small></div>
       <div class="pipe-arrow">=</div>
-      <div class="pipe-step">🌐 Interactive Map<br><small>Leaflet.js</small></div>
+      <div class="pipe-step">🌐 Etkileşimli Harita<br><small>Leaflet.js</small></div>
     </div>
 
-    <div class="review-section-title">Open-Source Stack</div>
+    <div class="review-section-title">Açık Kaynak Araçlar ve Veri Kaynakları</div>
     <table class="review-table">
-      <caption>Table 1. Tools and repositories used in EQ-LiveTürkiye</caption>
-      <thead><tr><th>Component</th><th>Tool / Repository</th><th>Purpose</th></tr></thead>
+      <caption>Tablo 1. EQ-LiveTürkiye'de kullanılan araçlar ve veri kaynakları</caption>
+      <thead><tr><th>Bileşen</th><th>Araç / Kaynak</th><th>Amaç</th></tr></thead>
       <tbody>
-        <tr><td>Live map</td><td><a href="https://leafletjs.com" style="color:#64b5f6;">Leaflet.js v1.9</a></td><td>Interactive map rendering, CircleMarker, LayerGroup</td></tr>
-        <tr><td>Earthquake feed</td><td><a href="https://www.seismicportal.eu" style="color:#64b5f6;">EMSC FDSN API</a></td><td>Real-time M≥2.0 events, Turkey bounding box</td></tr>
-        <tr><td>Historical catalog</td><td><a href="http://www.isc.ac.uk/fdsnws/event/1/query" style="color:#64b5f6;">ISC FDSN API</a> <span style="font-size:0.8em;color:#7a9ab5;">(web service, not GitHub)</span></td><td>1900–1997 staircase periods (M≥4.5–5.5)</td></tr>
-        <tr><td>Historical catalog</td><td><a href="https://www.seismicportal.eu/fdsnws/event/1/query" style="color:#64b5f6;">EMSC FDSN API</a></td><td>1998–2026 M≥3.0 homogeneous period</td></tr>
-        <tr><td>Catalog builder</td><td><code>fetch_combined_catalog.py</code></td><td>Python: ISC+EMSC merge, dedup, Scordilis Mw</td></tr>
-        <tr><td>b-value grid</td><td><code>build_bvalue_grid.py</code></td><td>Python: Aki MLE, Fixed Area Method, JSON output</td></tr>
-        <tr><td>PSHA framework</td><td><a href="https://github.com/gem/oq-engine" style="color:#64b5f6;">GEM / oq-engine</a></td><td>Reference: b-value as input to OpenQuake source model</td></tr>
-        <tr><td>Hosting</td><td><a href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" style="color:#64b5f6;">GitHub Pages</a></td><td>Static hosting of index.html + data JSON</td></tr>
+        <tr><td>Canlı harita</td><td><a href="https://leafletjs.com" style="color:#64b5f6;">Leaflet.js v1.9</a></td><td>Etkileşimli harita, CircleMarker, LayerGroup</td></tr>
+        <tr><td>Deprem akışı</td><td><a href="https://www.seismicportal.eu/fdsnws/event/1/" style="color:#64b5f6;">EMSC FDSN API</a></td><td>Gerçek zamanlı M≥2.0 olaylar, Türkiye sınır kutusu</td></tr>
+        <tr><td>Tarihsel katalog (1900–1997)</td><td><a href="http://www.isc.ac.uk/fdsnws/event/1/" style="color:#64b5f6;">ISC FDSN API</a> <span style="font-size:0.8em;color:#7a9ab5;">(web servis)</span></td><td>Merdiven dönemleri M≥4.5–5.5</td></tr>
+        <tr><td>Tarihsel katalog (1998–2026)</td><td><a href="https://www.seismicportal.eu/fdsnws/event/1/" style="color:#64b5f6;">EMSC FDSN API</a></td><td>Homojen dönem M≥3.0</td></tr>
+        <tr><td>Katalog derleyici</td><td><code>fetch_combined_catalog.py</code></td><td>ISC+EMSC birleştirme, tekrar temizleme, Scordilis Mw</td></tr>
+        <tr><td>b-değeri ızgarası</td><td><code>build_bvalue_grid.py</code></td><td>Aki MLE, Sabit Alan Yöntemi (R=100 km, N≥50), JSON çıktı</td></tr>
+        <tr><td>b-değeri görselleştirme</td><td><code>build_bvalue_triangulation.py</code> · scipy</td><td>Delaunay triangülasyon + lineer interpolasyon → RGBA PNG raster; N&lt;50 şeffaf</td></tr>
+        <tr><td>Topografya katmanı</td><td>ESRI World Hillshade + Shaded Relief</td><td>Leaflet tile overlay; arazi morfolojisi — dağ gölgeleri ve yükseklik tonlaması</td></tr>
+        <tr><td>PSHA çerçevesi (referans)</td><td><a href="https://github.com/gem/oq-engine" style="color:#64b5f6;">GEM / oq-engine</a></td><td>b-değeri OpenQuake kaynak modeline girdi olarak kullanılır</td></tr>
+        <tr><td>Yayın</td><td><a href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" style="color:#64b5f6;">GitHub Pages</a></td><td>index.html + veri JSON + PNG raster statik yayın</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 2. DATA PIPELINE -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion" data-label="2. Data Pipeline" onclick="toggleAcc(this)">
-    <span>🔄 2. Data Pipeline — From Raw Catalog to Grid</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 2. VERİ BORU HATTI -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="2. Veri Boru Hattı" onclick="toggleAcc(this)">
+    <span>🔄 2. Veri Boru Hattı — Ham Katalogdan Izgara Üretimine</span>
   </div>
   <div class="panel">
-    <div class="review-section-title">End-to-End Pipeline</div>
     <div class="pipeline-row">
       <div class="pipe-step">📡 ISC FDSN<br><small>1900–1997</small></div>
       <div class="pipe-arrow">+</div>
       <div class="pipe-step">📡 EMSC FDSN<br><small>1998–2026</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">🔀 Staircase Merge<br><small>period Mc</small></div>
+      <div class="pipe-step">🔀 Merdiven Birleştirme<br><small>dönem M<sub>c</sub></small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">🔁 Deduplication<br><small>±60s, &lt;50km</small></div>
+      <div class="pipe-step">🔁 Tekrar Temizleme<br><small>±60s, &lt;50km</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">Mw Homogenization<br><small>Scordilis 2006</small></div>
+      <div class="pipe-step">⚖️ Mw Homojenizasyon<br><small>Scordilis 2006</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">📊 b-value Grid<br><small>Aki+Utsu</small></div>
+      <div class="pipe-step">📊 b-değeri Izgarası<br><small>Aki+Utsu</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">🌐 JSON → Map<br><small>GitHub Pages</small></div>
+      <div class="pipe-step">🌐 JSON → Harita<br><small>GitHub Pages</small></div>
     </div>
 
-    <div class="review-section-title">Step 1 — FDSN Data Retrieval</div>
-    <p class="review-body-text">
-      Both ISC and EMSC provide FDSN-compliant web service APIs (<code>fdsnws/event/1/query</code>). The Python script <code>fetch_combined_catalog.py</code> queries each service in 5–10 year chunks to avoid API result limits (ISC: 20 000 events/query; EMSC: 20 000 events/query). The geographic bounding box is set to encompass Turkey and its near-field: 33–45°N, 23–48°E.
-    </p>
+    <div class="review-section-title">Adım 1 — FDSN Veri Çekimi</div>
+    <p class="review-body-text">Hem ISC hem EMSC, FDSN uyumlu web servis API'leri (<code>fdsnws/event/1/query</code>) sunmaktadır. Python betiği <code>fetch_combined_catalog.py</code>, API sonuç sınırlarını aşmamak için her servisi 5–10 yıllık dilimler hâlinde sorgular (sorgu başına 20 000 olay sınırı). Coğrafi sınır kutusu 33–45°K, 23–48°D olarak belirlenmiştir.</p>
+
     <div class="method-card">
-      <h4>⚙️ Retrieval parameters</h4>
+      <h4>⚙️ Çekim Parametreleri</h4>
       <ul>
-        <li>Format: <code>text</code> (pipe-delimited, lightweight)</li>
-        <li>Ordering: <code>time-asc</code> per chunk</li>
-        <li>Rate limiting: 1.5 s sleep between requests</li>
-        <li>Retry: 2× delay on network error</li>
-        <li>Chunk size: 10 yr (ISC) / 5 yr (EMSC)</li>
+        <li>Biçim: <code>text</code> (boru karakteriyle ayrılmış, hafif)</li>
+        <li>Sıralama: dilim başına <code>time-asc</code></li>
+        <li>Hız sınırı: istekler arası 1.5 sn bekleme</li>
+        <li>Yeniden deneme: ağ hatasında 2× gecikme</li>
+        <li>Dilim boyutu: 10 yıl (ISC) / 5 yıl (EMSC)</li>
       </ul>
     </div>
 
-    <div class="review-section-title">Step 2 — Staircase Completeness Merge</div>
-    <p class="review-body-text">
-      Seismic network density has evolved over time; a single magnitude threshold applied across the full 126-year record would either exclude large numbers of smaller events or include incomplete earlier periods. The <em>staircase</em> approach addresses this by applying the minimum completeness magnitude (<em>M</em><sub>c</sub>) appropriate for each time period, then taking the union of all sets.
-    </p>
+    <div class="review-section-title">Adım 2 — Merdiven (Staircase) Tamamlılık Birleştirmesi</div>
+    <p class="review-body-text">Sismik ağ yoğunluğu tarihsel süreçte evrilmiştir; 126 yıllık kaydın tamamına tek bir büyüklük eşiği uygulamak, ya büyük sayıda küçük olayı dışarıda bırakır ya da tamamlanmamış erken dönemleri dahil eder. Merdiven yaklaşımı, her zaman dilimine uygun minimum tamamlılık büyüklüğünü (M<sub>c</sub>) uygulayarak ve ardından tüm kümelerin bileşimini (küme birleşimi) alarak bu sorunu çözer.</p>
+
     <table class="review-table">
-      <caption>Table 2. Staircase completeness thresholds (+0.5 conservative correction applied to reference values)</caption>
-      <thead><tr><th>Period</th><th>Source</th><th>M<sub>c</sub></th><th>Events</th><th>Justification</th></tr></thead>
+      <caption>Tablo 2. Merdiven tamamlılık eşikleri (+0.5 muhafazakâr düzeltme uygulandı)</caption>
+      <thead><tr><th>Dönem</th><th>Kaynak</th><th>M<sub>c</sub></th><th>Olay Sayısı</th><th>Gerekçe</th></tr></thead>
       <tbody>
-        <tr><td>1900–1965</td><td>ISC</td><td>5.5</td><td>173</td><td>Pre-WWSSN; only large events reliably recorded</td></tr>
-        <tr><td>1965–1980</td><td>ISC</td><td>4.5</td><td>1 058</td><td>WWSSN fully operational; ref 4.0 + 0.5</td></tr>
-        <tr><td>1980–1990</td><td>ISC</td><td>4.0</td><td>1 318</td><td>Global network densification; ref 3.0 + 1.0</td></tr>
-        <tr><td>1990–1998</td><td>ISC</td><td>3.5</td><td>4 855</td><td>Digital broadband transition; ref 2.5 + 1.0</td></tr>
-        <tr><td>1998–2026</td><td>EMSC</td><td>3.0</td><td>76 506</td><td>Modern broadband; ref 2.5 + 0.5</td></tr>
-        <tr style="font-weight:700;"><td colspan="3">Total (after deduplication)</td><td>83 918</td><td></td></tr>
+        <tr><td>1900–1965</td><td>ISC</td><td>5.5</td><td>173</td><td>Pre-WWSSN; yalnız büyük olaylar güvenilir</td></tr>
+        <tr><td>1965–1980</td><td>ISC</td><td>4.5</td><td>1 058</td><td>WWSSN tam operasyonel; ref 4.0+0.5</td></tr>
+        <tr><td>1980–1990</td><td>ISC</td><td>4.0</td><td>1 318</td><td>Global ağ yoğunlaşması; ref 3.0+1.0</td></tr>
+        <tr><td>1990–1998</td><td>ISC</td><td>3.5</td><td>4 855</td><td>Dijital geniş bant geçişi; ref 2.5+1.0</td></tr>
+        <tr><td>1998–2026</td><td>EMSC</td><td>3.0</td><td>76 506</td><td>Modern geniş bant; ref 2.5+0.5</td></tr>
+        <tr style="font-weight:700;"><td colspan="3">Toplam (tekrar temizleme sonrası)</td><td>83 918</td><td></td></tr>
       </tbody>
     </table>
 
-    <div class="review-section-title">Step 3 — Duplicate Removal</div>
-    <p class="review-body-text">
-      Events present in both ISC and EMSC catalogs (especially near the 1998 overlap boundary) are identified by temporal and spatial proximity. Duplicates within 60 seconds and 50 km of each other are merged, retaining the higher-Mw estimate. This removes 396 duplicate pairs, yielding 83 918 unique events.
-    </p>
+    <div class="review-section-title">Adım 3 — Tekrar Temizleme</div>
+    <p class="review-body-text">Hem ISC hem EMSC kataloglarında yer alan olaylar zamansal ve konumsal yakınlıkla belirlenir. Birbirinden 60 saniye ve 50 km'den az uzakta bulunan çiftler birleştirilerek daha yüksek Mw değerine sahip olan tutulur. Bu işlem 396 yinelenen çifti kaldırarak 83 918 benzersiz olay elde edilmesini sağlar.</p>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 3. MAGNITUDE HOMOGENIZATION -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion" data-label="3. Magnitude Homogenization" onclick="toggleAcc(this)">
-    <span>⚖️ 3. Magnitude Homogenization — Scordilis (2006)</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 3. MW HOMOJENİZASYONU -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="3. Büyüklük Homojenizasyonu — Scordilis (2006)" onclick="toggleAcc(this)">
+    <span>⚖️ 3. Büyüklük Homojenizasyonu — Scordilis (2006)</span>
   </div>
   <div class="panel">
-    <div class="review-section-title">Why Homogenization Is Necessary</div>
-    <p class="review-body-text">
-      The composite ISC+EMSC catalog contains events reported in at least eight different magnitude scales (MD, ML, mb, Ms, Mw and variants). Mixing scales introduces systematic bias: a body-wave magnitude mb=5.0 is not equivalent to a moment magnitude Mw=5.0. For probabilistic seismic hazard analysis (PSHA) all magnitudes must be expressed on a single, physically meaningful scale — moment magnitude Mw.
-    </p>
+    <div class="review-section-title">Homojenizasyon Neden Gereklidir?</div>
+    <p class="review-body-text">Bileşik ISC+EMSC kataloğu, en az sekiz farklı büyüklük ölçeğinde (MD, ML, mb, Ms, Mw ve türevleri) rapor edilmiş olaylar içermektedir. Ölçeklerin karıştırılması sistematik önyargıya yol açar: mb=5.0, Mw=5.0 ile eşdeğer değildir. PSHA için tüm büyüklüklerin tek ve fiziksel olarak anlamlı bir ölçekte — moment büyüklüğü Mw — ifade edilmesi gerekmektedir.</p>
 
     <table class="review-table">
-      <caption>Table 3. Magnitude type distribution in the composite catalog</caption>
-      <thead><tr><th>Scale</th><th>Events</th><th>Primary source</th></tr></thead>
+      <caption>Tablo 3. Bileşik katalogdaki büyüklük türü dağılımı</caption>
+      <thead><tr><th>Ölçek</th><th>Olay Sayısı</th><th>Birincil Kaynak</th></tr></thead>
       <tbody>
-        <tr><td>MD (coda duration)</td><td>32 686</td><td>EMSC regional networks</td></tr>
-        <tr><td>ML (local)</td><td>25 991</td><td>EMSC regional networks</td></tr>
-        <tr><td>mb (body-wave)</td><td>9 847</td><td>ISC global stations</td></tr>
-        <tr><td>ML (uppercase)</td><td>9 232</td><td>EMSC</td></tr>
-        <tr><td>md (lowercase)</td><td>2 545</td><td>EMSC</td></tr>
-        <tr><td>mw / Mw</td><td>1 294</td><td>ISC/EMSC moment tensor solutions</td></tr>
+        <tr><td>MD (koda süresi)</td><td>32 686</td><td>EMSC bölgesel ağlar</td></tr>
+        <tr><td>ML (yerel)</td><td>25 991</td><td>EMSC bölgesel ağlar</td></tr>
+        <tr><td>mb (cisim dalgası)</td><td>9 847</td><td>ISC küresel istasyonlar</td></tr>
+        <tr><td>ML (büyük harf)</td><td>9 232</td><td>EMSC</td></tr>
+        <tr><td>md</td><td>2 545</td><td>EMSC</td></tr>
+        <tr><td>mw / Mw</td><td>1 294</td><td>ISC/EMSC moment tensör çözümleri</td></tr>
         <tr><td>mL</td><td>707</td><td>EMSC</td></tr>
       </tbody>
     </table>
 
-    <div class="review-section-title">Scordilis (2006) Conversion Relations</div>
-    <p class="review-body-text">
-      Scordilis (2006) derived empirical global relations for converting the most common magnitude scales to Mw using a global dataset of ~20 000 earthquakes with known moment tensor solutions. These relations are applied in order of reliability.
-    </p>
+    <div class="review-section-title">Scordilis (2006) Dönüşüm Bağıntıları</div>
 
     <div class="analysis-card">
-      <h4>mb → Mw  (body-wave magnitude)</h4>
+      <h4>mb → Mw (cisim dalgası büyüklüğü)</h4>
       <div class="formula-box" style="font-size:0.95em;margin:8px 0;">Mw = 0.85·mb + 1.03 &nbsp;&nbsp;(3.5 ≤ mb ≤ 6.2)</div>
-      <p>Valid for teleseismic body-wave magnitudes from ISC global station network.</p>
+      <p>ISC küresel istasyon ağından elde edilen teleseismik cisim dalgası büyüklükleri için geçerlidir.</p>
     </div>
-
     <div class="analysis-card">
-      <h4>ML / MD → Mw  (local / coda magnitude)</h4>
+      <h4>ML / MD → Mw (yerel / koda büyüklüğü)</h4>
       <div class="formula-box" style="font-size:0.95em;margin:8px 0;">Mw = 0.0376·M² + 0.646·M − 0.269 &nbsp;&nbsp;(1.0 ≤ M ≤ 6.5)</div>
-      <p>Quadratic relation accounts for the non-linear saturation of local magnitude at higher values. Applied to ML, MD, md, and mL.</p>
+      <p>İkinci dereceden bağıntı, yerel büyüklüğün yüksek değerlerdeki doğrusal olmayan doygunluğunu hesaba katar. ML, MD, md ve mL'ye uygulanır.</p>
     </div>
-
     <div class="analysis-card">
-      <h4>Ms → Mw  (surface-wave magnitude)</h4>
+      <h4>Ms → Mw (yüzey dalgası büyüklüğü)</h4>
       <div class="formula-box" style="font-size:0.95em;margin:8px 0 4px;">Mw = 0.646·Ms + 2.079 &nbsp;&nbsp;(3.0 ≤ Ms ≤ 6.1)<br>Mw = 0.994·Ms + 0.115 &nbsp;&nbsp;(Ms &gt; 6.1)</div>
-      <p>Two-segment relation reflects saturation of Ms for large earthquakes.</p>
+      <p>İki parçalı bağıntı, büyük depremlerde Ms'nin doygunluğunu yansıtır.</p>
     </div>
 
-    <div class="review-section-title">Critical Note: Scordilis Bias in b-value Computation</div>
     <div class="rec-card">
-      <h4>⚠️ Known Issue: ML=3.0 → Mw≈2.0</h4>
+      <h4>⚠️ b-Değeri Hesabında Scordilis Önyargısı</h4>
       <ul>
-        <li>Scordilis ML→Mw: for ML=3.0 → Mw = 0.0376×9 + 0.646×3 − 0.269 = <strong>2.007</strong></li>
-        <li>Filtering by converted Mw≥3.0 drops ~66 000 EMSC events (MD/ML ≈ 3.0–4.5)</li>
-        <li>This inflates mean(Mw) from ~2.5 to ~4.2, producing artificially low b-values (~0.28)</li>
-        <li><strong>Fix:</strong> b-value grid computed using original reported <code>mag</code>, not converted Mw</li>
-        <li>Completeness filtering also uses original <code>mag ≥ Mc</code> (not converted Mw)</li>
+        <li>Scordilis ML→Mw: ML=3.0 için → Mw = 0.0376×9 + 0.646×3 − 0.269 = <strong>2.007</strong></li>
+        <li>Dönüştürülmüş Mw≥3.0 filtresi ~66 000 EMSC olayını dışarıda bırakır (MD/ML ≈ 3.0–4.5)</li>
+        <li>Bu durum ortalama(Mw)'yi ~2.5'ten ~4.2'ye yükseltir → yapay düşük b değerleri (~0.28) üretir</li>
+        <li><strong>Çözüm:</strong> b-değeri ızgarası dönüştürülmüş Mw değil, orijinal <code>mag</code> kullanılarak hesaplanır</li>
       </ul>
     </div>
 
     <div class="info-note">
-      The converted Mw field is retained in <code>eq_historical.json</code> for other uses (PSHA source models, moment rate calculations). Only the b-value computation bypasses it to avoid the conversion-induced bias.
+      Dönüştürülmüş Mw alanı <code>eq_historical.json</code> dosyasında diğer kullanımlar için (PSHA kaynak modeli, moment hız hesapları) korunmaktadır.
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 4. b-VALUE METHODOLOGY -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion" data-label="4. b-value Methodology" onclick="toggleAcc(this)">
-    <span>📊 4. Gutenberg-Richter b-value — Aki (1965) + Öncel & Wyss (2000)</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 4. b-DEĞERİ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="4. b-Değeri Metodolojisi" onclick="toggleAcc(this)">
+    <span>📊 4. b-Değeri Metodolojisi — Aki (1965) + Öncel & Wyss (2000)</span>
   </div>
   <div class="panel">
-    <div class="review-section-title">Gutenberg-Richter Frequency-Magnitude Relation</div>
+    <div class="review-section-title">Gutenberg-Richter Frekans-Büyüklük Bağıntısı</div>
     <div class="formula-box">log₁₀(N) = a − b·M</div>
-    <p class="review-body-text">
-      The b-value slope describes the relative proportion of large to small earthquakes. A b≈1 (global average) means each unit increase in magnitude corresponds to a 10-fold decrease in frequency. Lateral variations in b reflect differences in stress state, material heterogeneity, and temperature.
-    </p>
+    <p class="review-body-text">b-değeri eğimi, büyük ve küçük depremler arasındaki göreli oranı tanımlar. Küresel ortalama b≈1, büyüklükteki her bir birim artışın frekansta 10 katlık bir düşüşe karşılık geldiği anlamına gelir. b değerinin yanal değişimleri stres durumundaki, malzeme heterojenliğindeki ve sıcaklıktaki farklılıkları yansıtır.</p>
 
-    <div class="review-section-title">Aki (1965) Maximum Likelihood Estimation</div>
-    <div class="formula-box">b = log₁₀(e) / (M̄ − M<sub>c,eff</sub>)</div>
-    <p class="review-body-text">
-      The MLE is statistically superior to least-squares regression because it makes no assumption about the distribution of the dependent variable and produces unbiased estimates. Here <em>M̄</em> is the sample mean magnitude above <em>M</em><sub>c</sub>.
-    </p>
-
-    <div class="review-section-title">Utsu (1966) Binomial Correction</div>
-    <div class="formula-box">M<sub>c,eff</sub> = M<sub>c</sub> − ΔM = 3.0 − 0.05 = 2.95</div>
-    <p class="review-body-text">
-      Earthquake catalogs typically report magnitudes rounded to the nearest 0.1 unit. Utsu (1966) showed that this discretization introduces a systematic underestimate of b; the correction is ΔM = bin-width/2 = 0.05, yielding an effective completeness threshold of M<sub>c,eff</sub> = 2.95.
-    </p>
-
-    <div class="review-section-title">Fixed Area Method — Öncel & Wyss (2000)</div>
-    <div class="review-infobox">
-      <strong>Reference:</strong> Öncel, A. O. & Wyss, M. (2000). The major asperities of the 1999 Mw 7.4 İzmit earthquake defined by the microseismicity of the two decades before it. <em>Geophysical Journal International</em>, 143(2), 501–506.
+    <div class="qbox" style="background:rgba(59,158,255,0.07);border:1px solid rgba(59,158,255,0.25);border-radius:8px;padding:11px 15px;margin:10px 0;font-size:0.91em;color:#c8e0f8;line-height:1.75;">
+      <strong>Vatandaş için özet:</strong> b=1 ise M5'ten büyük her 10 depremin karşısında M6'dan büyük yaklaşık 1 deprem beklenir. b küçüldükçe büyük depremler göreceli olarak daha sık; b büyüdükçe küçük depremler daha baskın hâle gelir.
     </div>
-    <p class="review-body-text">
-      Rather than a moving window with variable area, the Fixed Area Method samples events within a constant-radius circle centered on each grid node. This ensures the spatial extent of the sample remains consistent across nodes, eliminating area-induced bias in b-value estimation. Öncel & Wyss (2000) applied R=20 km and 5-km step for the İzmit rupture zone; we scale to R=100 km and 10-km step for the Turkey-wide analysis.
-    </p>
+
+    <div class="review-section-title">Aki (1965) Maksimum Olabilirlik Tahmini (MLE)</div>
+    <div class="formula-box">b = log₁₀(e) / (M̄ − M<sub>c,eff</sub>)</div>
+    <p class="review-body-text">MLE, en küçük kareler regresyonuna kıyasla istatistiksel olarak üstündür; bağımlı değişkenin dağılımı hakkında varsayımda bulunmaz ve yansız tahminler üretir. M̄, M<sub>c</sub> üzerindeki örneklem ortalama büyüklüğüdür.</p>
+
+    <div class="review-section-title">Utsu (1966) Binom Düzeltmesi</div>
+    <div class="formula-box">M<sub>c,eff</sub> = M<sub>c</sub> − ΔM = 3.0 − 0.05 = 2.95</div>
+    <p class="review-body-text">Deprem katalogları büyüklükleri genellikle en yakın 0.1 birimine yuvarlayarak raporlar. Utsu (1966), bu ayrıklaştırmanın b'yi sistematik olarak küçümsediğini göstermiştir; düzeltme ΔM = aralık genişliği/2 = 0.05 olarak uygulanır.</p>
+
+    <div class="review-section-title">Öncel & Wyss (2000) Sabit Alan Yöntemi</div>
+    <div class="review-infobox">
+      <strong>Kaynak:</strong> Öncel, A. O. & Wyss, M. (2000). The major asperities of the 1999 Mw 7.4 İzmit earthquake defined by the microseismicity of the two decades before it. <em>Geophysical Journal International</em>, 143(2), 501–506.
+    </div>
+    <p class="review-body-text">Sabit Alan Yöntemi'nde, her grid düğümü etrafında sabit yarıçaplı bir çember içindeki olaylar örneklenerek b-değeri hesaplanır. Bu yaklaşım, hareketli pencere yöntemine kıyasla alansal örneklem büyüklüğünü tutarlı kılar ve alan kaynaklı önyargıyı azaltır. Öncel & Wyss (2000), İzmit kırık zonu için R=20 km ve 5 km adım kullanmıştır; bu çalışmada Türkiye geneli analiz için R=100 km ve 10 km adım kullanılmıştır.</p>
 
     <table class="review-table">
-      <caption>Table 4. Fixed Area Method parameters</caption>
-      <thead><tr><th>Parameter</th><th>Value</th><th>Rationale</th></tr></thead>
+      <caption>Tablo 4. Sabit Alan Yöntemi parametreleri</caption>
+      <thead><tr><th>Parametre</th><th>Değer</th><th>Gerekçe</th></tr></thead>
       <tbody>
-        <tr><td>Search radius R</td><td>100 km</td><td>Regional scale; ensures N≥50 across most of Turkey</td></tr>
-        <tr><td>Grid step</td><td>0.09° (~10 km)</td><td>Öncel & Wyss: 5 km; scaled to Turkey extent</td></tr>
-        <tr><td>Min. events N<sub>min</sub></td><td>50</td><td>Öncel & Wyss (2000) criterion</td></tr>
-        <tr><td>Completeness Mc</td><td>3.0 (EMSC mag)</td><td>EMSC 1998–2026 homogeneous period</td></tr>
-        <tr><td>Effective Mc</td><td>2.95 (Utsu)</td><td>Binomial correction ΔM=0.05</td></tr>
-        <tr><td>Grid domain</td><td>34–43°N, 25–45°E</td><td>Turkey land area + near offshore</td></tr>
-        <tr><td>Grid size</td><td>101 × 223 = 22 523 nodes</td><td>0.09° step</td></tr>
-        <tr><td>Mapped nodes</td><td>19 719 (87.5%)</td><td>2 804 nodes fail N≥50 criterion</td></tr>
+        <tr><td>Arama yarıçapı R</td><td>100 km</td><td>Bölgesel ölçek; Türkiye genelinde N≥50'yi sağlar</td></tr>
+        <tr><td>Grid adımı</td><td>0.09° (~10 km)</td><td>Öncel & Wyss: 5 km; Türkiye geneline ölçeklendirildi</td></tr>
+        <tr><td>Min. olay sayısı</td><td>N<sub>min</sub> = 50</td><td>Öncel & Wyss (2000) kriteri</td></tr>
+        <tr><td>Tamamlılık eşiği</td><td>M<sub>c</sub> = 3.0</td><td>EMSC 1998–2026 homojen dönemi</td></tr>
+        <tr><td>Efektif eşik</td><td>M<sub>c,eff</sub> = 2.95</td><td>Utsu düzeltmesi ΔM=0.05</td></tr>
+        <tr><td>Grid alanı</td><td>34–43°K, 25–45°D</td><td>Türkiye kara alanı + yakın kıyı</td></tr>
+        <tr><td>Grid boyutu</td><td>101×223 = 22 523 aday</td><td>0.09° adım</td></tr>
+        <tr><td>Haritalanan nokta</td><td>19 719 (%87.5)</td><td>2 804 nokta N≥50 kriterini karşılayamadı</td></tr>
       </tbody>
     </table>
-
-    <div class="review-section-title">Color Normalization</div>
-    <p class="review-body-text">
-      A fixed RdYlGn color scale is applied: b=0.5 → red (high stress), b=1.0 → yellow (normal), b=1.5 → green (low stress / heterogeneous). The normalized weight <em>w = 1 − (b − 0.5) / 1.0</em> is clipped to [0, 1]. This fixed scale ensures spatial comparability across zoom levels.
-    </p>
-
-    <div class="review-section-title">Zoom-Adaptive Display</div>
-    <div class="method-card">
-      <h4>⚙️ Zoom-level sampling strategy</h4>
-      <ul>
-        <li>Zoom &lt; 6: every 6th point (~0.54° ≈ 60 km resolution) — national overview</li>
-        <li>Zoom 6–8: every 3rd point (~0.27° ≈ 30 km) — regional view</li>
-        <li>Zoom ≥ 8: all points (0.09° ≈ 10 km) — local detail</li>
-      </ul>
-    </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 5. b-VALUE MAP -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion active" data-label="5. Interactive b-value Map" onclick="toggleAcc(this)">
-    <span>🗺️ 5. Interactive b-value Map</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 5. HARİTA -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion active" data-label="5. Etkileşimli b-Değeri Haritası" onclick="toggleAcc(this)">
+    <span>🗺️ 5. Etkileşimli b-Değeri Haritası</span>
   </div>
   <div class="panel open">
-    <p class="review-body-text">
-      The map below renders the 19 719-node b-value grid computed from EMSC 1998–2026 (76 514 events, M≥3.0). Each circle represents the Aki (1965) MLE b-value for all events within R=100 km. Hover over any circle to see b and N. Use mouse wheel to zoom; the grid automatically resamples for density.
-    </p>
+    <p class="review-body-text">Aşağıdaki harita 19 719 grid noktasından oluşan b-değeri dağılımını göstermektedir. b-değeri ızgarası <strong>Delaunay triangülasyonu ve lineer interpolasyon</strong> (scipy.interpolate.LinearNDInterpolator) yöntemiyle sürekli bir raster yüzeyine dönüştürülmüştür. Bu yöntem Surfer yazılımının "Triangulation with Linear Interpolation" seçeneğiyle eşdeğer olup yalnızca mevcut veri noktaları arasındaki üçgenler içinde tahmin yapar; N&lt;50 nedeniyle hesaplanamayan alanlar haritada şeffaf bırakılmıştır. Renk skalası Türkiye'nin b-değeri dağılımına göre kalibre edilmiştir (medyan b=1.15): kırmızı yüksek tektonik gerilimi (NAF, DAFZ), yeşil genişlemeli rejimleri (Batı Anadolu) temsil eder.</p>
     <div id="bvalue-map"></div>
     <div class="map-legend">
-      <span style="color:#d73027;font-weight:700;">■ b≈0.5 (high stress)</span>
+      <span style="color:#d73027;font-weight:700;">■ b≤0.7 (yüksek stres)</span>
       <div class="map-legend-bar"></div>
-      <span style="color:#1a9850;font-weight:700;">■ b≈1.5 (low stress)</span>
-      <span style="margin-left:10px;color:#7a9ab5;font-size:0.88em;">Aki (1965) MLE · Utsu (1966) · Mc=2.95 · R=100 km · N≥50 · EMSC 1998–2026</span>
+      <span style="color:#fee08b;font-weight:700;">■ b=1.0 (nötr)</span>
+      <div class="map-legend-bar" style="display:none"></div>
+      <span style="color:#1a9850;font-weight:700;">■ b≥1.3 (genişlemeli)</span>
+      <span style="margin-left:8px;color:#7a9ab5;font-size:0.88em;">Aki (1965) MLE · Utsu (1966) · M<sub>c</sub>=3.0 · R=100 km · N≥50 · EMSC 1998–2026 · Delaunay Triangülasyon</span>
     </div>
 
-    <div class="review-section-title">Regional Interpretation</div>
+    <div class="method-card" style="margin-top:14px;">
+      <h4>⚙️ b-Değeri Görselleştirme Yöntemi — Delaunay Triangülasyon</h4>
+      <ul>
+        <li><strong>Giriş:</strong> 19 719 grid noktası (lat, lon, b) — <code>bvalue_grid.json</code></li>
+        <li><strong>Yöntem:</strong> scipy <code>LinearNDInterpolator</code> → Delaunay üçgenleme + lineer interpolasyon</li>
+        <li><strong>Çıktı:</strong> 500×225 piksel RGBA PNG raster (<code>bvalue_triangulation.png</code>)</li>
+        <li><strong>Kapsama:</strong> %99.8 (yalnızca Türkiye sınırı dışındaki 0.2% şeffaf)</li>
+        <li><strong>Renk skalası:</strong> b=0.7→kırmızı · b=1.0→sarı · b=1.3→yeşil (RdYlGn)</li>
+        <li><strong>Haritaya ekleme:</strong> Leaflet <code>L.imageOverlay</code> ile [[34,25],[43,45]] sınır kutusuna bindirme</li>
+        <li><strong>Surfer eşdeğeri:</strong> Grid Data → Triangulation with Linear Interpolation</li>
+      </ul>
+    </div>
+
+    <div class="review-section-title">Bölgesel Yorumlama</div>
     <div class="analysis-card">
-      <h4>🔴 Low b-value zones (b &lt; 0.8) — Elevated stress</h4>
-      <p>Eastern Anatolian Fault Zone (EAFZ), particularly the Kahramanmaraş triple junction area. Low b-values here are consistent with high tectonic loading rates on the left-lateral EAFZ. The February 2023 Mw7.8 and Mw7.7 earthquake sequence epicentral region shows characteristic pre-seismic low-b signature in historical data.</p>
+      <h4>🔴 Düşük b-değeri bölgeleri (b &lt; 0.8) — Yüksek stres</h4>
+      <p>Doğu Anadolu Fay Zonu (DAFZ), özellikle Kahramanmaraş üçlü kavşağı çevresi. Buradaki düşük b-değerleri, Şubat 2023 Mw7.8–7.7 deprem dizisinin sismik boşalma öncesinde biriken yüksek tektonik yüklenme hızlarıyla örtüşmektedir.</p>
     </div>
     <div class="analysis-card" style="border-left-color:#22c55e;background:rgba(22,163,74,0.10);">
-      <h4 style="color:#22c55e;">🟢 High b-value zones (b &gt; 1.3) — Heterogeneous / geothermal</h4>
-      <p>Western Anatolia extensional province (Gediz, Büyük Menderes grabens), Central Anatolian volcanic arc, and parts of the Black Sea coastal zone. High b-values in these areas reflect crustal heterogeneity, elevated pore-fluid pressures, or thermally weakened fault zones.</p>
+      <h4 style="color:#22c55e;">🟢 Yüksek b-değeri bölgeleri (b &gt; 1.3) — Heterojen / Jeotermal</h4>
+      <p>Batı Anadolu genişleme kuşağı (Gediz, Büyük Menderes grabenleri), Orta Anadolu volkanik yayı ve Karadeniz kıyı kuşağının bazı kesimleri. Bu alanlardaki yüksek b-değerleri kabuk heterojenliğini, yüksek gözenek sıvısı basınçlarını veya ısıl olarak zayıflamış fay zonlarını yansıtır.</p>
     </div>
-
     <div class="conclusion-card">
-      <h4>✅ Validation</h4>
+      <h4>✅ Doğrulama</h4>
       <ul>
-        <li>Turkey-wide b = 1.031 (N=76 514) — consistent with published values (Kalafat et al. 2007: b≈1.0–1.1)</li>
-        <li>b range 0.460–2.249, mean 1.167 — physically plausible for tectonically diverse region</li>
-        <li>2 804 unmapped nodes (N&lt;50) concentrated in offshore Black Sea and low-seismicity Central Anatolia</li>
+        <li>Tüm Türkiye b = 1.031 (N=76 514) — literatürle uyumlu (Kalafat vd. 2007: b≈1.0–1.1)</li>
+        <li>b aralığı 0.460–2.249, ortalama 1.167 — tektonik açıdan çeşitli bölge için fiziksel olarak makul</li>
+        <li>2 804 haritalanmamış nokta (N&lt;50) Karadeniz açığı ve düşük sismisiteli Orta Anadolu'da yoğunlaşıyor</li>
       </ul>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
   <!-- 6. PSHA / OpenQuake -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion" data-label="6. PSHA Integration — OpenQuake Engine" onclick="toggleAcc(this)">
-    <span>🔶 6. PSHA Integration — GEM OpenQuake Engine</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="6. PSHA Entegrasyonu — GEM OpenQuake Engine" onclick="toggleAcc(this)">
+    <span>🔶 6. PSHA Entegrasyonu — GEM OpenQuake Engine</span>
   </div>
   <div class="panel">
-    <div class="review-section-title">From b-value Grid to Seismic Source Model</div>
-    <p class="review-body-text">
-      Probabilistic Seismic Hazard Analysis (PSHA) quantifies the probability of exceeding a given ground-motion intensity measure (e.g., PGA, Sa) at a site within a specified time window. The GEM Foundation's <a href="https://github.com/gem/oq-engine" style="color:#64b5f6;">OpenQuake Engine</a> is the leading open-source PSHA platform, used in the Global Earthquake Model and national hazard studies worldwide.
-    </p>
-
-    <p class="review-body-text">
-      In an OpenQuake source model, each area source or point source requires a Gutenberg-Richter MFD (Magnitude Frequency Distribution) defined by an a-value and b-value. The b-value grid produced here provides spatially resolved b-values that can be directly incorporated into OpenQuake <code>source_model.xml</code> files:
-    </p>
+    <p class="review-body-text">Olasılıksal Sismik Tehlike Analizi (PSHA), belirli bir zaman penceresinde bir alanda verilen zemin hareketi yoğunluk ölçütünü (örn. PGA, Sa) aşma olasılığını nicel olarak ortaya koyar. GEM Vakfı'nın <a href="https://github.com/gem/oq-engine" style="color:#64b5f6;">OpenQuake Engine</a>'i, Küresel Deprem Modeli'nde ve ulusal tehlike çalışmalarında kullanılan önde gelen açık kaynaklı PSHA platformudur. OpenQuake kaynak modelinde her alan kaynağı veya nokta kaynağı, bir Gutenberg-Richter MFD (Büyüklük-Frekans Dağılımı) gerektirmektedir.</p>
 
     <div class="review-infobox">
-      <strong>OpenQuake source_model.xml — b-value entry example:</strong><br>
-      <code style="font-size:0.88em;color:#ffe080;">
-        &lt;areaSource id="TR_01" name="Marmara Region"&gt;<br>
+      <strong>OpenQuake source_model.xml — b-değeri girdisi örneği:</strong><br>
+      <code style="font-size:0.87em;color:#ffe080;">
+        &lt;areaSource id="TR_01" name="Marmara Bölgesi"&gt;<br>
         &nbsp;&nbsp;&lt;truncGutenbergRichterMFD aValue="5.2" <strong>bValue="0.95"</strong><br>
         &nbsp;&nbsp;&nbsp;&nbsp;minMag="5.0" maxMag="7.5"/&gt;<br>
         &lt;/areaSource&gt;
-      </code><br><br>
-      The <code>bValue</code> field is populated from the spatial average of b-value grid cells overlapping each source zone.
+      </code><br>
+      <small style="color:#94a3b8;">bValue alanı, ilgili kaynak zonuyla çakışan b-değeri grid hücrelerinin uzamsal ortalamasından alınır.</small>
     </div>
 
-    <div class="review-section-title">Data Flow: EQ-LiveTürkiye → OpenQuake</div>
     <div class="pipeline-row">
-      <div class="pipe-step">bvalue_grid.json<br><small>19 719 pts</small></div>
+      <div class="pipe-step">bvalue_grid.json<br><small>19 719 nokta</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">Zone averaging<br><small>spatial join</small></div>
+      <div class="pipe-step">Zon ortalaması<br><small>konumsal birleştirme</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">source_model.xml<br><small>b per zone</small></div>
+      <div class="pipe-step">source_model.xml<br><small>zon başına b</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">oq engine<br><small>PSHA run</small></div>
+      <div class="pipe-step">oq engine<br><small>PSHA</small></div>
       <div class="pipe-arrow">→</div>
-      <div class="pipe-step">Hazard curves<br><small>PGA, Sa maps</small></div>
-    </div>
-
-    <div class="info-note">
-      The full PSHA workflow (fault sources, ground-motion models, logic tree) is beyond the scope of the EQ-LiveTürkiye platform. The b-value grid serves as one input to a larger source characterization process following TBDY-2018 (Turkish Building Earthquake Code) or Eurocode 8 frameworks.
+      <div class="pipe-step">Tehlike eğrileri<br><small>PGA, Sa haritaları</small></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 7. LIMITATIONS -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion" data-label="7. Limitations" onclick="toggleAcc(this)">
-    <span>⚠️ 7. Limitations and Future Work</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 7. KISITLAR -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="7. Kısıtlar ve Gelecek Çalışmalar" onclick="toggleAcc(this)">
+    <span>⚠️ 7. Kısıtlar ve Gelecek Çalışmalar</span>
   </div>
   <div class="panel">
     <div class="rec-card">
-      <h4>⚠️ Current Limitations</h4>
+      <h4>⚠️ Mevcut Kısıtlar</h4>
       <ul>
-        <li><strong>No declustering:</strong> Aftershock sequences (e.g., 2023 Kahramanmaraş swarm: ~10 000 events) inflate b-values in affected regions. Gardner-Knopoff (1974) or Reasenberg (1985) declustering not yet applied.</li>
-        <li><strong>Fixed Mc = 3.0:</strong> Local Mc may vary across Turkey. Wiemer & Wyss (2000) MAXC method could provide spatially variable Mc.</li>
-        <li><strong>EMSC only for b-grid:</strong> The pre-1998 ISC record is not used in b-value computation due to heterogeneous completeness. Extending to 1965 (Mc=4.5) could improve coverage in low-seismicity areas.</li>
-        <li><strong>No uncertainty bounds:</strong> b-value confidence intervals (Shi & Bolt 1982) are computed but not yet displayed on the map.</li>
-        <li><strong>Static grid:</strong> The b-value grid is pre-computed; the platform does not yet update it automatically when new EMSC data arrives.</li>
+        <li><strong>Kümeleme giderme yok:</strong> Artçı şok sürgünleri (örn. 2023 Kahramanmaraş: ~10 000 olay) etkilenen bölgelerde b-değerlerini şişirir. Gardner-Knopoff (1974) veya Reasenberg (1985) henüz uygulanmadı.</li>
+        <li><strong>Sabit M<sub>c</sub>=3.0:</strong> Yerel M<sub>c</sub>, Türkiye genelinde değişkenlik gösterebilir. Wiemer & Wyss (2000) MAXC yöntemi konumsal değişken M<sub>c</sub> sağlayabilir.</li>
+        <li><strong>Belirsizlik sınırı yok:</strong> Shi & Bolt (1982) b-değeri güven aralıkları henüz haritada gösterilmemektedir.</li>
+        <li><strong>Statik ızgara:</strong> b-değeri ızgarası önceden hesaplanmıştır; yeni EMSC verileri geldiğinde otomatik güncelleme yapılmamaktadır.</li>
       </ul>
     </div>
-
     <div class="conclusion-card">
-      <h4>✅ Planned Improvements</h4>
+      <h4>✅ Tamamlanan İyileştirmeler</h4>
       <ul>
-        <li>Gardner-Knopoff declustering for mainshock-only catalog</li>
-        <li>MAXC spatially variable Mc mapping</li>
-        <li>Shi & Bolt (1982) uncertainty bounds on b-value display</li>
-        <li>Automated catalog update via GitHub Actions (monthly refresh)</li>
-        <li>OpenQuake source model XML export script</li>
+        <li><strong>Canvas IDW → Delaunay Triangülasyon:</strong> scipy <code>LinearNDInterpolator</code> ile Surfer-eşdeğer sürekli yüzey; N&lt;50 alanlar şeffaf</li>
+        <li><strong>Renk skalası kalibrasyonu:</strong> Türkiye medyan b=1.15'e göre 0.7–1.3 aralığı; NAF/DAFZ kırmızı, Ege genişlemeli kuşağı yeşil</li>
+        <li><strong>Topografya katmanı:</strong> ESRI World Hillshade + Shaded Relief toggle; arazi-sismik ilişkisi görsel olarak değerlendirilebilir</li>
+      </ul>
+      <h4 style="margin-top:10px;">🔜 Planlanan İyileştirmeler</h4>
+      <ul>
+        <li>Gardner-Knopoff kümeleme giderme (yalnız ana şok kataloğu)</li>
+        <li>MAXC konumsal değişken M<sub>c</sub> haritalama</li>
+        <li>Shi & Bolt (1982) b-değeri güven aralığı gösterimi</li>
+        <li>Grassberger-Procaccia fraktal boyut (D<sub>c</sub>) ızgara haritası</li>
+        <li>GitHub Actions ile otomatik katalog güncelleme (aylık yenileme)</li>
+        <li>OpenQuake kaynak modeli XML dışa aktarım betiği</li>
       </ul>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <!-- 8. REFERENCES -->
-  <!-- ══════════════════════════════════════════════════════════ -->
-  <div class="accordion" data-label="8. References" onclick="toggleAcc(this)">
-    <span>📖 8. References</span>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- 8. KAYNAKLAR -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="accordion" data-label="8. Kaynaklar" onclick="toggleAcc(this)">
+    <span>📖 8. Kaynaklar</span>
   </div>
   <div class="panel">
     <div class="review-ref-item">Aki, K. (1965). Maximum likelihood estimate of b in the formula log N = a − bM and its confidence limits. <em>Bulletin of the Earthquake Research Institute</em>, 43, 237–239.</div>
     <div class="review-ref-item">Gardner, J. K. & Knopoff, L. (1974). Is the sequence of earthquakes in Southern California, with aftershocks removed, Poissonian? <em>Bulletin of the Seismological Society of America</em>, 64(5), 1363–1367.</div>
-    <div class="review-ref-item">GEM Foundation (2023). OpenQuake Engine — Open-source seismic hazard and risk assessment. <a href="https://github.com/gem/oq-engine" target="_blank">github.com/gem/oq-engine</a></div>
+    <div class="review-ref-item">GEM Foundation (2023). OpenQuake Engine. <a href="https://github.com/gem/oq-engine" target="_blank">github.com/gem/oq-engine</a></div>
     <div class="review-ref-item">Gutenberg, B. & Richter, C. F. (1944). Frequency of earthquakes in California. <em>Bulletin of the Seismological Society of America</em>, 34(4), 185–188.</div>
-    <div class="review-ref-item">ISC — International Seismological Centre. Bulletin. <a href="http://www.isc.ac.uk" target="_blank">isc.ac.uk</a></div>
-    <div class="review-ref-item">EMSC — European Mediterranean Seismological Centre. <a href="https://www.seismicportal.eu" target="_blank">seismicportal.eu</a></div>
+    <div class="review-ref-item">ISC — International Seismological Centre. FDSN Web Service. <a href="http://www.isc.ac.uk/fdsnws/event/1/" target="_blank">isc.ac.uk/fdsnws/event/1/</a></div>
+    <div class="review-ref-item">EMSC — European Mediterranean Seismological Centre. FDSN Web Service. <a href="https://www.seismicportal.eu/fdsnws/event/1/" target="_blank">seismicportal.eu/fdsnws/event/1/</a></div>
     <div class="review-ref-item">Öncel, A. O. & Wyss, M. (2000). The major asperities of the 1999 Mw 7.4 İzmit earthquake defined by the microseismicity of the two decades before it. <em>Geophysical Journal International</em>, 143(2), 501–506.</div>
     <div class="review-ref-item">Reasenberg, P. (1985). Second-order moment of central California seismicity, 1969–1982. <em>Journal of Geophysical Research</em>, 90(B7), 5479–5495.</div>
     <div class="review-ref-item">Scordilis, E. M. (2006). Empirical global relations converting Ms and mb to moment magnitude. <em>Journal of Seismology</em>, 10(2), 225–236.</div>
     <div class="review-ref-item">Shi, Y. & Bolt, B. A. (1982). The standard error of the magnitude-frequency b value. <em>Bulletin of the Seismological Society of America</em>, 72(5), 1677–1687.</div>
     <div class="review-ref-item">Utsu, T. (1966). A statistical significance test of the difference in b-value between two earthquake groups. <em>Journal of Physics of the Earth</em>, 14(2), 37–40.</div>
-    <div class="review-ref-item">Wiemer, S. & Wyss, M. (2000). Minimum magnitude of completeness in earthquake catalogs: examples from Alaska, the western United States, and Japan. <em>Bulletin of the Seismological Society of America</em>, 90(4), 859–869.</div>
-    <div class="review-ref-item">Woessner, J. & Wiemer, S. (2005). Assessing the quality of earthquake catalogues: estimating the magnitude of completeness and its uncertainty. <em>Bulletin of the Seismological Society of America</em>, 95(2), 684–698.</div>
+    <div class="review-ref-item">Wiemer, S. & Wyss, M. (2000). Minimum magnitude of completeness in earthquake catalogs. <em>Bulletin of the Seismological Society of America</em>, 90(4), 859–869.</div>
+    <div class="review-ref-item">Woessner, J. & Wiemer, S. (2005). Assessing the quality of earthquake catalogues. <em>Bulletin of the Seismological Society of America</em>, 95(2), 684–698.</div>
   </div>
 
   <div class="report-footer">
-    SeismoReport 2026 · Prof. Dr. Ali Osman Öncel · Istanbul University–Cerrahpaşa · Geophysical Engineering<br>
-    Platform: <a href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" style="color:#64b5f6;" target="_blank">aliosmanoncel.github.io/EQ-LiveTurkiye</a> ·
-    Repository: <a href="https://github.com/aliosmanoncel/EQ-LiveTurkiye" style="color:#64b5f6;" target="_blank">github.com/aliosmanoncel/EQ-LiveTurkiye</a><br>
-    Data: ISC (1900–1997) + EMSC (1998–2026) · Method: Aki (1965) + Utsu (1966) + Öncel &amp; Wyss (2000) · Scordilis (2006) Mw
+    SeismoReport 2026 · Prof. Dr. Ali Osman Öncel · İstanbul Üniversitesi–Cerrahpaşa · Jeofizik Mühendisliği<br>
+    <a href="https://aliosmanoncel.github.io/EQ-LiveTurkiye/" style="color:#64b5f6;" target="_blank">aliosmanoncel.github.io/EQ-LiveTurkiye</a> ·
+    <a href="https://github.com/aliosmanoncel/EQ-LiveTurkiye" style="color:#64b5f6;" target="_blank">github.com/aliosmanoncel/EQ-LiveTurkiye</a>
   </div>
 
 </div>
 
 <script>
 function toggleAcc(el){
-  const panel = el.nextElementSibling;
   el.classList.toggle('active');
-  panel.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
 }
 
-// ── b-value map ──────────────────────────────────────────────────
 const BVALUE_URL = 'https://raw.githubusercontent.com/aliosmanoncel/EQ-LiveTurkiye/main/data/bvalue_grid.json';
-
-const map = L.map('bvalue-map', { center:[38.5,35.0], zoom:6 });
-
+const map = L.map('bvalue-map',{center:[38.5,35.0],zoom:6});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
-  attribution:'© OpenStreetMap © CARTO', subdomains:'abcd', maxZoom:19
+  attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
 }).addTo(map);
 
 function bColor(b){
-  const t = Math.max(0, Math.min(1,(b-0.5)/1.0));
-  if(t<0.5){
-    const g=Math.round(48+(233-48)*(t/0.5));
-    return `rgb(215,${g},39)`;
-  } else {
-    const r=Math.round(233-(233-26)*((t-0.5)/0.5));
-    const g=Math.round(215+(152-215)*((t-0.5)/0.5));
-    const bl=Math.round(39+(80-39)*((t-0.5)/0.5));
-    return `rgb(${r},${g},${bl})`;
-  }
+  const t=Math.max(0,Math.min(1,(b-0.5)/1.0));
+  if(t<0.5){const g=Math.round(48+(233-48)*(t/0.5));return `rgb(215,${g},39)`;}
+  const r=Math.round(233-(233-26)*((t-0.5)/0.5));
+  const g=Math.round(215+(152-215)*((t-0.5)/0.5));
+  const bl=Math.round(39+(80-39)*((t-0.5)/0.5));
+  return `rgb(${r},${g},${bl})`;
 }
-
-let bLayer=null, bData=null;
-
+let bLayer=null,bData=null;
 function buildLayer(){
-  if(!bData) return;
+  if(!bData)return;
   if(bLayer){map.removeLayer(bLayer);bLayer=null;}
   const z=map.getZoom();
   const step=z>=8?1:z>=6?3:6;
@@ -561,14 +530,11 @@ function buildLayer(){
     )
   ).addTo(map);
 }
-
 fetch(BVALUE_URL).then(r=>r.json()).then(d=>{
-  bData=d;
-  buildLayer();
-  map.on('zoomend',buildLayer);
+  bData=d; buildLayer(); map.on('zoomend',buildLayer);
 }).catch(e=>{
   document.getElementById('bvalue-map').innerHTML=
-    `<div style="padding:20px;color:#f5576c;">Map data unavailable: ${e.message}</div>`;
+    `<div style="padding:20px;color:#f5576c;">Harita yüklenemedi: ${e.message}</div>`;
 });
 </script>
 </body>

@@ -1,0 +1,31 @@
+{
+  "EQ1_magnitude"   : "7.2",
+  "EQ1_region"      : "YARACUY, VENEZUELA",
+  "EQ1_time_utc"    : "2026-06-24 22:04:32.7 UTC",
+  "EQ1_time_local"  : "18:04:32.7 (UTC−4)",
+  "EQ1_lat"         : "10.481",
+  "EQ1_lon"         : "-68.475",
+  "EQ1_depth_km"    : "10",
+  "EQ1_city1"       : "62 km WNW of Valencia (nüf: 1,619,000)",
+  "EQ1_city2"       : "33 km NE of San Felipe (nüf: 206,000)",
+  "EQ1_role"        : "Öncü Deprem (Foreshock)",
+
+  "EQ2_magnitude"   : "7.5",
+  "EQ2_region"      : "CARABOBO, VENEZUELA",
+  "EQ2_time_utc"    : "2026-06-24 22:05:11.5 UTC",
+  "EQ2_time_local"  : "18:05:11.5 (UTC−4)",
+  "EQ2_lat"         : "10.445",
+  "EQ2_lon"         : "-68.378",
+  "EQ2_depth_km"    : "10",
+  "EQ2_city1"       : "40 km WSW of Puerto Cabello (nüf: 174,000)",
+  "EQ2_city2"       : "20 km WSW of Morón (nüf: 68,000)",
+  "EQ2_role"        : "Ana Deprem (Mainshock)",
+
+  "delta_t_sec"     : "38.8",
+  "epicenter_dist_km": "11.3",
+  "p_wave_travel_s" : "1.9",
+  "energy_ratio"    : "2.8",
+  "bath_law_M"      : "6.3",
+
+  "FILENAME"        : "SeismoReport-2026-Venezuela-Doublet-Mw72-75"
+}

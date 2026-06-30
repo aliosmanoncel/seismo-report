@@ -179,21 +179,50 @@ Kullanim: generate.py tarafindan otomatik doldurulur — bu dosyaya dokunma
 
   function buildBodyHTML(){
     const accMap={};
-    document.querySelectorAll(".accordion").forEach(acc=>{const num=acc.getAttribute("data-num")||"";accMap[num]=acc;});
+    const accOrder=[];
+    document.querySelectorAll(".accordion").forEach(acc=>{
+      const num=acc.getAttribute("data-num")||"";
+      accMap[num]=acc;
+      accOrder.push(num);
+    });
     function buildSection(acc){
       const panel=acc.nextElementSibling;
       if(!panel||!panel.classList.contains("panel"))return"";
       const clone=panel.cloneNode(true);
-      clone.querySelectorAll("script,style,.no-export,iframe,.export-toolbar").forEach(el=>el.remove());
-      clone.querySelectorAll("div[id^='map']").forEach(div=>{const ph=document.createElement("p");ph.style.cssText="font-size:9pt;color:#555;font-style:italic;border:1pt solid #aaa;padding:8pt;text-align:center;";ph.textContent=`Etkilesimli harita (${div.id}) — PDF gorunumunde mevcut degil.`;div.parentNode.replaceChild(ph,div);});
+      clone.querySelectorAll("script,style,.no-export,iframe,.export-toolbar,button").forEach(el=>el.remove());
+      clone.querySelectorAll("div[id^='map']").forEach(div=>{
+        const ph=document.createElement("p");
+        ph.style.cssText="font-size:9pt;color:#555;font-style:italic;border:1pt solid #aaa;padding:8pt;text-align:center;";
+        ph.textContent=`Etkilesimli harita (${div.id}) — PDF gorunumunde mevcut degil.`;
+        div.parentNode.replaceChild(ph,div);
+      });
       clone.querySelectorAll(".map-ph").forEach(el=>el.remove());
-      clone.querySelectorAll("[style]").forEach(el=>{let s=el.getAttribute("style")||"";s=s.replace(/background(-color)?\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"");s=s.replace(/color\s*:\s*#[7-9a-f][0-9a-f]{2,5}\b[^;]*;?/gi,"color:#111;");s=s.replace(/color\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"color:#111;");s=s.replace(/color\s*:\s*var\(--[^)]+\)[^;]*;?/gi,"color:#000;");el.setAttribute("style",s.trim());});
+      clone.querySelectorAll("[style]").forEach(el=>{
+        let s=el.getAttribute("style")||"";
+        s=s.replace(/background(-color)?\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"");
+        s=s.replace(/color\s*:\s*#[7-9a-f][0-9a-f]{2,5}\b[^;]*;?/gi,"color:#111;");
+        s=s.replace(/color\s*:\s*rgba\([^)]+\)[^;]*;?/gi,"color:#111;");
+        s=s.replace(/color\s*:\s*var\(--[^)]+\)[^;]*;?/gi,"color:#000;");
+        el.setAttribute("style",s.trim());
+      });
       return clone.innerHTML;
     }
+    // Review article first (data-num="7." is the main article by convention)
     let body="";
-    if(accMap["7."])body+=buildSection(accMap["7."]);
-    body+=`<div style="page-break-before:always;text-align:center;padding:60pt 0 40pt;border-top:2pt solid #333;margin-top:30pt;"><p style="font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;color:#666;margin-bottom:8pt;">Supporting Material</p><h2 style="font-size:16pt;font-weight:bold;border:none;margin:0 0 6pt;">APPENDICES</h2></div>`;
-    ["1.","2.","3.","4.","5.","6."].forEach(num=>{if(accMap[num]){const acc=accMap[num];const label=acc.getAttribute("data-label")||"";body+=`<h2>${label}</h2>`+buildSection(acc);}});
+    const mainAcc=accMap["7."];
+    if(mainAcc)body+=buildSection(mainAcc);
+    // Appendices: ALL numbered accordions except "7." (review article), sorted
+    const appendixNums=accOrder.filter(n=>n&&n!=="7.");
+    if(appendixNums.length>0){
+      body+=`<div style="page-break-before:always;text-align:center;padding:60pt 0 40pt;border-top:2pt solid #333;margin-top:30pt;"><p style="font-size:8pt;letter-spacing:0.15em;text-transform:uppercase;color:#666;margin-bottom:8pt;">Supporting Material</p><h2 style="font-size:16pt;font-weight:bold;border:none;margin:0 0 6pt;">APPENDICES</h2></div>`;
+      appendixNums.forEach(num=>{
+        if(accMap[num]){
+          const acc=accMap[num];
+          const label=acc.getAttribute("data-label")||acc.textContent.trim().slice(0,80);
+          body+=`<h2 style="font-size:12pt;border-bottom:1.5pt solid #333;margin:18pt 0 8pt;">${label}</h2>`+buildSection(acc);
+        }
+      });
+    }
     return body;
   }
 
@@ -224,8 +253,19 @@ ol,ul{margin:6pt 0 8pt 18pt;}li{margin-bottom:4pt;text-align:justify;}
 .review-table td{border:0.5pt solid #999;}
 .figure-caption{font-size:9pt;font-style:italic;color:#555;}
 .leaflet-container,.map-ph{display:none !important;}
+.doublet-pair{display:grid;grid-template-columns:1fr 1fr;gap:12pt;}
+.eq-card-fore,.eq-card-main{border:1pt solid #999;padding:8pt 10pt;background:#f8f8f8;}
+.eq-label{font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;}
+.eq-mag{font-size:22pt;font-weight:bold;}
+.info-note[style*="border-left:3px solid #f59e0b"]{background:#fff8e1;border-left:3pt solid #b45309;}
+.info-note[style*="border-left:3px solid #3b82f6"]{background:#eff6ff;border-left:3pt solid #1d4ed8;}
+.analysis-card[style*="border-left:4px solid #8b5cf6"]{background:#f5f3ff;border-left:3pt solid #6d28d9;}
+.rec-card[style*="border-left:4px solid #ef4444"]{background:#fff5f5;border-left:3pt solid #CC2200;}
+.method-card[style*="border-left:4px solid #f97316"]{background:#fffbe8;border-left:3pt solid #AA7700;}
 [style*="background:rgba"]{background:#f8f8f8 !important;}
 [style*="color:var(--accent)"]{color:#1a4a8a !important;}
+/* Uncertainty note */
+.info-note[style*="border-left:3px solid #64748b"]{background:#f8fafc;border-left:3pt solid #475569;}
 </style></head><body>
 <div class="print-bar"><div><strong>📄 ${CONFIG.docTitle} — Akademik Belge</strong><br><span style="font-size:11px;color:#94a3b8;">Kagit:A4 · Baski: Ctrl+P</span></div><button class="btn-p" onclick="window.print()">🖨️ Yazdir / PDF Kaydet</button></div>
 <div class="doc-wrap">

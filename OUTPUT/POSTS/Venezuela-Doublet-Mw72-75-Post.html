@@ -1,0 +1,415 @@
+﻿<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+#ep-wrap {
+  --ep-bg:#0d1117; --ep-text:#e2e8f0; --ep-panel:#111827; --ep-muted:#7c9cbd;
+  --ep-accent:#e11d48; --ep-accent2:#f59e0b; --ep-accent3:#a78bfa;
+  --ep-glass:rgba(255,255,255,.03); --ep-border:rgba(255,255,255,.08);
+  font-family:'DM Sans',sans-serif;
+  background:var(--ep-bg);
+  color:var(--ep-text);
+  line-height:1.8;
+  text-align:justify;
+  max-width:780px;
+  margin:0 auto;
+  padding:24px 24px 60px;
+  transition:background .4s,color .4s;
+}
+#ep-wrap[data-theme="light"] {
+  --ep-bg:#f0f4f8; --ep-text:#1a202c; --ep-panel:#ffffff; --ep-muted:#4a6280;
+  --ep-accent:#c41535; --ep-accent2:#b45309; --ep-accent3:#7c3aed;
+  --ep-glass:rgba(0,0,0,.02); --ep-border:rgba(0,0,0,.1);
+}
+#ep-wrap * { box-sizing:border-box; }
+#ep-wrap .ep-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 0 20px;border-bottom:1px solid var(--ep-border);margin-bottom:28px;}
+#ep-wrap .ep-badge{background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));padding:5px 14px;border-radius:100px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;color:#fff;letter-spacing:.08em;text-transform:uppercase;}
+#ep-wrap .ep-brand-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--ep-text);margin-top:5px;}
+#ep-wrap .ep-brand-sub{font-size:.78rem;color:var(--ep-muted);}
+#ep-wrap .ep-theme-btn{border:1px solid var(--ep-border);padding:7px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;background:var(--ep-glass);color:var(--ep-text);transition:all .2s;}
+#ep-wrap .ep-theme-btn:hover{border-color:var(--ep-accent);color:var(--ep-accent);}
+#ep-wrap .ep-hero{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(225,29,72,.22),transparent 70%),linear-gradient(135deg,#070c18,#0d1525);border-radius:20px;padding:44px 32px;text-align:center;margin-bottom:28px;border:1px solid var(--ep-border);overflow:hidden;}
+#ep-wrap .ep-hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(225,29,72,.1);border:1px solid rgba(225,29,72,.25);padding:5px 14px;border-radius:100px;font-size:.78rem;color:var(--ep-accent);margin-bottom:18px;font-weight:600;}
+#ep-wrap .ep-hero h1{font-family:'Syne',sans-serif;font-size:2.1rem;font-weight:800;line-height:1.15;margin-bottom:12px;text-wrap:balance;}
+#ep-wrap .ep-hero h1 span{background:linear-gradient(90deg,var(--ep-accent),var(--ep-accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+#ep-wrap .ep-hero .ep-lead{font-size:1rem;color:var(--ep-muted);max-width:560px;margin:0 auto 20px;}
+#ep-wrap .ep-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
+#ep-wrap .ep-pill{padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:600;border:1px solid var(--ep-border);color:var(--ep-muted);background:var(--ep-glass);}
+#ep-wrap .ep-meta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 20px;font-size:.8rem;color:var(--ep-muted);}
+#ep-wrap .ep-summary{background:linear-gradient(135deg,rgba(225,29,72,.1),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.25);border-radius:16px;padding:24px 24px 24px 70px;margin:24px 0;position:relative;}
+#ep-wrap .ep-summary::before{content:"🌍";font-size:1.8rem;position:absolute;top:20px;left:20px;}
+#ep-wrap .ep-summary h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--ep-accent);margin-bottom:10px;}
+#ep-wrap .ep-summary p{font-size:.92rem;font-style:italic;color:var(--ep-text);opacity:.88;margin-bottom:8px;}
+#ep-wrap .ep-summary .ep-note{font-size:.78rem;color:var(--ep-muted);font-style:normal;}
+#ep-wrap .ep-section{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--ep-accent);margin:32px 0 14px;display:flex;align-items:center;gap:10px;border-bottom:2px solid rgba(225,29,72,.2);padding-bottom:8px;}
+#ep-wrap .ep-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0;}
+#ep-wrap .ep-card{background:var(--ep-panel);border:1px solid var(--ep-border);border-radius:14px;padding:18px;transition:border-color .2s,transform .2s;}
+#ep-wrap .ep-card:hover{border-color:var(--ep-accent);transform:translateY(-2px);}
+#ep-wrap .ep-card .ep-icon{font-size:1.6rem;margin-bottom:10px;}
+#ep-wrap .ep-card h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:6px;color:var(--ep-accent);}
+#ep-wrap .ep-card p{font-size:.82rem;opacity:.72;line-height:1.6;}
+#ep-wrap .ep-steps{display:flex;flex-direction:column;margin:20px 0;}
+#ep-wrap .ep-step{display:flex;gap:16px;align-items:flex-start;padding:18px;background:var(--ep-panel);border:1px solid var(--ep-border);}
+#ep-wrap .ep-step:first-child{border-radius:14px 14px 0 0;}
+#ep-wrap .ep-step:last-child{border-radius:0 0 14px 14px;}
+#ep-wrap .ep-step-num{width:40px;height:40px;border-radius:50%;background:var(--ep-accent);color:#fff;font-weight:700;font-family:'Syne',sans-serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#ep-wrap .ep-step-body h4{margin:0 0 4px;color:var(--ep-accent);font-family:'Syne',sans-serif;font-size:.9rem;}
+#ep-wrap .ep-step-body p{margin:0;font-size:.88rem;opacity:.8;}
+#ep-wrap .ep-connector{width:2px;background:rgba(225,29,72,.3);height:20px;margin-left:19px;}
+#ep-wrap .ep-quote{border-left:3px solid var(--ep-accent2);padding:14px 20px;margin:20px 0;background:rgba(245,158,11,.05);border-radius:0 12px 12px 0;font-style:italic;font-size:.96rem;}
+#ep-wrap .ep-quote cite{display:block;margin-top:8px;font-style:normal;font-size:.78rem;color:var(--ep-muted);}
+#ep-wrap .ep-box{border-radius:14px;padding:18px 22px;margin:20px 0;font-size:.92rem;}
+#ep-wrap .ep-box-red{background:rgba(225,29,72,.07);border:1px solid rgba(225,29,72,.2);}
+#ep-wrap .ep-box-red strong{color:var(--ep-accent);}
+#ep-wrap .ep-box-gold{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);}
+#ep-wrap .ep-box-gold strong{color:#c9a84c;}
+#ep-wrap .ep-box-green{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);}
+#ep-wrap .ep-box-green strong{color:#22c55e;}
+#ep-wrap .ep-think{background:rgba(167,139,250,.08);border-left:4px solid var(--ep-accent3);padding:16px 18px 16px 60px;border-radius:12px;margin:24px 0;font-style:italic;position:relative;font-size:.92rem;}
+#ep-wrap .ep-think::before{content:"💡";font-size:1.6rem;position:absolute;top:14px;left:14px;}
+#ep-wrap .ep-think strong{display:block;margin-bottom:6px;font-style:normal;color:var(--ep-accent3);}
+#ep-wrap .ep-tags{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0 0;}
+#ep-wrap .ep-tag{padding:6px 16px;border-radius:100px;font-size:.78rem;font-weight:600;border:1px solid var(--ep-border);color:var(--ep-muted);background:var(--ep-glass);}
+#ep-wrap .ep-divider{height:1px;background:linear-gradient(90deg,transparent,var(--ep-border),transparent);margin:28px 0;}
+#ep-wrap .ep-p{font-size:.96rem;line-height:1.9;margin:16px 0;opacity:.9;}
+#ep-wrap .ep-kw{color:var(--ep-accent2);font-weight:600;}
+#ep-wrap .ep-kw2{color:var(--ep-accent3);font-weight:600;}
+#ep-wrap .ep-cta{text-align:center;margin:36px 0 16px;}
+#ep-wrap .ep-cta-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));color:#fff;border:none;padding:16px 36px;border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;box-shadow:0 8px 28px rgba(225,29,72,.35);transition:opacity .2s,transform .2s;}
+#ep-wrap .ep-cta-btn:hover{opacity:.88;transform:translateY(-2px);}
+#ep-wrap .ep-cta-sub{font-size:.8rem;color:var(--ep-muted);margin-top:10px;}
+#ep-wrap .ep-author{display:flex;align-items:center;gap:18px;background:var(--ep-panel);border:1px solid var(--ep-border);border-radius:16px;padding:20px 24px;margin:28px 0;flex-wrap:wrap;}
+#ep-wrap .ep-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ep-accent),var(--ep-accent2));display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+#ep-wrap .ep-author-info{flex:1;min-width:180px;}
+#ep-wrap .ep-author-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--ep-text);margin-bottom:3px;}
+#ep-wrap .ep-author-role{font-size:.78rem;color:var(--ep-accent);margin-bottom:5px;}
+#ep-wrap .ep-author-bio{font-size:.8rem;color:var(--ep-muted);line-height:1.6;}
+#ep-wrap .ep-share{margin:28px 0 0;}
+#ep-wrap .ep-share-label{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ep-muted);margin-bottom:10px;}
+#ep-wrap .ep-share-btns{display:flex;flex-wrap:wrap;gap:9px;}
+#ep-wrap .ep-share-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:100px;font-family:'Syne',sans-serif;font-size:.76rem;font-weight:700;cursor:pointer;text-decoration:none;border:1px solid var(--ep-border);background:var(--ep-glass);color:var(--ep-text);transition:all .2s;}
+#ep-wrap .ep-share-btn:hover{transform:translateY(-2px);}
+#ep-wrap .ep-tw{border-color:rgba(29,161,242,.35);color:#1da1f2;}
+#ep-wrap .ep-wa{border-color:rgba(37,211,102,.35);color:#25d366;}
+#ep-wrap .ep-cp{border-color:rgba(167,139,250,.35);color:var(--ep-accent3);}
+#ep-wrap .ep-ml{border-color:rgba(225,29,72,.35);color:var(--ep-accent);}
+#ep-wrap .ep-footer{text-align:center;padding:24px 0 0;color:var(--ep-muted);font-size:.82rem;border-top:1px solid var(--ep-border);}
+#ep-wrap .ep-footer strong{color:var(--ep-accent);}
+#ep-wrap .ep-fig{margin:20px 0;}
+#ep-wrap .ep-fig img{width:100%;border-radius:12px;border:1px solid var(--ep-border);}
+#ep-wrap .ep-fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;}
+#ep-wrap .ep-figcap{font-size:.76rem;color:var(--ep-muted);margin-top:7px;font-style:italic;text-align:center;}
+#ep-wrap .ep-wit{background:rgba(245,158,11,.06);border-left:3px solid var(--ep-accent2);border-radius:0 10px 10px 0;padding:12px 16px;margin:10px 0;font-size:.88rem;}
+#ep-wrap .ep-wit-loc{font-size:.72rem;color:var(--ep-muted);margin-top:4px;}
+@media(max-width:600px){
+  #ep-wrap .ep-hero h1{font-size:1.55rem;}
+  #ep-wrap .ep-hero{padding:32px 20px;}
+  #ep-wrap .ep-author{flex-direction:column;text-align:center;}
+  #ep-wrap .ep-cards{grid-template-columns:1fr;}
+  #ep-wrap .ep-fig-2col{grid-template-columns:1fr;}
+}
+</style>
+
+<div id="ep-wrap">
+
+<!-- GOOGLE TRANSLATE -->
+<div style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+  <div id="google_translate_element"></div>
+  <span style="font-size:0.72rem;color:#7a9ab5;">🌍 Auto-translated · Change language above</span>
+</div>
+<script type="text/javascript">
+(function(){
+  function setCookie(n,v,d){var e=new Date();e.setTime(e.getTime()+(d*864e5));document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/';}
+  if(document.cookie.indexOf('googtrans')===-1){setCookie('googtrans','/tr/en',1);}
+})();
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({pageLanguage:'tr',includedLanguages:'en,tr,es,de,fr,ar,ru,pt',layout:google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay:true},'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- HEADER -->
+<div class="ep-header">
+  <div>
+    <div class="ep-badge">Earthquake Doublet · June 2026</div>
+    <div class="ep-brand-title">⚡ Venezuela Mw 7.2 + 7.5 — Twin Rupture</div>
+    <div class="ep-brand-sub">Caribbean–South American Plate Boundary · <span style="opacity:.6;">24 June 2026, 22:04–22:05 UTC</span></div>
+  </div>
+  <button class="ep-theme-btn" id="ep-theme-btn"><span id="ep-theme-icon">🌙</span> Theme</button>
+</div>
+
+<!-- HERO -->
+<div class="ep-hero">
+  <div class="ep-hero-tag">🌎 Seismological Analysis · 24 June 2026</div>
+  <h1>The 24 June 2026 Venezuela <span>Earthquake Doublet</span></h1>
+  <p class="ep-lead">Two M7+ earthquakes struck 38.8 seconds apart and only 11.3 km away from each other — a rare seismic doublet at the Caribbean–South American plate boundary.</p>
+  <div class="ep-pills">
+    <span class="ep-pill">🌏 Venezuela</span>
+    <span class="ep-pill">⚡ Mw 7.2 + 7.5</span>
+    <span class="ep-pill">⏱ 38.8 sec apart</span>
+    <span class="ep-pill">📏 11.3 km separation</span>
+    <span class="ep-pill">🔴 Doublet</span>
+    <span class="ep-pill">📐 Bath's Law</span>
+    <span class="ep-pill">🏙 Caracas basin effect</span>
+  </div>
+</div>
+
+<!-- META -->
+<div class="ep-meta-row">
+  <span>📅 24 June 2026</span>
+  <span>⏱️ ~7 min read</span>
+  <span>✍️ Seismological Analysis</span>
+  <span>📡 SeismoReport v3.1</span>
+</div>
+
+<!-- ÖZET -->
+<div class="ep-summary">
+  <h3>Key Finding</h3>
+  <p>On 24 June 2026 at 18:04 local time, a Mw 7.2 earthquake struck Yaracuy, Venezuela. Just 38.8 seconds later, a Mw 7.5 struck 11.3 km to the southeast in Carabobo. Multi-agency moment tensor solutions show nearly identical right-lateral strike-slip beach balls for both events — the hallmark of a <strong>seismic doublet</strong>, not a classic foreshock–mainshock pair. Bath's Law magnitude gap of only ΔMw=0.3 (expected: 1.2) confirms this classification.</p>
+  <p class="ep-note">📍 Full SeismoReport including EMSC seismicity maps, intensity–distance curves, macroseismic testimonies and moment tensors available via the full report link below.</p>
+</div>
+
+<!-- STAT CARDS -->
+<table style="width:100%;border-collapse:separate;border-spacing:10px;margin:24px 0;table-layout:fixed;">
+  <tr>
+    <td style="background:linear-gradient(135deg,rgba(245,166,35,.12),rgba(245,166,35,.03));border:1px solid rgba(245,166,35,.3);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
+      <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#f5a623;line-height:1.2;">Mw 7.2</div>
+      <div style="font-size:.76rem;color:#7c9cbd;margin-top:6px;">⚡ Foreshock — 22:04:32 UTC</div>
+      <div style="font-size:.68rem;color:#7c9cbd;opacity:.75;margin-top:3px;">Yaracuy · 10 km depth · EMSC reviewed</div>
+    </td>
+    <td style="background:linear-gradient(135deg,rgba(225,29,72,.12),rgba(225,29,72,.03));border:1px solid rgba(225,29,72,.3);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
+      <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#e11d48;line-height:1.2;">Mw 7.5</div>
+      <div style="font-size:.76rem;color:#7c9cbd;margin-top:6px;">🔴 Mainshock — 22:05:11 UTC</div>
+      <div style="font-size:.68rem;color:#fca5a5;opacity:.9;margin-top:3px;">Carabobo · 10 km depth · EMSC reviewed</div>
+    </td>
+  </tr>
+  <tr>
+    <td style="background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(167,139,250,.02));border:1px solid rgba(167,139,250,.25);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
+      <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#a78bfa;line-height:1.2;">38.8 s</div>
+      <div style="font-size:.76rem;color:#7c9cbd;margin-top:6px;">Time separation (Δt)</div>
+      <div style="font-size:.68rem;color:#7c9cbd;opacity:.75;margin-top:3px;">Dynamic triggering delay ~37 s after P-wave</div>
+    </td>
+    <td style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(34,197,94,.02));border:1px solid rgba(34,197,94,.25);border-radius:14px;padding:18px 12px;text-align:center;vertical-align:top;">
+      <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#22c55e;line-height:1.2;">ΔMw 0.3</div>
+      <div style="font-size:.76rem;color:#7c9cbd;margin-top:6px;">Magnitude gap (Bath's Law: 1.2)</div>
+      <div style="font-size:.68rem;color:#86efac;opacity:.9;margin-top:3px;">→ Doublet · Expected largest aftershock: M6.3</div>
+    </td>
+  </tr>
+</table>
+
+<div class="ep-divider"></div>
+
+<!-- STEPS -->
+<div class="ep-section">🔬 Three Critical Dimensions of This Doublet</div>
+<div class="ep-steps">
+  <div class="ep-step">
+    <div class="ep-step-num">01</div>
+    <div class="ep-step-body">
+      <h4>Doublet Classification — Bath's Law Test</h4>
+      <p>Bath's Law states the largest aftershock is typically 1.2 Mw below the mainshock. Here the gap is only 0.3 Mw. Multi-agency solutions (CPPT, AUST: Mw 7.5; SC4: Mw 7.6 for the "foreshock") suggest the true magnitude difference may approach zero — the strongest possible evidence for a doublet. The two events likely ruptured adjacent segments of the same Boconó–coastal range fault system.</p>
+    </div>
+  </div>
+  <div class="ep-connector"></div>
+  <div class="ep-step">
+    <div class="ep-step-num">02</div>
+    <div class="ep-step-body">
+      <h4>Identical Moment Tensor Mechanisms</h4>
+      <p>EMSC double-couple MT solutions for both events show nearly identical beach ball geometry: dominant dextral (right-lateral) strike-slip faulting on NE–SW or E–W nodal planes — consistent with the Caribbean–South American plate boundary kinematics (~20 mm/yr eastward motion). Mechanism identity at two epicentres 11.3 km apart is the clearest seismological fingerprint of a doublet rupture.</p>
+    </div>
+  </div>
+  <div class="ep-connector"></div>
+  <div class="ep-step">
+    <div class="ep-step-num">03</div>
+    <div class="ep-step-body">
+      <h4>Caracas Basin Amplification — Non-Monotonic Intensity Anomaly</h4>
+      <p>EMSC DYFI data reveal a striking anomaly: corrected MMI intensity <em>increases</em> from 5.6 at Maracay (72–122 km) to <strong>6.8 at Caracas (122–209 km)</strong> — a +1.2 unit rise despite greater distance. This Quaternary alluvial basin resonance effect (identical to 1967 Caracas M6.5 observations by Seed et al.) places 7.1 million people at disproportionate risk relative to their distance from the epicentre.</p>
+    </div>
+  </div>
+</div>
+
+<div class="ep-divider"></div>
+
+<!-- MOMENT TENSORS -->
+<div class="ep-section">📐 Moment Tensor Solutions — Identical Mechanisms</div>
+<p class="ep-p">EMSC published multi-agency double-couple MT solutions for both events. The nearly identical beach ball geometries — both showing dominant <span class="ep-kw">right-lateral strike-slip</span> faulting — are the most compelling visual proof that the two ruptures share the same fault system.</p>
+
+<div class="ep-fig-2col">
+  <div>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdhCYzZEuE401043ULMaiOpuJ2EUIhhINENgcTkNg8uQv1QSoVm64pvA58qbjPjyfJRUllVSpVzXhAl-Nia9zoQiPI7yv2RkmcT7gNKg6w7O7HaVtT0WHAabrf_k-jzkZ7UqDqPufg_Zqa2KzuT9RYGTr2EOpHut1CYTZTinRCCMHBnJPUkDxS0L1bWRo/s600/moment76.jpg" alt="Mw 7.2 Foreshock MT" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+    <div class="ep-figcap"><strong>Fig. 1 — Mw 7.2 Foreshock (22:04 UTC)</strong><br>NEIC: 7.2 · CPPT: 7.5 · GFZ: 7.3 · AUST: 7.5 · SC4: 7.6<br>Dextral strike-slip · Z ≈ 12–16 km</div>
+  </div>
+  <div>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLwkHDSJC8iVHgEN5aA5Y7qf-qgs1RL7aAaqs_i67NKAD9GVH9eXlxOWYDYvX3pMKu7xCobXDiFefNAAZfnNGIDS_IBunALmdEgq8eY5Ojnhr5p1HUuQ6iBSH3kIOgdNflMVYDT3BtmIcTTpdqld5ILOvu3UbXnQ7G_UdnSktvDE22a6qfOlFbPawpEXU/s600/moment75.jpg" alt="Mw 7.5 Mainshock MT" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+    <div class="ep-figcap"><strong>Fig. 2 — Mw 7.5 Mainshock (22:05 UTC)</strong><br>GCMT: 7.5 · GFZ: 7.4 · NEIC: 7.5<br>Nearly identical beach ball · Z ≈ 12–13 km</div>
+  </div>
+</div>
+
+<div class="ep-think">
+  <strong>Why identical mechanisms matter</strong>
+  In a classic foreshock–mainshock pair, the two events may involve stress transfer across different fault planes. When both events show the same focal mechanism at nearly the same depth and just 11 km apart, it strongly indicates <em>the same fault segment or adjacent parallel segments</em> — the defining characteristic of a doublet.
+</div>
+
+<div class="ep-divider"></div>
+
+<!-- INTENSITY DISTANCE -->
+<div class="ep-section">📊 EMSC Intensity–Distance Curves</div>
+<p class="ep-p">EMSC "Did You Feel It?" data from 100+ witnesses across 12 countries reveal a non-standard attenuation pattern for both events, with a pronounced <span class="ep-kw">secondary intensity peak at Caracas</span> despite its greater distance.</p>
+
+<div class="ep-fig-2col">
+  <div>
+    <img src="https://static3.emsc.eu/Images/FELTREPORTS/201/2016533/IntensityDistance.png" alt="M7.2 Intensity-Distance" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+    <div class="ep-figcap"><strong>Fig. 3 — M7.2 Intensity–Distance</strong><br>MMI 5.4–5.8 · Felt to 1,780 km (Manaus, Brazil)<br>Mild Caracas secondary peak (+0.4)</div>
+  </div>
+  <div>
+    <img src="https://static3.emsc.eu/Images/FELTREPORTS/201/2016614/IntensityDistance.png" alt="M7.5 Intensity-Distance" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+    <div class="ep-figcap"><strong>Fig. 4 — M7.5 Intensity–Distance</strong><br>MMI ≥6.7 at Valencia (42–72 km)<br><strong>Caracas: 6.8 vs. Maracay: 5.6 → +1.2 anomaly</strong></div>
+  </div>
+</div>
+
+<div class="ep-box ep-box-red">
+  <strong>⚠️ The Caracas Anomaly:</strong> Standard intensity attenuation predicts a monotonic decrease with distance. For the Mw 7.5, MMI actually <em>increases</em> from 5.6 at 97 km (Maracay) to <strong>6.8 at 160 km (Caracas)</strong>. This +1.2 unit rise reflects ~4× ground motion amplification in the Caracas Quaternary alluvial valley — the same phenomenon documented after the 1967 M6.5 Caracas earthquake (Seed et al. 1972). With 7.1 million people in this basin, it represents the highest aggregate seismic risk from this doublet.
+</div>
+
+<div class="ep-divider"></div>
+
+<!-- BACKGROUND SEISMICITY -->
+<div class="ep-section">🗺️ Background Seismicity — 66 Years of Context</div>
+<p class="ep-p">EMSC background seismicity maps (ISC+EMSC catalogue, 1960–2026, N≈50,000 events M≥3) place the 2026 doublet in its long-term tectonic context.</p>
+
+<div class="ep-fig-2col">
+  <div>
+    <img src="https://static3.emsc.eu/Images/EVID_V2/201/2016/2016533/2016533.wide.seismicity.jpg" alt="M7.2 Background Seismicity" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+    <div class="ep-figcap"><strong>Fig. 5 — M7.2 background seismicity</strong><br>N=50,680 events (M≥3, 1960–2026)<br>Dense yellow belt = plate boundary fault system</div>
+  </div>
+  <div>
+    <img src="https://static3.emsc.eu/Images/EVID_V2/201/2016/2016614/2016614.wide.seismicity.jpg" alt="M7.5 Background Seismicity" style="width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.1);">
+    <div class="ep-figcap"><strong>Fig. 6 — M7.5 background seismicity</strong><br>N=50,313 events · Δ367 = aftershocks in 38.8 s<br>~11 km separation imperceptible at this scale</div>
+  </div>
+</div>
+
+<div class="ep-box ep-box-gold">
+  <strong>66-year catalogue:</strong> The dense <strong>yellow (0–40 km) seismicity band</strong> along Venezuela's northern coast precisely traces the Caribbean–South American plate boundary — the Oca-Ancón, Boconó and El Pilar fault systems. Both 2026 epicentres sit squarely within this belt. The deeper red–purple seismicity to the south marks the subducting Caribbean slab, unrelated to the 2026 shallow doublet. The 367-event difference between the two maps represents aftershocks accumulated in the <strong>38.8 seconds between both ruptures</strong>.
+</div>
+
+<div class="ep-divider"></div>
+
+<!-- WITNESS VOICES -->
+<div class="ep-section">🗣️ Voices from the Field — Selected Testimonies</div>
+<p class="ep-p">Over 100 witnesses across 12 countries/territories reported to EMSC. Because the two events were only 38.8 seconds apart, most people experienced them as a single prolonged shaking sequence. Many reports explicitly note the unusually long duration — the combined surface wave train of two Mw 7+ ruptures.</p>
+
+<div class="ep-wit">"Land was moving under my feet."<div class="ep-wit-loc">📍 Los Rastrojos, Venezuela · 97 km SW · T0+10 min</div></div>
+<div class="ep-wit">"Largo, unos 40 segundos. Movimiento visible en todos los artefactos y muebles. Tuvimos que salir afuera." <span style="font-size:.8em;color:#7c9cbd;">[~40 seconds. Visible movement in all appliances and furniture. We had to go outside.]</span><div class="ep-wit-loc">📍 Los Rastrojos, Venezuela · 98 km SW · T0+15 min</div></div>
+<div class="ep-wit">"Nunca había sentido un terremoto así." <span style="font-size:.8em;color:#7c9cbd;">[I had never felt an earthquake like this.]</span><div class="ep-wit-loc">📍 Maracay, Venezuela · 103 km E · T0+58 min</div></div>
+
+<div class="ep-quote">
+  "Se cayeron edificios cerca de mi vivienda. No hay energía eléctrica."<br>
+  <span style="font-size:.85em;color:#94a3b8;">[Buildings collapsed near my home. No electricity.]</span>
+  <cite>📍 Santa Rita, Venezuela · 107 km E from M7.5 epicentre · T0+174 min ⚠️</cite>
+</div>
+
+<div class="ep-wit">"Estaba en el centro de Caracas, en la Avenida Baralt. Se cayeron paredes, vidrios y ventanas. La mercancía de las tiendas cayó al suelo." <span style="font-size:.8em;color:#7c9cbd;">[Walls, glass and windows fell. Store merchandise fell to the ground. Avenida Baralt, central Caracas.]</span><div class="ep-wit-loc">📍 Caracas · 174 km E · T0+90 min</div></div>
+
+<div class="ep-wit">"Hubo un bajón de electricidad bastante grave diez segundos antes del terremoto y luego todo comenzó a temblar aproximadamente por un minuto. Escuché ruido de fisuras." <span style="font-size:.8em;color:#7c9cbd;">[Serious electricity drop 10 seconds before the earthquake, then ~1 minute of shaking. I heard cracking sounds.]</span><div class="ep-wit-loc">⚡ Barquisimeto · 115 km W · T0+529 min — electricity dip likely caused by Mw 7.2 hitting infrastructure before Mw 7.5 surface waves arrived</div></div>
+
+<div class="ep-wit">"La Guaira es un caos total." <span style="font-size:.8em;color:#7c9cbd;">[La Guaira is total chaos.]</span><div class="ep-wit-loc">⚠️ Caracas/La Guaira · 163 km E · T0+505 min</div></div>
+
+<div class="ep-wit">"Barinas… duró aproximadamente 5 minutos… sonaban las ventanas, materos de barro se movían, los postes y señales de tránsito." <span style="font-size:.8em;color:#7c9cbd;">[Lasted ~5 minutes… windows rattling, pots moving, street poles and signs swaying.]</span><div class="ep-wit-loc">⏱ Alto Barinas · 288 km SW · T0+210 min — 5 min = combined surface wave coda of both M7+ events</div></div>
+
+<div class="ep-wit">"Lustres balançando pelo menos uns 5–10 cm." <span style="font-size:.8em;color:#7c9cbd;">[Chandeliers swinging at least 5–10 cm.]</span><div class="ep-wit-loc">📍 Manaus, Brazil · <strong>1,771 km SE</strong> · T0+78 min ← maximum felt distance</div></div>
+
+<div class="ep-divider"></div>
+
+<!-- KEY FINDINGS -->
+<div class="ep-section">✅ Summary — Five Key Findings</div>
+<div class="ep-cards">
+  <div class="ep-card">
+    <div class="ep-icon">⚡</div>
+    <h4>True Doublet</h4>
+    <p>ΔMw=0.3 (Bath expected 1.2), identical MT mechanisms, 11.3 km separation — not a foreshock–mainshock pair but two equal ruptures on adjacent segments.</p>
+  </div>
+  <div class="ep-card">
+    <div class="ep-icon">📐</div>
+    <h4>Dynamic Triggering</h4>
+    <p>P-wave from Mw 7.2 reached Mw 7.5 epicentre in ~1.9 s. Second rupture initiated ~37 s later — consistent with dynamic Coulomb stress transfer.</p>
+  </div>
+  <div class="ep-card">
+    <div class="ep-icon">🏙️</div>
+    <h4>Caracas Basin Effect</h4>
+    <p>MMI jumps from 5.6 (Maracay, 97 km) to 6.8 (Caracas, 160 km). +1.2 unit increase with distance — Quaternary alluvial valley amplification, 7.1 M people at risk.</p>
+  </div>
+  <div class="ep-card">
+    <div class="ep-icon">🌎</div>
+    <h4>Felt across 12 countries</h4>
+    <p>Bogotá (892 km), Dominican Republic (898 km), Puerto Rico (915 km), Martinique (924 km), Georgetown Guyana (1,207 km), Manaus Brazil (1,771 km).</p>
+  </div>
+  <div class="ep-card">
+    <div class="ep-icon">⚠️</div>
+    <h4>Structural Damage</h4>
+    <p>Building collapses reported at Santa Rita (107 km). Caracas: wall collapses, window breakage, cracks (Avenida Baralt). La Guaira: "total chaos." Power outage confirmed.</p>
+  </div>
+  <div class="ep-card">
+    <div class="ep-icon">🔮</div>
+    <h4>Aftershock Outlook</h4>
+    <p>Bath's Law: largest expected aftershock ≈ M6.3. Omori–Utsu: dozens of M≥5 events in first week. Two rupture zones may generate separate aftershock sequences.</p>
+  </div>
+</div>
+
+<div class="ep-divider"></div>
+
+<!-- CTA -->
+<div class="ep-cta">
+  <a class="ep-cta-btn" href="https://aliosmanoncel.blogspot.com/p/venezuela-doublet-2026.html" target="_blank">📄 Full SeismoReport — Venezuela Doublet 2026</a>
+  <div class="ep-cta-sub">Complete analysis · Moment tensors · Seismicity maps · Intensity–distance curves · 100+ witness testimonies · PDF &amp; Word export</div>
+</div>
+
+<div class="ep-divider"></div>
+
+<!-- AUTHOR -->
+<div class="ep-author">
+  <div class="ep-avatar">🌍</div>
+  <div class="ep-author-info">
+    <div class="ep-author-name">Prof. Dr. Ali Osman Öncel</div>
+    <div class="ep-author-role">Seismology · Istanbul University–Cerrahpaşa</div>
+    <div class="ep-author-bio">Department of Geophysical Engineering · Avcılar, Istanbul. Research: seismic hazard, b-value analysis, earthquake doublets, PSHA, Caribbean–South American tectonics.</div>
+    <a class="ep-author-link" href="mailto:ali.oncel@iuc.edu.tr">✉️ ali.oncel@iuc.edu.tr</a>
+  </div>
+</div>
+
+<!-- TAGS -->
+<div class="ep-tags">
+  <span class="ep-tag">Venezuela Earthquake 2026</span>
+  <span class="ep-tag">Earthquake Doublet</span>
+  <span class="ep-tag">Mw 7.5</span>
+  <span class="ep-tag">Caribbean Tectonics</span>
+  <span class="ep-tag">Bath's Law</span>
+  <span class="ep-tag">Dynamic Triggering</span>
+  <span class="ep-tag">Boconó Fault</span>
+  <span class="ep-tag">Caracas Basin Effect</span>
+  <span class="ep-tag">EMSC DYFI</span>
+  <span class="ep-tag">Moment Tensor</span>
+  <span class="ep-tag">SeismoReport</span>
+</div>
+
+<!-- SHARE -->
+<div class="ep-share">
+  <div class="ep-share-label">Share this analysis</div>
+  <div class="ep-share-btns">
+    <a class="ep-share-btn ep-tw" id="ep-tw" href="#" target="_blank">𝕏 X / Twitter</a>
+    <a class="ep-share-btn ep-wa" id="ep-wa" href="#" target="_blank">💬 WhatsApp</a>
+    <a class="ep-share-btn ep-ml" id="ep-ml" href="#" target="_blank">✉️ E-mail</a>
+    <button class="ep-share-btn ep-cp" id="ep-cp">🔗 Copy link</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="ep-footer" style="margin-top:32px;">
+  <strong>SeismoReport v3.1</strong> · Venezuela Doublet Mw 7.2+7.5 · 24 June 2026<br>
+  Prof. Dr. Ali Osman Öncel · İstanbul Üniversitesi–Cerrahpaşa · Jeofizik Mühendisliği<br>
+  Data: EMSC (seismologist reviewed) · USGS/NEIC · ISC · GCMT · GFZ · CPPT · AUST
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- FULL SEISMOREPORT — Venezuela Doublet 2026 -->
+<!-- ═══════════════════════════════════════════ -->
+<!-- Full Report Page Link -->
+<div style="text-align:center;margin:32px 0 24px;"><a href="https://aliosmanoncel.blogspot.com/p/venezuela-doublet-2026.html" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#1e3a5f,#2d6a9f);color:#fff;font-weight:700;font-size:1.05em;padding:14px 32px;border-radius:10px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,0.35);">📄 Tam Rapor — SeismoReport Sayfası</a><p style="margin-top:10px;font-size:0.82em;color:#94a3b8;">Ekler A–M · DYFI · FFM · Hakem Yorumu · 7 BSSA makalesi</p></div>

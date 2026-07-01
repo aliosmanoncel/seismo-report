@@ -408,12 +408,15 @@ ${body}</div></body></html>`;
       <div id="sr-toc-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;">
         <!-- JS tarafından doldurulur -->
       </div>
-      <p style="margin:10px 0 0;font-size:.73rem;color:#4a6280;text-align:center;">Tıklayın → bölüm açılır ve sayfaya kaydırılır · SeismoSoft v2.0</p>
+      <p style="margin:10px 0 0;font-size:.73rem;color:#4a6280;text-align:center;">Tıklayın → içerik burada açılır · tekrar tıklayın → kapanır · SeismoSoft v2.0</p>
+      <div id="sr-inline-viewer" style="display:none;margin-top:14px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.12);padding:20px 22px;max-height:72vh;overflow-y:auto;scroll-behavior:smooth;"></div>
     </div>
   </div>
 
   <script>
   (function(){
+    var _srActive=null;
+
     /* Dinamik TOC — accordion'ları tara, buton oluştur */
     function buildTOC(){
       var grid=document.getElementById('sr-toc-grid');
@@ -425,46 +428,63 @@ ${body}</div></body></html>`;
         var label=acc.getAttribute('data-label')||acc.innerText||'';
         if(!num||seen[num]) return;
         seen[num]=1;
-        /* Etiket: data-label'dan ilk 60 karakter, emoji dahil */
         var short=label.replace(/\s+/g,' ').trim().slice(0,72);
-        /* YENİ rozeti: son eklenenler için data-new="1" eklenirse */
         var isNew=acc.getAttribute('data-new')==='1';
         var btn=document.createElement('button');
+        btn.setAttribute('data-sr-num',num);
         btn.style.cssText='text-align:left;background:'+(isNew?'rgba(239,68,68,0.1)':'rgba(255,255,255,0.03)')+
           ';border:1px solid '+(isNew?'rgba(239,68,68,0.35)':'rgba(255,255,255,0.08)')+
           ';border-radius:8px;padding:8px 12px;color:'+(isNew?'#fca5a5':'#e2e8f0')+
           ';cursor:pointer;font-size:.8rem;font-family:inherit;width:100%;position:relative;';
         btn.innerHTML=short+(isNew?'<span style="position:absolute;top:5px;right:7px;font-size:.6rem;background:#ef4444;color:#fff;padding:1px 5px;border-radius:100px;font-weight:700;">YENİ</span>':'');
-        btn.onclick=function(){srOpenAcc(num);};
+        btn.onclick=function(){srToggle(num);};
         grid.appendChild(btn);
       });
     }
-    function srOpenAcc(num){
+
+    /* Inline viewer — tıkla aç/kapat, aşağı kaydırma yok */
+    function srToggle(num){
+      var viewer=document.getElementById('sr-inline-viewer');
+      var btns=document.querySelectorAll('#sr-toc-grid button');
+      /* kapat: aynı butona tekrar tıklandıysa */
+      if(_srActive===num){
+        viewer.style.display='none';
+        viewer.innerHTML='';
+        _srActive=null;
+        btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
+        return;
+      }
+      /* içeriği bul */
       var accs=document.querySelectorAll('.accordion');
+      var found=null;
       for(var i=0;i<accs.length;i++){
         if(accs[i].getAttribute('data-num')===num){
-          var panel=accs[i].nextElementSibling;
-          if(panel&&!panel.classList.contains('open')){
-            accs[i].classList.add('active');
-            panel.classList.add('open');
-            panel.style.display='block';
-          }
-          accs[i].scrollIntoView({behavior:'smooth',block:'start'});
-          var b=document.getElementById('sr-toc-body');
-          var ic=document.getElementById('sr-toc-icon');
-          if(b){b.style.display='none';if(ic)ic.textContent='▼';}
+          var p=accs[i].nextElementSibling;
+          if(p&&(p.classList.contains('panel')||p.classList.contains('open'))){found=p;}
           break;
         }
       }
+      if(!found) return;
+      viewer.innerHTML=found.innerHTML;
+      viewer.style.display='block';
+      viewer.scrollTop=0;
+      _srActive=num;
+      /* aktif buton vurgusu */
+      btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
+      var activeBtn=document.querySelector('#sr-toc-grid button[data-sr-num="'+num+'"]');
+      if(activeBtn){
+        activeBtn.style.outline='2px solid #3b9eff';
+        activeBtn.style.boxShadow='0 0 0 3px rgba(59,158,255,.18)';
+      }
     }
-    /* Accordion'lar DOM'a yerleştikten sonra çalıştır */
+
     if(document.readyState==='loading'){
       document.addEventListener('DOMContentLoaded',buildTOC);
     } else {
       buildTOC();
     }
-    /* Global erişim için */
-    window.srOpenAcc=srOpenAcc;
+    window.srToggle=srToggle;
+    window.srOpenAcc=srToggle; /* geriye dönük uyumluluk */
   })();
   </script>
 

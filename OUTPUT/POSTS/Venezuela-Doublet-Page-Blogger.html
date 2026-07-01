@@ -316,6 +316,14 @@ ${body}</div></body></html>`;
     </p>
   </div>
 
+  <!-- VIDEO OVERVIEW -->
+  <div style="margin:24px 0;">
+    <div style="font-size:.82em;font-weight:700;color:#22c55e;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;">🎬 Video Genel Bakış — NotebookLM</div>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid rgba(255,255,255,.1);">
+      <iframe src="https://www.youtube.com/embed/OJOeBsRL8OY" title="2026 Venezuela Doublet Mw7.2+7.5 — Sismotektonik Analiz" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;"></iframe>
+    </div>
+  </div>
+
   <!-- İÇİNDEKİLER / TABLE OF CONTENTS -->
   <div id="sr-toc" style="background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 20px;margin-bottom:20px;">
     <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;" onclick="var b=document.getElementById('sr-toc-body');var i=document.getElementById('sr-toc-icon');var open=b.style.display!=='none';b.style.display=open?'none':'block';i.textContent=open?'▼':'▲';">
@@ -360,29 +368,54 @@ ${body}</div></body></html>`;
         </button>
 
       </div>
-      <p style="margin:10px 0 0;font-size:.75rem;color:#4a6280;text-align:center;">Tıklayın → ilgili bölüm açılır ve sayfaya kaydırılır</p>
+      <p style="margin:10px 0 0;font-size:.75rem;color:#4a6280;text-align:center;">Tıklayın → içerik burada açılır · tekrar tıklayın → kapanır</p>
+      <div id="sr-inline-viewer" style="display:none;margin-top:14px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.12);padding:20px 22px;max-height:72vh;overflow-y:auto;scroll-behavior:smooth;"></div>
     </div>
   </div>
 
   <script>
-  function srOpen(num){
+  var _srActive=null;
+  function srToggle(num){
+    var viewer=document.getElementById('sr-inline-viewer');
+    var btns=document.querySelectorAll('#sr-toc-body button');
+    /* aktif butonu onclick attr'dan bul */
+    var activeBtn=null;
+    btns.forEach(function(b){
+      var oc=b.getAttribute('onclick')||'';
+      if(oc.indexOf("'"+num+"'")>-1||oc.indexOf('"'+num+'"')>-1){activeBtn=b;}
+    });
+    /* kapat: aynı butona tekrar tıklandıysa */
+    if(_srActive===num){
+      viewer.style.display='none';
+      viewer.innerHTML='';
+      _srActive=null;
+      btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
+      return;
+    }
+    /* içeriği bul */
     var accs=document.querySelectorAll('.accordion');
+    var found=null;
     for(var i=0;i<accs.length;i++){
       if(accs[i].getAttribute('data-num')===num){
-        var panel=accs[i].nextElementSibling;
-        if(panel&&!panel.classList.contains('open')){
-          accs[i].classList.add('active');
-          panel.classList.add('open');
-          panel.style.display='block';
-        }
-        accs[i].scrollIntoView({behavior:'smooth',block:'start'});
-        var body=document.getElementById('sr-toc-body');
-        var icon=document.getElementById('sr-toc-icon');
-        if(body){body.style.display='none';if(icon)icon.textContent='▼';}
+        var p=accs[i].nextElementSibling;
+        if(p&&(p.classList.contains('panel')||p.classList.contains('open'))){found=p;}
         break;
       }
     }
+    if(!found){return;}
+    viewer.innerHTML=found.innerHTML;
+    viewer.style.display='block';
+    viewer.scrollTop=0;
+    _srActive=num;
+    /* aktif buton vurgusu */
+    btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
+    if(activeBtn){
+      activeBtn.style.outline='2px solid #3b9eff';
+      activeBtn.style.boxShadow='0 0 0 3px rgba(59,158,255,.18)';
+    }
   }
+  /* eski srOpen geriye dönük uyumluluk */
+  function srOpen(num){srToggle(num);}
   </script>
 
   <!-- REVIEW ARTICLE — Section 7 (prints first) -->

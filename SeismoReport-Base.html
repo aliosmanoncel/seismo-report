@@ -1,8 +1,30 @@
 <!--
-SeismoReport-Base.html — v1.1
-Statik kisim: CSS + ExportEngine JS + Yapi
-Degisken kisimlar: PLACEHOLDER ile isaretli
-Kullanim: generate.py tarafindan otomatik doldurulur — bu dosyaya dokunma
+╔══════════════════════════════════════════════════════════════════════════╗
+║  SeismoReport-Base.html — v2.0  ·  SeismoSoft  ·  JeoTurizm EduPanel   ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║  Statik kisim: CSS + ExportEngine JS + Dinamik TOC + Yapi               ║
+║  Degisken kisimlar: PLACEHOLDER ile isaretli                             ║
+║  Kullanim: generate.py tarafindan otomatik doldurulur                    ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║  POST / PAGE AYRIM KURALLARI                                             ║
+║                                                                          ║
+║  POST  (Blogger Yazi — kisa teaser)                                      ║
+║  · ep_part: <div id="sr-full-report"> oncesi icerik                      ║
+║  · Hedef boyut: 20–40 KB                                                 ║
+║  · CTA butonu PAGE URL'e yonlendirir                                     ║
+║  · rebuild_post.py ile uretilir                                          ║
+║                                                                          ║
+║  PAGE  (Blogger Sayfa — tam rapor)                                       ║
+║  · Bu sablon ciktisi dogrudan PAGE olarak kullanilir                     ║
+║  · TOC, accordion, ExportEngine, haritalar burada                        ║
+║  · aliosmanoncel.blogspot.com/p/SLUG formatinda URL                      ║
+║                                                                          ║
+║  DEGISIKLIK GECMISI                                                      ║
+║  v1.1 → v2.0 (1 Temmuz 2026)                                            ║
+║    + SeismoSoft markasi                                                  ║
+║    + Dinamik TOC (accordion otomatik tarama)                             ║
+║    + Post/Page ayrim kurallari                                           ║
+╚══════════════════════════════════════════════════════════════════════════╝
 -->
 <!DOCTYPE html>
 <html lang="tr">
@@ -348,7 +370,7 @@ ${body}</div></body></html>`;
 
   <!-- Google Translate -->
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 16px;margin:0 0 16px;">
-    <div style="font-size:0.78em;color:#7a9ab5;flex:1;min-width:160px;">🌍 SeismoReport v3.1 · Otomatik Çeviri</div>
+    <div style="font-size:0.78em;color:#7a9ab5;flex:1;min-width:160px;">🌍 SeismoSoft SeismoReport v3.2 · Otomatik Çeviri</div>
     <div id="google_translate_element"></div>
   </div>
   <script type="text/javascript">
@@ -356,16 +378,95 @@ ${body}</div></body></html>`;
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  <!-- Export Toolbar -->
+  <!-- Export Toolbar — SeismoSoft v2.0 -->
   <div class="export-toolbar" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#12171f;border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:18px 22px;margin:20px 0 24px;">
     <div style="flex:1;min-width:200px;">
-      <div style="font-weight:700;font-size:0.97rem;color:#3b9eff;">📤 Akademik Dışa Aktarma</div>
-      <div style="font-size:0.78rem;color:#8a9ab5;margin-top:3px;">SCI Makale Çekirdeği + Appendices — A4 tipografi · ExportEngine v3.1</div>
+      <div style="font-weight:700;font-size:0.97rem;color:#3b9eff;">📤 Akademik Dışa Aktarma
+        <span style="margin-left:8px;font-size:.7rem;background:linear-gradient(135deg,#1e40af,#7c3aed);color:#fff;padding:2px 8px;border-radius:100px;font-weight:700;letter-spacing:.06em;">SeismoSoft</span>
+      </div>
+      <div style="font-size:0.78rem;color:#8a9ab5;margin-top:3px;">SCI Makale Çekirdeği + Appendices — A4 tipografi · ExportEngine v3.2 · SeismoSoft</div>
     </div>
     <button onclick="ExportEngine.exportPdf()" style="padding:12px 22px;background:linear-gradient(135deg,#1e40af,#1d4ed8);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📄 PDF / Yazdır</button>
     <button onclick="ExportEngine.exportWord()" style="padding:12px 22px;background:linear-gradient(135deg,#166534,#15803d);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:0.92em;cursor:pointer;">📝 Word Belgesi</button>
     <button id="sr-tts-btn" style="padding:12px 22px;background:linear-gradient(135deg,#1e3a5f,#1e40af);border:1px solid rgba(59,158,255,0.45);border-radius:10px;color:#90caf9;font-weight:700;font-size:0.92em;cursor:pointer;white-space:nowrap;">🔊 Dinle</button>
   </div>
+
+  <!-- DİNAMİK İÇİNDEKİLER / TOC — SeismoSoft v2.0
+       Sayfadaki tüm .accordion elemanlarını otomatik tarar,
+       data-label'dan başlık alır, tıklandığında açar + kaydırır.
+       Yeni ek eklendiğinde TOC otomatik güncellenir — elle değiştirme gerekmez. -->
+  <div id="sr-toc" style="background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 20px;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;"
+         onclick="(function(){var b=document.getElementById('sr-toc-body');var i=document.getElementById('sr-toc-icon');var open=b.style.display!=='none';b.style.display=open?'none':'block';i.textContent=open?'▼':'▲';})()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-family:sans-serif;font-weight:700;font-size:.97rem;color:#e2e8f0;">📑 İçindekiler</span>
+        <span style="font-size:.68rem;background:linear-gradient(135deg,#1e40af,#7c3aed);color:#fff;padding:2px 8px;border-radius:100px;font-weight:700;letter-spacing:.05em;">SeismoSoft</span>
+      </div>
+      <span id="sr-toc-icon" style="color:#7c9cbd;font-size:.85rem;">▼</span>
+    </div>
+    <div id="sr-toc-body" style="display:none;margin-top:14px;">
+      <div id="sr-toc-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;">
+        <!-- JS tarafından doldurulur -->
+      </div>
+      <p style="margin:10px 0 0;font-size:.73rem;color:#4a6280;text-align:center;">Tıklayın → bölüm açılır ve sayfaya kaydırılır · SeismoSoft v2.0</p>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    /* Dinamik TOC — accordion'ları tara, buton oluştur */
+    function buildTOC(){
+      var grid=document.getElementById('sr-toc-grid');
+      if(!grid) return;
+      var accs=document.querySelectorAll('.accordion');
+      var seen={};
+      accs.forEach(function(acc){
+        var num=acc.getAttribute('data-num')||'';
+        var label=acc.getAttribute('data-label')||acc.innerText||'';
+        if(!num||seen[num]) return;
+        seen[num]=1;
+        /* Etiket: data-label'dan ilk 60 karakter, emoji dahil */
+        var short=label.replace(/\s+/g,' ').trim().slice(0,72);
+        /* YENİ rozeti: son eklenenler için data-new="1" eklenirse */
+        var isNew=acc.getAttribute('data-new')==='1';
+        var btn=document.createElement('button');
+        btn.style.cssText='text-align:left;background:'+(isNew?'rgba(239,68,68,0.1)':'rgba(255,255,255,0.03)')+
+          ';border:1px solid '+(isNew?'rgba(239,68,68,0.35)':'rgba(255,255,255,0.08)')+
+          ';border-radius:8px;padding:8px 12px;color:'+(isNew?'#fca5a5':'#e2e8f0')+
+          ';cursor:pointer;font-size:.8rem;font-family:inherit;width:100%;position:relative;';
+        btn.innerHTML=short+(isNew?'<span style="position:absolute;top:5px;right:7px;font-size:.6rem;background:#ef4444;color:#fff;padding:1px 5px;border-radius:100px;font-weight:700;">YENİ</span>':'');
+        btn.onclick=function(){srOpenAcc(num);};
+        grid.appendChild(btn);
+      });
+    }
+    function srOpenAcc(num){
+      var accs=document.querySelectorAll('.accordion');
+      for(var i=0;i<accs.length;i++){
+        if(accs[i].getAttribute('data-num')===num){
+          var panel=accs[i].nextElementSibling;
+          if(panel&&!panel.classList.contains('open')){
+            accs[i].classList.add('active');
+            panel.classList.add('open');
+            panel.style.display='block';
+          }
+          accs[i].scrollIntoView({behavior:'smooth',block:'start'});
+          var b=document.getElementById('sr-toc-body');
+          var ic=document.getElementById('sr-toc-icon');
+          if(b){b.style.display='none';if(ic)ic.textContent='▼';}
+          break;
+        }
+      }
+    }
+    /* Accordion'lar DOM'a yerleştikten sonra çalıştır */
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',buildTOC);
+    } else {
+      buildTOC();
+    }
+    /* Global erişim için */
+    window.srOpenAcc=srOpenAcc;
+  })();
+  </script>
 
   <!-- FTLS+ Seviye 4 Analiz Paneli -->
   <div style="background:linear-gradient(135deg,#0a1e2e,#0d2535);border:1px solid #1e3a4f;border-radius:10px;padding:22px 26px;margin:28px 0;font-family:'Segoe UI',sans-serif;">

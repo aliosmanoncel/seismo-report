@@ -375,46 +375,94 @@ ${body}</div></body></html>`;
 
   <script>
   var _srActive=null;
-  function srToggle(num){
-    var viewer=document.getElementById('sr-inline-viewer');
-    var btns=document.querySelectorAll('#sr-toc-body button');
-    /* aktif butonu onclick attr'dan bul */
-    var activeBtn=null;
-    btns.forEach(function(b){
-      var oc=b.getAttribute('onclick')||'';
-      if(oc.indexOf("'"+num+"'")>-1||oc.indexOf('"'+num+'"')>-1){activeBtn=b;}
-    });
-    /* kapat: aynı butona tekrar tıklandıysa */
-    if(_srActive===num){
-      viewer.style.display='none';
-      viewer.innerHTML='';
-      _srActive=null;
-      btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
-      return;
-    }
-    /* içeriği bul */
+  var _srPanelCache={};
+
+  function _srGetPanel(num){
+    if(_srPanelCache[num]) return _srPanelCache[num];
     var accs=document.querySelectorAll('.accordion');
-    var found=null;
     for(var i=0;i<accs.length;i++){
       if(accs[i].getAttribute('data-num')===num){
         var p=accs[i].nextElementSibling;
-        if(p&&(p.classList.contains('panel')||p.classList.contains('open'))){found=p;}
-        break;
+        if(p&&(p.classList.contains('panel')||p.classList.contains('open'))){
+          _srPanelCache[num]=p; return p;
+        }
       }
     }
-    if(!found){return;}
+    return null;
+  }
+
+  function _srHighlight(num){
+    var btns=document.querySelectorAll('#sr-toc-body button');
+    btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
+    btns.forEach(function(b){
+      var oc=b.getAttribute('onclick')||'';
+      if(oc.indexOf("'"+num+"'")>-1||oc.indexOf('"'+num+'"')>-1){
+        b.style.outline='2px solid #3b9eff';
+        b.style.boxShadow='0 0 0 3px rgba(59,158,255,.18)';
+      }
+    });
+  }
+
+  function srToggle(num){
+    var viewer=document.getElementById('sr-inline-viewer');
+    /* kapat */
+    if(_srActive===num){
+      viewer.style.display='none'; viewer.innerHTML=''; _srActive=null;
+      document.querySelectorAll('#sr-toc-body button').forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
+      return;
+    }
+    var found=_srGetPanel(num);
+    if(!found) return;
+    /* alt başlıkları çıkar */
+    var tmp=document.createElement('div');
+    tmp.innerHTML=found.innerHTML;
+    var hEls=Array.from(tmp.querySelectorAll('.review-section-title,h3,h4,.analysis-card h4,.method-card h4,.conclusion-card h4,.rec-card h4'))
+      .filter(function(h){return h.textContent.trim().length>4;});
+    if(hEls.length>=3){
+      /* Alt başlık menüsü göster */
+      var html='<div style="padding:4px 0;">';
+      html+='<p style="font-size:.78rem;color:#7c9cbd;margin:0 0 12px;">Bu bölümde <strong style="color:#7dd3fc;">'+hEls.length+'</strong> alt başlık var — birini seçin veya tümünü açın:</p>';
+      html+='<div style="display:flex;flex-direction:column;gap:6px;">';
+      hEls.forEach(function(h,idx){
+        var txt=h.textContent.trim().slice(0,80);
+        html+='<button onclick="srOpenSection(\''+num+'\','+idx+')" style="text-align:left;background:rgba(59,158,255,0.07);border:1px solid rgba(59,158,255,0.2);border-radius:8px;padding:8px 14px;color:#e2e8f0;cursor:pointer;font-size:.85rem;font-family:inherit;transition:background .15s;" onmouseover="this.style.background=\'rgba(59,158,255,0.15)\'" onmouseout="this.style.background=\'rgba(59,158,255,0.07)\'">↳ '+txt+'</button>';
+      });
+      html+='</div>';
+      html+='<button onclick="srOpenFull(\''+num+'\')" style="margin-top:12px;width:100%;background:linear-gradient(135deg,rgba(59,158,255,0.15),rgba(124,58,237,0.12));border:1px solid rgba(59,158,255,0.3);border-radius:8px;padding:10px;color:#7dd3fc;cursor:pointer;font-size:.85rem;font-weight:700;font-family:inherit;">📖 Tümünü Aç</button>';
+      html+='</div>';
+      viewer.innerHTML=html;
+    } else {
+      viewer.innerHTML=found.innerHTML;
+    }
+    viewer.style.display='block'; viewer.scrollTop=0;
+    _srActive=num; _srHighlight(num);
+  }
+
+  function srOpenSection(num,idx){
+    var viewer=document.getElementById('sr-inline-viewer');
+    var found=_srGetPanel(num);
+    if(!found) return;
     viewer.innerHTML=found.innerHTML;
     viewer.style.display='block';
-    viewer.scrollTop=0;
-    _srActive=num;
-    /* aktif buton vurgusu */
-    btns.forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
-    if(activeBtn){
-      activeBtn.style.outline='2px solid #3b9eff';
-      activeBtn.style.boxShadow='0 0 0 3px rgba(59,158,255,.18)';
-    }
+    /* idx'nci başlığa scroll */
+    var hEls=viewer.querySelectorAll('.review-section-title,h3,h4,.analysis-card h4,.method-card h4,.conclusion-card h4,.rec-card h4');
+    if(hEls[idx]){
+      hEls[idx].scrollIntoView({behavior:'smooth',block:'start'});
+      hEls[idx].style.outline='2px solid #3b9eff';
+      setTimeout(function(){hEls[idx].style.outline='none';},2000);
+    } else { viewer.scrollTop=0; }
+    _srHighlight(num);
   }
-  /* eski srOpen geriye dönük uyumluluk */
+
+  function srOpenFull(num){
+    var viewer=document.getElementById('sr-inline-viewer');
+    var found=_srGetPanel(num);
+    if(!found) return;
+    viewer.innerHTML=found.innerHTML;
+    viewer.style.display='block'; viewer.scrollTop=0;
+    _srHighlight(num);
+  }
+
   function srOpen(num){srToggle(num);}
   </script>
 

@@ -486,7 +486,10 @@ ${body}</div></body></html>`;
           html+='<button onclick="srOpenSection(\''+num+'\','+idx+')" style="text-align:left;background:rgba(59,158,255,0.07);border:1px solid rgba(59,158,255,0.2);border-radius:8px;padding:8px 14px;color:#e2e8f0;cursor:pointer;font-size:.85rem;font-family:inherit;" onmouseover="this.style.background=\'rgba(59,158,255,0.15)\'" onmouseout="this.style.background=\'rgba(59,158,255,0.07)\'">↳ '+txt+'</button>';
         });
         html+='</div>';
-        html+='<button onclick="srOpenFull(\''+num+'\')" style="margin-top:12px;width:100%;background:linear-gradient(135deg,rgba(59,158,255,0.15),rgba(124,58,237,0.12));border:1px solid rgba(59,158,255,0.3);border-radius:8px;padding:10px;color:#7dd3fc;cursor:pointer;font-size:.85rem;font-weight:700;font-family:inherit;">📖 Tümünü Aç</button>';
+        html+='<div style="display:flex;gap:8px;margin-top:12px;">';
+        html+='<button onclick="srOpenFull(\''+num+'\')" style="flex:1;background:linear-gradient(135deg,rgba(59,158,255,0.15),rgba(124,58,237,0.12));border:1px solid rgba(59,158,255,0.3);border-radius:8px;padding:10px;color:#7dd3fc;cursor:pointer;font-size:.85rem;font-weight:700;font-family:inherit;">📖 Tümünü Aç</button>';
+        html+='<button onclick="srClose()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 16px;color:#94a3b8;cursor:pointer;font-size:.85rem;font-family:inherit;">✕ Kapat</button>';
+        html+='</div>';
         html+='</div>';
         viewer.innerHTML=html;
       } else {

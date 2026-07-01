@@ -325,12 +325,12 @@ ${body}</div></body></html>`;
   </div>
 
   <!-- İÇİNDEKİLER / TABLE OF CONTENTS -->
-  <div id="sr-toc" style="background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 20px;margin-bottom:20px;">
+  <div id="sr-toc" style="background:linear-gradient(135deg,rgba(59,158,255,0.12),rgba(124,58,237,0.10));border:1px solid rgba(59,158,255,0.35);border-radius:14px;padding:18px 20px;margin-bottom:20px;box-shadow:0 4px 20px rgba(59,158,255,0.12);">
     <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;" onclick="var b=document.getElementById('sr-toc-body');var i=document.getElementById('sr-toc-icon');var open=b.style.display!=='none';b.style.display=open?'none':'block';i.textContent=open?'▼':'▲';">
-      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#e2e8f0;">📑 İçindekiler / Table of Contents</span>
-      <span id="sr-toc-icon" style="color:#7c9cbd;font-size:.85rem;">▼</span>
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#7dd3fc;">📑 İçindekiler / Table of Contents</span>
+      <span id="sr-toc-icon" style="color:#7dd3fc;font-size:.85rem;">▲</span>
     </div>
-    <div id="sr-toc-body" style="display:none;margin-top:14px;">
+    <div id="sr-toc-body" style="display:block;margin-top:14px;">
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;">
 
         <button onclick="srOpen('7.')" style="text-align:left;background:rgba(245,87,108,0.08);border:1px solid rgba(245,87,108,0.2);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📄 <strong>Review Article</strong> — Özet Makale</button>

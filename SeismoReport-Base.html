@@ -394,16 +394,16 @@ ${body}</div></body></html>`;
        Sayfadaki tüm .accordion elemanlarını otomatik tarar,
        data-label'dan başlık alır, tıklandığında açar + kaydırır.
        Yeni ek eklendiğinde TOC otomatik güncellenir — elle değiştirme gerekmez. -->
-  <div id="sr-toc" style="background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 20px;margin-bottom:20px;">
+  <div id="sr-toc" style="background:linear-gradient(135deg,rgba(59,158,255,0.12),rgba(124,58,237,0.10));border:1px solid rgba(59,158,255,0.35);border-radius:14px;padding:16px 20px;margin-bottom:20px;box-shadow:0 4px 20px rgba(59,158,255,0.12);">
     <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;"
          onclick="(function(){var b=document.getElementById('sr-toc-body');var i=document.getElementById('sr-toc-icon');var open=b.style.display!=='none';b.style.display=open?'none':'block';i.textContent=open?'▼':'▲';})()">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-family:sans-serif;font-weight:700;font-size:.97rem;color:#e2e8f0;">📑 İçindekiler</span>
+        <span style="font-family:sans-serif;font-weight:700;font-size:.97rem;color:#7dd3fc;">📑 İçindekiler</span>
         <span style="font-size:.68rem;background:linear-gradient(135deg,#1e40af,#7c3aed);color:#fff;padding:2px 8px;border-radius:100px;font-weight:700;letter-spacing:.05em;">SeismoSoft</span>
       </div>
-      <span id="sr-toc-icon" style="color:#7c9cbd;font-size:.85rem;">▼</span>
+      <span id="sr-toc-icon" style="color:#7dd3fc;font-size:.85rem;">▲</span>
     </div>
-    <div id="sr-toc-body" style="display:none;margin-top:14px;">
+    <div id="sr-toc-body" style="display:block;margin-top:14px;">
       <div id="sr-toc-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;">
         <!-- JS tarafından doldurulur -->
       </div>

@@ -304,6 +304,76 @@ ${body}</div></body></html>`;
     </p>
   </div>
 
+  <!-- İÇİNDEKİLER / TABLE OF CONTENTS -->
+  <div id="sr-toc" style="background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 20px;margin-bottom:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;" onclick="var b=document.getElementById('sr-toc-body');var i=document.getElementById('sr-toc-icon');var open=b.style.display!=='none';b.style.display=open?'none':'block';i.textContent=open?'▼':'▲';">
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#e2e8f0;">📑 İçindekiler / Table of Contents</span>
+      <span id="sr-toc-icon" style="color:#7c9cbd;font-size:.85rem;">▼</span>
+    </div>
+    <div id="sr-toc-body" style="display:none;margin-top:14px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px;">
+
+        <button onclick="srOpen('7.')" style="text-align:left;background:rgba(245,87,108,0.08);border:1px solid rgba(245,87,108,0.2);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📄 <strong>Review Article</strong> — Özet Makale</button>
+
+        <button onclick="srOpen('1.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📋 <strong>Appendix A</strong> — Temel Parametreler</button>
+
+        <button onclick="srOpen('2.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📍 <strong>Appendix B</strong> — Episantral Harita</button>
+
+        <button onclick="srOpen('3.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">🌏 <strong>Appendix C</strong> — Tektonik Bağlam · Temblor Analizi</button>
+
+        <button onclick="srOpen('3b.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">🗺️ <strong>Appendix C2</strong> — EMSC Artalan Sismisitesi</button>
+
+        <button onclick="srOpen('4.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📐 <strong>Appendix D</strong> — Doublet · Bath Yasası · Terminoloji</button>
+
+        <button onclick="srOpen('5.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">⚠️ <strong>Appendix E</strong> — Hasar ve Risk Değerlendirmesi</button>
+
+        <button onclick="srOpen('6.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📚 <strong>Appendix F</strong> — Sismik Tehlike · Tarihsel Depremler</button>
+
+        <button onclick="srOpen('7.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">🗣️ <strong>Appendix G</strong> — 592 Tanık İfadesi (DYFI)</button>
+
+        <button onclick="srOpen('8.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">🌐 <strong>Appendix H</strong> — USGS PAGER · EarthquakeInsights</button>
+
+        <button onclick="srOpen('9.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📊 <strong>Appendix I</strong> — Artçı Dizi · b-Değeri · FTLS</button>
+
+        <button onclick="srOpen('10.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📚 <strong>Appendix J</strong> — 7 BSSA Makalesi Sentezi</button>
+
+        <button onclick="srOpen('11.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">🧪 <strong>Appendix K</strong> — FFM · InSAR · Doublet Tartışması</button>
+
+        <button onclick="srOpen('12.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">📱 <strong>Appendix L</strong> — DYFI · Direktiflik Kanıtı</button>
+
+        <button onclick="srOpen('13.')" style="text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e2e8f0;cursor:pointer;font-size:.82rem;font-family:inherit;">🧑‍🔬 <strong>Appendix M</strong> — Hakem Yorumu · Geliştirme Analizi</button>
+
+        <button onclick="srOpen('14.')" style="text-align:left;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.35);border-radius:8px;padding:8px 12px;color:#fca5a5;cursor:pointer;font-size:.82rem;font-family:inherit;position:relative;">🆕 <strong>Appendix N</strong> — HAARP / Yapay Deprem İddialarına Yanıt
+          <span style="position:absolute;top:6px;right:8px;font-size:.65rem;background:#ef4444;color:#fff;padding:1px 6px;border-radius:100px;font-weight:700;">YENİ</span>
+        </button>
+
+      </div>
+      <p style="margin:10px 0 0;font-size:.75rem;color:#4a6280;text-align:center;">Tıklayın → ilgili bölüm açılır ve sayfaya kaydırılır</p>
+    </div>
+  </div>
+
+  <script>
+  function srOpen(num){
+    var accs=document.querySelectorAll('.accordion');
+    for(var i=0;i<accs.length;i++){
+      if(accs[i].getAttribute('data-num')===num){
+        var panel=accs[i].nextElementSibling;
+        if(panel&&!panel.classList.contains('open')){
+          accs[i].classList.add('active');
+          panel.classList.add('open');
+          panel.style.display='block';
+        }
+        accs[i].scrollIntoView({behavior:'smooth',block:'start'});
+        // close TOC
+        var body=document.getElementById('sr-toc-body');
+        var icon=document.getElementById('sr-toc-icon');
+        if(body){body.style.display='none';if(icon)icon.textContent='▼';}
+        break;
+      }
+    }
+  }
+  </script>
+
   <!-- REVIEW ARTICLE — Section 7 (prints first) -->
   <div class="accordion active" data-num="7." data-label="Review Article — 24 Haziran 2026 Venezuela Mw 7.2+7.5 Çift Depremi">📄 Review Article — Öncel, A.O. | Venezuela Mw 7.2 + 7.5 Çift Depremi: Dinamik Tetiklenme ve Fay Sistemi Analizi</div>
   <div class="panel open" id="panel-review">

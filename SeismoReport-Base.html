@@ -496,11 +496,18 @@ ${body}</div></body></html>`;
       _srActive=num; _srHighlight(num);
     }
 
+    function _srNavBar(num){
+      return '<div style="display:flex;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.08);">'
+        +'<button onclick="srToggle(\''+num+'\');srToggle(\''+num+'\')" style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);border-radius:8px;padding:7px 14px;color:#7dd3fc;cursor:pointer;font-size:.82rem;font-family:inherit;">← Geri</button>'
+        +'<button onclick="srClose()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:7px 14px;color:#94a3b8;cursor:pointer;font-size:.82rem;font-family:inherit;">✕ Kapat</button>'
+        +'</div>';
+    }
+
     function srOpenSection(num,idx){
       var viewer=document.getElementById('sr-inline-viewer');
       var found=_srGetPanel(num);
       if(!found) return;
-      viewer.innerHTML=found.innerHTML;
+      viewer.innerHTML=_srNavBar(num)+found.innerHTML;
       viewer.style.display='block';
       var hEls=viewer.querySelectorAll('.review-section-title,h3,h4,.analysis-card h4,.method-card h4,.conclusion-card h4,.rec-card h4');
       if(hEls[idx]){hEls[idx].scrollIntoView({behavior:'smooth',block:'start'});hEls[idx].style.outline='2px solid #3b9eff';setTimeout(function(){hEls[idx].style.outline='none';},2000);}
@@ -512,8 +519,14 @@ ${body}</div></body></html>`;
       var viewer=document.getElementById('sr-inline-viewer');
       var found=_srGetPanel(num);
       if(!found) return;
-      viewer.innerHTML=found.innerHTML; viewer.style.display='block'; viewer.scrollTop=0;
+      viewer.innerHTML=_srNavBar(num)+found.innerHTML; viewer.style.display='block'; viewer.scrollTop=0;
       _srHighlight(num);
+    }
+
+    function srClose(){
+      var viewer=document.getElementById('sr-inline-viewer');
+      viewer.style.display='none'; viewer.innerHTML=''; _srActive=null;
+      document.querySelectorAll('#sr-toc-grid button').forEach(function(b){b.style.outline='none';b.style.boxShadow='none';});
     }
 
     if(document.readyState==='loading'){
@@ -524,6 +537,7 @@ ${body}</div></body></html>`;
     window.srToggle=srToggle;
     window.srOpenSection=srOpenSection;
     window.srOpenFull=srOpenFull;
+    window.srClose=srClose;
     window.srOpenAcc=srToggle;
   })();
   </script>
